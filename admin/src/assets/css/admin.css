@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+/* Admin.vue 页面样式 */
+.topBar { background:#1c2438; height:50px; }
+.topBar .logo { background:#4A5064; width:100px;height:100%; }
+
+.main-body { position:absolute; width:100%; top:50px; bottom:0px; background-color:#000; z-index:100; }
+.main-body .rightView { width:auto; position:absolute; top:0px; left:180px; bottom:0px; right:0px; overflow:hidden; background:#fff; }
+
+.main-body .leftMenu { width:180px; position:fixed; top:50px; bottom:0px; background-color:#1c2438; overflow-x:hidden; overflow-y:hidden; }
+.main-body .leftMenu .sidebar-inner { height:30px; width:100%; background:#4A5064; text-align:center; font-size:20px;color:#fff; cursor:pointer; }
+
+
