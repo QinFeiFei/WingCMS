@@ -3,7 +3,9 @@
     <top-bar></top-bar>
     <div class="main-body">
       <left-menu></left-menu>
-      <right-view></right-view>
+      <div class="rightView">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -12,7 +14,6 @@
   // Import Frame
   import leftMenu from '../pages/main/LeftMenu'
   import topBar from '../pages/main/TopBar'
-  import rightView from '../pages/main/RightView'
 
   export default {
     name: 'admin',
@@ -23,8 +24,7 @@
     },
     components: {
       leftMenu,
-      topBar,
-      rightView
+      topBar
     }
   }
 </script>
