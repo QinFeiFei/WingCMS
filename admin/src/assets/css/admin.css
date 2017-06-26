@@ -10,7 +10,6 @@
 .ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item { padding-left:0px !important; }
 
 
-
 .main-body { position:absolute; width:100%; top:50px; bottom:0px; background-color:#000; z-index:100; }
 .main-body .rightView { width:auto; position:absolute; top:0px; left:180px; bottom:0px; right:0px; overflow:hidden; background:#fff; }
 .main-body .rightView .item-menu .view-body-navbar {
@@ -55,9 +54,51 @@
   overflow-y: auto;
   transition: all 0.2s ease;
 }
-
-
-
+.main-body .rightView .item-menu .view-body-navbar .item-menu-title {
+  font-size:14px;
+  text-indent: 20px;
+  width: 180px;
+  height: 70px;
+  line-height: 70px;
+  background: #D9DEE4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.main-body .rightView .item-menu .view-body-navbar .item-menu-list {
+  position: absolute;
+  top: 70px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.main-body .rightView .item-menu .view-body-navbar .item-menu-list a {
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  color: #333;
+}
+.main-body .rightView .item-menu .view-body-navbar .item-menu-list .active a {
+  background-color: #FFF;
+}
+.main-body .rightView .item-menu .view-body-navbar .item-menu-list a .menu-icon {
+  width: 30px;
+  height: 40px;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+}
+.main-body .rightView .item-menu .view-body-navbar .item-menu-list a .menu-name {
+  width: 138px;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 
 

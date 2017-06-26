@@ -1,6 +1,6 @@
 <template>
   <div>
-    <item-menu></item-menu>
+    <item-menu :childMenus="childMenus"></item-menu>
     <div class="view-body">
       <router-view></router-view>
     </div>
@@ -13,14 +13,24 @@ export default {
   name: 'user',
   data: function () {
     return {
-      menuItems: {
+      childMenus: {
         title: '用户管理',
-        datas: [
+        menus: [
           {
-            itemName: '标题一'
+            itemName: '标题一',
+            routeName: 'UserList',
+            active: true
           },
           {
-            itemName: '标题二'
+            itemName: '标题二',
+            routeName: 'UserPage'
+          },
+          {
+            itemName: '二级菜单',
+            child: [
+              { childName: '二级菜单1' },
+              { childName: '二级菜单2' }
+            ]
           }
         ]
       }
