@@ -36,4 +36,7 @@ div {display:block;}
 .h800 {height:800px;}
 .h1200 {height:1200px;}
 
+.show { display:block; }
+.hide { display:none; }
+
 .font20 {font-size:20px;}

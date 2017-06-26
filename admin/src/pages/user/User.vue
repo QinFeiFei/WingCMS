@@ -1,7 +1,7 @@
 <template>
   <div>
     <item-menu :childMenus="childMenus"></item-menu>
-    <div class="view-body">
+    <div class="view-body fold">
       <router-view></router-view>
     </div>
   </div>
@@ -19,14 +19,19 @@ export default {
           {
             itemName: '标题一',
             routeName: 'UserList',
-            active: true
+            active: true,
+            display: false
           },
           {
             itemName: '标题二',
-            routeName: 'UserPage'
+            routeName: 'UserPage',
+            active: false,
+            display: false
           },
           {
             itemName: '二级菜单',
+            active: false,
+            display: false,
             child: [
               { childName: '二级菜单1' },
               { childName: '二级菜单2' }
