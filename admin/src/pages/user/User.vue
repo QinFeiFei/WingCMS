@@ -1,7 +1,7 @@
 <template>
   <div>
-    <item-menu :childMenus="childMenus"></item-menu>
-    <div class="view-body fold">
+    <item-menu :childMenus="childMenus" @fold="changeFold"></item-menu>
+    <div class="view-body" :class="{ fold: isFold }">
       <router-view></router-view>
     </div>
   </div>
@@ -13,6 +13,7 @@ export default {
   name: 'user',
   data: function () {
     return {
+      isFold: true,
       childMenus: {
         title: '用户管理',
         menus: [
@@ -39,6 +40,11 @@ export default {
           }
         ]
       }
+    }
+  },
+  methods: {
+    changeFold: function (state) {
+      this.isFold = state
     }
   },
   components: {

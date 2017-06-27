@@ -1,6 +1,6 @@
 <template>
   <div class="item-menu">
-    <div class="view-body-navbar">
+    <div class="view-body-navbar" :class="fold ? '' : 'hide'">
       <h2 class="item-menu-title">{{ childMenus_.title }}</h2>
       <div class="item-menu-list">
         <ul>
@@ -21,8 +21,8 @@
         </ul>
       </div>
     </div>
-    <div class="view-body-collapse">
-      <Icon type="chevron-left"></Icon>
+    <div class="view-body-collapse" :class="{ collapse_un: !fold }" @click="changeFold">
+      <Icon :type="fold ? 'chevron-left' : 'chevron-right'"></Icon>
     </div>
   </div>
 </template>
@@ -38,7 +38,8 @@ export default {
   },
   data: function () {
     return {
-      childMenus_: {}
+      childMenus_: {},
+      fold: true
     }
   },
   created: function () {
@@ -66,6 +67,10 @@ export default {
       if (childIndex != null) {
         this.childMenus_.menus[index].child[childIndex].active = true
       }
+    },
+    changeFold: function () {
+      this.fold = !this.fold
+      this.$emit('fold', this.fold)
     }
   }
 }
