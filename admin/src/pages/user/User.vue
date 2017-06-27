@@ -33,8 +33,8 @@ export default {
             active: false,
             display: false,
             child: [
-              { childName: '二级菜单1' },
-              { childName: '二级菜单2' }
+              { childName: '二级菜单1', routeName: 'UserPage', active: false },
+              { childName: '二级菜单2', routeName: 'UserList', active: false }
             ]
           }
         ]

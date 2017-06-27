@@ -4,17 +4,17 @@
       <h2 class="item-menu-title">{{ childMenus_.title }}</h2>
       <div class="item-menu-list">
         <ul>
-          <li :class="{ active: item.active }" v-for="(item, index) in childMenus_.menus">
+          <li :class="{ active: (item.active && !item.child) || (item.active && item.child && !item.display) }" v-for="(item, index) in childMenus_.menus" @click="toggleActive(item, index, null)">
             <router-link :to="{ name: item.routeName }">
               <div class="menu-icon"><Icon :type="item.display ? 'arrow-down-b' : 'arrow-right-b' " v-if="item.child"></Icon></div>
               <div class="menu-name" @click="toggleItem(item, index)">{{ item.itemName }}</div>
             </router-link>
             <ul v-if="item.child" :class="[item.display ? 'show' : 'hide']">
-              <li v-for="(childItem, childIndex) in item.child">
-                <a href="">
+              <li :class="{ active: childItem.active }" v-for="(childItem, childIndex) in item.child" @click.stop="toggleActive(item, index, childIndex)">
+                <router-link :to="{ name: childItem.routeName }">
                   <div class="menu-icon"></div>
                   <div class="menu-name">{{ childItem.childName }}</div>
-                </a>
+                </router-link>
               </li>
             </ul>
           </li>
@@ -50,6 +50,21 @@ export default {
         this.childMenus_.menus[index].display = false
       } else {
         this.childMenus_.menus[index].display = true
+      }
+    },
+    toggleActive: function (item, index, childIndex) {
+      this.childMenus_.menus.forEach(function (item, i) {
+        item.active = false
+        if (item.child) {
+          item.child.forEach(function (childItem, i) {
+            childItem.active = false
+          })
+        }
+      })
+
+      this.childMenus_.menus[index].active = true
+      if (childIndex != null) {
+        this.childMenus_.menus[index].child[childIndex].active = true
       }
     }
   }

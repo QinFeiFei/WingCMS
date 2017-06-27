@@ -32,8 +32,4 @@
 <style>
   @import "../assets/css/reset.css";
   @import "../assets/css/admin.css";
-
-
-
-
 </style>
