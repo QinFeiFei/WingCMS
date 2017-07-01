@@ -12,3 +12,4 @@ npm-debug.log
 .env.*.php
 .env.php
 .idea/
+.composer.lock

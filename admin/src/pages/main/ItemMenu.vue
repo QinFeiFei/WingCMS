@@ -1,5 +1,5 @@
 <template>
-  <div class="item-menu">
+  <div class="item-menu" :class="fold ? '' : 'w0'">
     <div class="view-body-navbar" :class="fold ? '' : 'hide'">
       <h2 class="item-menu-title">{{ childMenus_.title }}</h2>
       <div class="item-menu-list">
@@ -77,5 +77,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

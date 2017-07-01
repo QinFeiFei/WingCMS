@@ -1,5 +1,7 @@
 <template>
-  <div>dashborad</div>
+  <div class="view-body">
+    控制台
+  </div>
 </template>
 
 <script>

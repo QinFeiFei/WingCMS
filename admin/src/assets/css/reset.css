@@ -2,6 +2,7 @@
 
 /* const width and height */
 div {display:block;}
+.w0 {width:0px;}
 .w10 {width:10px;}
 .w20 {width:10px;}
 .w30 {width:10px;}
