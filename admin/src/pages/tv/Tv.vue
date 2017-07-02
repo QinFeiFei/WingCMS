@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <item-menu :childMenus="childMenus" @fold="changeFold"></item-menu>
+  <div style="height:100%;">
+    <item-menu :childMenus="childMenus"></item-menu>
     <div class="view-body">
       <router-view></router-view>
     </div>
@@ -13,7 +13,6 @@
     name: 'tv',
     data: function () {
       return {
-        isFold: true,
         childMenus: {
           title: '影视管理',
           menus: [
@@ -48,7 +47,7 @@
             },
             {
               itemName: '未来添加',
-              routeName: 'xxx',
+              routeName: 'dashBoard',
               active: false,
               display: false
             }
@@ -57,9 +56,6 @@
       }
     },
     methods: {
-      changeFold: function (state) {
-        this.isFold = state
-      }
     },
     components: {
       itemMenu

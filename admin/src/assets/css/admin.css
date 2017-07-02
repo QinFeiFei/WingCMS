@@ -13,9 +13,9 @@
 .main-body .leftMenu .ivu-menu-submenu { text-align:left; }
 .main-body .leftMenu .ivu-menu-submenu-title { padding: 14px 24px 14px 20px !important; }
 .main-body .leftMenu .ivu-menu-item { padding-left:20px !important; }
-.main-body .rightView { width:auto; position:absolute; top:0px; left:180px; bottom:0px; right:0px; overflow:hidden; background:#fff; }
+.main-body .rightView { width:auto; height:100%; position:absolute; top:0px; left:180px; bottom:0px; right:0px; overflow:hidden; background:#fff; }
 
-/* ---  左侧item-menu  --- */
+/* ---  左侧left-menu  --- */
 .main-body .leftMenu { width:180px; position:fixed; top:50px; bottom:0px; background-color:#383d42; overflow-x:hidden; overflow-y:hidden; }
 .main-body .leftMenu .sidebar-inner { height:30px; width:100%; background:#4A5064; text-align:center; font-size:20px;color:#fff; cursor:pointer; }
 
@@ -23,6 +23,7 @@
 .main-body .rightView .item-menu {
   width:180px;
   float:left;
+  height:100%;
 }
 .main-body .rightView .item-menu .view-body-navbar {
   width: 180px;
@@ -149,9 +150,12 @@
   width:100%;
 }
 
-/* ---  右侧item-menu  --- */
+/* ---  右侧view-body  --- */
 .main-body .rightView .view-body {
-  padding:15px;
+  padding:5px 15px;
   overflow: hidden;
-  border-right:100px solid red;
+  height:100%;
+}
+.main-body .console-title-border {
+  border-bottom: 1px solid #DDD;
 }

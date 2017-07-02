@@ -70,7 +70,6 @@ export default {
     },
     changeFold: function () {
       this.fold = !this.fold
-      this.$emit('fold', this.fold)
     }
   }
 }

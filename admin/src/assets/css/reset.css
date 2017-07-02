@@ -2,7 +2,7 @@
 
 /* const width and height */
 div {display:block;}
-.w0 {width:0px;}
+.w0 {width:0px !important;}
 .w10 {width:10px;}
 .w20 {width:10px;}
 .w30 {width:10px;}
@@ -20,6 +20,7 @@ div {display:block;}
 .w800 {width:800px;}
 .w1200 {width:1200px;}
 
+.h0 {height:0px !important;}
 .h10 {height:10px;}
 .h20 {height:10px;}
 .h30 {height:10px;}
@@ -37,7 +38,13 @@ div {display:block;}
 .h800 {height:800px;}
 .h1200 {height:1200px;}
 
+.relative { position:relative; }
+.inline-block { display:inline-block; }
 .show { display:block; }
 .hide { display:none; }
+.clearbox { clear:both; }
+.fleft { float:left; }
+.fright { float:right; }
 
 .font20 {font-size:20px;}
+
