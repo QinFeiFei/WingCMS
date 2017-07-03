@@ -18,12 +18,13 @@
     <!-- 高级搜索 -->
     <div class="advancedSearch" v-if="advancedSearch && searchType == 'advanced'">
       <div class="advanced_field" v-for="(item, index) in searchFields_">
+        {{ searchFields_[index]['search'] }}
         <Row>
           <Col span="6"><label class="advancedLabel" :for="'advanced_field_'+index">{{ item.text }}：</label></Col>
           <Col span="18">
-            <Input :id="'advanced_field_'+index" v-if="item.type === 'text'" v-model="searchFields_[index]['search']" :placeholder="item.placeholder" />
-            <Date-picker :id="'advanced_field_'+index" v-if="item.type === 'time'" v-model="searchFields_[index]['search']" type="datetimerange" :placeholder="item.placeholder" style="display:inline-block" />
-            <Select :id="'advanced_field_'+index" v-if="item.type === 'select'" v-model="searchFields_[index]['search']" :placeholder="item.placeholder">
+            <Input :id="'advanced_field_'+index" v-if="item.type === 'text'" v-model="searchFields_[index].search" :placeholder="item.placeholder" />
+            <Date-picker :id="'advanced_field_'+index" v-if="item.type === 'time'" v-model="searchFields_[index].search" type="datetimerange" :placeholder="item.placeholder" style="display:inline-block" />
+            <Select :id="'advanced_field_'+index" v-if="item.type === 'select'" v-model="searchFields_[index].search" :placeholder="item.placeholder">
               <Option v-for="iitem in item.values" :value="iitem.value" :key="iitem">{{ iitem.label }}</Option>
             </Select>
           </Col>
