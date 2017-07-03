@@ -18,12 +18,11 @@
     <!-- 高级搜索 -->
     <div class="advancedSearch" v-if="advancedSearch && searchType == 'advanced'">
       <div class="advanced_field" v-for="(item, index) in searchFields_">
-        {{ searchFields_[index]['search'] }}
         <Row>
-          <Col span="6"><label class="advancedLabel" :for="'advanced_field_'+index">{{ item.text }}：</label></Col>
-          <Col span="18">
+          <Col span="7"><label class="advancedLabel" :for="'advanced_field_'+index">{{ item.text }}：</label></Col>
+          <Col span="17">
             <Input :id="'advanced_field_'+index" v-if="item.type === 'text'" v-model="searchFields_[index].search" :placeholder="item.placeholder" />
-            <Date-picker :id="'advanced_field_'+index" v-if="item.type === 'time'" v-model="searchFields_[index].search" type="datetimerange" :placeholder="item.placeholder" style="display:inline-block" />
+            <Date-picker :id="'advanced_field_'+index" v-if="item.type === 'time'" v-model="searchFields_[index].search" type="datetimerange" :placeholder="item.placeholder" />
             <Select :id="'advanced_field_'+index" v-if="item.type === 'select'" v-model="searchFields_[index].search" :placeholder="item.placeholder">
               <Option v-for="iitem in item.values" :value="iitem.value" :key="iitem">{{ iitem.label }}</Option>
             </Select>
@@ -32,8 +31,8 @@
       </div>
       <div class="clearbox" style="width:33.33%">
         <Row>
-          <Col span="6"><span>&nbsp;</span></Col>
-          <Col span="18">
+          <Col span="7"><span>&nbsp;</span></Col>
+          <Col span="17">
             <Button type="primary" @click="submit">高级搜索</Button>
             <Button @click="reset">清空条件</Button>
           </Col>
@@ -75,12 +74,7 @@
           search: '',
           placeholder: '',
           values: []
-        },
-
-        test: [
-          { search: '1', name: '1' },
-          { search: '2', name: '2' }
-        ]
+        }
       }
     },
     created: function () {
@@ -95,6 +89,7 @@
     methods: {
       switchType: function () {
         this.searchType = this.searchType === 'simple' ? 'advanced' : 'simple'
+        this.simpleSearch_.search = ''
       },
       fieldIndex: function (field) {
         return _.findIndex(this.searchFields, function (chr) {
@@ -103,11 +98,15 @@
       },
       submit: function () {
         let index = this.fieldIndex(this.simpleSearch_.field)
-        this.searchFields_[index].search = this.simpleSearch_.search
+        if (this.simpleSearch_.search !== '') {
+          this.searchFields_[index].search = this.simpleSearch_.search
+        }
         this.$emit('submit', this.searchFields_)
       },
       reset: function () {
-        console.log('reset')
+        for (var field of this.searchFields_) {
+          field.search = null
+        }
       }
     },
     watch: {
@@ -120,11 +119,11 @@
         },
         deep: true
       },
-      searchFields_: function (val, old) {
-        // console.log(val)
-      },
-      test: function (val) {
-        console.log(val)
+      searchFields_: {
+        handler: function (val, old) {
+          this.searchFields_ = val
+        },
+        deep: true
       }
     }
   }
@@ -150,6 +149,7 @@
     margin-right:10px;
   }
   .advanced_field {
+    margin-bottom:8px;
     width:33.33%;
     display:inline-block;
   }
@@ -159,5 +159,8 @@
     text-align:right;
     display:block;
     padding-right:12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 </style>

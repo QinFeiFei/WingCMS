@@ -21,6 +21,9 @@
         <span class="aliBtn aliBtn-default"><Icon type="help"></Icon></span>
       </template>
     </column-search>
+
+    <!-- 栏目内容列表 -->
+    <column-list></column-list>
   </div>
 </template>
 
@@ -28,6 +31,7 @@
   import topMessage from '../../components/ColumnTopMessage'
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
+  import columnList from '../../components/ColumnList'
   import langs from '../../config/TvLangs'
   import areas from '../../config/TvAreas'
   export default {
@@ -48,7 +52,8 @@
     components: {
       topMessage,
       consoleTitle,
-      columnSearch
+      columnSearch,
+      columnList
     },
     methods: {
       readNotice: function () {
