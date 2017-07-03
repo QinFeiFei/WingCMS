@@ -43,8 +43,38 @@ div {display:block;}
 .show { display:block; }
 .hide { display:none; }
 .clearbox { clear:both; }
+.clearfix { clear:both; }
 .fleft { float:left; }
 .fright { float:right; }
 
 .font20 {font-size:20px;}
+
+
+/** 自定义按钮 **/
+.aliBtn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  font-size: 14px;
+  border-radius: 0px;
+  padding: 4px 12px;
+  height: 32px;
+  line-height: 25px;
+}
+.aliBtn-default {
+  color: #333;
+  border: 1px solid #ddd;
+  background-color: #F7F7F7;
+}
 

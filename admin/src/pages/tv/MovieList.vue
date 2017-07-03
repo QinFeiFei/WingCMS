@@ -14,7 +14,13 @@
     </console-title>
 
     <!-- 栏目Search -->
-    <column-search :searchFields="searchFields"></column-search>
+    <column-search :searchFields="searchFields" :advancedSearch="true" @submit="search">
+      <template slot="toolBar">
+        <span class="aliBtn aliBtn-default"><Icon type="android-download"></Icon></span>
+        <span class="aliBtn aliBtn-default"><Icon type="ios-gear"></Icon></span>
+        <span class="aliBtn aliBtn-default"><Icon type="help"></Icon></span>
+      </template>
+    </column-search>
   </div>
 </template>
 
@@ -32,10 +38,10 @@
           search: null
         },
         searchFields: [
-          { field: 'tv_name', text: '影视名称', type: 'text' },
-          { field: 'tv_lang', text: '影视语言', type: 'select', values: langs },
-          { field: 'tv_area', text: '影视地区', type: 'select', values: areas },
-          { field: 'created_at', text: '添加时间', type: 'time' }
+          { field: 'tv_name', text: '影视名称', type: 'text', placeholder: '请输入要搜索的名称', search: null },
+          { field: 'tv_lang', text: '影视语言', type: 'select', values: langs, placeholder: '请选择语言', search: null },
+          { field: 'tv_area', text: '影视地区', type: 'select', values: areas, placeholder: '请选地区', search: null },
+          { field: 'created_at', text: '添加时间', type: 'time', placeholder: '请选择添加时间范围', search: null }
         ]
       }
     },
@@ -47,6 +53,9 @@
     methods: {
       readNotice: function () {
         console.log('关闭了notice.')
+      },
+      search: function (obj) {
+        console.log(obj)
       }
     }
   }
