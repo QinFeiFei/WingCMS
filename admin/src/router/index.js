@@ -33,6 +33,15 @@ import 'iview/dist/styles/iview.css'
 Vue.use(Router)
 Vue.use(iView)
 
+// Iview 的table组件宽度不能自适应，暂时单独引入element-ui的table组件
+import 'element-ui/lib/theme-default/index.css'
+import {
+  Table,
+  TableColumn
+} from 'element-ui'
+Vue.use(Table)
+Vue.use(TableColumn)
+
 export default new Router({
   routes: [
     {
