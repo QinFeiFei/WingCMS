@@ -132,6 +132,7 @@
 <style scoped>
   .column-search {
     margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
   }
   .tool-bar {
