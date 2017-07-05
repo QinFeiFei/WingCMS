@@ -160,3 +160,8 @@
 .main-body .console-title-border {
   border-bottom: 1px solid #DDD;
 }
+.main-body .pageWrap {
+  margin-top:15px;
+  margin-bottom:30px;
+  float:right;
+}

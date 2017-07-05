@@ -37,10 +37,12 @@ Vue.use(iView)
 import 'element-ui/lib/theme-default/index.css'
 import {
   Table,
-  TableColumn
+  TableColumn,
+  Loading
 } from 'element-ui'
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Loading)
 
 export default new Router({
   routes: [
