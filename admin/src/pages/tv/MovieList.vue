@@ -17,17 +17,25 @@
     <column-search :searchFields="searchFields" :advancedSearch="true" @submit="search">
       <template slot="toolBar">
         <span class="aliBtn aliBtn-default"><Icon type="android-download"></Icon></span>
-        <span class="aliBtn aliBtn-default" @click="modal1 = true"><Icon type="ios-gear"></Icon></span>
+        <span class="aliBtn aliBtn-default" @click="showTableColumns"><Icon type="ios-gear"></Icon></span>
         <span class="aliBtn aliBtn-default"><Icon type="help"></Icon></span>
       </template>
     </column-search>
-    <set-column-modal :columnShow="showColumns" :display="modal1"></set-column-modal>
+    <set-column-modal :columnShow="showColumns" @set="setShowTableColumns"></set-column-modal>
 
     <!-- 数据表与分页 -->
-    <el-table border :data="tableData" v-loading="loading" element-loading-text="拼命加载中">
-      <el-table-column prop="date" label="日期" width="180"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
+    <el-table border :data="tableData" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="45"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'date')" prop="date" label="日期" sortable></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'name')" prop="name" label="姓名"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'address')" prop="address" label="地址"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="170">
+        <template scope="scope">
+          <Button size="small" type="info">查看</Button>
+          <Button size="small" type="success">编辑</Button>
+          <Button size="small" type="error">删除</Button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <Page class="pageWrap" :total="100" show-sizer @on-change="changePage" @on-page-size-change="changePage"></Page>
@@ -44,8 +52,6 @@
   export default {
     data: function () {
       return {
-        loading: false,
-        modal1: false,
         simpleSearch: {
           field: '',
           search: null
@@ -78,12 +84,15 @@
         showColumns: [
           {
             column: 'date',
+            text: '日期',
             show: true
           }, {
             column: 'name',
+            text: '姓名',
             show: true
           }, {
             column: 'address',
+            text: '地址',
             show: true
           }
         ]
@@ -107,11 +116,22 @@
       changePageSize: function (pageSize) {
         console.log(pageSize)
       },
+      showTableColumns: function () {
+        this.$store.commit('ToggleColumnsShow')
+      },
       setShowTableColumns: function (showTableColumns) {
-        console.log('setTableColumns')
+        console.log(showTableColumns)
       }
     },
     created: function () {
+    },
+    watch: {
+      multipleSelection: {
+        handler: function (val) {
+          console.log(val)
+        },
+        deep: true
+      }
     }
   }
 </script>

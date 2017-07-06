@@ -1,5 +1,5 @@
-const actions = {
+const getters = {
   // example
   // sidebar: state => state.app.sidebar,
 }
-export default actions
+export default getters

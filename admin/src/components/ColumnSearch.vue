@@ -6,7 +6,7 @@
         <Option v-for="item in searchFields" :value="item.field" :key="item">{{ item.text }}</Option>
       </Select>
       <template>
-        <Input v-if="simpleSearch_.type === 'text'" v-model="simpleSearch_.search" :placeholder="simpleSearch_.placeholder" style="width: 200px" />
+        <Input v-if="simpleSearch_.type === 'text'" v-model.trim="simpleSearch_.search" :placeholder="simpleSearch_.placeholder" style="width: 200px" />
         <Date-picker v-if="simpleSearch_.type === 'time'" v-model="simpleSearch_.search" type="datetimerange" :placeholder="simpleSearch_.placeholder" style="width: 300px;display:inline-block" />
         <Select  v-if="simpleSearch_.type === 'select'" v-model="simpleSearch_.search" :placeholder="simpleSearch_.placeholder" style="width:200px">
           <Option v-for="item in simpleSearch_.values" :value="item.value" :key="item">{{ item.label }}</Option>
@@ -21,7 +21,7 @@
         <Row>
           <Col span="7"><label class="advancedLabel" :for="'advanced_field_'+index">{{ item.text }}：</label></Col>
           <Col span="17">
-            <Input :id="'advanced_field_'+index" v-if="item.type === 'text'" v-model="searchFields_[index].search" :placeholder="item.placeholder" />
+            <Input :id="'advanced_field_'+index" v-if="item.type === 'text'" v-model.trim="searchFields_[index].search" :placeholder="item.placeholder" />
             <Date-picker :id="'advanced_field_'+index" v-if="item.type === 'time'" v-model="searchFields_[index].search" type="datetimerange" :placeholder="item.placeholder" />
             <Select :id="'advanced_field_'+index" v-if="item.type === 'select'" v-model="searchFields_[index].search" :placeholder="item.placeholder">
               <Option v-for="iitem in item.values" :value="iitem.value" :key="iitem">{{ iitem.label }}</Option>

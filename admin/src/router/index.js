@@ -33,6 +33,10 @@ import 'iview/dist/styles/iview.css'
 Vue.use(Router)
 Vue.use(iView)
 
+// public Mixin
+import publicMixin from '../mixins/public'
+Vue.mixin(publicMixin)
+
 // Iview 的table组件宽度不能自适应，暂时单独引入element-ui的table组件
 import 'element-ui/lib/theme-default/index.css'
 import {

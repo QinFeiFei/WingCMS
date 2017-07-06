@@ -1,18 +1,15 @@
 <template>
-  <Modal v-model="display" title="设置显示的列" @on-ok="setShowTableColumns" @on-cancel="cancle" width="500">
-    <p>对话框内容</p>
-    <p>对话框内容</p>
-    <p>对话框内容</p>
+  <div>
+  <Modal v-model="modalColumns" title="设置显示的列" @on-ok="setShowTableColumns" @on-cancel="cancel" width="500">
+    <div class="columnItem_" v-for="(item, index) in columnShow">
+      <span><Checkbox v-model="item.show">&nbsp;{{ item.text }}</Checkbox></span>
+    </div>
   </Modal>
+  </div>
 </template>
 <script>
   export default {
     props: {
-      display: {
-        type: Boolean,
-        default: false,
-        require: true
-      },
       columnShow: {
         type: Array,
         default: [],
@@ -24,14 +21,29 @@
         columnShow_: []
       }
     },
+    computed: {
+      modalColumns: function () {
+        return this.$store.state.columnsShow
+      }
+    },
+    created: function () {
+      this.columnShow_ = this.columnShow
+    },
     methods: {
       setShowTableColumns: function () {
+        this.$emit('set', this.columnShow_)
+        this.cancel()
       },
-      cancle: function () {
-        this.$emit('cancle')
+      cancel: function () {
+        this.$store.commit('ToggleColumnsShow')
       }
     }
   }
 </script>
 <style scoped>
+  .columnItem_ {
+    width:25%;
+    display:inline-block;
+    padding:10px 0px;
+  }
 </style>
