@@ -38,6 +38,9 @@ div {display:block;}
 .h800 {height:800px;}
 .h1200 {height:1200px;}
 
+.font12 { font-size:12px; }
+.font14 { font-size:14px; }
+
 .relative { position:relative; }
 .inline-block { display:inline-block; }
 .show { display:block; }

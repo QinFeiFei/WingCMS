@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Admin from '../components/Admin'
+import PublicBody from '../pages/main/PublicBody'
 
 // 控制台
 import dashBoard from '../pages/main/Dashboard'
+
+// 错误页面
+import error404 from '../pages/error/404'
+import error401 from '../pages/error/401'
 
 // 用户管理
 import user from '../pages/user/User'
@@ -25,6 +30,7 @@ import mvList from '../pages/tv/MvList'
 import openclassList from '../pages/tv/OpenclassList'
 import otherList from '../pages/tv/OtherList'
 import tvSpecial from '../pages/tv/TvSpecial'
+import createTv from '../pages/tv/CreateTv'
 
 // Iview UI
 import iView from 'iview'
@@ -60,6 +66,15 @@ export default new Router({
           component: dashBoard
         },
         {
+          path: '/error',
+          component: PublicBody,
+          children: [
+            { path: '', name: 'error', component: error404 },
+            { path: '404', name: 'error404', component: error404 },
+            { path: '401', name: 'error401', component: error401 }
+          ]
+        },
+        {
           path: '/user',
           component: user,
           children: [
@@ -79,16 +94,19 @@ export default new Router({
           component: tv,
           children: [
             // 资源管理
-            { path: '/tv/', name: 'TvOverView', component: tvOverView },
-            { path: '/tv/movieList', name: 'MovieList', component: movieList },
-            { path: '/tv/teleplayList', name: 'TeleplayList', component: teleplayList },
-            { path: '/tv/cartoonList', name: 'CartoonList', component: cartoonList },
-            { path: '/tv/varietyList', name: 'VarietyList', component: varietyList },
-            { path: '/tv/mvList', name: 'MvList', component: mvList },
-            { path: '/tv/oenclassList', name: 'OpenclassList', component: openclassList },
-            { path: '/tv/otherList', name: 'OtherList', component: otherList },
+            { path: '', name: 'TvOverView', component: tvOverView },
+            { path: 'movieList', name: 'MovieList', component: movieList },
+            { path: 'teleplayList', name: 'TeleplayList', component: teleplayList },
+            { path: 'cartoonList', name: 'CartoonList', component: cartoonList },
+            { path: 'varietyList', name: 'VarietyList', component: varietyList },
+            { path: 'mvList', name: 'MvList', component: mvList },
+            { path: 'oenclassList', name: 'OpenclassList', component: openclassList },
+            { path: 'otherList', name: 'OtherList', component: otherList },
             // 专题管理
-            { path: '/otherList', name: 'TvSpecial', component: tvSpecial }
+            { path: 'otherList', name: 'TvSpecial', component: tvSpecial },
+            // 添加与删除
+            { path: 'create', name: 'TvCreate', component: createTv },
+            { path: 'update', name: 'TvUpdate', component: createTv }
           ]
         }
       ]

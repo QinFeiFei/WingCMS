@@ -8,17 +8,26 @@
       <div slot="left" style="max-width:400px;">
       </div>
       <div slot="right" style="width:auto;height:auto;position:absolute;top:10px;right:0px;">
-        <Button><Icon type="loop" style="font-size:14px;" /></Button>
-        <Button type="primary">Primary</Button>
+        <Button><Icon type="loop" class="font14" /></Button>
+        <router-link :to="{name:'TvCreate'}"><Button type="primary">添加电影</Button></router-link>
       </div>
     </console-title>
 
     <!-- 栏目Search -->
     <column-search :searchFields="searchFields" :advancedSearch="true" @submit="search">
       <template slot="toolBar">
-        <span class="aliBtn aliBtn-default"><Icon type="android-download"></Icon></span>
-        <span class="aliBtn aliBtn-default" @click="showTableColumns"><Icon type="ios-gear"></Icon></span>
-        <span class="aliBtn aliBtn-default"><Icon type="help"></Icon></span>
+        <Tooltip content="导出数据" placement="top">
+          <span class="aliBtn aliBtn-default"><Icon type="android-download"></Icon></span>
+        </Tooltip>
+        <Tooltip content="设置显示的列" placement="top">
+          <span class="aliBtn aliBtn-default" @click="showTableColumns"><Icon type="ios-gear"></Icon></span>
+        </Tooltip>
+        <Tooltip content="帮助信息" placement="top">
+          <span class="aliBtn aliBtn-default"><Icon type="help"></Icon></span>
+        </Tooltip>
+
+
+
       </template>
     </column-search>
     <set-column-modal :columnShow="showColumns" @set="setShowTableColumns"></set-column-modal>
@@ -38,7 +47,17 @@
       </el-table-column>
     </el-table>
 
-    <Page class="pageWrap" :total="100" show-sizer @on-change="changePage" @on-page-size-change="changePage"></Page>
+    <div class="pageWrap">
+      <Button-group class="fleft">
+        <Button type="ghost" icon="ios-color-wand-outline"></Button>
+        <Button type="ghost" icon="ios-sunny-outline"></Button>
+        <Button type="ghost" icon="ios-crop"></Button>
+        <Button type="ghost" icon="ios-color-filter-outline"></Button>
+      </Button-group>
+
+      <Page class="inline-block fright" :total="100" show-sizer @on-change="changePage" @on-page-size-change="changePage"></Page>
+    </div>
+
   </div>
 </template>
 
@@ -126,12 +145,6 @@
     created: function () {
     },
     watch: {
-      multipleSelection: {
-        handler: function (val) {
-          console.log(val)
-        },
-        deep: true
-      }
     }
   }
 </script>

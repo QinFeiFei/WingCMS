@@ -12,7 +12,7 @@
         adsfasdfasdfasdfasdfasdf
       </Dropdown-menu>
     </Dropdown>
-    <div class="bar-item bar-item-right ico-item">
+    <div class="bar-item bar-item-right ico-item" @click="fullscreen">
       <Icon type="android-expand"></Icon>
     </div>
     <Dropdown class="bar-item bar-item-right ico-item" trigger="hover" :visible="visible">
@@ -23,15 +23,11 @@
         adsfasdfasdfasdfasdfasdf
       </Dropdown-menu>
     </Dropdown>
-
-
-
-
-
   </div>
 </template>
 
 <script>
+  import screenfull from 'screenfull'
   export default {
     name: 'topBar',
     data: function () {
@@ -45,6 +41,15 @@
       },
       handleClose () {
         this.visible = false
+      },
+      fullscreen: function () {
+        if (!screenfull.enabled) {
+          this.$Message.warning({
+            content: 'you browser can not work'
+          })
+          return false
+        }
+        screenfull.toggle()
       }
     },
     components: {
@@ -53,5 +58,4 @@
 </script>
 
 <style scoped>
-
 </style>
