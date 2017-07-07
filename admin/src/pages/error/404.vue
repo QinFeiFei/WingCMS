@@ -1,5 +1,5 @@
 <template>
-  <div style="background:#f0f2f5;height:100%;">
+  <div style="height:100%;">
     <div class="wscn-http404">
       <div style="display:flex;justify-content: center;align-items:center;height:100%;position:relative;top:-50px;">
         <div class="pic-404">
@@ -30,8 +30,7 @@
   }
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
-  .view-body {padding:0px !important;}
+<style rel="stylesheet/scss" lang="scss" scoped>
   .wscn-http404 {
     position: relative;
     width: 100%;

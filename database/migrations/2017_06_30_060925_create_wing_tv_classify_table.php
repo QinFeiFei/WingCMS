@@ -12,10 +12,10 @@ class CreateWingTvTypeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tv_type', function(Blueprint $table)
+		Schema::create('tv_classify', function(Blueprint $table)
 		{
-			$table->integer('type_id', true);
-			$table->string('type_name')->default('')->comment('类型名称');
+			$table->integer('classify_id', true);
+			$table->string('classify_name')->default('')->comment('类型名称');
 			$table->integer('tv_id')->default(0);
 		});
 	}

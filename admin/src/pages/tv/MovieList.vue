@@ -9,7 +9,7 @@
       </div>
       <div slot="right" style="width:auto;height:auto;position:absolute;top:10px;right:0px;">
         <Button><Icon type="loop" class="font14" /></Button>
-        <router-link :to="{name:'TvCreate'}"><Button type="primary">添加电影</Button></router-link>
+        <router-link :to="{name:'TvCreate', params:{type:'movie' }}"><Button type="primary">添加电影</Button></router-link>
       </div>
     </console-title>
 
@@ -25,9 +25,6 @@
         <Tooltip content="帮助信息" placement="top">
           <span class="aliBtn aliBtn-default"><Icon type="help"></Icon></span>
         </Tooltip>
-
-
-
       </template>
     </column-search>
     <set-column-modal :columnShow="showColumns" @set="setShowTableColumns"></set-column-modal>

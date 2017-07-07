@@ -8,7 +8,11 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import tvMixins from '../../mixins/tv'
   import itemMenu from '../main/ItemMenu'
+  Vue.mixin(tvMixins)
+
   export default {
     name: 'tv',
     data: function () {
@@ -64,5 +68,4 @@
 </script>
 
 <style scoped>
-
 </style>

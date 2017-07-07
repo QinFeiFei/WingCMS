@@ -1,8 +1,7 @@
 export default [
   {
     label: '国语',
-    value: '111',
-    default: true
+    value: '111'
   },
   {
     label: '英语',

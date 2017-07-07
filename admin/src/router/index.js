@@ -105,8 +105,8 @@ export default new Router({
             // 专题管理
             { path: 'otherList', name: 'TvSpecial', component: tvSpecial },
             // 添加与删除
-            { path: 'create', name: 'TvCreate', component: createTv },
-            { path: 'update', name: 'TvUpdate', component: createTv }
+            { path: 'create/:type', name: 'TvCreate', component: createTv },
+            { path: 'update/:id', name: 'TvUpdate', component: createTv }
           ]
         }
       ]

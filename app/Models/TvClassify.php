@@ -9,9 +9,9 @@ class TvType extends Model
 {
     use SoftDeletes;
 
-    protected $table='tv_type';
+    protected $table='tv_classify';
     public $timestamps = true;
-    protected $primaryKey='type_id';
+    protected $primaryKey='classify_id';
     protected $guarded=[];
     protected $dates = ['deleted_at'];
 

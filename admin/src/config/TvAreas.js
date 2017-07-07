@@ -1,8 +1,7 @@
 export default [
   {
     label: '内地',
-    value: '111',
-    default: true
+    value: '111'
   },
   {
     label: '台湾',
