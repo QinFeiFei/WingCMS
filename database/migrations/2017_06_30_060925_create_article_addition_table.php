@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingArticleAdditionTable extends Migration {
+class CreateArticleAdditionTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -22,6 +22,8 @@ class CreateWingArticleAdditionTable extends Migration {
 			$table->integer('is_goods')->default(0)->comment('好评');
 			$table->integer('is_bads')->default(0)->comment('差评');
 			$table->integer('article_comment_counts')->default(0)->comment('文章评论总数');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

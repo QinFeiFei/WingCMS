@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingTvSpecialManyTable extends Migration {
+class CreateTvSpecialManyTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -17,6 +17,8 @@ class CreateWingTvSpecialManyTable extends Migration {
 			$table->integer('id', true);
 			$table->integer('tv_id')->nullable();
 			$table->integer('sp_id')->nullable();
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

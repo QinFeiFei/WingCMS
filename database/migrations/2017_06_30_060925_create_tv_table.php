@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingTvTable extends Migration {
+class CreateTvTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -30,6 +30,8 @@ class CreateWingTvTable extends Migration {
 			$table->smallInteger('tv_minute')->unsigned()->default(0)->comment('片长（分钟）');
 			$table->string('tv_baidu_url')->default('')->comment('百度分享链接');
 			$table->string('tv_baidu_pwd')->default('')->comment('百度分享密码');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

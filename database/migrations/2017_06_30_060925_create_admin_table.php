@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingAdminTable extends Migration {
+class CreateAdminTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -23,6 +23,8 @@ class CreateWingAdminTable extends Migration {
 			$table->integer('admin_gid')->default(0)->comment('权限组ID');
 			$table->dateTime('admin_last_logintime')->comment('最后一次登陆时间');
 			$table->integer('admin_admin_loginnum')->default(0)->comment('登陆次数');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

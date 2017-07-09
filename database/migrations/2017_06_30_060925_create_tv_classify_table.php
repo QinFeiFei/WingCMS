@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingTvTypeTable extends Migration {
+class CreateTvClassifyTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -17,6 +17,8 @@ class CreateWingTvTypeTable extends Migration {
 			$table->integer('classify_id', true);
 			$table->string('classify_name')->default('')->comment('类型名称');
 			$table->integer('tv_id')->default(0);
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

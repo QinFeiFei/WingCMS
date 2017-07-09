@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingTvSpecialTable extends Migration {
+class CreateTvSpecialTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -18,6 +18,8 @@ class CreateWingTvSpecialTable extends Migration {
 			$table->string('sp_name')->default('')->comment('专题名称');
 			$table->string('sp_desc')->default('')->comment('专题简介');
 			$table->string('sp_pic')->default('')->comment('专题封面图片');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

@@ -58,7 +58,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
   import setColumnModal from '../../components/SetColumnsShow'
@@ -120,6 +120,11 @@
       setColumnModal
     },
     methods: {
+      loadData: function () {
+        this.axios({
+        }).then(response => {
+        })
+      },
       readNotice: function () {
         console.log('关闭了notice.')
       },
@@ -140,6 +145,7 @@
       }
     },
     created: function () {
+      this.loadData()
     },
     watch: {
     }

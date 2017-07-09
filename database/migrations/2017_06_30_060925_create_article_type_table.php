@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingArticleTypeTable extends Migration {
+class CreateArticleTypeTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -17,6 +17,8 @@ class CreateWingArticleTypeTable extends Migration {
 			$table->integer('type_id', true);
 			$table->string('type_name')->default('')->comment('分类名称');
 			$table->integer('type_pid')->default(0)->comment('父级ID');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

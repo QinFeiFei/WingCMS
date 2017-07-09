@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingArticleTable extends Migration {
+class CreateArticleTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -27,8 +27,10 @@ class CreateWingArticleTable extends Migration {
 			$table->string('article_from_user')->default('')->comment('投稿用户（JSON：用户ID、用户名）');
 			$table->string('article_source')->default('')->comment('文章来源（JSON：来源网址、网站名称）');
 			$table->string('article_tags')->default('')->comment('文章标签（标签名称）');
-			$table->boolean('article_soft')->default(255)->comment('排序');
+			$table->integer('article_soft')->default(255)->comment('排序');
 			$table->string('is_publish')->default('0')->comment('是否发布（0草稿 1发布）');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

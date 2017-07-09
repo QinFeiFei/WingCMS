@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWingUserTable extends Migration {
+class CreateUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -26,6 +26,8 @@ class CreateWingUserTable extends Migration {
 			$table->string('last_ip')->default('')->comment('最后登陆IP');
 			$table->integer('login_num')->default(0)->comment('登陆次数');
 			$table->string('register_type')->default('pc');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
