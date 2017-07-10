@@ -12,12 +12,12 @@ class TvController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $model = Tv::orderBy('created_at', 'desc');
-        $data = $model->paginate(10);
+        $list = $model->paginate($request->get('pageSize', 10));
 
-        return response()->json($data);
+        return $list;
     }
 
     /**

@@ -30,11 +30,17 @@
     <set-column-modal :columnShow="showColumns" @set="setShowTableColumns"></set-column-modal>
 
     <!-- 数据表与分页 -->
-    <el-table border :data="tableData" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
+    <el-table border :data="dataList" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="45"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'date')" prop="date" label="日期" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'name')" prop="name" label="姓名"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'address')" prop="address" label="地址"></el-table-column>
+      <el-table-column prop="tv_name" label="影视名称"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="影视年代"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_lang')" prop="tv_lang" label="语言"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_area')" prop="tv_area" label="地区"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_minute')" prop="tv_minute" label="片长"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_url')" prop="tv_baidu_url" label="百度分享URL"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_pwd')" prop="tv_baidu_pwd" label="百度分享密码"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="添加时间" sortable></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'updated_at')" prop="updated_at" label="最后修改时间" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="170">
         <template scope="scope">
           <Button size="small" type="info">查看</Button>
@@ -52,13 +58,15 @@
         <Button type="ghost" icon="ios-color-filter-outline"></Button>
       </Button-group>
 
-      <Page class="inline-block fright" :total="100" show-sizer @on-change="changePage" @on-page-size-change="changePage"></Page>
+      <Page class="inline-block fright" :total="list_count" show-sizer @on-change="changePage" @on-page-size-change="changePage"></Page>
     </div>
 
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import _ from 'lodash'
+  import { movieList } from '../../api/tv'
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
   import setColumnModal from '../../components/SetColumnsShow'
@@ -68,47 +76,44 @@
   export default {
     data: function () {
       return {
-        simpleSearch: {
-          field: '',
-          search: null
-        },
         searchFields: [
           { field: 'tv_name', text: '影视名称', type: 'text', placeholder: '请输入要搜索的名称', search: null },
           { field: 'tv_lang', text: '影视语言', type: 'select', values: langs, placeholder: '请选择语言', search: null },
           { field: 'tv_area', text: '影视地区', type: 'select', values: areas, placeholder: '请选地区', search: null },
           { field: 'created_at', text: '添加时间', type: 'time', placeholder: '请选择添加时间范围', search: null }
         ],
-        tableData: [
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }
-        ],
         showColumns: [
           {
-            column: 'date',
-            text: '日期',
+            column: 'tv_show_year',
+            text: '影视年代',
             show: true
           }, {
-            column: 'name',
-            text: '姓名',
+            column: 'tv_lang',
+            text: '语言',
             show: true
           }, {
-            column: 'address',
-            text: '地址',
+            column: 'tv_area',
+            text: '地区',
+            show: false
+          }, {
+            column: 'tv_minute',
+            text: '片长',
+            show: false
+          }, {
+            column: 'tv_baidu_url',
+            text: '百度分享URL',
+            show: true
+          }, {
+            column: 'tv_baidu_pwd',
+            text: '百度分享密码',
+            show: true
+          }, {
+            column: 'created_at',
+            text: '添加时间',
+            show: true
+          }, {
+            column: 'updated_at',
+            text: '最后修改时间',
             show: true
           }
         ]
@@ -120,28 +125,38 @@
       setColumnModal
     },
     methods: {
+      parseParam: function () {
+        let params_ = {
+          page: this.current_page,
+          page_size: this.page_size
+        }
+        for (let item of this.searchFields) {
+          _.set(params_, item.field, item.search)
+        }
+
+        console.log(params_)
+        return params_
+      },
       loadData: function () {
+        this.isLoading = true
         this.axios({
+          method: 'GET',
+          url: movieList,
+          params: this.parseParam()
         }).then(response => {
+          this.isLoading = false
+          this.dataList = response.data.data
+          this.list_count = response.data.total
         })
       },
       readNotice: function () {
         console.log('关闭了notice.')
       },
       search: function (obj) {
-        console.log(obj)
-      },
-      changePage: function (page) {
-        console.log(page)
-      },
-      changePageSize: function (pageSize) {
-        console.log(pageSize)
-      },
-      showTableColumns: function () {
-        this.$store.commit('ToggleColumnsShow')
+        this.loadData()
       },
       setShowTableColumns: function (showTableColumns) {
-        console.log(showTableColumns)
+        console.log('显示了这些列：' + showTableColumns)
       }
     },
     created: function () {

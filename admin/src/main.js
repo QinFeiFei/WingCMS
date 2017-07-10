@@ -8,7 +8,7 @@ import store from './store'
 Vue.config.productionTip = false
 
 // Axios
-import axios from 'axios'
+import axios from './http.js'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
