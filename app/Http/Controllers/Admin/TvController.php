@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tv;
+use App\Services\TvService;
 use Illuminate\Http\Request;
 
 class TvController extends Controller
@@ -12,11 +13,9 @@ class TvController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, TvService $service)
     {
-        $model = Tv::orderBy('created_at', 'desc');
-        $list = $model->paginate($request->get('pageSize', 10));
-
+        $list = $service->pageList($request);
         return $list;
     }
 
