@@ -33,10 +33,10 @@
     <el-table border :data="dataList" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="45"></el-table-column>
       <el-table-column prop="tv_name" label="影视名称"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="影视年代"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="影视年代" sortable></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_lang')" prop="tv_lang" label="语言"></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_area')" prop="tv_area" label="地区"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_minute')" prop="tv_minute" label="片长"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_minute')" prop="tv_minute" label="片长" sortable></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_url')" prop="tv_baidu_url" label="百度分享URL"></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_pwd')" prop="tv_baidu_pwd" label="百度分享密码"></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="添加时间" sortable></el-table-column>
@@ -58,14 +58,13 @@
         <Button type="ghost" icon="ios-color-filter-outline"></Button>
       </Button-group>
 
-      <Page class="inline-block fright" :total="list_count" show-sizer @on-change="changePage" @on-page-size-change="changePage"></Page>
+      <Page class="inline-block fright" :total="list_count" :page-size="page_size" show-total show-sizer @on-change="changePage" @on-page-size-change="changePageSize"></Page>
     </div>
 
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import _ from 'lodash'
   import { movieList } from '../../api/tv'
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
@@ -125,24 +124,12 @@
       setColumnModal
     },
     methods: {
-      parseParam: function () {
-        let params_ = {
-          page: this.current_page,
-          page_size: this.page_size
-        }
-        for (let item of this.searchFields) {
-          _.set(params_, item.field, item.search)
-        }
-
-        console.log(params_)
-        return params_
-      },
       loadData: function () {
         this.isLoading = true
         this.axios({
           method: 'GET',
           url: movieList,
-          params: this.parseParam()
+          params: this.parseParam(this.searchFields)
         }).then(response => {
           this.isLoading = false
           this.dataList = response.data.data

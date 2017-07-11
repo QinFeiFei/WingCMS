@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import dateUtil from 'iview/src/utils/date'
 
 export default {
   data: function () {
@@ -9,7 +10,7 @@ export default {
       multipleSelection: [],  // 列表页面多选，选中项,
 
       current_page: 0,        // 当前页
-      page_size: 10,           // 每页条数
+      page_size: 20,           // 每页条数
       list_count: 0            // 数据总条数
     }
   },
@@ -42,6 +43,26 @@ export default {
     // 列表页显示设置显示列的弹层
     showTableColumns: function () {
       this.$store.commit('ToggleColumnsShow')
+    },
+
+    // 列表页组装查询条件
+    parseParam: function (searchFields) {
+      let params_ = {
+        page: this.current_page,
+        page_size: this.page_size
+      }
+      for (let item of searchFields) {
+        if (item.type === 'time' && item.search && item.search.length === 2) {
+          if (item.search[0] === null || item.search[1] === null) {
+            continue
+          }
+          item.search[0] = dateUtil.format(item.search[0], 'yyyy-MM-dd HH:mm:ss')
+          item.search[1] = dateUtil.format(item.search[1], 'yyyy-MM-dd HH:mm:ss')
+        }
+        _.set(params_, item.field, item.search)
+      }
+
+      return params_
     }
   }
 }

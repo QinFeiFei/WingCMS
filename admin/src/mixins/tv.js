@@ -28,6 +28,11 @@ export default {
         case 'movie': type = 10; break
       }
       return type
+    },
+
+    // 将影视语言转换为文字
+    parseTvLangText: function (lang) {
+
     }
   }
 }

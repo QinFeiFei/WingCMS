@@ -98,9 +98,8 @@
       },
       submit: function () {
         let index = this.fieldIndex(this.simpleSearch_.field)
-        if (this.simpleSearch_.search !== '') {
-          this.searchFields_[index].search = this.simpleSearch_.search
-        }
+        this.searchFields_[index].search = this.simpleSearch_.search
+
         this.$emit('submit', this.searchFields_)
       },
       reset: function () {

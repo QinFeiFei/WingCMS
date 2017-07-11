@@ -16,7 +16,7 @@ class TvService {
         // parseCondition
         $this->parseCondition($request, $model);
 
-        $list = $model->paginate($request->get('pageSize', 10));
+        $list = $model->paginate($request->get('page_size', 10));
         return $list;
     }
 
@@ -24,13 +24,11 @@ class TvService {
     /**
      * 转换查询条件
      *
-     *
-     *
      */
     private function parseCondition (Request $request, &$model) {
         $tv_name = trim($request->get('tv_name', ''));
         if(!empty($tv_name)){
-            $model = $model->where('tv_name', $tv_name);
+            $model = $model->where('tv_name', 'like', '%'.$tv_name.'%');
         }
 
         $tv_type = intval($request->get('tv_type', 0));
@@ -55,16 +53,8 @@ class TvService {
 
         $created_at = $request->get('created_at');
         if(!empty($created_at)){
-            dd($created_at[0]);
-            dd(date('Y-m-d H:i:s', strtotime($created_at[0])));
-            $model = $model->whereBetween('created_at', [1, 2]);
+            $model = $model->whereBetween('created_at', [$created_at[0], $created_at[1]]);
         }
-
-
-
-
-
-
     }
 
 
