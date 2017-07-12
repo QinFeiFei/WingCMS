@@ -34,11 +34,35 @@
       <el-table-column type="selection" width="45"></el-table-column>
       <el-table-column prop="tv_name" label="影视名称"></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="影视年代" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_lang')" prop="tv_lang" label="语言"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_area')" prop="tv_area" label="地区"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_lang')" label="语言">
+        <template scope="scope">
+          {{ parseTvLangText(scope.row.tv_lang) }}
+        </template>
+      </el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_area')" label="地区">
+        <template scope="scope">
+          {{ parseTvAreaText(scope.row.tv_area) }}
+        </template>
+      </el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_minute')" prop="tv_minute" label="片长" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_url')" prop="tv_baidu_url" label="百度分享URL"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_pwd')" prop="tv_baidu_pwd" label="百度分享密码"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_url')" label="百度分享URL">
+        <template scope="scope">
+          <Input v-show="scope.row.edit" size="small" v-model="scope.row.tv_baidu_url" />
+          <Button class="editRowBtn" size="small" v-show="scope.row.edit" type="primary" icon="ios-search"></Button>
+
+          <span v-show="!scope.row.edit">{{ scope.row.tv_baidu_url }}</span>
+          <Button class="editRowBtn" size="small" v-show="!scope.row.edit" type="success" icon="ios-search"></Button>
+        </template>
+      </el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_pwd')" label="百度分享密码">
+        <template scope="scope">
+          <Input v-show="scope.row.edit" size="small" v-model="scope.row.tv_baidu_pwd" />
+          <Button class="editRowBtn" size="small" v-show="scope.row.edit" type="primary" icon="ios-search"></Button>
+
+          <span v-show="!scope.row.edit">{{ scope.row.tv_baidu_pwd }}</span>
+          <Button class="editRowBtn" size="small" v-show="!scope.row.edit" type="success" icon="ios-search"></Button>
+        </template>
+      </el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="添加时间" sortable></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'updated_at')" prop="updated_at" label="最后修改时间" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="170">
@@ -153,3 +177,18 @@
     }
   }
 </script>
+
+<style scoped>
+  .editRowBtn {
+    display:block;
+    position: absolute;
+    right: 5px;
+    top:50%;
+    transform: translate(0%, -50%);
+  }
+
+  tr:hover .editRowBtn {
+    display:block;
+  }
+
+</style>

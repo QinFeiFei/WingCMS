@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import langs from '../config/TvLangs'
 import areas from '../config/TvAreas'
 import types from '../config/TvTypes'
@@ -22,6 +23,7 @@ export default {
   },
   methods: {
     // 将影视类型转为数据库中的数值
+    /*
     parseTvType: function (val) {
       let type = 0
       switch (val) {
@@ -29,10 +31,26 @@ export default {
       }
       return type
     },
+    */
 
     // 将影视语言转换为文字
     parseTvLangText: function (lang) {
+      let index = _.findIndex(langs, function (chr) {
+        return chr.value === lang
+      })
 
+      let text = (index === -1) ? '未知' : langs[index].label
+      return text
+    },
+
+    // 将
+    parseTvAreaText: function (area) {
+      let index = _.findIndex(areas, function (chr) {
+        return chr.value === area
+      })
+
+      let text = (index === -1) ? '未知' : areas[index].label
+      return text
     }
   }
 }

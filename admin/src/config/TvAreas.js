@@ -1,14 +1,14 @@
 export default [
   {
     label: '内地',
-    value: '111'
+    value: '10'
   },
   {
     label: '台湾',
-    value: '222'
+    value: '20'
   },
   {
     label: '美国',
-    value: '333'
+    value: '30'
   }
 ]
