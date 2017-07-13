@@ -148,6 +148,8 @@
           url: tvStore,
           method: 'POST',
           data: {
+            classifys: this.classifys,
+            formFields: this.formFields
           }
         }).then(response => {
         })

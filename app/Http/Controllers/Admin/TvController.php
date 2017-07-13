@@ -27,17 +27,32 @@ class TvController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, TvService $service)
     {
-        $validator = Validator::make($request->all(), [
-            'tv_id' => 'exists:tv,tv_id',
-            'field' => 'required',
-            'value' => 'required'
+        dd($request->all());
+        $validator = Validator::make($request->get('formFields'), [
+            'tv_name' => 'required',
+            'tv_type' => 'required|Integer',
+            'tv_lang' => 'Integer',
+            'tv_area' => 'Integer',
+            'tv_minute' => 'Integer',
+        ], [
+            'tv_name.required' => '影视名称必填!',
+            'tv_type.required' => '影视分类必填!',
+            'tv_type.integer' => '影视分类格式异常!',
+            'tv_lang.integer' => '影视语言格式异常!',
+            'tv_area.integer' => '影视地区格式异常!',
+            'tv_minute.integer' => '影视时长格式异常!',
         ]);
 
         if ($validator->fails()) {
-            output_error("数据不完整.");
+            return output_error($validator->errors()->all());
         }
+
+        if( $service->createTv($request) )
+            return output_success("添加成功");
+        else
+            return output_error("添加失败");
     }
 
     /**

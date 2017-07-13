@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\Tv;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TvService {
 
@@ -74,5 +75,38 @@ class TvService {
     }
 
 
+    public function createTv (Request $request) {
+        $fields = $request->get('formFields');
+        $classifys = $request->get('classifys');
+
+        try {
+            DB::beginTransaction();
+            $tv = Tv::create([
+                'tv_name' => $fields['tv_name'],
+                'tv_alias_name' => $fields['tv_name'],
+                'tv_brief' => $fields['tv_name'],
+                'tv_description' => $fields['tv_name'],
+                'tv_type' => $fields['tv_name'],
+                'tv_cover' => $fields['tv_name'],
+                'tv_show_date' => $fields['tv_name'],
+                'tv_show_year' => $fields['tv_name'],
+                'tv_lang' => $fields['tv_name'],
+                'tv_area' => $fields['tv_name'],
+                'tv_actors' => $fields['tv_name'],
+                'tv_director' => $fields['tv_name'],
+                'tv_minute' => $fields['tv_name'],
+                'tv_baidu_url' => $fields['tv_name'],
+                'tv_baidu_pwd' => $fields['tv_name']
+            ]);
+
+            $tv->classifys()->saveMany();
+
+            DB::commit();
+            return true;
+        } catch(\Exception $e){
+            DB::rollBack();
+            return false;
+        }
+    }
 
 }

@@ -16,8 +16,14 @@ class Tv extends Model
     protected $dates = ['deleted_at'];
 
 
-
-
-
+    /**
+     * 关联影视类型表
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function classifys()
+    {
+        return $this->hasMany('App\TvClassify', 'tv_id', 'tv_id');
+    }
 
 }
