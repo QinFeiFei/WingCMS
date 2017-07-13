@@ -30,7 +30,7 @@ import mvList from '../pages/tv/MvList'
 import openclassList from '../pages/tv/OpenclassList'
 import otherList from '../pages/tv/OtherList'
 import tvSpecial from '../pages/tv/TvSpecial'
-import createTv from '../pages/tv/CreateTv'
+import pageTv from '../pages/tv/pageTv'
 
 // Iview UI
 import iView from 'iview'
@@ -105,8 +105,8 @@ export default new Router({
             // 专题管理
             { path: 'otherList', name: 'TvSpecial', component: tvSpecial },
             // 添加与删除
-            { path: 'create/:type', name: 'TvCreate', component: createTv },
-            { path: 'update/:id', name: 'TvUpdate', component: createTv }
+            { path: 'create/:type', name: 'TvCreate', component: pageTv },
+            { path: 'update/:id', name: 'TvUpdate', component: pageTv }
           ]
         }
       ]

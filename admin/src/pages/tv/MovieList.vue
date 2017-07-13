@@ -16,13 +16,13 @@
     <!-- 栏目Search -->
     <column-search :searchFields="searchFields" :advancedSearch="true" @submit="search">
       <template slot="toolBar">
-        <Tooltip content="导出数据" placement="top">
+        <Tooltip content="导出数据" placement="bottom">
           <span class="aliBtn aliBtn-default"><Icon type="android-download"></Icon></span>
         </Tooltip>
-        <Tooltip content="设置显示的列" placement="top">
+        <Tooltip content="设置显示的列" placement="bottom">
           <span class="aliBtn aliBtn-default" @click="showTableColumns"><Icon type="ios-gear"></Icon></span>
         </Tooltip>
-        <Tooltip content="帮助信息" placement="top">
+        <Tooltip content="帮助信息" placement="bottom">
           <span class="aliBtn aliBtn-default"><Icon type="help"></Icon></span>
         </Tooltip>
       </template>
@@ -30,7 +30,7 @@
     <set-column-modal :columnShow="showColumns" @set="setShowTableColumns"></set-column-modal>
 
     <!-- 数据表与分页 -->
-    <el-table border :data="dataList" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
+    <el-table border fit :data="dataList" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="45"></el-table-column>
       <el-table-column prop="tv_name" label="影视名称"></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="影视年代" sortable></el-table-column>
@@ -47,20 +47,20 @@
       <el-table-column v-if="displayColumns(showColumns, 'tv_minute')" prop="tv_minute" label="片长" sortable></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_url')" label="百度分享URL">
         <template scope="scope">
-          <Input v-show="scope.row.edit" size="small" v-model="scope.row.tv_baidu_url" />
-          <Button class="editRowBtn" size="small" v-show="scope.row.edit" type="primary" icon="ios-search"></Button>
+          <Input v-show="scope.row.urlEdit" size="small" v-model="scope.row.tv_baidu_url" />
+          <Button v-show="scope.row.urlEdit" class="editRowBtn" size="small" type="primary" icon="checkmark-round" @click="setUrl(scope.row)"></Button>
 
-          <span v-show="!scope.row.edit">{{ scope.row.tv_baidu_url }}</span>
-          <Button class="editRowBtn" size="small" v-show="!scope.row.edit" type="success" icon="ios-search"></Button>
+          <span v-show="!scope.row.urlEdit">{{ scope.row.tv_baidu_url }}</span>
+          <Button v-show="!scope.row.urlEdit" class="editRowBtn" size="small" type="success" icon="edit" @click="scope.row.urlEdit = true"></Button>
         </template>
       </el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_pwd')" label="百度分享密码">
         <template scope="scope">
-          <Input v-show="scope.row.edit" size="small" v-model="scope.row.tv_baidu_pwd" />
-          <Button class="editRowBtn" size="small" v-show="scope.row.edit" type="primary" icon="ios-search"></Button>
+          <Input v-if="scope.row.passEdit" size="small" v-model="scope.row.tv_baidu_pwd" />
+          <Button v-if="scope.row.passEdit" class="editRowBtn" size="small"  type="primary" icon="checkmark-round" @click="setPass(scope.row)"></Button>
 
-          <span v-show="!scope.row.edit">{{ scope.row.tv_baidu_pwd }}</span>
-          <Button class="editRowBtn" size="small" v-show="!scope.row.edit" type="success" icon="ios-search"></Button>
+          <span v-if="!scope.row.passEdit">{{ scope.row.tv_baidu_pwd }}</span>
+          <Button v-if="!scope.row.passEdit" class="editRowBtn" size="small" type="success" icon="edit" @click="scope.row.passEdit=true"></Button>
         </template>
       </el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="添加时间" sortable></el-table-column>
@@ -89,7 +89,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { movieList } from '../../api/tv'
+  import { movieList, setField } from '../../api/tv'
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
   import setColumnModal from '../../components/SetColumnsShow'
@@ -156,8 +156,12 @@
           params: this.parseParam(this.searchFields)
         }).then(response => {
           this.isLoading = false
-          this.dataList = response.data.data
           this.list_count = response.data.total
+          this.dataList = response.data.data.map(item => {
+            item.urlEdit = false
+            item.passEdit = false
+            return item
+          })
         })
       },
       readNotice: function () {
@@ -168,6 +172,42 @@
       },
       setShowTableColumns: function (showTableColumns) {
         console.log('显示了这些列：' + showTableColumns)
+      },
+      setPass: function (row) {
+        row.passEdit = false
+        this.setField({
+          tv_id: row.tv_id,
+          field: 'tv_baidu_pwd',
+          value: row.tv_baidu_pwd
+        }, row)
+      },
+      setUrl: function (row) {
+        row.urlEdit = false
+        this.setField({
+          tv_id: row.tv_id,
+          field: 'tv_baidu_url',
+          value: row.tv_baidu_url
+        }, row)
+      },
+      setField: function (setData, row) {
+        this.axios({
+          url: setField,
+          method: 'POST',
+          data: setData
+        }).then(response => {
+          let fieldName = setData.field === 'tv_baidu_url' ? '百度分享URL' : '百度分享密码'
+          if (response.data.code !== 0) {
+            this.$Notice.success({
+              title: fieldName + ' 更新成功',
+              desc: '《' + row.tv_name + '》 的字段' + fieldName + '更新成功,更新后的值为:' + setData.value
+            })
+          } else {
+            this.$Notice.error({
+              title: fieldName + ' 更新失败',
+              desc: '《' + row.tv_name + '》 的字段' + fieldName + '更新失败,失败原因为:' + response.data.msg
+            })
+          }
+        })
       }
     },
     created: function () {
@@ -180,14 +220,14 @@
 
 <style scoped>
   .editRowBtn {
-    display:block;
+    display:none;
     position: absolute;
     right: 5px;
     top:50%;
     transform: translate(0%, -50%);
   }
 
-  tr:hover .editRowBtn {
+  td:hover .editRowBtn {
     display:block;
   }
 

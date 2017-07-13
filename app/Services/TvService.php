@@ -58,6 +58,20 @@ class TvService {
     }
 
 
+    /**
+     * 快速设置某个字段的值
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function setField (Request $request){
+        $model = Tv::find($request->get('tv_id'));
+
+        $field = $request->get('field');
+        $value = $request->get('value');
+        $model->$field = $value;
+        return $model->save();
+    }
 
 
 

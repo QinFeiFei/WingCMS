@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Tv;
 use App\Services\TvService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Psy\Util\Json;
 
 class TvController extends Controller
 {
@@ -20,16 +22,6 @@ class TvController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,7 +29,15 @@ class TvController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'tv_id' => 'exists:tv,tv_id',
+            'field' => 'required',
+            'value' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            output_error("数据不完整.");
+        }
     }
 
     /**
@@ -47,17 +47,6 @@ class TvController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }
@@ -83,5 +72,27 @@ class TvController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 设置某个字段的值
+     *
+     * @return Json
+     */
+    public function setField(Request $request, TvService $service){
+        $validator = Validator::make($request->all(), [
+            'tv_id' => 'exists:tv,tv_id',
+            'field' => 'required',
+            'value' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            output_error("数据不完整.");
+        }
+
+        if($service->setField($request))
+            output_success("更新成功.");
+        else
+            output_error("更新失败");
     }
 }

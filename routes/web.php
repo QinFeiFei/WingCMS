@@ -8,4 +8,5 @@ Route::get('/', function () {
 // Admin Route
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin::'], function () {
     Route::resource('tv', 'TvController');
+    Route::post('setField', ['as'=>'tv.setField', 'uses'=>'TvController@setField']);
 });

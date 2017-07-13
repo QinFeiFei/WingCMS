@@ -98,15 +98,16 @@
       </Form-item>
 
       <Form-item>
-        <Button type="primary" @click="submit">提交</Button>
-        <Button type="ghost" style="margin-left: 8px">重置</Button>
+        <Button type="primary" @click="create">确认添加</Button>
+        <Button type="primary" @click="update">确认修改</Button>
       </Form-item>
     </Form>
   </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
   import consoleTitle from '../../components/ConsoleTitle'
   import editArray from '../../components/EditArray'
+  import { tvStore } from '../../api/tv'
 
   export default {
     created: function () {
@@ -142,9 +143,18 @@
       updateActors: function (arr) {
         this.formFields.tv_actors.actors = arr
       },
-      submit: function () {
-        console.log(this.classifys)
-        console.log(this.formFields)
+      create: function () {
+        this.axios({
+          url: tvStore,
+          method: 'POST',
+          data: {
+          }
+        }).then(response => {
+        })
+      },
+      update: function () {
+      },
+      show: function () {
       }
     }
   }
