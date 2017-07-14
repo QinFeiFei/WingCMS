@@ -1,9 +1,12 @@
 import _ from 'lodash'
 import dateUtil from 'iview/src/utils/date'
+import { uploadDirUrl } from '../api/main'
 
 export default {
   data: function () {
     return {
+      uploadDirUrl: uploadDirUrl, // 文件上传目录URL
+
       dataInfo: {},           // 单信息页面使用，如：新闻编辑
       dataList: [],           // 列表页面使用，如：新闻列表
       isLoading: false,       // 加载页面数据Loding,

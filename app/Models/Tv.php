@@ -23,7 +23,7 @@ class Tv extends Model
      */
     public function classifys()
     {
-        return $this->hasMany('App\TvClassify', 'tv_id', 'tv_id');
+        return $this->hasMany('App\Models\TvClassify', 'tv_id', 'tv_id');
     }
 
 }

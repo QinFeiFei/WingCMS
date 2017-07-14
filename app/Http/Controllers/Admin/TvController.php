@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tv;
 use App\Services\TvService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Psy\Util\Json;
 
@@ -29,7 +30,57 @@ class TvController extends Controller
      */
     public function store(Request $request, TvService $service)
     {
-        dd($request->all());
+        $validBack = $this->valid($request);
+        if(! $validBack['state']){ return output_error($validBack['error']); }
+
+        if( $service->createTv($request) )
+            return output_success("添加成功");
+        else
+            return output_error("添加失败");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id, TvService $service)
+    {
+        return $service->findTv($id);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, TvService $service, $id)
+    {
+        $validBack = $this->valid($request);
+        if(! $validBack['state']){ return output_error($validBack['error']); }
+
+        if( $service->updateTv($request) )
+            return output_success("修改成功");
+        else
+            return output_error("修改失败");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    private function valid(Request $request) {
+        $validArr = [ 'state' => true, 'error' => '' ];
         $validator = Validator::make($request->get('formFields'), [
             'tv_name' => 'required',
             'tv_type' => 'required|Integer',
@@ -46,47 +97,10 @@ class TvController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return output_error($validator->errors()->all());
+            $validArr['state'] = false;
+            $validArr['error'] = $validator->errors()->first();
         }
-
-        if( $service->createTv($request) )
-            return output_success("添加成功");
-        else
-            return output_error("添加失败");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $validArr;
     }
 
     /**
@@ -109,5 +123,20 @@ class TvController extends Controller
             output_success("更新成功.");
         else
             output_error("更新失败");
+    }
+
+    /**
+     * 上传影视封面图片
+     *
+     * @param Request $request
+     * @return String
+     */
+    public function uploadCover (Request $request) {
+        $file = $request->file('tv_cover');
+        $hashname = $file->hashName();
+
+        Storage::putFileAs('public/tv', $file, $hashname);
+
+        return output_data('tv/'. $hashname);
     }
 }

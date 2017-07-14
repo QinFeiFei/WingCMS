@@ -152,7 +152,7 @@
 
 /* ---  右侧view-body  --- */
 .main-body .rightView .view-body {
-  padding:5px 15px;
+  padding:5px 15px 60px 15px;
   overflow-y: scroll;
   overflow-x: hidden;
   height:100%;
@@ -163,4 +163,32 @@
 .main-body .pageWrap {
   margin-top:15px;
   margin-bottom:30px;
+}
+
+
+/* ---  公共添加修改页面  --- */
+.formWarp { background: #f7f7f7;padding:30px; border-radius:10px; }
+.ivu-form .ivu-form-item-label { color: #262626; }
+.itemWidth { width:600px; }
+.itemText { display:inline-block;color:#999; }
+
+.formWarp .el-loading-spinner {
+  position:fixed !important;
+  margin:0 auto;
+  left:0;
+  right:0;
+}
+
+
+/* ---  公共列表页面  --- */
+.editRowBtn {
+  display:none;
+  position: absolute;
+  right: 5px;
+  top:50%;
+  transform: translate(0%, -50%);
+}
+
+td:hover .editRowBtn {
+  display:block;
 }

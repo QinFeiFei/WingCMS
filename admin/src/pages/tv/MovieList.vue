@@ -8,7 +8,7 @@
       <div slot="left" style="max-width:400px;">
       </div>
       <div slot="right" style="width:auto;height:auto;position:absolute;top:10px;right:0px;">
-        <Button><Icon type="loop" class="font14" /></Button>
+        <Button @click="loadData"><Icon type="loop" class="font14" /></Button>
         <router-link :to="{name:'TvCreate', params:{type:'movie' }}"><Button type="primary">添加电影</Button></router-link>
       </div>
     </console-title>
@@ -68,7 +68,7 @@
       <el-table-column fixed="right" label="操作" width="170">
         <template scope="scope">
           <Button size="small" type="info">查看</Button>
-          <Button size="small" type="success">编辑</Button>
+          <router-link :to="{ name:'TvUpdate', params:{tv_id:scope.row.tv_id} }"><Button size="small" type="success">编辑</Button></router-link>
           <Button size="small" type="error">删除</Button>
         </template>
       </el-table-column>
@@ -219,16 +219,4 @@
 </script>
 
 <style scoped>
-  .editRowBtn {
-    display:none;
-    position: absolute;
-    right: 5px;
-    top:50%;
-    transform: translate(0%, -50%);
-  }
-
-  td:hover .editRowBtn {
-    display:block;
-  }
-
 </style>

@@ -40,6 +40,11 @@
       notice: function () {
         this.$emit('change', this.dataArray_)
       }
+    },
+    watch: {
+      toArray: function () {
+        this.dataArray_ = this.toArray
+      }
     }
   }
 </script>

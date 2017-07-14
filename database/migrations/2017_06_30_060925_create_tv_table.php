@@ -22,7 +22,7 @@ class CreateTvTable extends Migration {
 			$table->string('tv_type')->default('10')->comment('影视类型（10-电影 20-电视剧 30-动漫 40-综艺 50-音乐MV 60-公开课 70-其它短片）');
 			$table->string('tv_cover')->default('')->comment('影视封面');
 			$table->date('tv_show_date')->comment('上影日期');
-			$table->smallInteger('tv_show_year')->unsigned()->default(0)->comment('影视年代');
+			$table->string('tv_show_year')->default("1970")->comment('影视年代');
 			$table->string('tv_lang')->default('0')->comment('语言（0-国语 10粤语 20-英语 30-韩语 40-日语 50-法语 60-其它）');
 			$table->string('tv_area')->default('')->comment('地区');
 			$table->string('tv_actors')->default('')->comment('演员（JSON）');
