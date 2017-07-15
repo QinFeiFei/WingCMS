@@ -30,6 +30,6 @@ class CreateTvClassifyTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('wing_tv_type');
+		Schema::drop('tv_classify');
 	}
 }

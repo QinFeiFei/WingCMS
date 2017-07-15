@@ -260,7 +260,7 @@
               this.$Message.error(response.data.msg)
             } else {
               this.$Message.success('修改成功')
-              // this.$router.back()
+              this.$router.back()
             }
           })
         }

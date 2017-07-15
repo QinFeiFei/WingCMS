@@ -1,8 +1,8 @@
 <?php
 namespace App\Services;
 
-use App\Models\Tv;
-use App\Models\TvClassify;
+use App\Tv;
+use App\TvClassify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\Util\Json;
@@ -165,7 +165,6 @@ class TvService {
             $model->tv_baidu_pwd = trim($fields['tv_baidu_pwd']);
             $model->save();
 
-            /*
             // ---- 维护影视类型部分，可能写的有点复杂了...
             $many = [];
             $classify_keys = [];
@@ -189,15 +188,15 @@ class TvService {
             }
 
             // 最后删除本次提交不存在的类型
-            TvClassify::where('tv_id', $fields['tv_id'])->whereNotIn('classify_key', $classify_keys)->deleted();
+            TvClassify::where('tv_id', $fields['tv_id'])->whereNotIn('classify_key', $classify_keys)->delete();
 
             // 添加不存在的类型
             $model->classifys()->saveMany($many);
-            */
 
             DB::commit();
             return true;
         } catch(\Exception $e){
+            dd($e->getMessage());
             DB::rollBack();
             return false;
         }

@@ -35,7 +35,7 @@ class CreateArticleAdditionTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('wing_article_addition');
+		Schema::drop('article_addition');
 	}
 
 }

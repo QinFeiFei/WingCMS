@@ -31,7 +31,7 @@ class CreateTvSpecialTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('wing_tv_special');
+		Schema::drop('tv_special');
 	}
 
 }

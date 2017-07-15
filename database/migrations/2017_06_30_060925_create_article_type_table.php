@@ -30,7 +30,7 @@ class CreateArticleTypeTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('wing_article_type');
+		Schema::drop('article_type');
 	}
 
 }

@@ -30,7 +30,7 @@ class CreateTvSpecialManyTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('wing_tv_special_many');
+		Schema::drop('tv_special_many');
 	}
 
 }

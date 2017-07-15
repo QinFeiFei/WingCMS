@@ -3,12 +3,14 @@ import Router from 'vue-router'
 import Admin from '../components/Admin'
 import PublicBody from '../pages/main/PublicBody'
 
+import login from '../pages/login/Login'
+
 // 控制台
 import dashBoard from '../pages/main/Dashboard'
 
 // 错误页面
 import error404 from '../pages/error/404'
-import error401 from '../pages/error/401'
+import error403 from '../pages/error/403'
 
 // 用户管理
 import user from '../pages/user/User'
@@ -57,6 +59,11 @@ Vue.use(Loading)
 export default new Router({
   routes: [
     {
+      path: '/login',
+      component: login,
+      name: 'login'
+    },
+    {
       path: '/',
       component: Admin,
       children: [
@@ -71,7 +78,7 @@ export default new Router({
           children: [
             { path: '', name: 'error', component: error404 },
             { path: '404', name: 'error404', component: error404 },
-            { path: '401', name: 'error401', component: error401 }
+            { path: '403', name: 'error403', component: error403 }
           ]
         },
         {

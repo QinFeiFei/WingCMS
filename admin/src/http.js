@@ -1,8 +1,6 @@
 import axios from 'axios'
 import Qs from 'qs'
 
-import { loginUrl } from './api/main'
-
 axios.defaults.paramsSerializer = function (params) {
   return Qs.stringify(params)
 }
@@ -16,8 +14,9 @@ axios.interceptors.response.use(
     return response
   },
   error => {
-    if (error.response.data.error || error.response.status === '401') {
-      window.location.href = loginUrl + encodeURIComponent(window.location.href)
+    if (error.response.data.error || error.response.status === 401) {
+      window.localStorage.removeItem('token')
+      window.location.href = '/#/login?' + encodeURIComponent(window.location.href)
       return false
     }
   })

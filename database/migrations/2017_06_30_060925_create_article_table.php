@@ -42,7 +42,7 @@ class CreateArticleTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('wing_article');
+		Schema::drop('article');
 	}
 
 }
