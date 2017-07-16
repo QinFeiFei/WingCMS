@@ -15,6 +15,9 @@ class LoginController extends Controller
     protected $username = 'admin_name';
 
     public function login (Request $request) {
+        dd($request->all());
+
+
         $this->validateLogin($request);
 
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {

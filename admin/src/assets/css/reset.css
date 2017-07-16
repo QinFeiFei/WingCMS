@@ -56,6 +56,10 @@ div {display:block;}
 .mt15 { margin-top:15px; }
 .mt20 { margin-top:20px; }
 
+.tleft { text-align:left; }
+.tright { text-align:right; }
+.tcenter { text-align:center; }
+
 
 /** 自定义按钮 **/
 .aliBtn {
