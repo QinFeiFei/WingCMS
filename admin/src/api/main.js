@@ -1,7 +1,11 @@
 const loginUrl = '/admin/login'
+const logoutUrl = '/admin/logout'
+const getAdminInfo = '/admin/getAdmin'
 const uploadDirUrl = '/storage/'
 
 export {
   loginUrl,
-  uploadDirUrl
+  logoutUrl,
+  uploadDirUrl,
+  getAdminInfo
 }

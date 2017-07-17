@@ -62,8 +62,8 @@
           this.error = 'The Input username is empty!'
           return false
         }
-        if (this.formFields.username === '') {
-          this.error = 'The Input username is empty!'
+        if (this.formFields.password === '') {
+          this.error = 'The Input password is empty!'
           return false
         }
         return true
@@ -75,7 +75,7 @@
             url: loginUrl,
             method: 'POST',
             data: {
-              username: this.formFields.username,
+              admin_name: this.formFields.username,
               password: this.formFields.password,
               remember: this.formFields.remember
             }
@@ -84,7 +84,9 @@
             if (response.data.code !== 0) {
               this.$Message.error(response.data.msg)
             } else {
-              this.$Message.success('登陆失败')
+              localStorage.setItem('token', response.data.result.token)
+              window.location.href = '/'
+              this.$Message.success('登陆成功')
             }
           })
         }
@@ -111,7 +113,7 @@
     width:100%;
     top:0px;
     bottom:0px;
-    background-image: url(../../assets/images/login_bg3.jpg);
+    background-image: url(../../assets/images/login_bg1.jpg);
     padding: 20px 20px;
     padding-right: 500px;
   }

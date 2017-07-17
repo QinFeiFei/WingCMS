@@ -5,8 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model implements JWTSubject
+class Admin extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
 
@@ -15,6 +16,7 @@ class Admin extends Model implements JWTSubject
     protected $primaryKey='admin_id';
     protected $guarded=[];
     protected $dates = ['deleted_at'];
+    protected $hidden = ['password', 'deleted_at'];
 
 
     /**

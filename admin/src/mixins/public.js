@@ -5,6 +5,8 @@ import { uploadDirUrl } from '../api/main'
 export default {
   data: function () {
     return {
+      adminInfo: {},          // 管理员信息
+
       uploadDirUrl: uploadDirUrl, // 文件上传目录URL
 
       dataInfo: {},           // 单信息页面使用，如：新闻编辑

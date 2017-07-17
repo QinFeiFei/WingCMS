@@ -4,13 +4,17 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   export default {
     name: 'dashBoard',
+    created: function () {
+    },
     data: function () {
       return {}
     },
     components: {
+    },
+    methods: {
     }
   }
 </script>
