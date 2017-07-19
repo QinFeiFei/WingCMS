@@ -79,9 +79,15 @@ class TvService {
         $model = Tv::find($request->get('tv_id'));
 
         $field = $request->get('field');
-        $value = $request->get('value');
+        $value = $request->get('value', '');
         $model->$field = $value;
-        return $model->save();
+
+        try {
+            return $model->save();
+        } catch (\Exception $e) {
+            logger($e->getMessage());
+            return false;
+        }
     }
 
 

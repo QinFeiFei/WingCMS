@@ -35,7 +35,7 @@
             <span class="fright">&nbsp;·&nbsp;</span>
             <a href="" class="fright">找回密码</a>
           </p>
-          <Button class="mt20" size="large" type="info" long @click="login">Login In</Button>
+          <Button v-loading="isLoading" class="mt20" size="large" type="info" long @click="login">Login In</Button>
         </div>
         <p class="copyright">太原科技公司 © <a href="http://www.wagcc.com" target="_blank">wagcc.com</a></p>
       </div>

@@ -110,19 +110,20 @@ class TvController extends Controller
      */
     public function setField(Request $request, TvService $service){
         $validator = Validator::make($request->all(), [
-            'tv_id' => 'exists:tv,tv_id',
+            'tv_id' => 'required|exists:tv,tv_id',
             'field' => 'required',
-            'value' => 'required'
+//            'value' => 'required'
         ]);
 
         if ($validator->fails()) {
-            output_error("数据不完整.");
+            return output_error("数据不完整.");
         }
 
-        if($service->setField($request))
-            output_success("更新成功.");
-        else
-            output_error("更新失败");
+        if($service->setField($request) === true){
+            return output_success("更新成功.");
+        } else {
+            return output_error("更新失败");
+        }
     }
 
     /**

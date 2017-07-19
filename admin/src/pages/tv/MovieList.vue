@@ -69,7 +69,7 @@
         <template scope="scope">
           <Button size="small" type="info">查看</Button>
           <router-link :to="{ name:'TvUpdate', params:{tv_id:scope.row.tv_id} }"><Button size="small" type="success">编辑</Button></router-link>
-          <Button size="small" type="error">删除</Button>
+          <Button size="small" type="error" @click="delete(scope.row)">删除</Button>
         </template>
       </el-table-column>
     </el-table>
@@ -84,12 +84,11 @@
 
       <Page class="inline-block fright" :total="list_count" :page-size="page_size" show-total show-sizer @on-change="changePage" @on-page-size-change="changePageSize"></Page>
     </div>
-
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { movieList, setField } from '../../api/tv'
+  import { tvList } from '../../api/tv'
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
   import setColumnModal from '../../components/SetColumnsShow'
@@ -97,6 +96,7 @@
   import areas from '../../config/TvAreas'
 
   export default {
+    name: 'movie',
     data: function () {
       return {
         searchFields: [
@@ -150,10 +150,13 @@
     methods: {
       loadData: function () {
         this.isLoading = true
+        let searchParams = this.parseParam(this.searchFields)
+        searchParams.tv_type = this.movie.value
+
         this.axios({
           method: 'GET',
-          url: movieList,
-          params: this.parseParam(this.searchFields)
+          url: tvList,
+          params: searchParams
         }).then(response => {
           this.isLoading = false
           this.list_count = response.data.total
@@ -165,49 +168,13 @@
         })
       },
       readNotice: function () {
-        console.log('关闭了notice.')
+        // console.log('关闭了notice.')
       },
       search: function (obj) {
         this.loadData()
       },
       setShowTableColumns: function (showTableColumns) {
-        console.log('显示了这些列：' + showTableColumns)
-      },
-      setPass: function (row) {
-        row.passEdit = false
-        this.setField({
-          tv_id: row.tv_id,
-          field: 'tv_baidu_pwd',
-          value: row.tv_baidu_pwd
-        }, row)
-      },
-      setUrl: function (row) {
-        row.urlEdit = false
-        this.setField({
-          tv_id: row.tv_id,
-          field: 'tv_baidu_url',
-          value: row.tv_baidu_url
-        }, row)
-      },
-      setField: function (setData, row) {
-        this.axios({
-          url: setField,
-          method: 'POST',
-          data: setData
-        }).then(response => {
-          let fieldName = setData.field === 'tv_baidu_url' ? '百度分享URL' : '百度分享密码'
-          if (response.data.code !== 0) {
-            this.$Notice.success({
-              title: fieldName + ' 更新成功',
-              desc: '《' + row.tv_name + '》 的字段' + fieldName + '更新成功,更新后的值为:' + setData.value
-            })
-          } else {
-            this.$Notice.error({
-              title: fieldName + ' 更新失败',
-              desc: '《' + row.tv_name + '》 的字段' + fieldName + '更新失败,失败原因为:' + response.data.msg
-            })
-          }
-        })
+        // console.log('显示了这些列：' + showTableColumns)
       }
     },
     created: function () {
