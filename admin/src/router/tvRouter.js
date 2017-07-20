@@ -1,4 +1,4 @@
-// 影视管理
+// 影视路由
 import tv from '../pages/tv/Tv'
 import tvOverView from '../pages/tv/TvOverView'
 import movieList from '../pages/tv/MovieList'

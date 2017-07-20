@@ -12,40 +12,17 @@ import dashBoard from '../pages/main/Dashboard'
 import error404 from '../pages/error/404'
 import error403 from '../pages/error/403'
 
-// 用户管理
-import user from '../pages/user/User'
-import userList from '../pages/user/UserList'
-import userPage from '../pages/user/UserPage'
-
 // 文章管理
 import article from '../pages/article/Article'
 import articleList from '../pages/article/ArticleList'
 
-// 影视管理
-import tvRouter from '../router/tvRouter'
+// 用户管理
+import userRouter from './userRouter'
 
-// Iview UI
-import iView from 'iview'
-import 'iview/dist/styles/iview.css'
+// 影视管理
+import tvRouter from './tvRouter'
 
 Vue.use(Router)
-Vue.use(iView)
-
-// public Mixin
-import publicMixin from '../mixins/public'
-Vue.mixin(publicMixin)
-
-// Iview 的table组件宽度不能自适应，暂时单独引入element-ui的table组件
-import 'element-ui/lib/theme-default/index.css'
-import {
-  Table,
-  TableColumn,
-  Loading
-} from 'element-ui'
-Vue.use(Table)
-Vue.use(TableColumn)
-Vue.use(Loading)
-
 export default new Router({
   routes: [
     {
@@ -72,20 +49,13 @@ export default new Router({
           ]
         },
         {
-          path: '/user',
-          component: user,
-          children: [
-            { path: '/list', name: 'UserList', component: userList },
-            { path: '/page', name: 'UserPage', component: userPage }
-          ]
-        },
-        {
           path: '/article',
           component: article,
           children: [
             { path: '/list', name: 'ArticleList', component: articleList }
           ]
         },
+        userRouter,
         tvRouter
       ]
     }
