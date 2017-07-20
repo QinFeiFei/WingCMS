@@ -4,7 +4,7 @@ import areas from '../config/TvAreas'
 import classify from '../config/TvClassify'
 import types from '../config/TvTypes'
 const [movie, teleplay, cartoon, variety, mv, openclass, other] = types
-import { setField } from '../api/tv'
+import { setField, destoryTv } from '../api/tv'
 
 export default {
   created: function () {
@@ -82,23 +82,49 @@ export default {
       })
     },
 
-    // 删除影视
-    delete: function (row) {
-      this.deleteModal = true
+    // 将影视放入回收站
+    deleteTv: function (row, index, rows) {
+      this.$Modal.confirm({
+        title: '确认删除',
+        content: '确认将影视<b style="color:red">《' + row.tv_name + '》</b>放入回收站么？',
+        loading: true,
+        scrollable: false,
+        onOk: function () {
+          this.axios({
+            url: destoryTv + row.tv_id,
+            method: 'DELETE'
+          }).then(response => {
+            this.$Modal.remove()
+            if (response.data.code === 0) {
+              this.$Notice.success({
+                title: '《' + row.tv_name + '》 删除成功'
+              })
+
+              rows.splice(index, 1)
+              if (rows.length === 0) {
+                window.location.reload()
+              }
+            } else {
+              this.$Notice.error({
+                title: '删除失败',
+                desc: '《' + row.tv_name + '》删除失败，失败原因：' + response.data.msg
+              })
+            }
+          })
+        }
+      })
     },
 
-    // 将影视类型转为数据库中的数值
-    /*
-    parseTvType: function (val) {
-      let type = 0
-      switch (val) {
-        case 'movie': type = 10; break
-      }
-      return type
-    },
-    */
+    // 根据影视类型(Tvtype:text=>value)转为数据库值
+    parseTvTypeValue: function (type) {
+      let index = _.findIndex(types, function (chr) {
+        return chr.text === type
+      })
 
-    // 将影视语言转换为文字
+      return (index === -1) ? types[0].value : types[index].value
+    },
+
+    // 根据影视语言(TvLang:value=>text)转换为文字
     parseTvLangText: function (lang) {
       let index = _.findIndex(langs, function (chr) {
         return chr.value === lang
@@ -108,7 +134,7 @@ export default {
       return text
     },
 
-    // 将
+    // 根据影视地区(TvArea:value=>text)转换为文字
     parseTvAreaText: function (area) {
       let index = _.findIndex(areas, function (chr) {
         return chr.value === area

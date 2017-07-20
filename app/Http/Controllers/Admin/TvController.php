@@ -74,11 +74,26 @@ class TvController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, TvService $tvService)
     {
-        //
+        if($tvService->destoryTv($id)) {
+            return output_success('删除成功');
+        }else{
+            return output_error('服务器处理失败.');
+        }
     }
 
+    public function delete(TvService $tvService){
+        // 暂时不做强制删除接口
+
+    }
+
+    /**
+     * 插入或更新数据时，验证字段
+     *
+     * @param Request $request
+     * @return array
+     */
     private function valid(Request $request) {
         $validArr = [ 'state' => true, 'error' => '' ];
         $validator = Validator::make($request->get('formFields'), [
@@ -112,7 +127,7 @@ class TvController extends Controller
         $validator = Validator::make($request->all(), [
             'tv_id' => 'required|exists:tv,tv_id',
             'field' => 'required',
-//            'value' => 'required'
+            'value' => 'required'
         ]);
 
         if ($validator->fails()) {

@@ -13,7 +13,6 @@ export default {
       dataList: [],           // 列表页面使用，如：新闻列表
       isLoading: false,       // 加载页面数据Loding,
       multipleSelection: [],  // 列表页面多选，选中项,
-      deleteModal: false,     // 列表页删除确认信息弹层
 
       current_page: 0,        // 当前页
       page_size: 20,          // 每页条数

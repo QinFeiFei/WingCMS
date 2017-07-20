@@ -7,31 +7,31 @@ export default [
   {
     label: '电视剧',
     value: '20',
-    text: 'movie'
+    text: 'teleplay'
   },
   {
     label: '动漫',
     value: '30',
-    text: 'movie'
+    text: 'cartoon'
   },
   {
     label: '综艺',
     value: '40',
-    text: 'movie'
+    text: 'variety'
   },
   {
     label: '音乐MV',
     value: '50',
-    text: 'movie'
+    text: 'mv'
   },
   {
     label: '公开课',
     value: '60',
-    text: 'movie'
+    text: 'openclass'
   },
   {
     label: '其它短片',
     value: '70',
-    text: 'movie'
+    text: 'other'
   }
 ]

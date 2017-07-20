@@ -119,7 +119,7 @@
 
   export default {
     created: function () {
-      this.formFields.tv_type = this.types[0].value  // 影视分类, 默认选中电影
+      this.formFields.tv_type = this.parseTvTypeValue(this.$route.params.type)  // 影视分类, 默认选中电影
       this.formFields.tv_lang = this.langs[0].value  // 影视语言, 默认选中中文
       this.formFields.tv_area = this.areas[0].value  // 影视地区, 默认选中大陆
 

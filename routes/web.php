@@ -15,6 +15,11 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'namespace' =
     Route::get('getAdmin', ['as'=>'getAdmin', 'uses'=>'LoginController@getAdmin']);
 
     Route::resource('tv', 'TvController');
-    Route::post('setField', ['as'=>'tv.setField', 'uses'=>'TvController@setField']);
-    Route::post('uploadCover', ['as'=>'tv.uploadCover', 'uses'=>'TvController@uploadCover']);
+    Route::post('tv/setField', ['as'=>'tv.setField', 'uses'=>'TvController@setField']);
+    Route::post('tv/uploadCover', ['as'=>'tv.uploadCover', 'uses'=>'TvController@uploadCover']);
+    Route::delete('tv/delete', ['as'=>'tv.delete', 'uses'=>'TvController@delete']);
+
+
+
+
 });

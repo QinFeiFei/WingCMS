@@ -9,7 +9,7 @@
       </div>
       <div slot="right" style="width:auto;height:auto;position:absolute;top:10px;right:0px;">
         <Button @click="loadData"><Icon type="loop" class="font14" /></Button>
-        <router-link :to="{name:'TvCreate', params:{type:'movie' }}"><Button type="primary">添加电影</Button></router-link>
+        <router-link :to="{name:'TvCreate', params:{type:movie.text }}"><Button type="primary">添加电影</Button></router-link>
       </div>
     </console-title>
 
@@ -69,7 +69,7 @@
         <template scope="scope">
           <Button size="small" type="info">查看</Button>
           <router-link :to="{ name:'TvUpdate', params:{tv_id:scope.row.tv_id} }"><Button size="small" type="success">编辑</Button></router-link>
-          <Button size="small" type="error" @click="delete(scope.row)">删除</Button>
+          <Button size="small" type="error" @click="deleteTv(scope.row, scope.$index, dataList)">删除</Button>
         </template>
       </el-table-column>
     </el-table>
@@ -96,7 +96,7 @@
   import areas from '../../config/TvAreas'
 
   export default {
-    name: 'movie',
+    name: 'movieList',
     data: function () {
       return {
         searchFields: [

@@ -207,4 +207,27 @@ class TvService {
             return false;
         }
     }
+
+
+    /**
+     * 将影视放入回收站
+     *
+     * @param $id
+     * @return int
+     */
+    public function destoryTv ($id) {
+        return Tv::destroy($id);
+    }
+
+
+    /**
+     * 将影视永久删除
+     *
+     * @param $id
+     * @return int
+     */
+    public function deleteTv ($id) {
+        // $tvModel = Tv::find($id);
+        // return Tv::forceDelete($id);
+    }
 }
