@@ -73,7 +73,7 @@
           type: '',
           search: '',
           placeholder: '',
-          values: []
+          values: null
         }
       }
     },

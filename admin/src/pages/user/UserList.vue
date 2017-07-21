@@ -32,43 +32,18 @@
     <!-- 数据表与分页 -->
     <el-table border fit :data="dataList" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="45"></el-table-column>
-      <el-table-column prop="tv_name" label="影视名称"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="影视年代" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_lang')" label="语言">
-        <template scope="scope">
-          {{ parseTvLangText(scope.row.tv_lang) }}
-        </template>
-      </el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_area')" label="地区">
-        <template scope="scope">
-          {{ parseTvAreaText(scope.row.tv_area) }}
-        </template>
-      </el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_minute')" prop="tv_minute" label="片长" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_url')" label="百度分享URL">
-        <template scope="scope">
-          <Input v-show="scope.row.urlEdit" size="small" v-model="scope.row.tv_baidu_url" />
-          <Button v-show="scope.row.urlEdit" class="editRowBtn" size="small" type="primary" icon="checkmark-round" @click="setUrl(scope.row)"></Button>
-
-          <span v-show="!scope.row.urlEdit">{{ scope.row.tv_baidu_url }}</span>
-          <Button v-show="!scope.row.urlEdit" class="editRowBtn" size="small" type="success" icon="edit" @click="scope.row.urlEdit = true"></Button>
-        </template>
-      </el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_baidu_pwd')" label="百度分享密码">
-        <template scope="scope">
-          <Input v-if="scope.row.passEdit" size="small" v-model="scope.row.tv_baidu_pwd" />
-          <Button v-if="scope.row.passEdit" class="editRowBtn" size="small"  type="primary" icon="checkmark-round" @click="setPass(scope.row)"></Button>
-
-          <span v-if="!scope.row.passEdit">{{ scope.row.tv_baidu_pwd }}</span>
-          <Button v-if="!scope.row.passEdit" class="editRowBtn" size="small" type="success" icon="edit" @click="scope.row.passEdit=true"></Button>
-        </template>
-      </el-table-column>
+      <el-table-column prop="tv_name" label="用户名"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="邮箱"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="手机号"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="登陆次数" sortable></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" label="注册来源" :formatter="RegisterTypeText"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="最后登陆时间" sortable></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="最后登陆IP"></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="添加时间" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'updated_at')" prop="updated_at" label="最后修改时间" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="170">
         <template scope="scope">
           <Button size="small" type="info">查看</Button>
-          <router-link :to="{ name:'TvUpdate', params:{tv_id:scope.row.tv_id} }"><Button size="small" type="success">编辑</Button></router-link>
+          <router-link :to="{ name:'TvUpdate', params:{tv_id:scope.row.user_id} }"><Button size="small" type="success">编辑</Button></router-link>
           <Button size="small" type="error" @click="deleteTv(scope.row, scope.$index, dataList)">删除</Button>
         </template>
       </el-table-column>
@@ -89,6 +64,7 @@
 
 <script type="text/ecmascript-6">
   import { userList } from '../../api/user'
+  import registerType from '../../config/userRegisterType'
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
   import setColumnModal from '../../components/SetColumnsShow'
@@ -98,15 +74,17 @@
     data: function () {
       return {
         searchFields: [
-          { field: 'tv_name', text: '影视名称', type: 'text', placeholder: '请输入要搜索的名称', search: null },
-          { field: 'tv_lang', text: '影视语言', type: 'select', values: [], placeholder: '请选择语言', search: null },
-          { field: 'tv_area', text: '影视地区', type: 'select', values: [], placeholder: '请选地区', search: null },
-          { field: 'created_at', text: '添加时间', type: 'time', placeholder: '请选择添加时间范围', search: null }
+          { field: 'username', text: '用户名', type: 'text', placeholder: '请输入要搜索的用户名', search: null },
+          { field: 'phone', text: '手机号', type: 'text', placeholder: '请输入要搜索的手机号', search: null },
+          { field: 'email', text: '邮箱', type: 'text', placeholder: '请输入要搜索的邮箱', search: null },
+          { field: 'register_type', text: '注册来源', type: 'select', values: registerType, placeholder: '请选择用户来源', search: null },
+          { field: 'last_login', text: '最后登陆时间', type: 'time', placeholder: '请选择最后登陆时间范围', search: null },
+          { field: 'created_at', text: '添加时间', type: 'time', placeholder: '请选择注册时间范围', search: null }
         ],
         showColumns: [
           {
             column: 'tv_show_year',
-            text: '影视年代',
+            text: '用户名',
             show: true
           }, {
             column: 'tv_lang',
@@ -168,6 +146,9 @@
       },
       setShowTableColumns: function (showTableColumns) {
         // console.log('显示了这些列：' + showTableColumns)
+      },
+      RegisterTypeText: function (row, column) {
+        return row.address
       }
     },
     created: function () {
