@@ -29,7 +29,7 @@
             },
             {
               itemName: '会员通知',
-              routeName: 'UserPage',
+              routeName: 'dashBoard',
               active: false,
               display: false
             }

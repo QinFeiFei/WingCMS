@@ -9,7 +9,7 @@
       </div>
       <div slot="right" style="width:auto;height:auto;position:absolute;top:10px;right:0px;">
         <Button @click="loadData"><Icon type="loop" class="font14" /></Button>
-        <router-link :to="{name:'dashBoard'}"><Button type="primary">添加会员</Button></router-link>
+        <router-link :to="{name:'UserCreate'}"><Button type="primary">添加会员</Button></router-link>
       </div>
     </console-title>
 
@@ -32,19 +32,29 @@
     <!-- 数据表与分页 -->
     <el-table border fit :data="dataList" v-loading="isLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="45"></el-table-column>
-      <el-table-column prop="tv_name" label="用户名"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="邮箱"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="手机号"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="登陆次数" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" label="注册来源" :formatter="RegisterTypeText"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="最后登陆时间" sortable></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'tv_show_year')" prop="tv_show_year" label="最后登陆IP"></el-table-column>
-      <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="添加时间" sortable></el-table-column>
+      <el-table-column prop="username" label="用户名"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'email')" label="邮箱">
+        <template scope="scope">
+          {{ scope.row.email }}
+          <Icon type="android-checkmark-circle" v-if="scope.row.email_check === '1'"></Icon>
+        </template>
+      </el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'phone')" label="手机号">
+        <template scope="scope">
+          {{ scope.row.phone }}
+          <Icon type="android-checkmark-circle" v-if="scope.row.phone_check === '1'"></Icon>
+        </template>
+      </el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'login_num')" prop="login_num" label="登陆次数" sortable></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'register_type')" prop="register_type" label="注册来源" :formatter="RegisterTypeText"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'last_login')" prop="last_login" label="最后登陆时间" sortable></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'last_ip')" prop="last_ip" label="最后登陆IP"></el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="注册时间" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="170">
         <template scope="scope">
           <Button size="small" type="info">查看</Button>
-          <router-link :to="{ name:'TvUpdate', params:{tv_id:scope.row.user_id} }"><Button size="small" type="success">编辑</Button></router-link>
-          <Button size="small" type="error" @click="deleteTv(scope.row, scope.$index, dataList)">删除</Button>
+          <Button size="small" type="success">编辑</Button>
+          <Button size="small" type="error" @click="deleteUser(scope.row, scope.$index, dataList)">删除</Button>
         </template>
       </el-table-column>
     </el-table>
@@ -63,7 +73,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { userList } from '../../api/user'
+  import { userList, destoryUser } from '../../api/user'
   import registerType from '../../config/userRegisterType'
   import consoleTitle from '../../components/ConsoleTitle'
   import columnSearch from '../../components/ColumnSearch'
@@ -73,6 +83,8 @@
     name: 'userList',
     data: function () {
       return {
+        checked: true,
+        registerType: registerType,
         searchFields: [
           { field: 'username', text: '用户名', type: 'text', placeholder: '请输入要搜索的用户名', search: null },
           { field: 'phone', text: '手机号', type: 'text', placeholder: '请输入要搜索的手机号', search: null },
@@ -83,37 +95,33 @@
         ],
         showColumns: [
           {
-            column: 'tv_show_year',
-            text: '用户名',
+            column: 'email',
+            text: '邮箱',
             show: true
           }, {
-            column: 'tv_lang',
-            text: '语言',
+            column: 'phone',
+            text: '手机号',
             show: true
           }, {
-            column: 'tv_area',
-            text: '地区',
+            column: 'login_num',
+            text: '登陆次数',
             show: false
           }, {
-            column: 'tv_minute',
-            text: '片长',
+            column: 'register_type',
+            text: '注册来源',
             show: false
           }, {
-            column: 'tv_baidu_url',
-            text: '百度分享URL',
+            column: 'last_login',
+            text: '最后登陆时间',
             show: true
           }, {
-            column: 'tv_baidu_pwd',
-            text: '百度分享密码',
-            show: true
+            column: 'last_ip',
+            text: '最后登陆IP',
+            show: false
           }, {
             column: 'created_at',
-            text: '添加时间',
-            show: true
-          }, {
-            column: 'updated_at',
-            text: '最后修改时间',
-            show: true
+            text: '注册时间',
+            show: false
           }
         ]
       }
@@ -148,7 +156,39 @@
         // console.log('显示了这些列：' + showTableColumns)
       },
       RegisterTypeText: function (row, column) {
-        return row.address
+        return this.parseRegisterTypeText(row.register_type)
+      },
+      // 将会员放入回收站
+      deleteUser: function (row, index, rows) {
+        this.$Modal.confirm({
+          title: '确认删除',
+          content: '确认将该会员 <b style="color:red">' + row.username + '</b> 放入回收站么？',
+          loading: true,
+          scrollable: false,
+          onOk: function () {
+            this.axios({
+              url: destoryUser + row.user_id,
+              method: 'DELETE'
+            }).then(response => {
+              this.$Modal.remove()
+              if (response.data.code === 0) {
+                this.$Notice.success({
+                  title: '成功将会员 <span style="color:red">' + row.username + '</span> 放入回收站'
+                })
+
+                rows.splice(index, 1)
+                if (rows.length === 0) {
+                  window.location.reload()
+                }
+              } else {
+                this.$Notice.error({
+                  title: '删除失败',
+                  desc: '《' + row.tv_name + '》删除失败，失败原因：' + response.data.msg
+                })
+              }
+            })
+          }
+        })
       }
     },
     created: function () {
@@ -160,4 +200,7 @@
 </script>
 
 <style scoped>
+  .el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: #20a0ff !important;
+  }
 </style>

@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'namespace' =
 
     // 用户管理
     Route::resource('user', 'UserController');
+    Route::post('user/uploadAvatar', ['as'=>'tv.uploadAvatar', 'uses'=>'UserController@uploadAvatar']);
 
 
 });

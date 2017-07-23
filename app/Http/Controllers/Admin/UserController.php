@@ -147,8 +147,8 @@ class UserController extends Controller
      * @param Request $request
      * @return String
      */
-    public function uploadCover (Request $request) {
-        $file = $request->file('user_avatar');
+    public function uploadAvatar (Request $request) {
+        $file = $request->file('avatar');
         $hashname = $file->hashName();
 
         Storage::putFileAs('public/user', $file, $hashname);
