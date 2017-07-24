@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\Util\Json;
@@ -93,43 +94,28 @@ class UserService {
      * @param Request $request
      * @return bool
      */
-    public function createUser (Request $request) {
+    public function createUser (Request $request, $registerType) {
         $fields = $request->get('formFields');
-        $classifys = $request->get('classifys');
 
         try {
             DB::beginTransaction();
-            $tv = User::create([
+            User::create([
                 'username' => trim($fields['username']),
-                'tv_alias_name' => trim($fields['tv_alias_name']),
-                'tv_brief' => trim($fields['tv_brief']),
-                'tv_description' => trim($fields['tv_description']),
-                'register_type' => intval($fields['register_type']),
-                'tv_cover' => trim($fields['tv_cover']),
-                'tv_show_date' => date('Y-m-d', strtotime($fields['tv_show_date'])),
-                'tv_show_year' => date('Y', strtotime($fields['tv_show_year'])),
-                'tv_lang' => intval($fields['tv_lang']),
-                'tv_area' => intval($fields['tv_area']),
-                'tv_actors' => Json::encode($fields['tv_actors'], 1),
-                'tv_director' => trim($fields['tv_director']),
-                'tv_minute' => intval($fields['tv_minute']),
-                'tv_baidu_url' => trim($fields['tv_baidu_url']),
-                'tv_baidu_pwd' => trim($fields['tv_baidu_pwd'])
+                'password' => bcrypt(trim($fields['password'])),
+                'avatar' => trim($fields['avatar'], ''),
+                'email' => trim($fields['email'], ''),
+                'phone' => trim($fields['phone'], ''),
+                'login_num' => 1,
+                'last_login' => Carbon::now(),
+                'last_ip' => $request->getClientIp(),
+                'register_ip' => $request->getClientIp(),
+                'register_time' => Carbon::now(),
+                'register_type' => $registerType
             ]);
-
-            $many = [];
-            foreach ($classifys as $item) {
-                $itemArr = explode('-', $item);
-                $many[] = new TvClassify([
-                    'classify_key' => $itemArr[0],
-                    'classify_name' => $itemArr[1]
-                ]);
-            }
-            $tv->classifys()->saveMany($many);
-
             DB::commit();
             return true;
         } catch(\Exception $e){
+            dd($e->getMessage());
             DB::rollBack();
             return false;
         }

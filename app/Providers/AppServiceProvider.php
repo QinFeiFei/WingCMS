@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
+        $this->extendValidator();
     }
 
     /**
@@ -33,5 +36,22 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+    }
+
+
+    /**
+     * 扩展Validate验证规则
+     *
+     */
+    private function extendValidator() {
+        // 添加手机号验证
+        Validator::extend('mobile', function($attribute, $value, $parameters, $validator) {
+            return isMobile($value);
+        });
+
+        // 添加身份证验证
+        Validator::extend('idCard', function($attribute, $value, $parameters, $validator) {
+            return isIdCardNo($value);
+        });
     }
 }

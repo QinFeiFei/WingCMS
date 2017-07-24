@@ -83,7 +83,7 @@
             { type: 'email', message: '邮箱格式错误', trigger: 'blur' }
           ],
           phone: [
-            { pattern: /^1[3|4|5|8][0-9]\d{4,8}$/g, message: '手机号格式错误', trigger: 'blur' }
+            { pattern: /^1[3|4|5|7|8]\d{9}$/, message: '手机号格式错误', trigger: 'blur' }
           ]
         }
       }
@@ -120,12 +120,19 @@
       create: function () {
         if (this.validForm()) {
           this.isLoading = true
+
+          var createData = {}
+          createData.username = this.formFields.username
+          createData.password = this.formFields.password
+          createData.avatar = this.formFields.avatar
+          if (this.formFields.email !== '') { createData.email = this.formFields.email }
+          if (this.formFields.phone !== '') { createData.phone = this.formFields.phone }
+
           this.axios({
             url: userStore,
             method: 'POST',
             data: {
-              classifys: this.classifys,
-              formFields: this.formFields
+              formFields: createData
             }
           }).then(response => {
             this.isLoading = false

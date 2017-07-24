@@ -2,12 +2,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tv;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Psy\Util\Json;
+use Validator;
 
 class UserController extends Controller
 {
@@ -33,7 +32,7 @@ class UserController extends Controller
         $validBack = $this->valid($request);
         if(! $validBack['state']){ return output_error($validBack['error']); }
 
-        if( $service->createUser($request) )
+        if( $service->createUser($request, 'admin') )
             return output_success("添加成功");
         else
             return output_error("添加失败");
@@ -97,18 +96,15 @@ class UserController extends Controller
     private function valid(Request $request) {
         $validArr = [ 'state' => true, 'error' => '' ];
         $validator = Validator::make($request->get('formFields'), [
-            'tv_name' => 'required',
-            'tv_type' => 'required|Integer',
-            'tv_lang' => 'Integer',
-            'tv_area' => 'Integer',
-            'tv_minute' => 'Integer',
+            'username' => 'required',
+            'password' => 'between:6,20',
+            'email' => 'email',
+            'phone' => "mobile"
         ], [
-            'tv_name.required' => '影视名称必填!',
-            'tv_type.required' => '影视分类必填!',
-            'tv_type.integer' => '影视分类格式异常!',
-            'tv_lang.integer' => '影视语言格式异常!',
-            'tv_area.integer' => '影视地区格式异常!',
-            'tv_minute.integer' => '影视时长格式异常!',
+            'username.required' => '用户名必填!',
+            'password.between' => '密码长度必须为6-30位!',
+            'email.email' => '邮箱格式错误!',
+            'phone.mobile' => '手机格式错误!'
         ]);
 
         if ($validator->fails()) {
