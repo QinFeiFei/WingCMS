@@ -192,3 +192,18 @@
 td:hover .editRowBtn {
   display:block;
 }
+
+
+/*---  详情页（杂）  ---*/
+.ivu-tabs-tabpane .tab-info {
+  border:1px solid #e1e6eb;
+  padding:28px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+
+.ivu-tabs-tabpane .tab-title {
+  font-size:15px;
+  color: #2d8cf0;
+  font-weight:normal;
+}

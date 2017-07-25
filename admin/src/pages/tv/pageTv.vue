@@ -63,7 +63,7 @@
         <template v-if="formFields.tv_cover !== ''">
           <img :src="uploadDirUrl+formFields.tv_cover" class="w300" />
         </template>
-        <Upload name="tv_cover" type="drag" :action="uploadUrl" :max-size="2048" :format="['jpg','jpeg','png','gif']" :on-success="handleSuccess" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" :on-remove="handleRemove" :before-upload="handleBeforeUpload" class="itemWidth">
+        <Upload name="tv_cover" type="drag" :action="uploadUrl" :headers="tokenAuth" :max-size="2048" :format="['jpg','jpeg','png','gif']" :on-success="handleSuccess" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" :on-remove="handleRemove" :before-upload="handleBeforeUpload" class="itemWidth">
           <div style="padding: 20px 0">
             <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
             <p>点击或将文件拖拽到这里上传</p>

@@ -45,7 +45,7 @@
               active: false,
               display: false,
               child: [
-                { childName: '所有专题', routeName: 'UserPage', active: false },
+                { childName: '所有专题', routeName: 'dashBoard', active: false },
                 { childName: '回收站', routeName: 'UserList', active: false }
               ]
             },

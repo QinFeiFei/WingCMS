@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 栏目Title -->
-    <console-title title="添加电影" class="console-title-border">
+    <console-title title="添加会员" class="console-title-border">
       <div slot="left" style="max-width:400px;">
       </div>
       <div slot="right" style="width:auto;height:auto;position:absolute;top:10px;right:0px;">
@@ -17,19 +17,20 @@
 
     <Form ref="formFields" :model="formFields" label-position="top" :rules="formRules" class="formWarp" v-loading="isLoading">
       <div class="fleft w150">
-        <Upload name="avatar" :action="uploadUrl" ref="upload" :on-success="handleSuccess" :format="['jpg','jpeg','png']" :on-format-error="handleFormatError" type="drag" style="display:inline-block;width:130px;height:130px;">
+        <Upload name="avatar" :action="uploadUrl" ref="upload" :show-upload-list="false" :headers="tokenAuth" :on-success="handleSuccess" :format="['jpg','jpeg','png']" :on-format-error="handleFormatError" type="drag" style="display:inline-block;width:130px;height:130px;">
           <div style="width: 130px;height:130px;line-height: 130px; font-size:30px;">
-            <Icon type="ios-person" size="30"></Icon>
+            <img :src="uploadDirUrl + formFields.avatar" v-if="formFields.avatar !== ''" width="130" height="130" />
+            <Icon type="ios-person" size="30" v-else></Icon>
           </div>
         </Upload>
       </div>
 
       <div class="fleft">
         <Form-item label="用户名" prop="username">
-          <Input v-model="formFields.username" size="large" placeholder="请输入用户名" class="itemWidth" />
+          <Input v-model="formFields.username" size="large" :disabled="pageType === 'UserCreate' ? false : true" placeholder="请输入用户名" class="itemWidth" />
         </Form-item>
 
-        <Form-item label="密码" prop="password">
+        <Form-item :label="this.pageType === 'UserUpdate' ? '密码（为空则不修改密码）' : '密码'" prop="password">
           <Input type="password" v-model="formFields.password" size="large" placeholder="请输入密码" class="itemWidth" />
         </Form-item>
 
@@ -152,24 +153,26 @@
           url: userShow + this.$route.params.user_id
         }).then(response => {
           this.isLoading = false
-          let result = response.data
-          for (let info of result.classifys) {
-            this.classifys.push(info.classify_key + '-' + info.classify_name)
-          }
-
-          delete result.classifys
-          this.formFields = result
+          this.formFields = response.data
         })
       },
       update: function () {
         if (this.validForm()) {
           this.isLoading = true
+
+          var createData = {}
+          createData.user_id = this.formFields.user_id
+          createData.username = this.formFields.username
+          createData.avatar = this.formFields.avatar
+          if (this.formFields.password !== '') { createData.password = this.formFields.password }
+          if (this.formFields.email !== '') { createData.email = this.formFields.email }
+          if (this.formFields.phone !== '') { createData.phone = this.formFields.phone }
+
           this.axios({
-            url: userUpdate + this.formFields.tv_id,
+            url: userUpdate + this.formFields.user_id,
             method: 'PATCH',
             data: {
-              classifys: this.classifys,
-              formFields: this.formFields
+              formFields: createData
             }
           }).then(response => {
             this.isLoading = false

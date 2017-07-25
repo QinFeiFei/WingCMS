@@ -7,8 +7,7 @@
           <template slot="title">
             <Icon type="person"></Icon>会员管理
           </template>
-          <router-link :to="{ name: 'UserList' }"><Menu-item name="userList"><Icon type="person"></Icon>所有用户</Menu-item></router-link>
-          <!--<router-link :to="{ name: 'UserPage' }"><Menu-item name="userPage"><Icon type="person"></Icon>单页用户</Menu-item></router-link>-->
+          <router-link :to="{ name: 'UserList' }"><Menu-item name="0-1"><Icon type="person"></Icon>所有用户</Menu-item></router-link>
         </Submenu>
 
         <Submenu name="article">
@@ -26,55 +25,55 @@
             <Icon type="person"></Icon>
             影视管理
           </template>
-          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>所有资源</Menu-item></router-link>
-          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
+          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="2-1"><Icon type="person"></Icon>所有资源</Menu-item></router-link>
+          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="2-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
         </Submenu>
 
-        <Submenu name="tv">
+        <Submenu name="webPC">
           <template slot="title">
             <Icon type="person"></Icon>
             PC端
           </template>
-          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
+          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>首页管理</Menu-item></router-link>
           <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
         </Submenu>
 
-        <Submenu name="tv">
+        <Submenu name="webMobile">
           <template slot="title">
             <Icon type="person"></Icon>
             手机端
           </template>
-          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
-          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
+          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="4-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
+          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="4-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
         </Submenu>
 
-        <Submenu name="tv">
+        <Submenu name="wechat">
           <template slot="title">
             <Icon type="person"></Icon>
             微信公众平台
           </template>
-          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
-          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
+          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="5-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
+          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="5-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
         </Submenu>
 
-        <Submenu name="tv">
+        <Submenu name="stat">
           <template slot="title">
             <Icon type="person"></Icon>
             数据统计
           </template>
-          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
-          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>友情链接</Menu-item></router-link>
-          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>反馈管理</Menu-item></router-link>
+          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="6-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
+          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="6-2"><Icon type="person"></Icon>友情链接</Menu-item></router-link>
+          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="6-3"><Icon type="person"></Icon>反馈管理</Menu-item></router-link>
         </Submenu>
 
-        <Submenu name="tv">
+        <Submenu name="setting">
           <template slot="title">
             <Icon type="person"></Icon>
             设置管理
           </template>
-          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
-          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>友情链接</Menu-item></router-link>
-          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>反馈管理</Menu-item></router-link>
+          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="7-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
+          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="7-2"><Icon type="person"></Icon>友情链接</Menu-item></router-link>
+          <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="7-3"><Icon type="person"></Icon>反馈管理</Menu-item></router-link>
         </Submenu>
 
       </Menu>

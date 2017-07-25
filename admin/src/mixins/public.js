@@ -6,6 +6,7 @@ export default {
   data: function () {
     return {
       adminInfo: {},          // 管理员信息
+      tokenAuth: { Authorization: 'Bearer ' + localStorage.token },   // token header 头
 
       uploadDirUrl: uploadDirUrl, // 文件上传目录URL
 

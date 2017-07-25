@@ -89,7 +89,7 @@ class UserService {
 
 
     /**
-     * 添加影视
+     * 添加会员
      *
      * @param Request $request
      * @return bool
@@ -103,8 +103,8 @@ class UserService {
                 'username' => trim($fields['username']),
                 'password' => bcrypt(trim($fields['password'])),
                 'avatar' => trim($fields['avatar'], ''),
-                'email' => trim($fields['email'], ''),
-                'phone' => trim($fields['phone'], ''),
+                'email' => isset($fields['email']) ? trim($fields['email']) : '',
+                'phone' => isset($fields['phone']) ? trim($fields['phone']) : '',
                 'login_num' => 1,
                 'last_login' => Carbon::now(),
                 'last_ip' => $request->getClientIp(),
@@ -123,7 +123,7 @@ class UserService {
 
 
     /**
-     * 修改影视
+     * 修改会员
      *
      * @param Request $request
      * @return bool
@@ -132,23 +132,13 @@ class UserService {
         $fields = $request->get('formFields');
 
         try {
-            $model = User::findOrFail($fields['tv_id']);
+            $model = User::findOrFail($fields['user_id']);
 
-            $model->username = trim($fields['username']);
-            $model->tv_alias_name = trim($fields['tv_alias_name']);
-            $model->tv_brief = trim($fields['tv_brief']);
-            $model->tv_description = trim($fields['tv_description']);
-            $model->register_type = intval($fields['register_type']);
-            $model->tv_cover = trim($fields['tv_cover']);
-            $model->tv_show_date = date('Y-m-d', strtotime($fields['tv_show_date']));
-            $model->tv_show_year = date('Y', strtotime($fields['tv_show_year']));
-            $model->tv_lang = intval($fields['tv_lang']);
-            $model->tv_area = intval($fields['tv_area']);
-            $model->tv_actors = Json::encode($fields['tv_actors'], 1);
-            $model->tv_director = trim($fields['tv_director']);
-            $model->tv_minute = intval($fields['tv_minute']);
-            $model->tv_baidu_url = trim($fields['tv_baidu_url']);
-            $model->tv_baidu_pwd = trim($fields['tv_baidu_pwd']);
+            $model->avatar = trim($fields['avatar']);
+            if( isset($fields['password']) ){ $model->password = bcrypt(trim($fields['password'])); }
+            if( isset($fields['email']) ){ $model->email = trim($fields['email']); }
+            if( isset($fields['phone']) ){ $model->phone = trim($fields['phone']); }
+
             return $model->save();
         } catch(\Exception $e){
             return false;
@@ -157,7 +147,7 @@ class UserService {
 
 
     /**
-     * 将影视放入回收站
+     * 将会员放入回收站
      *
      * @param $id
      * @return int
@@ -168,7 +158,7 @@ class UserService {
 
 
     /**
-     * 将影视永久删除
+     * 将会员永久删除
      *
      * @param $id
      * @return int

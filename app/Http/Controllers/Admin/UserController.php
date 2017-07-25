@@ -95,16 +95,24 @@ class UserController extends Controller
      */
     private function valid(Request $request) {
         $validArr = [ 'state' => true, 'error' => '' ];
-        $validator = Validator::make($request->get('formFields'), [
-            'username' => 'required',
+
+        $formFields = $request->get('formFields');
+        $user_id = empty($formFields['user_id']) ? 0 : $formFields['user_id'];
+
+        $validator = Validator::make($formFields, [
+            'username' => 'required|max:60|unique:user,username,'.$user_id.',user_id',
             'password' => 'between:6,20',
-            'email' => 'email',
-            'phone' => "mobile"
+            'email' => 'email'.(!empty($formFields['email']) ? '|unique:user,email,'.$user_id.',user_id' : ''),
+            'phone' => 'mobile'.(!empty($formFields['phone']) ? '|unique:user,phone,'.$user_id.',user_id' : '')
         ], [
             'username.required' => '用户名必填!',
-            'password.between' => '密码长度必须为6-30位!',
+            'username.max' => '用户名不得超过60个字符',
+            'username.unique' => '用户名已存在',
+            'password.between' => '密码长度必须为6-30个字符!',
             'email.email' => '邮箱格式错误!',
-            'phone.mobile' => '手机格式错误!'
+            'email.unique' => '邮箱已存在',
+            'phone.mobile' => '手机格式错误!',
+            'phone.unique' => '手机号已存在'
         ]);
 
         if ($validator->fails()) {
@@ -120,6 +128,7 @@ class UserController extends Controller
      * @return Json
      */
     public function setField(Request $request, UserService $service){
+        /*
         $validator = Validator::make($request->all(), [
             'tv_id' => 'required|exists:tv,tv_id',
             'field' => 'required',
@@ -135,6 +144,7 @@ class UserController extends Controller
         } else {
             return output_error("更新失败");
         }
+        */
     }
 
     /**
@@ -147,8 +157,8 @@ class UserController extends Controller
         $file = $request->file('avatar');
         $hashname = $file->hashName();
 
-        Storage::putFileAs('public/user', $file, $hashname);
+        Storage::putFileAs('public/user/avatar', $file, $hashname);
 
-        return output_data('user/'. $hashname);
+        return output_data('user/avatar/'. $hashname);
     }
 }

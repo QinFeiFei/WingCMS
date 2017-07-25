@@ -52,8 +52,8 @@
       <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="注册时间" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="170">
         <template scope="scope">
-          <Button size="small" type="info">查看</Button>
-          <Button size="small" type="success">编辑</Button>
+          <router-link :to="{ name:'UserShow', params:{user_id: scope.row.user_id} }"><Button size="small" type="info">查看</Button></router-link>
+          <router-link :to="{ name:'UserUpdate', params:{user_id: scope.row.user_id} }"><Button size="small" type="success">编辑</Button></router-link>
           <Button size="small" type="error" @click="deleteUser(scope.row, scope.$index, dataList)">删除</Button>
         </template>
       </el-table-column>
@@ -183,7 +183,7 @@
               } else {
                 this.$Notice.error({
                   title: '删除失败',
-                  desc: '《' + row.tv_name + '》删除失败，失败原因：' + response.data.msg
+                  desc: '《' + row.username + '》删除失败，失败原因：' + response.data.msg
                 })
               }
             })
