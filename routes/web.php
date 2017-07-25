@@ -1,7 +1,6 @@
 <?php
 
 Route::get('/', function () {
-
     return view('welcome');
 });
 
@@ -12,7 +11,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin::'], f
     Route::post('logout', ['as'=>'logout', 'uses'=>'LoginController@logout']);
 });
 
-Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin::'], function () {
+Route::group(['middleware' => ['auth:admin', 'jwt.refresh'], 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin::'], function () {
     // 获取登陆用户
     Route::get('getAdmin', ['as'=>'getAdmin', 'uses'=>'LoginController@getAdmin']);
 

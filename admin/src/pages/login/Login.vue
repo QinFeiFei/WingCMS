@@ -84,7 +84,8 @@
             if (response.data.code !== 0) {
               this.$Message.error(response.data.msg)
             } else {
-              localStorage.setItem('token', response.data.result.token)
+              localStorage.setItem('token', 'Bearer ' + response.data.result.token)
+              // this.$cookie.set('token', 'Bearer ' + response.data.result.token)
               window.location.href = '/'
               this.$Message.success('登陆成功')
             }

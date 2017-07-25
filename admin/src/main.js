@@ -12,6 +12,10 @@ import axios from './http'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
+// Vue-cookie
+var VueCookie = require('vue-cookie')
+Vue.use(VueCookie)
+
 // Iview UI
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'

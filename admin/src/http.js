@@ -6,11 +6,17 @@ axios.defaults.paramsSerializer = function (params) {
 }
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.token
+axios.defaults.headers.common['Authorization'] = localStorage.token
 
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
+    /*
+    if (response.headers.authorization) {
+      localStorage.setItem('token', response.headers.authorization)
+    }
+    */
+
     return response
   },
   error => {

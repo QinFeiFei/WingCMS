@@ -5,7 +5,7 @@
     <div class="bar-item">产品与功能</div>
     <Dropdown class="bar-item bar-item-right" trigger="hover" :visible="visible" placement="bottom-end">
       <a href="javascript:void(0)" @click="handleOpen">
-        {{ adminInfo.admin_name }}　
+        {{ adminInfo ? adminInfo.admin_name : '' }}　
         <Icon type="arrow-down-b"></Icon>
       </a>
       <Dropdown-menu slot="list">
