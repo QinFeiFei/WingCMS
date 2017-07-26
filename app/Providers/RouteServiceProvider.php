@@ -51,9 +51,22 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
+        /*
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+        */
+
+        // 分割路由文件
+        Route::group([
+            'namespace' => $this->namespace,
+            'middleware' => 'web',
+        ], function ($router) {
+            require base_path('routes/web.php');
+            require base_path('routes/web_admin.php');
+            require base_path('routes/web_pc.php');
+            // require base_path('routes/web_wap.php');
+        });
     }
 
     /**

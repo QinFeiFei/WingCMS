@@ -35,6 +35,10 @@
   export default {
     name: 'topBar',
     created: function () {
+      if (!this.Cookies.get('token')) {
+        this.$router.push({ name: 'login' })
+        return false
+      }
       this.setAdmin()
     },
     data: function () {
@@ -56,7 +60,7 @@
           url: logoutUrl,
           method: 'POST'
         }).then(response => {
-          localStorage.removeItem('token')
+          this.Cookies.remove('token')
           this.$router.push({ name: 'login' })
           this.$Message.success('注销成功')
         })

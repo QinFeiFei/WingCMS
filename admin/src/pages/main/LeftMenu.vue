@@ -50,7 +50,7 @@
         <Submenu name="wechat">
           <template slot="title">
             <Icon type="person"></Icon>
-            微信公众平台
+            微信平台
           </template>
           <router-link :to="{ name: 'TvOverView' }"><Menu-item name="5-1"><Icon type="person"></Icon>权限设置</Menu-item></router-link>
           <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="5-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>

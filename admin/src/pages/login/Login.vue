@@ -45,6 +45,7 @@
 
 <script type="text/ecmascript-6">
   import { loginUrl } from '../../api/main'
+
   export default {
     data: function () {
       return {
@@ -84,8 +85,7 @@
             if (response.data.code !== 0) {
               this.$Message.error(response.data.msg)
             } else {
-              localStorage.setItem('token', 'Bearer ' + response.data.result.token)
-              // this.$cookie.set('token', 'Bearer ' + response.data.result.token)
+              this.Cookies.set('token', 'Bearer ' + response.data.result.token)
               window.location.href = '/'
               this.$Message.success('登陆成功')
             }

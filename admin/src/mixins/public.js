@@ -1,12 +1,14 @@
 import _ from 'lodash'
 import dateUtil from 'iview/src/utils/date'
 import { uploadDirUrl } from '../api/main'
+import Cookies from 'js-cookie'
 
 export default {
   data: function () {
     return {
+      Cookies: Cookies,
       adminInfo: {},          // 管理员信息
-      tokenAuth: { Authorization: 'Bearer ' + localStorage.token },   // token header 头
+      tokenAuth: { Authorization: Cookies.get('token') },   // token header 头
 
       uploadDirUrl: uploadDirUrl, // 文件上传目录URL
 
