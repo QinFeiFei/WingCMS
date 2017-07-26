@@ -1,0 +1,26 @@
+body { background:#fff}
+
+.main { width:1000px; margin:0 auto}
+
+.ivy960 { width:960px; margin:0 auto; overflow:hidden;}
+
+.m20 { margin-top:20px}
+
+.ivySogo { background:url(http://imgwx4.2345.com/dianyingimg/detail/images/detailRepeatMap.png) 0 -255px repeat-x; height:55px; overflow:hidden; border-right:1px solid #eed8c4; margin-top:47px}
+.ivySogo .sTit { background:url(http://imgwx4.2345.com/dianyingimg/detail/images/detailMap1113.png) 0 -64px no-repeat; width:30px; height:55px; float:left}
+.ivySogo .pIframe { float:left; width:959px; overflow:hidden; height:50px; padding:5px 0 0 9px}
+
+.g-notfound{ padding: 75px 0 15px 250px;}
+.g-notfound #time_out { color: #f30; font-size: 16px; font-family: Arial; padding-right: 5px; vertical-align: middle;}
+.g-notfound .g-notfound-cont{padding:40px 0 32px 180px;background:url(http://imgwx4.2345.com/dianyingimg/404/images/404.png) no-repeat;}
+.g-notfound .g-notfound-btit{margin:0 0 15px;font-family:\5FAE\8F6F\96C5\9ED1,\9ED1\4F53,\5B8B\4F53;color:#78aee0;font-size:26px;}
+.g-notfound .g-notfound-tips{font-size:14px;color:#535353;}
+.g-notfound .g-notfound-tips .trig{margin-right:5px;color:#2371c8 !important; font-family: \5B8B\4F53}
+.g-notfound .g-notfound-tips a.trig:hover { color: #f30 !important;}
+
+.aboutLinks { text-align: center; font-size: 14px; color: #535353; line-height: 24px; height: 24px; overflow: hidden; padding-bottom: 115px;}
+.aboutLinks a { color: #2371c8}
+.aboutLinks a:hover { color: #f30}
+
+.sfooter a.fankui { display: none;}
+.sheader .smenu { background: none;}
