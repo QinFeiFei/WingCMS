@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-07-15.
+    * Generated on 2017-07-28.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -64,7 +64,11 @@ namespace PHPSTORM_META {
         'tymon.jwt.claim.factory' => Tymon\JWTAuth\Claims\Factory::class,
         'tymon.jwt.payload.factory' => Tymon\JWTAuth\Factory::class,
         'tymon.jwt.secret' => Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
+        'hashids' => Hashids\Hashids::class,
         'blade.compiler' => Illuminate\View\Compilers\BladeCompiler::class,
+        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
+        'translation.loader' => Illuminate\Translation\FileLoader::class,
+        'translator' => Illuminate\Translation\Translator::class,
         'cache' => Illuminate\Cache\CacheManager::class,
         'cache.store' => Illuminate\Cache\Repository::class,
         'memcached.connector' => Illuminate\Cache\MemcachedConnector::class,
@@ -146,9 +150,6 @@ namespace PHPSTORM_META {
         'redis' => Illuminate\Redis\RedisManager::class,
         'auth.password' => Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => Illuminate\Auth\Passwords\PasswordBroker::class,
-        'translation.loader' => Illuminate\Translation\FileLoader::class,
-        'translator' => Illuminate\Translation\Translator::class,
-        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
         'command.tinker' => Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
@@ -207,7 +208,11 @@ namespace PHPSTORM_META {
         'tymon.jwt.claim.factory' => Tymon\JWTAuth\Claims\Factory::class,
         'tymon.jwt.payload.factory' => Tymon\JWTAuth\Factory::class,
         'tymon.jwt.secret' => Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
+        'hashids' => Hashids\Hashids::class,
         'blade.compiler' => Illuminate\View\Compilers\BladeCompiler::class,
+        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
+        'translation.loader' => Illuminate\Translation\FileLoader::class,
+        'translator' => Illuminate\Translation\Translator::class,
         'cache' => Illuminate\Cache\CacheManager::class,
         'cache.store' => Illuminate\Cache\Repository::class,
         'memcached.connector' => Illuminate\Cache\MemcachedConnector::class,
@@ -289,9 +294,6 @@ namespace PHPSTORM_META {
         'redis' => Illuminate\Redis\RedisManager::class,
         'auth.password' => Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => Illuminate\Auth\Passwords\PasswordBroker::class,
-        'translation.loader' => Illuminate\Translation\FileLoader::class,
-        'translator' => Illuminate\Translation\Translator::class,
-        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
         'command.tinker' => Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
@@ -350,7 +352,11 @@ namespace PHPSTORM_META {
         'tymon.jwt.claim.factory' => Tymon\JWTAuth\Claims\Factory::class,
         'tymon.jwt.payload.factory' => Tymon\JWTAuth\Factory::class,
         'tymon.jwt.secret' => Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
+        'hashids' => Hashids\Hashids::class,
         'blade.compiler' => Illuminate\View\Compilers\BladeCompiler::class,
+        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
+        'translation.loader' => Illuminate\Translation\FileLoader::class,
+        'translator' => Illuminate\Translation\Translator::class,
         'cache' => Illuminate\Cache\CacheManager::class,
         'cache.store' => Illuminate\Cache\Repository::class,
         'memcached.connector' => Illuminate\Cache\MemcachedConnector::class,
@@ -432,9 +438,6 @@ namespace PHPSTORM_META {
         'redis' => Illuminate\Redis\RedisManager::class,
         'auth.password' => Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => Illuminate\Auth\Passwords\PasswordBroker::class,
-        'translation.loader' => Illuminate\Translation\FileLoader::class,
-        'translator' => Illuminate\Translation\Translator::class,
-        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
         'command.tinker' => Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\App::make(0), map([
@@ -493,7 +496,11 @@ namespace PHPSTORM_META {
         'tymon.jwt.claim.factory' => Tymon\JWTAuth\Claims\Factory::class,
         'tymon.jwt.payload.factory' => Tymon\JWTAuth\Factory::class,
         'tymon.jwt.secret' => Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
+        'hashids' => Hashids\Hashids::class,
         'blade.compiler' => Illuminate\View\Compilers\BladeCompiler::class,
+        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
+        'translation.loader' => Illuminate\Translation\FileLoader::class,
+        'translator' => Illuminate\Translation\Translator::class,
         'cache' => Illuminate\Cache\CacheManager::class,
         'cache.store' => Illuminate\Cache\Repository::class,
         'memcached.connector' => Illuminate\Cache\MemcachedConnector::class,
@@ -575,9 +582,6 @@ namespace PHPSTORM_META {
         'redis' => Illuminate\Redis\RedisManager::class,
         'auth.password' => Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => Illuminate\Auth\Passwords\PasswordBroker::class,
-        'translation.loader' => Illuminate\Translation\FileLoader::class,
-        'translator' => Illuminate\Translation\Translator::class,
-        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
         'command.tinker' => Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\App::makeWith(0), map([
@@ -636,7 +640,11 @@ namespace PHPSTORM_META {
         'tymon.jwt.claim.factory' => Tymon\JWTAuth\Claims\Factory::class,
         'tymon.jwt.payload.factory' => Tymon\JWTAuth\Factory::class,
         'tymon.jwt.secret' => Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
+        'hashids' => Hashids\Hashids::class,
         'blade.compiler' => Illuminate\View\Compilers\BladeCompiler::class,
+        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
+        'translation.loader' => Illuminate\Translation\FileLoader::class,
+        'translator' => Illuminate\Translation\Translator::class,
         'cache' => Illuminate\Cache\CacheManager::class,
         'cache.store' => Illuminate\Cache\Repository::class,
         'memcached.connector' => Illuminate\Cache\MemcachedConnector::class,
@@ -718,9 +726,6 @@ namespace PHPSTORM_META {
         'redis' => Illuminate\Redis\RedisManager::class,
         'auth.password' => Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => Illuminate\Auth\Passwords\PasswordBroker::class,
-        'translation.loader' => Illuminate\Translation\FileLoader::class,
-        'translator' => Illuminate\Translation\Translator::class,
-        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
         'command.tinker' => Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\app(0), map([
@@ -779,7 +784,11 @@ namespace PHPSTORM_META {
         'tymon.jwt.claim.factory' => Tymon\JWTAuth\Claims\Factory::class,
         'tymon.jwt.payload.factory' => Tymon\JWTAuth\Factory::class,
         'tymon.jwt.secret' => Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
+        'hashids' => Hashids\Hashids::class,
         'blade.compiler' => Illuminate\View\Compilers\BladeCompiler::class,
+        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
+        'translation.loader' => Illuminate\Translation\FileLoader::class,
+        'translator' => Illuminate\Translation\Translator::class,
         'cache' => Illuminate\Cache\CacheManager::class,
         'cache.store' => Illuminate\Cache\Repository::class,
         'memcached.connector' => Illuminate\Cache\MemcachedConnector::class,
@@ -861,9 +870,6 @@ namespace PHPSTORM_META {
         'redis' => Illuminate\Redis\RedisManager::class,
         'auth.password' => Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => Illuminate\Auth\Passwords\PasswordBroker::class,
-        'translation.loader' => Illuminate\Translation\FileLoader::class,
-        'translator' => Illuminate\Translation\Translator::class,
-        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
         'command.tinker' => Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\resolve(0), map([
@@ -922,7 +928,11 @@ namespace PHPSTORM_META {
         'tymon.jwt.claim.factory' => Tymon\JWTAuth\Claims\Factory::class,
         'tymon.jwt.payload.factory' => Tymon\JWTAuth\Factory::class,
         'tymon.jwt.secret' => Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
+        'hashids' => Hashids\Hashids::class,
         'blade.compiler' => Illuminate\View\Compilers\BladeCompiler::class,
+        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
+        'translation.loader' => Illuminate\Translation\FileLoader::class,
+        'translator' => Illuminate\Translation\Translator::class,
         'cache' => Illuminate\Cache\CacheManager::class,
         'cache.store' => Illuminate\Cache\Repository::class,
         'memcached.connector' => Illuminate\Cache\MemcachedConnector::class,
@@ -1004,9 +1014,6 @@ namespace PHPSTORM_META {
         'redis' => Illuminate\Redis\RedisManager::class,
         'auth.password' => Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => Illuminate\Auth\Passwords\PasswordBroker::class,
-        'translation.loader' => Illuminate\Translation\FileLoader::class,
-        'translator' => Illuminate\Translation\Translator::class,
-        'validation.presence' => Illuminate\Validation\DatabasePresenceVerifier::class,
         'command.tinker' => Laravel\Tinker\Console\TinkerCommand::class,
     ]));
 

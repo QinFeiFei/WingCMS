@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.28 on 2017-07-15.
+ * Generated for Laravel 5.4.28 on 2017-07-28.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12015,6 +12015,64 @@ namespace Tymon\JWTAuth\Facades {
  
 }
 
+namespace Torann\Hashids { 
+
+    class Facade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function encode()
+        {
+            return \Hashids\Hashids::encode();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function decode($hash)
+        {
+            return \Hashids\Hashids::decode($hash);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function encode_hex($str)
+        {
+            return \Hashids\Hashids::encode_hex($str);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function decode_hex($hash)
+        {
+            return \Hashids\Hashids::decode_hex($hash);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function get_max_int_value()
+        {
+            return \Hashids\Hashids::get_max_int_value();
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -14082,6 +14140,8 @@ namespace  {
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
 
     class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
+
+    class Hashids extends \Torann\Hashids\Facade {}
  
 }
 

@@ -1,5 +1,31 @@
 <?php
 
+if(! function_exists('idEncode')) {
+    /**
+     * id 加密
+     *
+     * @param $id
+     * @return string
+     */
+    function idEncode($id)
+    {
+
+    }
+}
+
+if(! function_exists('idDecode')) {
+    /**
+     * id 加密
+     *
+     * @param $id
+     * @return string
+     */
+    function idDecode($id)
+    {
+
+    }
+}
+
 if(! function_exists('deep_in_array')) {
     /**
      * 查看多维数据是否存在某个值
@@ -121,3 +147,4 @@ if(! function_exists('isMobile')) {
 
     }
 }
+

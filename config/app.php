@@ -186,6 +186,9 @@ return [
 
         // Ide Helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        // Hashids 加密/解密
+        Vinkla\Hashids\HashidsServiceProvider::class
     ],
 
     /*
@@ -237,7 +240,10 @@ return [
 
         // Jwt
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+
+        // Hashids 加密/解密
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class
     ],
 
 ];

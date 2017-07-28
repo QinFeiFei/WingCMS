@@ -1,0 +1,1 @@
+@extends('pc.tv._tvDetail')
