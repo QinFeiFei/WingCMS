@@ -9,7 +9,16 @@ use Psy\Util\Json;
 
 class TvService {
 
-    public function findTv ($id) {
+    /**
+     * @param $id 数据库ID
+     * @param bool $idencrypt ID是否使用加密
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
+     */
+    public function findTv ($id, $id_encrypt = false) {
+        if($id_encrypt) {
+            $id = idDecode($id);
+        }
+
         $res = Tv::with('classifys')->find($id);
         $res->tv_actors = json_decode($res->tv_actors);
 
@@ -21,13 +30,13 @@ class TvService {
      * 获取分页列表
      *
      */
-    public function pageList (Request $request) {
-        $model = Tv::orderBy('created_at', 'desc');
+    public function pageList (Request $request, $pageSize = 10) {
+        $model = Tv::orderBy('updated_at', 'desc');
 
         // parseCondition
         $this->parseCondition($request, $model);
 
-        $list = $model->paginate($request->get('page_size', 10));
+        $list = $model->paginate($request->get('page_size', $pageSize));
         return $list;
     }
 

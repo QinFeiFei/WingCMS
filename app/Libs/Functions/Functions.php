@@ -1,5 +1,7 @@
 <?php
 
+use Vinkla\Hashids\Facades\Hashids;
+
 if(! function_exists('idEncode')) {
     /**
      * id 加密
@@ -9,20 +11,20 @@ if(! function_exists('idEncode')) {
      */
     function idEncode($id)
     {
-
+        return Hashids::encode($id);
     }
 }
 
 if(! function_exists('idDecode')) {
     /**
-     * id 加密
+     * id 解密
      *
-     * @param $id
+     * @param $characters
      * @return string
      */
-    function idDecode($id)
+    function idDecode($characters)
     {
-
+        return Hashids::decode($characters)[0];
     }
 }
 

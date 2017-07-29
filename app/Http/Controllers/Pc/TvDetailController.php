@@ -2,33 +2,42 @@
 namespace App\Http\Controllers\Pc;
 
 
+use App\Services\TvService;
+
 class TvDetailController extends TvController
 {
-    public function movieDetail () {
-        return view('pc.tv.movieDetail');
+    public function movieDetail ($tv_id, TvService $tvService) {
+        $info = $tvService->findTv($tv_id, true);
+        return view('pc.tv.movieDetail')->with(['info'=>$info]);
     }
 
-    public function teleplayDetail () {
-        return view('pc.tv.teleplayDetail');
+    public function teleplayDetail ($tv_id, TvService $tvService) {
+        $info = $tvService->findTv($tv_id, true);
+        return view('pc.tv.teleplayDetail')->with(['info'=>$info]);
     }
 
-    public function cartoonDetail () {
-        return view('pc.tv.cartoonDetail');
+    public function cartoonDetail ($tv_id, TvService $tvService) {
+        $info = $tvService->findTv($tv_id, true);
+        return view('pc.tv.cartoonDetail')->with(['info'=>$info]);
     }
 
-    public function varietyDetail () {
-        return view('pc.tv.varietyDetail');
+    public function varietyDetail ($tv_id, TvService $tvService) {
+        $info = $tvService->findTv($tv_id, true);
+        return view('pc.tv.varietyDetail')->with(['info'=>$info]);
     }
 
-    public function mvDetail () {
-        return view('pc.tv.mvDetail');
+    public function mvDetail ($tv_id, TvService $tvService) {
+        $info = $tvService->findTv($tv_id, true);
+        return view('pc.tv.mvDetail')->with(['info'=>$info]);
     }
 
-    public function openclassDetail () {
-        return view('pc.tv.openclassDetail');
+    public function openclassDetail ($tv_id, TvService $tvService) {
+        $info = $tvService->findTv($tv_id, true);
+        return view('pc.tv.openclassDetail')->with(['info'=>$info]);
     }
 
-    public function otherDetail () {
-        return view('pc.tv.otherDetail');
+    public function otherDetail ($tv_id, TvService $tvService) {
+        $info = $tvService->findTv($tv_id, true);
+        return view('pc.tv.otherDetail')->with(['info'=>$info]);
     }
 }

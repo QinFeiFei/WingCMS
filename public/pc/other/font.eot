@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="gb2312">
+<title>404 没有找到页面-2345视频</title>
+<link href="http://imgwx3.2345.com/dianyingimg/top/css/global.css" rel="stylesheet" type="text/css" />
+<link href="http://imgwx3.2345.com/dianyingimg/404/css/error.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://imgwx1.2345.com/dianyingimg/js/xquery2.20.min.js"></script>
+</head>
+
+<body>
+<!-- headder -->
+<script type="text/javascript" src="http://imgwx2.2345.com/dianyingimg/js/ipoActivity2345.js"></script>
+<div class="sheader" id="header">
+    <div class="shead">
+        <span class="slogo">
+            <a href="http://kan.2345.com" target="_self"></a>
+        </span>
+        <span class="smenu">
+            <a href="http://kan.2345.com/" target="_self">首页</a>
+            <a href="http://dianying.2345.com/" target="_self">电影</a>
+            <a href="http://tv.2345.com/" target="_self">电视剧</a>
+            <a href="http://dongman.2345.com/" target="_self">动漫</a>
+            <a href="http://kan.2345.com/zongyi/" target="_self">综艺</a>
+            <a href="http://kan.2345.com/live/9/" target="_self">直播</a>
+            <a href="http://kan.2345.com/zt/" target="_self">专题</a>
+            <a href="http://kan.2345.com/xiuchang/" target="_self">美女视频</a>
+            <a rel="nofollow" href="http://kan.2345.com/sit.htm" target="_self">网址</a>
+        </span>
+    </div>
+</div>
+
+<div class="main">
+
+	<!--404页 begining-->
+  <div class="g-notfound">
+    <div class="g-notfound-cont">  
+      <div class="g-notfound-btit">这个页面打不开了...</div>
+      <div class="g-notfound-tips"><em id='time_out'>5</em>秒后 页面自动跳转至&nbsp;&nbsp;<a class="trig" href="http://kan.2345.com" target="_self">影视首页>></a></div>
+    </div>
+  </div>
+  <!--404页 ended-->
+  <p class="aboutLinks"><em>去其他地方看看：</em>
+	<a href="http://kan.2345.com/" target="_self">首页</a>&nbsp;&nbsp;<a href="http://dianying.2345.com/" target="_self">电影</a>&nbsp;&nbsp;<a href="http://tv.2345.com" target="_self">电视剧</a>&nbsp;&nbsp;<a href="http://dongman.2345.com/" target="_self">动漫</a>&nbsp;&nbsp;<a href="http://kan.2345.com/zongyi/" target="_self">综艺</a>&nbsp;&nbsp;<a href="http://kan.2345.com/live/9/" target="_self">直播</a>&nbsp;&nbsp;<a href="http://kan.2345.com/zt/" target="_self">专题</a>
+  </p>  
+  <div class="ivy960 m20">
+		<script type="text/javascript">
+		/*404页面标签云，创建于2014-6-25*/
+		var cpro_id = "u1598902";
+		</script>
+		<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+	</div>
+
+  <script>
+	var pageFullName = "电视剧";
+	var pageName = "电视剧";
+  </script>
+  <script type="text/javascript" src="http://imgwx1.2345.com/dianyingimg/footer/js/footer_s2.js"></script>
+</div>
+<script>
+var t=5;
+var url='http://kan.2345.com/';
+setInterval(function(){
+	if(t<0){
+		window.location.href=url;
+		return;
+	}
+	document.getElementById('time_out').innerHTML=t;
+	t-=1;
+},1000);
+</script>
+<span style="display:none;">
+<script src="http://s22.cnzz.com/stat.php?id=4138086&web_id=4138086" language="JavaScript"></script>
+<script type="text/javascript" src="http://imgwx1.2345.com/dianyingimg/js/ysCommonStatistic.min.js"></script>
+<script>
+function sendTJ(){
+    ysCS.sendStat('ajax83', 'webview_404');
+}
+sendTJ();
+</script>
+</span>
+</body>
+</html>

@@ -237,8 +237,8 @@
                 <!-- 本网站的内容、图文来自于网络，我们尊重他人的合法权益，如有内容侵犯您的合法权益，请及时与我们联系，我们将第一时间安排核实及删除！ --></p>
 
             <div class="copyRight">版权所有&nbsp;&copy;&nbsp;2345.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP证沪B2-20120099&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;违法和不良信息举报电话：400-0000-2345&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                        class="iInternetReport"></i><a href="http://www.shjbzx.cn" target="_blank" rel="nofollow"><img
-                            src="images/internetReportIcon.png" width="16" height="16">上海市互联网违法和不良信息举报中心</a></div>
+                        class="iInternetReport"></i><a href="" target="_blank" rel="nofollow"><img
+                            src="/pc/images/internetReportIcon.png" width="16" height="16">上海市互联网违法和不良信息举报中心</a></div>
 
         </div>
 

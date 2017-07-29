@@ -181,6 +181,9 @@ return [
         Way\Generators\GeneratorsServiceProvider::class,
         Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
 
+        // debugbar
+        Barryvdh\Debugbar\ServiceProvider::class,
+
         // Jwt Auth
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
@@ -241,6 +244,9 @@ return [
         // Jwt
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+
+        // debugbar
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
         // Hashids 加密/解密
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class

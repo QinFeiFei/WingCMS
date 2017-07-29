@@ -30,6 +30,7 @@
     <meta name="applicable-device" content="pc,mobile">
     <link href="{{ asset('pc/css') }}/global_v4.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('pc/css') }}/home_v4.css" rel="stylesheet" type="text/css"/>
+    <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
     @yield('head')
