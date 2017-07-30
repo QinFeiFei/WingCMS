@@ -183,6 +183,7 @@
         })
       },
       handleBeforeUpload () {
+        /*
         const check = this.formFields.tv_cover === ''
         if (!check) {
           this.$Notice.warning({
@@ -190,6 +191,7 @@
           })
         }
         return check
+        */
       },
       handleRemove (file, fileList) {
         this.formFields.tv_cover = ''

@@ -150,3 +150,22 @@ if(! function_exists('isMobile')) {
     }
 }
 
+
+
+// 影视专用
+if(! function_exists('parseTvArea')) {
+    /**
+     * 影视地区转换为文字显示
+     * @param $code
+     * @return string
+     */
+    function parseTvArea($code)
+    {
+        $areas = config('tv.tv_areas');
+        foreach ($areas as $area){
+            if($area['value'] == $code)
+                return $area['label'];
+        }
+        return '未知地区';
+    }
+}

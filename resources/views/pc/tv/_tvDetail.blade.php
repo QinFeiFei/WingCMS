@@ -3,17 +3,31 @@
 @section('head')
     <link rel="stylesheet" href="{{ asset('pc/css') }}/detail_v4.css">
     <style>
-        .tabContent { margin:0;padding:0;width:100%;height:auto;border:1px solid #ccc;display:none; }
+        .tabContent { margin:0;height:auto;border:1px solid #ccc;display:none;padding:15px; }
         .tab { margin:0;padding:0;list-style:none;overflow:hidden; }
-        .tab li { float:left;width:60px;height:30px;text-align:center;line-height:30px;cursor:pointer; }
+        .tab li { float:left;width:100px;height:50px;text-align:center;line-height:50px;cursor:pointer; background: #e2e2e2;}
         .on { display:block; }
 
-        .tab .tabLi1.cur { background:blue; }
-        .tab .tabLi2.cur { background:red; }
+        .tabContent ul li {border-bottom:1px dashed #999;height:40px;line-height:40px;padding:0px 10px}
+        .tabContent ul li:hover { background:#eee; }
+
+        .tabContent ul li span {display:block;float:left;}
+        .w_50 { width:50%;}
+        .w_30 { width:30%;}
+        .w_20 { width:20%;text-align:right;}
+
+        .tab .cur { color:#fff;font-weight:bold;}
+        .tab .tabLi1.cur { background:#1dbe6f; }
+        .tab .tabLi2.cur { background:#34a9ff; }
         .tab .tabLi3.cur { background:black; }
-        .resource .tabContent1.on { border-color:blue }
-        .resource .tabContent2.on { border-color:red }
+        .resource .tabContent1.on { border-color:#1dbe6f }
+        .resource .tabContent2.on { border-color:#34a9ff }
         .resource .tabContent3.on { border-color:black; }
+
+        .lookBDPWD {padding:3px 5px;background:#444;color:#fff;}
+        .lookBDPWD:hover {background:#333;color:#fff;}
+
+        .body_1280 .height568 .pic167_223 { width: 920px !important; }
     </style>
 @endsection
 
@@ -89,7 +103,7 @@
 
                                 <li class="li_4">
                                     <em class="emTit">地区：</em>
-                                    <a title="{{ $info->tv_area }}电影" href="javascript:void(0)">{{ $info->tv_area }}</a>
+                                    <a title="{{ parseTvArea($info->tv_area) }}电影" href="javascript:void(0)">{{ parseTvArea($info->tv_area) }}</a>
                                 </li>
 
                                 <li class="li_4">
@@ -120,7 +134,7 @@
 
                     <!-- 功能 -->
                     <a href="javascript:void(0)" class="aQRCodeBtn">
-                        <span class="btn"><i class="iconfont">&#xe649;</i>sssssssimc</span>
+                        <span class="btn">找不到想看的资源，点我</span>
                     </a>
                     <!-- 功能 -->
                 </div>
@@ -135,29 +149,55 @@
                                 <li class="tabLi tabLi2">在线播放</li>
                                 <li class="tabLi tabLi3">下载中心</li>
                             </ul>
-                            <div class="tabContent tabContent1 on">11</div>
-                            <div class="tabContent tabContent2">22</div>
-                            <div class="tabContent tabContent3">33</div>
+                            <div class="tabContent tabContent1 on">
+                                <ul>
+                                    <li>
+                                        <span class="w_50">分享链接：<a target="_blank" href="{{ $info->tv_baidu_url }}">{{ $info->tv_baidu_url }}</a></span>
+                                        <span class="w_30">分享密码：<i class="BDPWD">****</i></span>
+                                        <span class="w_20"><a href="javascript:void(0)" class="lookBDPWD">查看分享密码</a></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tabContent tabContent2">
+                                <img src="{{ asset('pc/images/fendou.jpg') }}" style="float:left;margin-left:35%;margin-right:50px;">
+                                <p style="font-size:20px;line-height:30px;margin-top:7px;">我们正在努力开发该功能 ...</p>
+                                <p style="font-size:20px;line-height:30px;">亲一定要多多关注我们哦 ~</p>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="tabContent tabContent3">
+                                <img src="{{ asset('pc/images/fendou.jpg') }}" style="float:left;margin-left:35%;margin-right:50px;">
+                                <p style="font-size:20px;line-height:30px;margin-top:7px;">我们正在努力开发该功能 ...</p>
+                                <p style="font-size:20px;line-height:30px;">亲一定要多多关注我们哦 ~</p>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
 
                         <!--热门电影 begin -->
                         <div class="v_mod">
-                            <div class="v_th"><span class="sMark">相关影视推荐</span></div>
+                            <div class="v_th mt20"><span class="sMark">相关影视推荐</span></div>
 
                             <div class="v_tb">
                                 <div class="v_picConBox height568">
                                     <ul class="v_picTxt pic167_223 clearfix">
+                                        @forelse($relates as $relate)
                                         <li>
                                             <div class="pic">
-                                                <img width="133" height="185" src="asdf.jpg" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}'" />
+                                                <img width="133" height="185" src="{{ asset('storage/'.$relate->tv_cover) }}" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}'" />
                                                 {{--<p class="pRightBottom"><em>8.8分</em></p>--}}
                                                 <a class="aPlayBtn" href="javascript:void(0)"><i></i></a>
                                             </div>
                                             <div class="txt">
-                                                <span class="sTit"><a href="javascript:void(0)">记忆大师</a></span>
-                                                <span class="sActor"><em>黄渤</em>&nbsp;&nbsp;<em>徐静蕾</em>&nbsp;&nbsp;<em>段奕宏</em>&nbsp;&nbsp;<em>杨子姗</em>&nbsp;&nbsp;<em>许玮甯</em>&nbsp;&nbsp;<em>王真儿</em>&nbsp;&nbsp;</span>
+                                                <span class="sTit"><a href="{{ route('pc::movieDetail', ['tv_id'=>$relate->tv_id]) }}">{{ $relate->tv_name }}</a></span>
+                                                <span class="sActor">
+                                                    @forelse($relate->tv_actors->actors as $actor2)
+                                                        <em>{{ $actor2 }}</em>&nbsp;&nbsp;
+                                                    @empty
+                                                    @endforelse
+                                                </span>
                                             </div>
                                         </li>
+                                        @empty
+                                        @endforelse
                                     </ul>
                                 </div>
                             </div>
@@ -241,6 +281,11 @@
                 $('.tabContent').removeClass('on');
                 $(".tabContent").hide().eq($(this).index()).show().addClass('on');
             });
+
+            var bdpwd = '{{ $info->tv_baidu_pwd }}';
+            $(".lookBDPWD").click(function(){
+                $(".BDPWD").text(bdpwd);
+            })
         });
     </script>
 @endsection

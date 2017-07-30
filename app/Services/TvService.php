@@ -3,13 +3,23 @@ namespace App\Services;
 
 use App\Tv;
 use App\TvClassify;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\Util\Json;
 
 class TvService {
 
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new Tv();
+    }
+
     /**
+     * 查询影视详情
+     *
      * @param $id 数据库ID
      * @param bool $idencrypt ID是否使用加密
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
@@ -37,9 +47,27 @@ class TvService {
         $this->parseCondition($request, $model);
 
         $list = $model->paginate($request->get('page_size', $pageSize));
-        return $list;
+        return $this->parseList($list);
     }
 
+
+    /**
+     * 获取指定长度数据
+     *
+     * @param Request $request
+     * @param $model
+     * @param int $take
+     * @return mixed
+     */
+    public function getList (Request $request, $model, $take = 10) {
+        $model = $model->orderBy('updated_at', 'desc');
+
+        // parseCondition
+        $this->parseCondition($request, $model);
+
+        $list = $model->take($take)->get();
+        return $this->parseList($list);
+    }
 
     /**
      * 转换查询条件
@@ -238,5 +266,30 @@ class TvService {
     public function deleteTv ($id) {
         // $tvModel = Tv::find($id);
         // return Tv::forceDelete($id);
+    }
+
+
+    /**
+     * 获取指定类型的相关影视
+     *
+     * @param Request $request
+     * @param $type
+     * @param $notId
+     * @return mixed
+     */
+    public function relatesTv(Request $request, $type, $notId){
+        request()->offsetSet('tv_type', $type);
+
+        $model = $this->model;
+        $model = $model->where('tv_id', '<>', $notId)->orderByRaw("RAND()");
+        $list  = $this->getList($request, $model, 10);
+        return $list;
+    }
+
+    public function parseList($list){
+        $list->map(function ($item, $key) {
+            return $item->tv_actors = json_decode($item->tv_actors);
+        });
+        return $list;
     }
 }

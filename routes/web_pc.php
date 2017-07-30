@@ -5,6 +5,9 @@ Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     // 首页
     Route::get('/', ['as'=>'index', 'uses'=>'IndexController@index']);
 
+    // 错误页面
+    Route::get('/404', ['as'=>'error404', 'uses'=>'IndexController@index']);
+
     // 影视列表
     Route::get('/tvlist/movie', ['as'=>'movieList', 'uses'=>'TvListController@movieList']);
     Route::get('/tvlist/teleplay', ['as'=>'teleplayList', 'uses'=>'TvListController@teleplayList']);
