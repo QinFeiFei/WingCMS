@@ -96,12 +96,27 @@
         <p class="itemText">（单位:分钟）</p>
       </Form-item>
 
+      <Form-item label="评分" class="itemWidth">
+        <Input-number :max="10" :min="1" :step="0.1" v-model="formFields.tv_grade"></Input-number>
+        <p class="itemText">（评分范围：0.0分-10.0分）</p>
+      </Form-item>
+
       <Form-item label="导演" class="itemWidth">
         <Input v-model="formFields.tv_director" placeholder="请输入导演" class="itemWidth" />
       </Form-item>
 
       <Form-item label="演员" class="itemWidth">
         <edit-array :toArray="formFields.tv_actors.actors" @change="updateActors"></edit-array>
+      </Form-item>
+
+      <Form-item label="影视排序" class="itemWidth">
+        <Input-number :max="255" :min="1" :step="1" v-model="formFields.tv_sort"></Input-number>
+        <p class="itemText">（排序范围：1-255）</p>
+      </Form-item>
+
+      <Form-item label="是否推荐" class="itemWidth">
+        <el-switch v-model="formFields.is_push" on-value="1" off-value="0" on-text="开" ff-text="关"> </el-switch>
+        <p class="itemText"></p>
       </Form-item>
 
       <Form-item>
@@ -146,7 +161,10 @@
           tv_director: '',
           tv_minute: 0,
           tv_baidu_url: '',
-          tv_baidu_pwd: ''
+          tv_baidu_pwd: '',
+          is_push: false,
+          tv_sort: 255,
+          tv_grade: 1
         },
         formRules: {
           tv_type: [

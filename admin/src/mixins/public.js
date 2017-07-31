@@ -71,6 +71,12 @@ export default {
       }
 
       return params_
+    },
+    strToBool: function (str) {
+      if (str === '1') return true
+      return false
     }
+  },
+  filters: {
   }
 }

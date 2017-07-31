@@ -26,11 +26,13 @@ import 'element-ui/lib/theme-default/index.css'
 import {
   Table,
   TableColumn,
-  Loading
+  Loading,
+  Switch
 } from 'element-ui'
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Loading)
+Vue.use(Switch)
 
 /* eslint-disable no-new */
 new Vue({

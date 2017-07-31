@@ -21,6 +21,7 @@ class CreateTvTable extends Migration {
 			$table->string('tv_description')->nullable()->default('')->comment('剧情介绍');
 			$table->string('tv_type')->default('10')->comment('影视类型（10-电影 20-电视剧 30-动漫 40-综艺 50-音乐MV 60-公开课 70-其它短片）');
 			$table->string('tv_cover')->default('')->comment('影视封面');
+            $table->double('tv_grade', 3, 1)->default(0.0)->comment('影视评分');
 			$table->date('tv_show_date')->comment('上影日期');
 			$table->string('tv_show_year')->default("1970")->comment('影视年代');
 			$table->string('tv_lang')->default('0')->comment('语言（0-国语 10粤语 20-英语 30-韩语 40-日语 50-法语 60-其它）');
@@ -30,6 +31,8 @@ class CreateTvTable extends Migration {
 			$table->smallInteger('tv_minute')->unsigned()->default(0)->comment('片长（分钟）');
 			$table->string('tv_baidu_url')->default('')->comment('百度分享链接');
 			$table->string('tv_baidu_pwd')->default('')->comment('百度分享密码');
+            $table->enum('is_push', [0, 1])->default(0)->comment('是否推荐');
+            $table->tinyInteger('tv_sort')->unsigned()->default(255)->comment('影视排序');
 			$table->timestamps();
 			$table->softDeletes();
 		});

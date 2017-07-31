@@ -101,6 +101,9 @@ class TvController extends Controller
             'tv_lang' => 'Integer',
             'tv_area' => 'Integer',
             'tv_minute' => 'Integer',
+            'tv_sort' => 'Integer|between:0,255',
+            'is_push' => 'in:0,1',
+            'tv_grade' => 'numeric|between:0,10'
         ], [
             'tv_name.required' => '影视名称必填!',
             'tv_type.required' => '影视分类必填!',
@@ -108,6 +111,11 @@ class TvController extends Controller
             'tv_lang.integer' => '影视语言格式异常!',
             'tv_area.integer' => '影视地区格式异常!',
             'tv_minute.integer' => '影视时长格式异常!',
+            'tv_sort.integer' => '排序格式错误',
+            'tv_sort.between' => '排序数字范围为0-255',
+            'is_push.in' => '是否推荐格式错误',
+            'tv_grade.numeric' => '影视评分只能为数字类型',
+            'tv_grade.between' => '影视评分范围为0-10分',
         ]);
 
         if ($validator->fails()) {

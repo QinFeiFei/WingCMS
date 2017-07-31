@@ -84,6 +84,11 @@ class TvService {
             $model = $model->where('tv_type', $tv_type);
         }
 
+        $is_push = trim($request->get('is_push', ''));
+        if($is_push !== '') {
+            $model = $model->where('is_push', $is_push);
+        }
+
         $tv_show_year = intval($request->get('tv_show_year', 0));
         if(!empty($tv_show_year)){
             $model = $model->where('tv_show_year', $tv_show_year);
@@ -155,7 +160,10 @@ class TvService {
                 'tv_director' => trim($fields['tv_director']),
                 'tv_minute' => intval($fields['tv_minute']),
                 'tv_baidu_url' => trim($fields['tv_baidu_url']),
-                'tv_baidu_pwd' => trim($fields['tv_baidu_pwd'])
+                'tv_baidu_pwd' => trim($fields['tv_baidu_pwd']),
+                'tv_grade' => round($fields['tv_grade'], 1),
+                'is_push' => intval($fields['is_push']),
+                'tv_sort' => intval($fields['tv_sort'])
             ]);
 
             $many = [];
@@ -206,6 +214,9 @@ class TvService {
             $model->tv_minute = intval($fields['tv_minute']);
             $model->tv_baidu_url = trim($fields['tv_baidu_url']);
             $model->tv_baidu_pwd = trim($fields['tv_baidu_pwd']);
+            $model->tv_grade = round($fields['tv_grade'], 1);
+            $model->is_push = intval($fields['is_push']);
+            $model->tv_sort = intval($fields['tv_sort']);
             $model->save();
 
             // ---- 维护影视类型部分，可能写的有点复杂了...

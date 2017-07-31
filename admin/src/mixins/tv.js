@@ -60,6 +60,42 @@ export default {
       }, row)
     },
 
+    // 修改排序
+    setSort: function (row) {
+      row.sortEdit = false
+      this.setField({
+        tv_id: row.tv_id,
+        field: 'tv_sort',
+        value: row.tv_sort
+      }, row)
+    },
+
+    // 修改是否推荐
+    setPush: function (state, row) {
+      this.axios({
+        url: setField,
+        method: 'POST',
+        data: {
+          tv_id: row.tv_id,
+          field: 'is_push',
+          value: state ? '1' : '0'
+        }
+      }).then(response => {
+        let tmptxt = state === true ? '推荐' : '取消推荐'
+        if (response.data.code === 0) {
+          this.$Notice.success({
+            title: '操作成功',
+            desc: '《' + row.tv_name + '》 ' + tmptxt + '成功'
+          })
+        } else {
+          this.$Notice.error({
+            title: '操作失败',
+            desc: '《' + row.tv_name + '》 ' + tmptxt + '失败,失败原因为:' + response.data.msg
+          })
+        }
+      })
+    },
+
     // 快速修改某字段的值
     setField: function (setData, row) {
       this.axios({
@@ -67,7 +103,19 @@ export default {
         method: 'POST',
         data: setData
       }).then(response => {
-        let fieldName = setData.field === 'tv_baidu_url' ? '百度分享URL' : '百度分享密码'
+        let fieldName = ''
+        switch (setData.field) {
+          case 'tv_baidu_url':
+            fieldName = '百度分享URL'
+            break
+          case 'tv_baidu_pwd':
+            fieldName = '百度分享密码'
+            break
+          case 'tv_sort':
+            fieldName = '排序'
+            break
+        }
+
         if (response.data.code === 0) {
           this.$Notice.success({
             title: fieldName + ' 更新成功',
