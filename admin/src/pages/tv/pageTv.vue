@@ -115,7 +115,7 @@
       </Form-item>
 
       <Form-item label="是否推荐" class="itemWidth">
-        <el-switch v-model="formFields.is_push" on-value="1" off-value="0" on-text="开" ff-text="关"> </el-switch>
+        <el-switch v-model="formFields.is_push" :on-value="'1'" :off-value="'0'" on-text="开" off-text="关"></el-switch>
         <p class="itemText"></p>
       </Form-item>
 
@@ -162,7 +162,7 @@
           tv_minute: 0,
           tv_baidu_url: '',
           tv_baidu_pwd: '',
-          is_push: false,
+          is_push: '0',
           tv_sort: 255,
           tv_grade: 1
         },

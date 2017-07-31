@@ -13,7 +13,10 @@ class TvDetailController extends TvController
         // 获取相关影视
         $relates = $tvService->relatesTv($request, $info->tv_type, $info->tv_id);
 
-        return view('pc.tv.movieDetail')->with(['info'=>$info, 'relates'=>$relates]);
+        // 获取本类推荐
+        $pushs = $tvService->getPushs($request, $info->tv_id);
+
+        return view('pc.tv.movieDetail')->with(['info'=>$info, 'relates'=>$relates, 'pushs'=>$pushs]);
     }
 
     public function teleplayDetail ($tv_id, TvService $tvService, Request $request) {

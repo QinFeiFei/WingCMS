@@ -214,52 +214,21 @@
                         <!-- 本周热播榜 start -->
                         <div class="v_mod">
                             <div class="v_th_s">
-                                <span class="sMark">本周热播榜</span>
-                                <a class="aMore_left" href="http://dianying.2345.com/top/" rel="nofollow">更多></a>
+                                <span class="sMark">本周推荐</span>
+                                {{--<a class="aMore_left" href="" rel="nofollow">更多></a>--}}
                             </div>
 
                             <div class="v_tb">
                                 <ul class="v_rank clearfix">
-                                    <li><i class="iNum iCurNum">1</i><span class="sScore">8.3分</span><a <a
-                                                href="http://dianying.2345.com/detail/191315.html" target="_blank"
-                                                title="有完没完电影" data-ajax83="ys_dy_2015_detail_rb_1">有完没完</a></li>
-
-                                    <li><i class="iNum iCurNum">2</i><span class="sScore">8.1分</span><a <a
-                                                href="http://dianying.2345.com/detail/174392.html" target="_blank"
-                                                title="金刚骷髅岛电影" data-ajax83="ys_dy_2015_detail_rb_2">金刚：骷髅岛</a></li>
-
-                                    <li><i class="iNum iCurNum">3</i><span class="sScore">8.6分</span><a <a
-                                                href="http://dianying.2345.com/detail/182866.html" target="_blank"
-                                                title="非凡任务电影" data-ajax83="ys_dy_2015_detail_rb_3">非凡任务</a></li>
-
-                                    <li><i class="iNum ">4</i><span class="sScore">8.5分</span><a <a
-                                                href="http://dianying.2345.com/detail/165794.html" target="_blank"
-                                                title="我不是潘金莲电影" data-ajax83="ys_dy_2015_detail_rb_4">我不是潘金莲</a></li>
-
-                                    <li><i class="iNum ">5</i><span class="sScore">8.8分</span><a <a
-                                                href="http://dianying.2345.com/detail/179333.html" target="_blank"
-                                                title="超凡战队电影" data-ajax83="ys_dy_2015_detail_rb_5">超凡战队</a></li>
-
-                                    <li><i class="iNum ">6</i><span class="sScore">8.6分</span><a <a
-                                                href="http://dianying.2345.com/detail/192192.html" target="_blank"
-                                                title="摔跤吧爸爸电影" data-ajax83="ys_dy_2015_detail_rb_6">摔跤吧！爸爸</a></li>
-
-                                    <li><i class="iNum ">7</i><span class="sScore">8.9分</span><a <a
-                                                href="http://dianying.2345.com/detail/191521.html" target="_blank"
-                                                title="六人晚餐电影" data-ajax83="ys_dy_2015_detail_rb_7">六人晚餐</a></li>
-
-                                    <li><i class="iNum ">8</i><span class="sScore">8.7分</span><a <a
-                                                href="http://dianying.2345.com/detail/190295.html" target="_blank"
-                                                title="绑架者电影" data-ajax83="ys_dy_2015_detail_rb_8">绑架者</a></li>
-
-                                    <li><i class="iNum ">9</i><span class="sScore">8.6分</span><a <a
-                                                href="http://dianying.2345.com/detail/189361.html" target="_blank"
-                                                title="仙球大战电影" data-ajax83="ys_dy_2015_detail_rb_9">仙球大战</a></li>
-
-                                    <li><i class="iNum ">10</i><span class="sScore">8.3分</span><a <a
-                                                href="http://dianying.2345.com/detail/192645.html" target="_blank"
-                                                title="临时演员电影" data-ajax83="ys_dy_2015_detail_rb_10">临时演员</a></li>
-
+                                    @forelse($pushs as $k=>$push)
+                                    <li>
+                                        <i class="iNum iCurNum">{{ $k+1 }}</i>
+                                        <span class="sScore">{{ $push->tv_grade }}分</span>
+                                        <a href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($push->tv_id)]) }}" target="_blank">{{ $push->tv_name }}</a>
+                                    </li>
+                                    @empty
+                                        <li>暂无推荐</li>
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>

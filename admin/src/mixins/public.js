@@ -75,6 +75,10 @@ export default {
     strToBool: function (str) {
       if (str === '1') return true
       return false
+    },
+    boolToStr: function (bool) {
+      if (bool) return '1'
+      return '0'
     }
   },
   filters: {

@@ -187,9 +187,11 @@
                                     </span>
 
                                     <span class="sDes">
-                                        主演：<em>
-                                            <a href="http://dianying.2345.com/list/---fanbingbing---.html" title='范冰冰电影'>范冰冰&nbsp;&nbsp;</a></em>&nbsp;<em>
-                                            <a href="http://dianying.2345.com/list/---guotao---.html" title='张嘉译电影'>张嘉译&nbsp;&nbsp;</a></em>
+                                        主演：
+                                        @forelse($tv->tv_actors->actors as $actor)
+                                            <em>{{ $actor }}&nbsp;&nbsp;</em>&nbsp;
+                                        @empty
+                                        @endforelse
                                     </span>
                                 </div>
                             </li>

@@ -31,7 +31,7 @@ class CreateTvTable extends Migration {
 			$table->smallInteger('tv_minute')->unsigned()->default(0)->comment('片长（分钟）');
 			$table->string('tv_baidu_url')->default('')->comment('百度分享链接');
 			$table->string('tv_baidu_pwd')->default('')->comment('百度分享密码');
-            $table->enum('is_push', [0, 1])->default(0)->comment('是否推荐');
+            $table->enum('is_push', ['0', '1'])->default('0')->comment('是否推荐');
             $table->tinyInteger('tv_sort')->unsigned()->default(255)->comment('影视排序');
 			$table->timestamps();
 			$table->softDeletes();

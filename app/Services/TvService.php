@@ -162,7 +162,7 @@ class TvService {
                 'tv_baidu_url' => trim($fields['tv_baidu_url']),
                 'tv_baidu_pwd' => trim($fields['tv_baidu_pwd']),
                 'tv_grade' => round($fields['tv_grade'], 1),
-                'is_push' => intval($fields['is_push']),
+                'is_push' => trim($fields['is_push']),
                 'tv_sort' => intval($fields['tv_sort'])
             ]);
 
@@ -215,7 +215,7 @@ class TvService {
             $model->tv_baidu_url = trim($fields['tv_baidu_url']);
             $model->tv_baidu_pwd = trim($fields['tv_baidu_pwd']);
             $model->tv_grade = round($fields['tv_grade'], 1);
-            $model->is_push = intval($fields['is_push']);
+            $model->is_push = trim($fields['is_push']);
             $model->tv_sort = intval($fields['tv_sort']);
             $model->save();
 
@@ -297,6 +297,29 @@ class TvService {
         return $list;
     }
 
+
+    /**
+     * 获取当前分类下的推荐影视
+     *
+     * @param Request $request
+     * @param $type
+     * @param $notId
+     * @return mixed
+     */
+    public function getPushs(Request $request, $notId){
+        $model = $this->model;
+        $model = $model->where('tv_id', '<>', $notId)->where('is_push', '1');
+        $list  = $this->getList($request, $model, 10);
+        return $list;
+    }
+
+
+    /**
+     * 将数据库返回的List内容转换格式
+     *
+     * @param $list
+     * @return mixed
+     */
     public function parseList($list){
         $list->map(function ($item, $key) {
             return $item->tv_actors = json_decode($item->tv_actors);
