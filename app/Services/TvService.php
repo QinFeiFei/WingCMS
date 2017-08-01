@@ -41,7 +41,7 @@ class TvService {
      *
      */
     public function pageList (Request $request, $pageSize = 10) {
-        $model = Tv::orderBy('updated_at', 'desc');
+        $model = Tv::orderBy('tv.updated_at', 'desc');
 
         // parseCondition
         $this->parseCondition($request, $model);
@@ -89,11 +89,6 @@ class TvService {
             $model = $model->where('is_push', $is_push);
         }
 
-        $tv_show_year = intval($request->get('tv_show_year', 0));
-        if(!empty($tv_show_year)){
-            $model = $model->where('tv_show_year', $tv_show_year);
-        }
-
         $tv_lang = intval($request->get('tv_lang', 0));
         if(!empty($tv_lang)){
             $model = $model->where('tv_lang', $tv_lang);
@@ -106,17 +101,18 @@ class TvService {
 
         $tv_show_year = trim($request->get('tv_show_year', ''));
         if(!empty($tv_show_year)){
-            if(preg_match('/(\d{4})/', $tv_show_year)){
+            if(preg_match('/^\d{4}$/', $tv_show_year)){
                 $model = $model->where('tv_show_year', $tv_show_year);
-            }else if($tv_show_year == '2010-2000'){
-                dd('xxx');
+            }
+
+            if($tv_show_year == '2010-2000'){
                 $model = $model->whereBetween('tv_show_year', [2000, 2010]);
             }else if($tv_show_year == '2000-1990'){
                 $model = $model->whereBetween('tv_show_year', [1990, 2000]);
             }else if($tv_show_year == '1990-1980'){
                 $model = $model->whereBetween('tv_show_year', [1980, 1990]);
             }else if($tv_show_year == '1980-1970'){
-                $model = $model->whereBetween('tv_show_year', [1980, 1970]);
+                $model = $model->whereBetween('tv_show_year', [1970, 1980]);
             }else if($tv_show_year == '1970-'){
                 $model = $model->where('tv_show_year', '<', 1970);
             }
@@ -126,6 +122,14 @@ class TvService {
         if(!empty($created_at)){
             $model = $model->whereBetween('created_at', [$created_at[0], $created_at[1]]);
         }
+
+        $classify = intval($request->get('classify', 0));
+        if(!empty($classify)){
+            $model->rightJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')->where('tv_classify.classify_key', $classify);
+        }/*else{
+            $model->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
+                  ->groupBy('tv.tv_id');
+        }*/
     }
 
 

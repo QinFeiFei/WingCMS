@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Pc;
 
 use App\Services\TvService;
+use App\Tv;
+use DB;
 use Illuminate\Http\Request;
 
 class TvListController extends TvController
@@ -18,6 +20,9 @@ class TvListController extends TvController
     }
 
     public function movieList (Request $request, TvService $tvService) {
+        // $dd = DB::table('tv')->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')->groupBy('tv.tv_id')->get();
+        // dd($dd);
+
         request()->offsetSet('tv_type', config('tv.TV_MOVIE'));
         $list = $tvService->pageList($request, 10);
 
