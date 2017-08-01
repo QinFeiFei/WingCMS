@@ -104,6 +104,24 @@ class TvService {
             $model = $model->where('tv_area', $tv_area);
         }
 
+        $tv_show_year = trim($request->get('tv_show_year', ''));
+        if(!empty($tv_show_year)){
+            if(preg_match('/(\d{4})/', $tv_show_year)){
+                $model = $model->where('tv_show_year', $tv_show_year);
+            }else if($tv_show_year == '2010-2000'){
+                dd('xxx');
+                $model = $model->whereBetween('tv_show_year', [2000, 2010]);
+            }else if($tv_show_year == '2000-1990'){
+                $model = $model->whereBetween('tv_show_year', [1990, 2000]);
+            }else if($tv_show_year == '1990-1980'){
+                $model = $model->whereBetween('tv_show_year', [1980, 1990]);
+            }else if($tv_show_year == '1980-1970'){
+                $model = $model->whereBetween('tv_show_year', [1980, 1970]);
+            }else if($tv_show_year == '1970-'){
+                $model = $model->where('tv_show_year', '<', 1970);
+            }
+        }
+
         $created_at = $request->get('created_at');
         if(!empty($created_at)){
             $model = $model->whereBetween('created_at', [$created_at[0], $created_at[1]]);
