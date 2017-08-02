@@ -1,9 +1,7 @@
 <?php
 namespace App\Http\Controllers\Pc;
 
-use App\Http\Controllers\Controller;
-
-class IndexController extends Controller
+class IndexController extends PcController
 {
     public function index () {
         return view('pc.index');

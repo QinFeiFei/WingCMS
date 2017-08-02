@@ -41,10 +41,13 @@ class TvService {
      *
      */
     public function pageList (Request $request, $pageSize = 10) {
-        $model = Tv::orderBy('tv.updated_at', 'desc');
+        $model = new Tv();
 
         // parseCondition
         $this->parseCondition($request, $model);
+
+        // parseSort
+        $this->parseSort($request, $model);
 
         $list = $model->paginate($request->get('page_size', $pageSize));
         return $this->parseList($list);
@@ -126,12 +129,26 @@ class TvService {
         $classify = intval($request->get('classify', 0));
         if(!empty($classify)){
             $model->rightJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')->where('tv_classify.classify_key', $classify);
-        }/*else{
-            $model->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
-                  ->groupBy('tv.tv_id');
-        }*/
+        }else{
+            $model->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')->groupBy('tv.tv_id');
+        }
     }
 
+
+    /**
+     * 转换排序
+     *
+     * @param Request $request
+     * @param $model
+     */
+    private function parseSort (Request $request, &$model) {
+        $orderby = $request->get('orderby', '');
+        if(empty($orderby)){
+            $model->orderBy('tv.created_at', 'desc');
+        }else if ($orderby == 'grade'){
+            $model->orderBy('tv.tv_grade', 'desc');
+        }
+    }
 
     /**
      * 快速设置某个字段的值

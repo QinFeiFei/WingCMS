@@ -31,17 +31,15 @@
             -->
             <!--右侧广告 start-->
             <div class="headerFeatures clearfix">
+                {{ $user }}
                 <!-- 登录注册 -->
                 <div class="more_mod userLogin">
-                    <span class="sMore"><a href="javascript:void(0);" target="_self" id="user-login"
-                                           onclick="ysCS.posClick('ys_top_login2345');"><i class="iUser"></i><em>登录</em></a></span>
+                    <span class="sMore"><a href="{{ route('pc::login') }}" id="user-login"><i class="iUser"></i><em>登录</em></a></span>
                     <div class="more_tb">
                         <i class="iArrow"></i>
                         <div class="more_mod_border clearfix" id="user-login-list">
-                            <a href="javascript:void(0);" target="_self" id="user-login2"
-                               onclick="ysCS.posClick('ys_top_login2345');">登录</a>
-                            <a href="javascript:void(0);" target="_self" id="user-reg"
-                               onclick="ysCS.posClick('ys_top_reg');">注册</a>
+                            <a href="{{ route('pc::login') }}" id="user-login2">登录</a>
+                            <a href="{{ route('pc::register') }}" id="user-reg">注册</a>
                             <i class="clear"></i>
                         </div>
                     </div>
@@ -73,5 +71,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('.more_mod').live('mouseover', function () {
+                $(this).hasClass('more_mod_show') ? clearTimeout(o) : $(this).addClass('more_mod_show')
+            })
+
+            $('.more_mod').live('mouseout', function () {
+                var e = $(this);
+                o = setTimeout(function () {
+                    e.removeClass('more_mod_show')
+                }, 10)
+            })
+        })
+    </script>
+
     @include('pc.layouts.top_nav')
 </div>

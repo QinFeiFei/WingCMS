@@ -60,5 +60,9 @@ class Kernel extends HttpKernel
         // Jwt
         'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Check::class,
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+
+        // PC端JwtToken相关
+        'pc.jwt.token' => \App\Http\Middleware\PcRequestToken::class,
+        'pc.jwt.refresh' => \App\Http\Middleware\PcRefreshToken::class
     ];
 }

@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* CSS Document */
+.g-left { float: left;}
+.g-right { float: right;}
+.pfooter{ margin-top:0px;}
+.login_wrap{ height:480px; background:#e8f7fc; border-top:1px solid #e7e7e7;}
+.login_center{ width:1000px; height:100%; margin:0 auto;zoom:1;}
+.login_box{width: 343px; float:right;zoom:1;margin-left: 0; margin-right: 0; }
+.trig_gopro{ width:487px; height:383px; float:left; overflow:hidden; margin-left:87px; margin-top:49px;}
+.g-login .g-login-th{ height:37px; border-bottom:none; background:#fff; overflow:visible; line-height:none;}
+.g-login { width: 337px; border:none; margin-right:6px;}
+.g-login .g-inputTxt{ height:34px;}
+.g-icon-name, .g-icon-password{ top:9px;}
+.g-login .g-inputTxt .sDes{ top:8px;}
+.g-login .g-inputTxt input{ padding:8px 0;}
+.g-login-code .codePic{ height:36px;}
+.g-login-code .codePic .sPic{ height:36px;}
+.g-login-code .codePic .sPic img{ display:block;}
+.g-login-code .codePic{ line-height:36px;}
+.g-login .g-txt{ padding:0;}
+.g-login .g-error,.g-other-login,.g-other-login .otherStyle{ padding-top:7px;}
+.g-login .g-txt-registration{ padding:0; text-align:right; margin-top:14px;}
+.g-login .g-login-th{ padding:0;}
+.g-tipmar .g-inputTxt{ margin-top:18px;}
+.g-login .g-login-tb{ padding:0px;}
+.footer { border-top: 1px solid #eee; height:55px; overflow: hidden; background-color: #fff; min-width: 1000px; line-height: 56px; text-align: center; color: #999; font-size:14px; font-family:Arial,微软雅黑,宋体;}
+.footerCon { width: 1000px; margin: 0 auto;}
+.footer em { color: #dcd4dc; padding: 0 10px;}
+.footer a { color: #999;}
+.footer a:hover { color: #f30;}
+.g-login .g-inputTxt{}
+.g-login-code{ margin-top:18px;}
+.g-login-code .g-inputTxt{ margin-top:0px;}
+.logoPic{ float:left;}
+.sTxt { color: #666; float: left; font-size: 18px; height: 64px; line-height: 64px; overflow: hidden; padding: 7px 0 0 10px;}
+.g-icon-qq, .g-icon-weixin { display: block; width: 33px; height: 32px; background: url(../images/g-login_v3.png) 0 0 no-repeat; }
+.g-other-login .otherStyle a { height: 32px; }
+.g-other-login .g-icon-qq { background-position: 0 -138px; margin-top: 0; }
+.g-other-login .g-icon-weixin {display: block; width: 33px; height: 32px; background-position: 0 -101px; }
+.imgSlider {_display: inline; position: relative; width: 438px; overflow: hidden; float: left; margin-left: 91px; margin-top: 81px; zoom:1;}
+.swi_img {width: 438px; height: 324px; position: relative; overflow: hidden;zoom:1;}
+.imgSlider li { zoom:1; margin: 0 auto; opacity: 0;filter: alpha(opacity:0); position: 'absolute'; top: 0; left: 0}
+.imgSlider li.active { display: block;opacity: 1; filter: alpha(opacity:100);}
+.imgSlider li a { display: block; border-radius: 20px;}
+.imgSlider li a img{ width: 438px; height: 324px;}
+.sliderListNum { overflow: hidden; position: relative; margin: 11px 0 0 180px; }
+.sliderListNum a { float: left; margin-left: 11px; width: 11px; height: 11px; _height: 10px; display: block; border-bottom: 0 none; text-decoration: none; text-decoration: none; background: url(../images/login-slider.png) no-repeat left top;  background-position: 0 0;}
+.sliderListNum a.active { background: url(../images/login-slider.png) no-repeat left top; background-position: 0 -19px; text-decoration: none; }
+/*2016-04-18 pan*/
+.mt20{ margin-top:20px;}
+.mt10{ margin-top:10px;}
+.mt7{ margin-top:7px;}
+.g-login-form{ height:332px; padding-top:20px; position:relative;}
+.g-icon-name,.g-icon-password,.g-icon-qq,.g-icon-sina { background: url(../images/g-login_v3.png) 0 0 no-repeat;} 
+.g-icon-name,.g-icon-password { width: 16px; height: 16px; overflow: hidden; position: absolute; top: 9px; left: 8px;}
+.g-icon-name { background-position: -84px 0;}
+.g-icon-password { background-position: -84px -17px;}
+.g-login .g-inputTxt { border: 1px solid #e6e6e6; height: 34px; padding: 0 5px 0 32px; position: relative; color: #333; background-color: #fff; position: relative;}
+.g-login .g-inputTxt .g-iRight { background: url(../images/g-login_v3.png) -86px -86px no-repeat; width: 14px; height: 14px; overflow: hidden; position: absolute; top: 50%; right: 10px; margin-top: -7px;  z-index: 20;}
+.g-login .g-inputTxt .sDes { color: #999; position: absolute; top: 8px; left: 32px; z-index: 10; display: block;}
+.g-login .g-inputTxt .postDes{ left:8px;}
+.g-login .g-inputTxt input { border: 0 none; background: url(../images/fillBg.png) 0 0 repeat; width: 100%; *width: 99%; float: left; position: relative; outline:none; z-index: 15; zoom:1; padding: 8px 0; line-height: 18px; font-size: 12px; _float: none; _display: inline-block;}
+.g-login .g-inputTxt-error { border-color: #ff3300}
+.g-login .g-inputTxt-focus { border-color: #b3e6ff}
+.g-login .g-sCheck { float: left; line-height: 18px; height: 18px;}
+.g-login .g-sCheck input { width: 13px; height: 13px; overflow: hidden; float: left; margin:3px 4px 0 0; display: inline;}
+.g-login-code { padding-right: 166px; position: relative; _height: 40px; margin-top:10px; }
+.g-login-code .g-inputTxt { padding: 0 10px; margin-top: 0;}
+.g-login-code .codePic { position: absolute; width: 144px; height: 36px; overflow: hidden; line-height: 36px; top: 0; right:0;}
+.g-login-code .codePic .sPic { float: left; width: 88px; height: 36px; overflow: hidden;}
+.sPic img{ width:88px; height:36px; display:block; vertical-align:top; overflow:hidden;}
+.g-login .g-btn { background: #049ae6; display: block; line-height: 36px; height: 36px; text-align: center; border: 0 none; color: #fff; font-size: 14px; text-decoration: none; -webkit-radius: 2px; -moz-radius: 2px; -ms-radius: 2px; -o-radius: 2px; border-radius: 2px; cursor: pointer; width: 100%; margin-top:14px; font-family: \5FAE\8F6F\96C5\9ED1,\5b8b\4f53}
+.g-logincode .g-btn, .g-tipmar .g-btn,.g-logincode .g-txt-registration, .g-tipmar .g-txt-registration{ margin-top:7px;}
+.g-login .g-btn:hover { background: #0090d9; color: #fff; text-decoration: none;}
+.posti-wrap{ border-bottom: 1px solid #e6e6e6; padding-top:10px;}
+.g-login a { color: #166cbb; text-decoration: none;}
+.g-login a:hover { color: #f30; text-decoration: underline;}
+.g-login { width: 298px; height:400px; padding:0 20px; font-family:\5FAE\8F6F\96C5\9ED1,\5b8b\4f53; font-size: 12px; margin: 0 auto; background:#fff; line-height: 18px; position: relative; zoom:1;}
+.g-login-th { height: 37px;}
+.sMark { width:149px; height:38px; line-height:38px; float:left; text-align:center; color: #666; font-size: 18px; cursor:pointer;}
+.curr-sMark{ height:36px; line-height:38px; border-bottom:2px solid #049ae6; overflow:hidden; color:#333;}
+.g-login .g-txt { height: 18px; overflow: hidden; color: #999;}
+.g-next{ margin-top:20px;}
+.g-logincode .g-next{ margin-top:10px;}
+.g-login .g-error { height:18px; color: #f30; line-height:18px; padding-top:7px;}
+.g-other-login { width:100%; border-top: 1px dashed #e3e7ea; padding-top: 7px; position:absolute; left:0; bottom:15px;}
+.g-other-login .sTit { height:18px; line-height:18px; color: #666;padding: 12px 20px 0 0; display: block;float: left;}
+.g-other-login .otherStyle { height: 30px;float: left; overflow: hidden; padding-top: 7px;}
+.g-other-login .otherStyle a { float: left; line-height: 32px; height: 32px; text-align: center; margin-right: 10px; display: inline; color: #fff; -webkit-radius: 2px; -moz-radius: 2px; -ms-radius: 2px; -o-radius: 2px; border-radius: 2px;}
+.g-other-login .otherStyle a:hover { color: #fff; text-decoration: none;}
+.g-other-login .blueBtn { padding: 0 5px; background-color: #49bff2;}
+.g-other-login .blueBtn:hover { background-color: #30b2f2}
+.g-other-login .redBtn { background-color: #ff737a}
+.g-other-login .redBtn:hover { background-color: #ff4040}
+.g-login-form .g-pwd{ margin-top:20px;}
+.g-login-form .g-top{ margin-top:24px}
+.g-logincode .g-pwd{ margin-top:10px;}
+.g-logincode .g-login-code{ display:block;}
+.g-logincode .g-top{ margin-top:4px}
+/*快速登录*/
+.quick-login{ overflow:hidden; position:relative; *zoom:1;}
+.quick-tip{ margin-top:45px; height:20px;}
+.q-tiptxt{ height:20px; line-height:20px; text-align:center; color:#999;}
+.q-picwrap{ margin-top:36px;}
+.q-picwrap a{ width:90px; height:90px; display:block; margin:0 auto; border:1px solid #ebebeb; padding:2px; overflow:hidden;}
+.q-picwrap a:hover{ border:1px solid #abd9f0;}
+.q-picwrap a img{ width:100%; display:block;}
+.q-picwrap p{ height:20px; line-height:20px; font-size:14px; color:#666; text-align:center; margin-top:7px;}
+.q-outherLogin{ width:98px; height:28px; display:block; text-align:center; line-height:28px; font-size:14px; color:#999; border:1px solid #dedede; border-radius:1px; margin:0 auto; margin-top:44px;}
+.g-login .q-outherLogin:hover{ background:#f7f7f7; color:#999; text-decoration:none;}
+.g-login .q-outherLogin{ color:#999;}
+.q-outTxt{ width:267px; border:1px solid #f2d361; border-radius:2px; overflow:hidden; background:#fcf9d7; position:absolute; left:0px; top:27px; padding:4px 2px 4px 27px; z-index:99;}
+.q-outTxt p{ line-height:18px; color:#555;}
+.q-outTxt i{ width:14px; height:14px; display:block; background:url(../images/tips.png) no-repeat; position:absolute; left:7px; top:7px; overflow:hidden; text-indent:-9999px;}
+.q-outTxt2{ width:267px; border:1px solid #f2d361; border-radius:2px; overflow:hidden; background:#fcf9d7; position:relative; padding:4px 2px 4px 27px; z-index:99; display:none;}
+.q-outTxt2 p{ line-height:18px; color:#555;}
+.q-outTxt2 i{ width:14px; height:14px; display:block; background:url(../images/tips.png) no-repeat; position:absolute; left:7px; top:7px; overflow:hidden; text-indent:-9999px;}
+.g-tipmar { padding-top:10px;}
+.g-tipmar .q-outTxt2{ display:block;}
+/*.g-tipmar .g-login-code{ display:none;}*/
+.g-tipmar .g-userName{ margin-top:2px;}
+.g-tipmar .g-other-login{ bottom:5px;}
+.posti-one{ border:0px;}
+.posti-one span{ text-align:left;}
+.posti-one .sMark{ cursor:default;}
+#otherlogindiv .error {
+    color:red;
+    float:left;
+    height:25px;
+}

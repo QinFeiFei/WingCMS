@@ -29,6 +29,8 @@ class CreateUserTable extends Migration {
 			$table->integer('login_num')->default(0)->comment('登陆次数');
 			$table->string('register_type')->default('pc');
             $table->unique('username');
+            $table->unique('email');
+            $table->unique('phone');
 			$table->timestamps();
 			$table->softDeletes();
 		});

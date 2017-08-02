@@ -1,0 +1,156 @@
+body{ font:14px/1.5 Arial,\5FAE\8F6F\96C5\9ED1,\5b8b\4f53;background:#fff; color:#333;}
+html,body,p,dl,dt,dd,table,td,th,input,img,form,div,span,ul,ol,li,h1,h2,h3,h4,h5,h6,select,fieldset,fieldset,input,button,sub,sup,textarea{margin:0;padding:0; }
+table {border-collapse:collapse; border-spacing:0;}
+h1,h2,h3,h4,h5,h6 {font-size:100%;} 
+iframe,img{ border:0 none;}
+img{ vertical-align:middle;}
+em,i{font-style: normal;}
+ul,li,ol{list-style:none outside none;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{*zoom:1;}
+a{ text-decoration:none;color:#166cbb}
+a:hover{ text-decoration:underline;color:#f30}
+:focus { outline:0;}
+.clear{ clear:both; overflow:hidden; font-size:0; height:0;line-height:0;}
+/* 头部广告 */
+/* 头部广告 */
+.wrap_ad { background-color: #f94840; z-index: 0; }
+.grid_ad { margin: 0 auto; width: 1000px; height: 60px; }
+.grid_ad img { width: 1000px; height: 60px; }
+.grid_ad a{display: block; width: 1000px;height: 60px;}
+.grid_ad .iconfont {  background: url('../images/icon_close.jpg') no-repeat; display: block; width: 25px; height: 25px; float: right; margin-top: -60px; margin-right: 0; cursor: pointer; font-size: 14px; color: #FFF; opacity: .9;}
+
+.header { border-bottom: 1px solid #eee; height: 71px; overflow: hidden; background-color: #fff; min-width: 1000px;}
+.headerCon { width: 1000px; margin: 0 auto;}
+.header .logo { float: left;}
+.header .logo .logoPic { float: left;}
+.header .logo .sTxt { float: left; overflow: hidden; font-size: 18px; color: #666; padding: 7px 0 0 10px; line-height: 64px; height: 64px;}
+.header .logo .sTxt a { color: #666;}
+.header .logo .sTxt a:hover { text-decoration: none; color: #666;}
+.header .pRight { float: right; padding: 7px 0 0 10px; line-height: 64px; height: 64px; font-size: 14px; color: #999;}
+
+.footer { border-top: 1px solid #eee; height:55px; overflow: hidden; background-color: #fff; min-width: 1000px; line-height: 56px; text-align: center; color: #999;}
+.footerCon { width: 1000px; margin: 0 auto;}
+.footer em { color: #dcd4dc; padding: 0 10px;}
+.footer a { color: #999;}
+.footer a:hover { color: #f30;}
+
+.wrapper{ background-color: #f8f8f8; position: relative;}
+.main{ width: 1000px; min-width: 1000px; margin: 0 auto; padding-bottom: 30px; position: relative;}
+.pb25{ padding-bottom:24px;}
+
+.col_a { width: 620px; float: left; padding-left: 20px;}
+.col_b { width: 270px; float: right; padding: 35px 0 20px;}
+
+.sNotice{ padding-left: 48px; color: #999; height: 36px; line-height: 36px; display: block; overflow: hidden; margin-top:23px;}
+
+.loginTab{ margin-top: 15px; height: 54px; position: relative; zoom:1; overflow: hidden; zoom:1; display:none;}
+.loginTab .iLine { width: 100%; height: 1px; background-color: #e6e6e6; position: absolute; top: 53px; left: 0; z-index: 5; overflow: hidden; line-height: 0; font-size: 0;}
+.loginTab .iPhone,.loginTab .iEmail { background: url(../images/g-login.png) 0 0 no-repeat; float: left; display: inline; overflow: hidden;}
+.loginTab .iPhone { background-position: -69px 0; width: 14px; height: 22px; margin: 15px 5px 0 0;}
+.loginTab .iEmail { background-position: -49px 0; width: 19px; height: 16px; margin: 17px 5px 0 0;}
+.loginTab a { text-align: center; height: 52px; line-height: 52px; overflow: hidden; padding: 0 50px 2px; float: left; position: relative; z-index: 10; font-size: 18px; color: #666; zoom:1;}
+.loginTab a:hover { text-decoration: none;}
+.loginTab a:hover .iPhone { background-position: -69px -23px;}
+.loginTab a:hover .iEmail { background-position: -49px -17px;}
+.loginTab a.cur { padding-bottom: 0; border-bottom: 2px solid #00a0e9;}
+.loginTab a.cur .iPhone { background-position: -69px -23px;}
+.loginTab a.cur .iEmail { background-position: -49px -17px;}
+
+.inputTxt { border: 1px solid #e6e6e6; line-height: 18px; height: 38px; padding: 0 10px; color: #333; background-color: #fff; position: relative;}
+.inputTxt input { border: 0 none; background: url(../images/fillBg.png) 0 0 repeat; width: 100%; *width: 99%; float: left; position: relative; outline:none; z-index: 15; zoom:1; padding: 10px 0; line-height: 18px; font-size: 12px; color: #999;}
+.inputTxt .iRight { background: url(../images/g-login.png) -86px -86px no-repeat; width: 14px; height: 14px; overflow: hidden; position: absolute; top: 50%; right: 10px; margin-top: -7px; display: none; z-index: 20;}
+.inputTxtError { border-color: #ff3300}
+.inputTxtFocus { border-color: #b3e6ff}
+.sCheck { line-height: 18px; height: 18px; display: block; overflow: hidden; color: #666; padding-top: 11px}
+.sCheck input { width: 13px; height: 13px; overflow: hidden; float: left; margin:3px 4px 0 0; display: inline;}
+
+.btnStyle { background: #049ae6; display: block; line-height: 42px; height: 42px; text-align: center; border: 0 none; color: #fff; font-size: 16px; text-decoration: none; -webkit-radius: 2px; -moz-radius: 2px; -ms-radius: 2px; -o-radius: 2px; border-radius: 2px; margin-top: 5px; cursor: pointer; width: 100%; font-family: \5FAE\8F6F\96C5\9ED1,\5b8b\4f53}
+.btnStyle:hover { background: #0090d9; color: #fff; text-decoration: none;}
+
+.sHasAccount { font-size: 12px; color: #999; line-height: 20px; height: 20px; overflow: hidden; display: block; padding-top: 15px;}
+
+.ulForm { padding-top: 4px;}
+.ulForm li { position: relative; width: 100%; float: left; margin-top: 15px; display: inline;}
+.ulForm li .sTit { position: absolute; top: 0; left: 0; line-height: 40px; z-index: 10; text-align: right; width: 105px; color: #666; white-space: nowrap;}
+.ulForm li .tips { position: absolute; width: 235px; top: 0; right: 0; line-height: 40px; z-index: 10; font-size: 12px; overflow: hidden;}
+.ulForm li .sDes { color: #999; float: left;}
+.ulForm li .sError { color: #f30;}
+.formCon { padding: 0 245px 0 105px; z-index: 5; position: relative;}
+
+.loginCode { padding-right: 155px; position: relative; _height: 40px;}
+.loginCode .codePic { position: absolute; width: 145px; height: 40px; overflow: hidden; line-height: 40px; top: 0; right:0; zoom:1;}
+.loginCode .codePic .sPic { float: left; width: 88px; height: 40px; overflow: hidden;}
+.loginCode .codePic a { float: right;}
+.loginCode .aMessageCode { line-height: 38px; border: 1px solid #e6e6e6; width: 143px; position: absolute; top: 0; right: 0; text-align: center; color: #666; background-color: #f6f6f6;}
+.loginCode .aMessageCode:hover { text-decoration: none; border-color: #d9d9d9; background-color: #ebebeb;}
+.loginCode .messageCode_disable { border-color: #e6e6e6; background-color: #fafafa; color: #999; line-height: 38px; border: 1px solid #e6e6e6; width: 143px; position: absolute; top: 0; right: 0; text-align: center;}
+
+.voiceTips { padding-right: 245px;}
+.voiceTips .pTips { font-size: 12px; line-height: 18px; color: #666666; padding: 10px 0 0 105px;}
+.voiceTips .pTips em { color: #ff7800}
+
+.voicePop { position: relative; padding-top: 5px; margin-top: 5px; *zoom:1;}
+.voicePop .iArrow { background: url(../images/g-login.png) -90px -79px no-repeat; width: 10px; height: 6px; overflow: hidden; position: absolute; top: 0; right: 50px; z-index: 10;}
+.voicePop .txt { border: 1px solid #e6e6e6; background-color: #fff; padding: 10px 12px; font-size: 12px; color: #999; line-height: 18px; position: relative; z-index: 5}
+.voicePop .txt p { position: relative; padding-left: 16px; *zoom:1}
+.voicePop .txt p .emNum { position: absolute; width: 16px; overflow: hidden; top: 0; left: 0; white-space: nowrap;}
+
+.pPasswordHard { float: left; color: #999; font-size: 12px;}
+.pPasswordHard em { float: left; padding-right: 10px;}
+.pPasswordHard .emStyle { padding-left: 5px;}
+.pPasswordHard i { background-color: #4dc214; width: 18px; height: 4px; float: left; margin: 17px 4px 0 0; display: inline; border: 1px solid; background-color: #fff; overflow: hidden;}
+.level1 i { border-color: #ff3f00;}
+.level1 .on {background-color: #ff3f00;}
+.level1 .emStyle { color: #ff3f00}
+.level2 i { border-color: #ffc600;}
+.level2 .on {background-color: #ffc600;}
+.level2 .emStyle { color: #ffc600}
+.level4 i { border-color: #4dc214;}
+.level4 .on {background-color: #4dc214;}
+.level4 .emStyle { color: #4dc214}
+
+/*2016-01-07 pan*/
+.h80{ height:80px; margin-top:20px;}
+.mask{ width:100%; height:100%; background:#000; opacity:0.7; filter:alpha(opacity=70); position:absolute; left:0; top:0; z-index:10; text-indent:-99999px; display:none;}
+.security-code{ width:308px; height:158px; background:#fff; position:fixed; left:50%; margin-left:-154px; top:50%; margin-top:-99px; z-index:999; padding:20px 25px; display:none; _position:absolute;_top:expression(eval(document.documentElement.clientHeight/2 + document.documentElement.scrollTop-this.offsetHeight/2) + 99);}
+.btn-close{ width:13px; height:13px; display:block; line-height:0; font-size:0; background-image:url(../images/close.gif); background-repeat:no-repeat; background-position:left top; position:absolute; right:10px; top:10px; overflow:hidden;}
+.btn-close:hover{ background-position:left bottom;}
+.code-tit{ color:#666; font-size:14px;}
+.condeWrap{ overflow:hidden; *zoom:1;}
+.codePic2{ width:88px; height:40px; float:left; margin-right:10px;}
+.boxInput{ width:93px; height:38px; border:1px solid #e6e6e6; overflow:hidden; *zoom:1; float:left; padding:0 10px; position:relative;}
+.boxInput input{ width:93px; float:left; height:38px; display:inline; line-height:38px; border:0 none; padding:0;}
+.icon{ background: url(../images/g-login.png) -86px -86px no-repeat; width:14px; height:14px; clear:both; line-height:0; font-size:0; overflow:hidden; position:absolute; top:12px; right:10px; display:block; z-index:300; display:none;}
+.btn-changeCode{ float:left; margin-left:10px; line-height:40px;}
+.boxError{ color:#f30; margin-top:3px; font-size:12px;}
+.btn-ok{ width:100px; height:36px; display:block; margin:0 auto; background:#049ae6; color:#fff; font-size:16px; text-align:center; line-height:36px; border-radius:2px;}
+.btn-ok:hover{ background:#0090d9; color:#fff; text-decoration:none;}
+
+/*2016-06-14 pan*/
+.fontStyle{ font-size:12px; color:#999; text-align:right;}
+.ulForm .mtb12{ margin-top:12px; margin-bottom:-4px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

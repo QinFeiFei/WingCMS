@@ -1,7 +1,15 @@
 <?php
 
-// 未登陆
+// 无需Token
 Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
+    Route::match(['get', 'post'], '/register', ['as'=>'register', 'uses'=>'LoginController@register']);
+    Route::match(['get', 'post'], '/login', ['as'=>'login', 'uses'=>'LoginController@login']);
+    Route::match(['get', 'post'], '/findPassword', ['as'=>'findPassword', 'uses'=>'LoginController@findPassword']);
+});
+
+
+// 未登陆
+Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' => 'Pc', 'as' => 'pc::'], function () {
     // 首页
     Route::get('/', ['as'=>'index', 'uses'=>'IndexController@index']);
 
@@ -25,14 +33,9 @@ Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::get('/tvdetail/mv/{tv_id}', ['as'=>'mvDetail', 'uses'=>'TvDetailController@mvDetail']);
     Route::get('/tvdetail/openclass/{tv_id}', ['as'=>'openclassDetail', 'uses'=>'TvDetailController@openclassDetail']);
     Route::get('/tvdetail/other/{tv_id}', ['as'=>'otherDetail', 'uses'=>'TvDetailController@otherDetail']);
-
-    // 登陆 / 注册 / 找回密码
-    Route::get('/register', ['as'=>'register', 'uses'=>'LoginController@register']);
-    Route::get('/login', ['as'=>'login', 'uses'=>'LoginController@login']);
-    Route::get('/findPassword', ['as'=>'findPassword', 'uses'=>'LoginController@findPassword']);
 });
 
 // 需要登陆
-Route::group(['middleware' => ['auth:web'], 'namespace' => 'pc', 'as' => 'pc::'], function () {
+Route::group(['middleware' => ['pc.jwt.token', 'auth:api', 'pc.jwt.refresh'], 'namespace' => 'pc', 'as' => 'pc::'], function () {
 
 });

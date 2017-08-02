@@ -191,7 +191,10 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         // Hashids 加密/解密
-        Vinkla\Hashids\HashidsServiceProvider::class
+        Vinkla\Hashids\HashidsServiceProvider::class,
+
+        // captcha
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -249,7 +252,10 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
         // Hashids 加密/解密
-        'Hashids' => Vinkla\Hashids\Facades\Hashids::class
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+
+        // Captcha
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

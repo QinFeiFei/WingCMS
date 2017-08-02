@@ -1,11 +1,15 @@
 <?php
 namespace App\Http\Controllers\Pc;
 
-use App\Http\Controllers\Controller;
 
-class TvController extends Controller
+use Illuminate\Http\Request;
+
+class TvController extends PcController
 {
-
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+    }
 
 
 }

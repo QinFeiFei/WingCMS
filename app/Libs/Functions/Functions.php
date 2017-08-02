@@ -150,7 +150,22 @@ if(! function_exists('isMobile')) {
     }
 }
 
+if(! function_exists('isEmail')) {
+    /**
+     * 验证邮箱
+     * @param $email
+     * @return boolean
+     */
+    function isEmail($email)
+    {
+        $pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/";
+        if(preg_match($pattern, $email))
+            return true;
+        else
+            return false;
 
+    }
+}
 
 // 影视专用
 if(! function_exists('parseTvArea')) {

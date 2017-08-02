@@ -58,8 +58,8 @@
             <div class="v_th">
                 <i class="iLine"></i>
                 <p class="pTab">
-                    <a target="_self" href="http://dianying.2345.com/list/------.html" id="default" class="cur">评分</a>
-                    <a target="_self" href="http://dianying.2345.com/list/-----hits-.html" rel="nofollow">最新更新</a>
+                    <a href="{{ route('pc::movieList') }}?{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ empty(request('orderby', '')) ? 'cur' : '' }}" id="default">最新更新</a>
+                    <a href="{{ route('pc::movieList') }}?orderby=grade&{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ request('orderby', '')=='grade' ? 'cur' : '' }}">评分</a>
                 </p>
                 {{--<a class="aLatestNews" target="_blank" href="http://dianying.2345.com/top/">电影排行榜</a>--}}
                 <div class="pSelected"></div>

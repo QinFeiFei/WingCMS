@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 
 class TvListController extends TvController
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
+        parent::__construct($request);
         $areas = config('tv.tv_areas');
         $classifys = config('tv.tv_classify');
         $years = config('tv.tv_years');
@@ -20,9 +21,6 @@ class TvListController extends TvController
     }
 
     public function movieList (Request $request, TvService $tvService) {
-        // $dd = DB::table('tv')->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')->groupBy('tv.tv_id')->get();
-        // dd($dd);
-
         request()->offsetSet('tv_type', config('tv.TV_MOVIE'));
         $list = $tvService->pageList($request, 10);
 

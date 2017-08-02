@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TvDetailController extends TvController
 {
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+    }
+
     public function movieDetail ($tv_id, TvService $tvService, Request $request) {
         $info = $tvService->findTv($tv_id, true);
 
