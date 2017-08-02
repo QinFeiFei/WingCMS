@@ -56,7 +56,7 @@ class LoginController extends Controller
 
         // 这里改用 JWT-Auth 进行认证
         if ($token = Auth::guard($this->guard)->attempt([ $loginType => $username, 'password' => $password ])) {
-
+            setcookie('userToken', 'Bearer '.$token, time()+60*60*24*14, '/');
             return output_success('login Success');
         }
 

@@ -21,9 +21,9 @@ class PcRefreshToken
         try {
             $old_token = JWTAuth::getToken();
             $token = JWTAuth::refresh($old_token);
-            setcookie('userToken', $token, time()+3600*24*14, '/');
+            setcookie('userToken', 'Bearer '.$token, time()+3600*24*14, '/');
 
-            // JWTAuth::invalidate($old_token);
+            JWTAuth::invalidate($old_token);
         } catch (JWTException $e) {
         }
 

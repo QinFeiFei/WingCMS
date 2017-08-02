@@ -3,10 +3,11 @@ namespace App\Http\Controllers\Pc;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class PcController extends Controller
 {
-     public function __construct(Request $request)
+    public function __construct(Request $request)
     {
     }
 

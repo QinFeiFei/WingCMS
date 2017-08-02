@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Cookie;
 
 class PcRequestToken
 {
@@ -19,8 +20,9 @@ class PcRequestToken
      */
     public function handle($request, Closure $next)
     {
+        $token = isset($_COOKIE['userToken']) ? $_COOKIE['userToken'] : '' ;
         // 将旧token填充至请求的Request Header头中
-        $request->headers->set('Authorization', $_COOKIE['userToken']);
+        $request->headers->set('Authorization', $token);
 
         // 获取用户
         view()->share('user', auth('api')->user());

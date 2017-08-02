@@ -1,5 +1,14 @@
 <?php
 
+Route::get('test', function(){
+    setcookie('xx', 'sss', time()+60*60);
+});
+
+Route::get('test2', function(){
+    dd($_COOKIE['xx']);
+});
+
+
 // 无需Token
 Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::match(['get', 'post'], '/register', ['as'=>'register', 'uses'=>'LoginController@register']);
