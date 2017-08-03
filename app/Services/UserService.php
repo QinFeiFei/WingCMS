@@ -6,9 +6,16 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\Util\Json;
+use Validator;
 
 class UserService {
 
+    /**
+     * 获取单个会员信息
+     *
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
+     */
     public function findUser ($id) {
         return User::find($id);
     }
@@ -166,5 +173,70 @@ class UserService {
     public function deleteUser ($id) {
         // $tvModel = User::find($id);
         // return User::forceDelete($id);
+    }
+
+
+    public function login () {
+
+    }
+
+
+    public function register (Request $request) {
+        $validBack = $this->valid($request);
+        if(! $validBack['state']){ return output_error($validBack['error']); }
+
+        $fields = $request->all();
+        $user = User::create([
+            'username' => trim($fields['username']),
+            'password' => bcrypt(trim($fields['password'])),
+            'login_num' => 1,
+            'last_login' => Carbon::now(),
+            'last_ip' => $request->getClientIp(),
+            'register_ip' => $request->getClientIp(),
+            'register_time' => Carbon::now(),
+            'register_type' => 'pc'
+        ]);
+
+        if($user) {
+
+        }else{
+            return output_error('注册失败');
+        }
+    }
+
+    /**
+     * 插入或更新数据时，验证字段
+     *
+     * @param Request $request
+     * @return array
+     */
+    private function valid(Request $request) {
+        $validArr = [ 'state' => true, 'error' => '' ];
+
+        $formFields = $request->all();
+        $user_id = empty($request->get('user_id')) ? 0 : $request->get('user_id');
+
+        $validator = Validator::make($formFields, [
+            'username' => 'required|min:3|max:20|unique:user,username,'.$user_id.',user_id',
+            'password' => 'between:5,30',
+            'email' => 'email'.(!empty($formFields['email']) ? '|unique:user,email,'.$user_id.',user_id' : ''),
+            'phone' => 'mobile'.(!empty($formFields['phone']) ? '|unique:user,phone,'.$user_id.',user_id' : '')
+        ], [
+            'username.required' => '用户名必填!',
+            'username.min' => '用户名最少3个字符',
+            'username.max' => '用户名不得超过20个字符',
+            'username.unique' => '用户名已存在',
+            'password.between' => '密码长度必须为5-30个字符!',
+            'email.email' => '邮箱格式错误!',
+            'email.unique' => '邮箱已存在',
+            'phone.mobile' => '手机格式错误!',
+            'phone.unique' => '手机号已存在'
+        ]);
+
+        if ($validator->fails()) {
+            $validArr['state'] = false;
+            $validArr['error'] = $validator->errors()->first();
+        }
+        return $validArr;
     }
 }
