@@ -76,7 +76,7 @@
                                 <span class="sTit">&nbsp;</span>
                                 <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
-                                    <span class="sCheck"><input type="checkbox" checked class="checkbox" id="agree" name="agree">我同意<a href="/licence.html" target="_blank">《服务协议》</a>、<a href="/declare.html" target="_blank">《隐私声明》</a></span>
+                                    <span class="sCheck"><input type="checkbox" checked class="checkbox" id="agree" name="agree">我同意<a href="{{ route('pc::licence') }}" target="_blank">《服务协议》</a>、<a href="{{ route('pc::declare') }}" target="_blank">《隐私声明》</a></span>
                                 </div>
                             </li>
                             <li>

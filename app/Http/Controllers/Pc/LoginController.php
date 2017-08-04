@@ -4,16 +4,12 @@ namespace App\Http\Controllers\Pc;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use App\User;
-use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Validator;
 
 class LoginController extends Controller
 {
-    protected $guard = 'api';
-    protected $username = 'username';
-
     /**
      * 用户注册
      *
@@ -36,7 +32,20 @@ class LoginController extends Controller
             return output_error($validator->errors()->first());
         }
 
-        $userService->register($request);
+        $result = $userService->register($request->all());
+        if( $result['code'] == 0 ){
+            // PC端注册成功后，登陆用户
+            $loginResult = $userService->login($request->all());
+
+            if($loginResult['code'] == 0){
+                setcookie('userToken', 'Bearer '.$loginResult['result'], time()+60*60*24*14, '/');
+                return output_success('login success');
+            }else{
+                return $loginResult;
+            }
+        }else{
+            return $result;
+        }
     }
 
 
@@ -66,13 +75,14 @@ class LoginController extends Controller
         echo $rs ? 'false' : 'true';
     }
 
+
     /**
      * 登陆
      *
      * @param Request $request
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function login(Request $request) {
+    public function login(Request $request, UserService $userService) {
         if($request->method() == 'GET') {
             return view('pc.login.login');
         }
@@ -88,33 +98,49 @@ class LoginController extends Controller
             'captcha.required' => '图形验证码必填!',
             'captcha.captcha'  => '图形验证码错误!'
         ]);
-
         if ($validator->fails()) {
             return output_error($validator->errors()->first());
         }
 
-        $username = $request->get('username', '');
-        $password = $request->get('password', '');
-        $loginType = 'username';
-        if(isMobile($username)) {
-            $loginType = 'phone';
-        }elseif(isEmail($username)){
-            $loginType = 'email';
-        }
+        $result = $userService->login($request->all());
 
-        // 这里改用 JWT-Auth 进行认证
-        if ($token = Auth::guard($this->guard)->attempt([ $loginType => $username, 'password' => $password ])) {
-            setcookie('userToken', 'Bearer '.$token, time()+60*60*24*14, '/');
-            return output_success('login Success');
+        if($result['code'] == 0){
+            setcookie('userToken', 'Bearer '.$result['result'], time()+60*60*24*14, '/');
+            return output_success('login success');
+        }else{
+            return $result;
         }
-
-        return output_error('用户名密码错误');
     }
 
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function findPassword(Request $request) {
         if($request->method() == 'GET') {
             return view('pc.login.findPassword');
         }
 
+    }
+
+
+    /**
+     * 注册 - 服务协议
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function reg_licence () {
+        return view('pc.login.licence');
+    }
+
+
+    /**
+     * 注册 - 隐私声明
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function reg_declare () {
+        return view('pc.login.declare');
     }
 }

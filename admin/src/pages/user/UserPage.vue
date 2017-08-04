@@ -126,6 +126,7 @@
           createData.username = this.formFields.username
           createData.password = this.formFields.password
           createData.avatar = this.formFields.avatar
+          createData.register_type = 'admin'
           if (this.formFields.email !== '') { createData.email = this.formFields.email }
           if (this.formFields.phone !== '') { createData.phone = this.formFields.phone }
 

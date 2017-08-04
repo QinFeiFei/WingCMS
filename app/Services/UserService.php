@@ -1,14 +1,21 @@
 <?php
 namespace App\Services;
 
+use App\Events\LoginEvent;
+use App\Events\RegisterEvent;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\Util\Json;
+use Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Validator;
 
 class UserService {
+
+    protected $guard = 'api';
+    protected $username = 'username';
 
     /**
      * 获取单个会员信息
@@ -96,47 +103,14 @@ class UserService {
 
 
     /**
-     * 添加会员
-     *
-     * @param Request $request
-     * @return bool
-     */
-    public function createUser (Request $request, $registerType) {
-        $fields = $request->get('formFields');
-
-        try {
-            DB::beginTransaction();
-            User::create([
-                'username' => trim($fields['username']),
-                'password' => bcrypt(trim($fields['password'])),
-                'avatar' => trim($fields['avatar'], ''),
-                'email' => isset($fields['email']) ? trim($fields['email']) : '',
-                'phone' => isset($fields['phone']) ? trim($fields['phone']) : '',
-                'login_num' => 1,
-                'last_login' => Carbon::now(),
-                'last_ip' => $request->getClientIp(),
-                'register_ip' => $request->getClientIp(),
-                'register_time' => Carbon::now(),
-                'register_type' => $registerType
-            ]);
-            DB::commit();
-            return true;
-        } catch(\Exception $e){
-            dd($e->getMessage());
-            DB::rollBack();
-            return false;
-        }
-    }
-
-
-    /**
      * 修改会员
      *
      * @param Request $request
      * @return bool
      */
-    public function updateUser (Request $request) {
-        $fields = $request->get('formFields');
+    public function updateUser ($fields) {
+        $validBack = $this->valid($fields);
+        if(! $validBack['state']){ return output_error($validBack['error']); }
 
         try {
             $model = User::findOrFail($fields['user_id']);
@@ -176,31 +150,62 @@ class UserService {
     }
 
 
-    public function login () {
+    /**
+     * 会员登陆
+     *
+     * @param $request
+     * @return array
+     */
+    public function login ($request) {
+        $username = $request['username'];
+        $password = $request['password'];
+        $loginType = 'username';
+        if(isMobile($username)) {
+            $loginType = 'phone';
+        }elseif(isEmail($username)){
+            $loginType = 'email';
+        }
 
+        if ($token = Auth::guard($this->guard)->attempt([ $loginType => $username, 'password' => $password ])) {
+            // 登陆事件
+            event(new LoginEvent($token));
+
+            return output_data($token);
+        }
+
+        return output_error('用户名密码错误');
     }
 
 
-    public function register (Request $request) {
-        $validBack = $this->valid($request);
+    public function register ($form) {
+        $validBack = $this->valid($form);
         if(! $validBack['state']){ return output_error($validBack['error']); }
 
-        $fields = $request->all();
-        $user = User::create([
-            'username' => trim($fields['username']),
-            'password' => bcrypt(trim($fields['password'])),
-            'login_num' => 1,
-            'last_login' => Carbon::now(),
-            'last_ip' => $request->getClientIp(),
-            'register_ip' => $request->getClientIp(),
-            'register_time' => Carbon::now(),
-            'register_type' => 'pc'
-        ]);
+        try {
+            DB::beginTransaction();
+            $user = User::create([
+                'username' => trim($form['username']),
+                'password' => bcrypt(trim($form['password'])),
+                'avatar' => isset($form['avatar']) ? trim($form['avatar']) : '',
+                'email' => isset($form['email']) ? trim($form['email']) : '',
+                'phone' => isset($form['phone']) ? trim($form['phone']) : '',
+                'login_num' => 1,
+                'last_login' => Carbon::now(),
+                'last_ip' => request()->getClientIp(),
+                'register_ip' => request()->getClientIp(),
+                'register_time' => Carbon::now(),
+                'register_type' => isset($form['register_type']) ? trim($form['register_type']) : ''
+            ]);
+            DB::commit();
 
-        if($user) {
+            // 注册事件
+            event(new RegisterEvent($user));
 
-        }else{
-            return output_error('注册失败');
+            return output_data($user);
+        } catch(\Exception $e){
+            // dd($e->getMessage());
+            DB::rollBack();
+            return output_error('register error');
         }
     }
 
@@ -210,11 +215,10 @@ class UserService {
      * @param Request $request
      * @return array
      */
-    private function valid(Request $request) {
+    private function valid($formFields) {
         $validArr = [ 'state' => true, 'error' => '' ];
 
-        $formFields = $request->all();
-        $user_id = empty($request->get('user_id')) ? 0 : $request->get('user_id');
+        $user_id = empty($formFields['user_id']) ? 0 : $formFields['user_id'];
 
         $validator = Validator::make($formFields, [
             'username' => 'required|min:3|max:20|unique:user,username,'.$user_id.',user_id',

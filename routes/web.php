@@ -1,5 +1,3 @@
 <?php
 
-Route::get('/test', function() {
-    return 'test';
-});
+Route::get('/home', 'HomeController@index')->name('home');

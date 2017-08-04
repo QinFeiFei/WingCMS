@@ -7,6 +7,8 @@ Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::match(['get', 'post'], '/login', ['as'=>'login', 'uses'=>'LoginController@login']);
     Route::match(['get', 'post'], '/findPassword', ['as'=>'findPassword', 'uses'=>'LoginController@findPassword']);
     Route::get('/registerCheck', ['as'=>'registerCheck', 'uses'=>'LoginController@registerCheck']);
+    Route::get('/register/declare', ['as'=>'declare', 'uses'=>'LoginController@reg_declare']);
+    Route::get('/register/licence', ['as'=>'licence', 'uses'=>'LoginController@reg_licence']);
 });
 
 

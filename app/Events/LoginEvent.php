@@ -9,19 +9,24 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        request()->headers->set('Authorization', 'Bearer '.$token);
+        $user = JWTAuth::parseToken()->authenticate();
+        $this->user = $user;
     }
 
     /**
@@ -31,6 +36,6 @@ class LoginEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        // return new PrivateChannel('channel-name');
     }
 }
