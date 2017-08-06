@@ -128,9 +128,13 @@ class TvService {
 
         $classify = intval($request->get('classify', 0));
         if(!empty($classify)){
-            $model->rightJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')->where('tv_classify.classify_key', $classify);
+            $model->rightJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
+                  ->where('tv_classify.classify_key', $classify)
+                  ->select(DB::raw('wing_tv.*, wing_tv_classify.classify_key, wing_tv_classify.classify_name'));
         }else{
-            $model->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')->groupBy('tv.tv_id');
+            $model->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
+                  ->groupBy('tv.tv_id')
+                  ->select(DB::raw('wing_tv.*, wing_tv_classify.classify_key, wing_tv_classify.classify_name'));
         }
     }
 
@@ -331,7 +335,7 @@ class TvService {
         request()->offsetSet('tv_type', $type);
 
         $model = $this->model;
-        $model = $model->where('tv_id', '<>', $notId)->orderByRaw("RAND()");
+        $model = $model->where('tv.tv_id', '<>', $notId)->orderByRaw("RAND()");
         $list  = $this->getList($request, $model, 10);
         return $list;
     }
@@ -347,7 +351,7 @@ class TvService {
      */
     public function getPushs(Request $request, $notId){
         $model = $this->model;
-        $model = $model->where('tv_id', '<>', $notId)->where('is_push', '1');
+        $model = $model->where('tv.tv_id', '<>', $notId)->where('tv.is_push', '1');
         $list  = $this->getList($request, $model, 10);
         return $list;
     }
