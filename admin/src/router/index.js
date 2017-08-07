@@ -22,6 +22,9 @@ import userRouter from './userRouter'
 // 影视管理
 import tvRouter from './tvRouter'
 
+// 首页管理
+import pcRouter from './pcRouter'
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -56,7 +59,8 @@ export default new Router({
           ]
         },
         userRouter,
-        tvRouter
+        tvRouter,
+        pcRouter
       ]
     }
   ]

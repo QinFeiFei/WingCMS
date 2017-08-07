@@ -64,7 +64,7 @@
                     <div class="txtIntroCon">
                         <div class="tit">
                             <h1>{{ $info->tv_name }}</h1>
-                            {{--<p class="pTxt"><em class="emScore">8.5分</em></p>--}}
+                            <p class="pTxt"><em class="emScore">{{ $info->tv_grade }}分</em></p>
                         </div>
                         <div class="wholeTxt">
                             <ul class="txtList clearfix">
@@ -222,7 +222,7 @@
                                 <ul class="v_rank clearfix">
                                     @forelse($pushs as $k=>$push)
                                     <li>
-                                        <i class="iNum iCurNum">{{ $k+1 }}</i>
+                                        <i class="iNum {{ $k<3 ? 'iCurNum' : '' }}">{{ $k+1 }}</i>
                                         <span class="sScore">{{ $push->tv_grade }}分</span>
                                         <a href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($push->tv_id)]) }}" target="_blank">{{ $push->tv_name }}</a>
                                     </li>

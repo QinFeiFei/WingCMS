@@ -63,6 +63,23 @@
           <Button v-if="!scope.row.passEdit" class="editRowBtn" size="small" type="success" icon="edit" @click="scope.row.passEdit=true"></Button>
         </template>
       </el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'is_push')" label="是否推荐" width="95">
+        <template scope="scope">
+          <i-switch v-model="scope.row.is_push" @on-change="setPush($event, scope.row)">
+            <Icon type="android-done" slot="open"></Icon>
+            <Icon type="android-close" slot="close"></Icon>
+          </i-switch>
+        </template>
+      </el-table-column>
+      <el-table-column v-if="displayColumns(showColumns, 'tv_sort')" label="排序" sortable>
+        <template scope="scope">
+          <Input-number :max="255" :min="1" v-if="scope.row.sortEdit" size="small" v-model="scope.row.tv_sort" />
+          <Button v-if="scope.row.sortEdit" class="editRowBtn" size="small"  type="primary" icon="checkmark-round" @click="setSort(scope.row)"></Button>
+
+          <span v-if="!scope.row.sortEdit">{{ scope.row.tv_sort }}</span>
+          <Button v-if="!scope.row.sortEdit" class="editRowBtn" size="small" type="success" icon="edit" @click="scope.row.sortEdit=true"></Button>
+        </template>
+      </el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'created_at')" prop="created_at" label="添加时间" sortable></el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'updated_at')" prop="updated_at" label="最后修改时间" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="170">
@@ -138,6 +155,14 @@
             column: 'updated_at',
             text: '最后修改时间',
             show: true
+          }, {
+            column: 'is_push',
+            text: '是否推荐',
+            show: true
+          }, {
+            column: 'tv_sort',
+            text: '排序',
+            show: true
           }
         ]
       }
@@ -163,6 +188,8 @@
           this.dataList = response.data.data.map(item => {
             item.urlEdit = false
             item.passEdit = false
+            item.sortEdit = false
+            item.is_push = this.strToBool(item.is_push)
             return item
           })
         })

@@ -34,7 +34,7 @@
             <Icon type="person"></Icon>
             PC端
           </template>
-          <router-link :to="{ name: 'TvOverView' }"><Menu-item name="3-1"><Icon type="person"></Icon>首页管理</Menu-item></router-link>
+          <router-link :to="{ name: 'PcIndexClearCache' }"><Menu-item name="3-1"><Icon type="person"></Icon>首页管理</Menu-item></router-link>
           <router-link :to="{ name: 'TvSpecial' }"><Menu-item name="3-2"><Icon type="person"></Icon>专题管理</Menu-item></router-link>
         </Submenu>
 

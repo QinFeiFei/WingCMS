@@ -17,7 +17,6 @@
     name: 'user',
     data: function () {
       return {
-        isFold: true,
         childMenus: {
           title: '用户管理',
           menus: [

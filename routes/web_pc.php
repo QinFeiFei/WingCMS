@@ -5,6 +5,7 @@
 Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::match(['get', 'post'], '/register', ['as'=>'register', 'uses'=>'LoginController@register']);
     Route::match(['get', 'post'], '/login', ['as'=>'login', 'uses'=>'LoginController@login']);
+    Route::get('logout', ['as'=>'logout', 'uses'=>'LoginController@logout'])->middleware(['pc.jwt.token']);
     Route::match(['get', 'post'], '/findPassword', ['as'=>'findPassword', 'uses'=>'LoginController@findPassword']);
     Route::get('/registerCheck', ['as'=>'registerCheck', 'uses'=>'LoginController@registerCheck']);
     Route::get('/register/declare', ['as'=>'declare', 'uses'=>'LoginController@reg_declare']);
@@ -16,6 +17,9 @@ Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
 Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' => 'Pc', 'as' => 'pc::'], function () {
     // 首页
     Route::get('/', ['as'=>'index', 'uses'=>'IndexController@index']);
+
+    // 搜索页
+    Route::get('/search', ['as'=>'search', 'uses'=>'SearchController@search']);
 
     // 错误页面
     Route::get('/404', ['as'=>'error404', 'uses'=>'IndexController@index']);
@@ -41,5 +45,4 @@ Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' =>
 
 // 需要登陆
 Route::group(['middleware' => ['pc.jwt.token', 'auth:api', 'pc.jwt.refresh'], 'namespace' => 'pc', 'as' => 'pc::'], function () {
-
 });

@@ -114,6 +114,16 @@ class LoginController extends Controller
 
 
     /**
+     * 注销
+     *
+     */
+    public function logout (){
+        auth('api')->logout();
+        setcookie('userToken', '', time() - 3600);
+    }
+
+
+    /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

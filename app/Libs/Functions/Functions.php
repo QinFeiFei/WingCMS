@@ -184,3 +184,39 @@ if(! function_exists('parseTvArea')) {
         return '未知地区';
     }
 }
+
+if(! function_exists('replaceTvType')) {
+    /**
+     * 影视类型转换为文字显示
+     * @param $type
+     * @return string
+     */
+    function replaceTvType($type)
+    {
+        $txt = '其它';
+        switch ($type) {
+            case "10":
+                $txt = '电影';
+                break;
+            case "20":
+                $txt = '电视剧';
+                break;
+            case "30":
+                $txt = '动漫';
+                break;
+            case "40":
+                $txt = '综艺';
+                break;
+            case "50":
+                $txt = 'MV';
+                break;
+            case "60":
+                $txt = '公开课';
+                break;
+            case "70":
+                $txt = '其它';
+                break;
+        }
+        return $txt;
+    }
+}
