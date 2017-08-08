@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css"  href="{{ asset('pc/css/uc_9_18.css') }}">
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <style>
+        .icon-error { width:250px;height:30px; }
+    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -48,7 +51,7 @@
                             <div class="form-item form-item-yzm">
                                 <div class="form-field">验证码：</div>
                                 <div class="form-con clearfix">
-                                    <input class="ipt_txt ipt-txt-yzm" id="yzmcode" type="text" name="captcha" >
+                                    <input class="ipt_txt ipt-txt-yzm" id="yzmcode" type="text" name="yzmcode" >
                                     <img class="img-yzm clickImg" id="captcha" src="{{ captcha_src() }}" onclick="this.src = this.src + '?' + Math.random();" src="{{ captcha_src() }}">
                                     <a class="trig-link clickImg" href="javascript:;" onclick="document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + Math.random();">换一换</a>
                                     <span class="form-tips form-tips-error codeError"><i class="icon-error"></i></span>
@@ -57,7 +60,7 @@
                             </div>
 
                             <div class="form-item">
-                                <a class="btn-blueA commitFindData" href="javascript:void(0);">下一步</a>
+                                <a class="btn-blueA commitFindData" id="submit" href="javascript:void(0);">下一步</a>
                                 <br>
                                 <span class="g-error" style="color:red;"></span>
                             </div>
@@ -89,17 +92,24 @@
 
         $('#find-form').validate({
             errorPlacement: function(error, element){
-                $(element).parent().find('.accountError').find('.icon-error').html(error);
+                $(element).parent().find('.form-tips-error').find('.icon-error').html(error);
             },
             rules : {
                 mail : {
                     required: true,
-                    email: true
+                    email: true,
+                    remote   : {
+                        url : '{{ route('pc::registerCheck') }}',
+                        type: 'get',
+                        data:{
+                            type  : 'remail',
+                            value : function(){
+                                return $('#mail').val();
+                            }
+                        }
+                    }
                 },
                 yzmcode : {
-                    required: true
-                },
-                captcha : {
                     required: true
                 }
             },
@@ -109,9 +119,6 @@
                     email: '邮箱格式错误'
                 },
                 yzmcode : {
-                    required : '密码不能为空'
-                },
-                captcha : {
                     required : '验证码不能为空'
                 }
             }

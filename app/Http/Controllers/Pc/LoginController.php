@@ -70,6 +70,9 @@ class LoginController extends Controller
             $rs = $model->where('phone', $value)->orWhere('username', $value)->first();
         }else if($type == 'email'){
             $rs = $model->where('email', $value)->first();
+        }else if($type == 'remail'){
+            $rs = $model->where('email', $value)->first();
+            $rs = $rs ? false : true;
         }
 
         echo $rs ? 'false' : 'true';
