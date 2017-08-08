@@ -31,9 +31,12 @@
                 <!--<h2 class="m-boxA-tit" id="tophone">通过手机找回</h2>-->
                 <a class="more" href="{{ route('pc::login') }}">&lt; 返回登录页面</a>
             </div>
+
             <div class="m-boxA-bd">
-                <form id="find-form">
+                <p>{{ session('error') ? session('error') : '' }}</p>
+                <form id="find-form" method="post">
                     <input type="hidden" id="type" value="email" />
+                    {{ csrf_field() }}
                     <div class="ucfnBox">
                         <div class="m-form">
                             <div class="form-item mailitem">
@@ -116,7 +119,8 @@
             messages : {
                 mail : {
                     required : '邮箱不能为空',
-                    email: '邮箱格式错误'
+                    email: '邮箱格式错误',
+                    remote: '该邮箱不存在'
                 },
                 yzmcode : {
                     required : '验证码不能为空'
@@ -129,25 +133,7 @@
 
             if(! $("#find-form").valid()){ return false; }
 
-            $.ajax({
-                type: "POST",
-                url: "{{ route('pc::login') }}",
-                data: {
-                    username: $("#username").val(),
-                    password: $("#password").val(),
-                    captcha:  $("#captcha").val(),
-                    _token:   '{{ csrf_token() }}'
-                },
-                dataType: "json",
-                success: function(data){
-                    if(data.code != 0){
-                        document.getElementById('pic').src = document.getElementById('pic').src + '?' + Math.random();
-                        $('.g-error').html(data.msg).show();
-                    }else{
-                        window.location.href = '{{ request()->header('referer') }}'
-                    }
-                }
-            });
+            $('#find-form').submit();
         })
     })
 </script>
