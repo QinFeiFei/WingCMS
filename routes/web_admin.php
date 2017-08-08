@@ -21,4 +21,7 @@ Route::group(['middleware' => ['auth:admin', 'jwt.refresh'], 'prefix' => 'admin'
     // 用户管理
     Route::resource('user', 'UserController');
     Route::post('user/uploadAvatar', ['as'=>'tv.uploadAvatar', 'uses'=>'UserController@uploadAvatar']);
+
+    // 首页管理
+    Route::get('pc/clearCache', ['as'=>'tv.clearCache', 'uses'=>'PcController@clearCache']);
 });

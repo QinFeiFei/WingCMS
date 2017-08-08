@@ -10,24 +10,102 @@
     </console-title>
     <div style="height:20px;"></div>
     <div>
-      <Button type="primary">立即清除</Button>
+      <div style="border-bottom: 1px solid #e9e9e9;padding-bottom:6px;margin-bottom:6px;">
+        <Checkbox
+          :indeterminate="indeterminate"
+          :value="checkAll"
+          @click.prevent.native="handleCheckAll">全选</Checkbox>
+      </div>
+      <Checkbox-group v-model="checkAllGroup" @on-change="checkAllGroupChange">
+        <Checkbox label="电视剧[推荐]" style="width:110px;"></Checkbox>
+        <Checkbox label="电视剧[最近更新]" style="width:110px;"></Checkbox><br />
+        <Checkbox label="电影[推荐]" style="width:110px;"></Checkbox>
+        <Checkbox label="电影[最近更新]" style="width:110px;"></Checkbox><br />
+      </Checkbox-group>
+
+      <Button type="primary" style="margin-top: 10px;" @click="onclear">立即清除</Button>
     </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
   import consoleTitle from '../../components/ConsoleTitle'
+  import { clearCache } from '../../api/pc'
 
   export default {
     created: function () {
     },
     data: function () {
       return {
+        indeterminate: false,
+        checkAll: false,
+        checkAllGroup: []
       }
     },
     components: {
       consoleTitle
     },
+    computed: {
+      checkGroup: function () {
+        let arr = []
+        for (var i = 0; i < this.checkAllGroup.length; i++) {
+          let tmp = ''
+          switch (this.checkAllGroup[i]) {
+            case '电视剧[推荐]':
+              tmp = 'index_teleplay_puts'
+              break
+            case '电视剧[最近更新]':
+              tmp = 'index_teleplay_news'
+              break
+            case '电影[推荐]':
+              tmp = 'index_movie_puts'
+              break
+            case '电影[最近更新]':
+              tmp = 'index_movie_news'
+              break
+          }
+          arr.push(tmp)
+        }
+        return arr
+      }
+    },
     methods: {
+      handleCheckAll () {
+        if (this.indeterminate) {
+          this.checkAll = false
+        } else {
+          this.checkAll = !this.checkAll
+        }
+        this.indeterminate = false
+
+        if (this.checkAll) {
+          this.checkAllGroup = ['电视剧[推荐]', '电视剧[最近更新]', '电影[推荐]', '电影[最近更新]']
+        } else {
+          this.checkAllGroup = []
+        }
+      },
+      checkAllGroupChange (data) {
+        if (data.length === 4) {
+          this.indeterminate = false
+          this.checkAll = true
+        } else if (data.length > 0) {
+          this.indeterminate = true
+          this.checkAll = false
+        } else {
+          this.indeterminate = false
+          this.checkAll = false
+        }
+      },
+      onclear: function () {
+        this.axios({
+          url: clearCache,
+          method: 'GET',
+          params: {
+            clearGroup: this.checkGroup
+          }
+        }).then(response => {
+          this.$Message.success('清除成功.')
+        })
+      }
     }
   }
 </script>
