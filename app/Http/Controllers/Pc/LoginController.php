@@ -138,11 +138,11 @@ class LoginController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|exists:user,email',
+            'mail' => 'required|email|exists:user,email',
             'yzmcode' => 'required|captcha',
         ], [
-            'email.required' => '邮箱必填',
-            'email.email' => '邮箱格式错误',
+            'mail.required' => '邮箱必填',
+            'mail.email' => '邮箱格式错误',
             'email.exists' => '邮箱不存在',
             'yzmcode.required'  => '图形验证码必填',
             'yzmcode.captcha'   => '图形验证码错误',
@@ -151,6 +151,7 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return back()->with('error', $validator->errors()->first());
         }
+
 
     }
 
