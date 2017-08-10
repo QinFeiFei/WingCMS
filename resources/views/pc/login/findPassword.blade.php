@@ -33,7 +33,7 @@
             </div>
 
             <div class="m-boxA-bd">
-                <p>{{ session('error') ? session('error') : '' }}</p>
+                <p style="margin-left:50px;color:red;">{{ session('error') ? session('error') : '' }}</p>
                 <form id="find-form" method="post">
                     <input type="hidden" id="type" value="email" />
                     {{ csrf_field() }}
