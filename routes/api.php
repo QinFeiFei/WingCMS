@@ -17,4 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('sendEmail');
+
+// 无需Token
+Route::group(['namespace' => 'Api', 'as' => 'api::'], function () {
+    Route::get('/sendMail/{type}', ['as'=>'sendMail', 'uses'=>'EmailController@send']);
+});
