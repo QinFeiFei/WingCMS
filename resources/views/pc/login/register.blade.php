@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('pc/css/login.css') }}" />
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="//cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
 </head>
 <body>
 <div class="header">
@@ -282,7 +283,6 @@
                     }
                 }
             });
-
             $('#submit_1').click(function(){
                 $('.g-error').hide();
                 if(! $("#myFormPhone").valid()){ return false; }
@@ -301,7 +301,11 @@
                             document.getElementById('pic').src = document.getElementById('pic').src + '?' + Math.random();
                             $('.g-error').html(data.msg).show();
                         }else{
-                            window.location.href = '{{ request()->header('referer') }}'
+                            layer.msg('注册成功!', {icon: 6});
+
+                            window.setTimeout(function () {
+                                window.location.href = '{{ request()->header('referer') }}'
+                            }, 1000)
                         }
                     }
                 });

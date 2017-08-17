@@ -7,6 +7,7 @@ Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::match(['get', 'post'], '/login', ['as'=>'login', 'uses'=>'LoginController@login']);
     Route::get('logout', ['as'=>'logout', 'uses'=>'LoginController@logout'])->middleware(['pc.jwt.token']);
     Route::match(['get', 'post'], '/findPassword', ['as'=>'findPassword', 'uses'=>'LoginController@findPassword']);
+    Route::match(['get', 'post'], '/setPassword', ['as'=>'setPassword', 'uses'=>'LoginController@setPassword']);
 
     Route::get('/registerCheck', ['as'=>'registerCheck', 'uses'=>'LoginController@registerCheck']);
     Route::get('/register/declare', ['as'=>'declare', 'uses'=>'LoginController@reg_declare']);

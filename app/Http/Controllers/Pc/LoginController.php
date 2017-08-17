@@ -14,7 +14,7 @@ class LoginController extends Controller
      * 用户注册
      *
      * @param Request $request
-     * @return
+     * @return mixed
      */
     public function register (Request $request, UserService $userService) {
         if($request->method() == 'GET') {
@@ -152,13 +152,27 @@ class LoginController extends Controller
             return back()->with('error', $validator->errors()->first());
         }
 
-
-
-
+        redirect()->route('pc::setPassword', ['mail' => request('mail', '')]);
     }
 
+    public function setPassWord (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'mail' => 'required|email|exists:user,email'
+        ], [
+            'email.exists' => '邮箱不存在'
+        ]);
+        if ($validator->fails()) {
+            // redirect()->route('pc::error404');
+        }
 
+        // GET
+        if($request->method() == 'GET') {
+            return view('pc.login.setPassword');
+        }
 
+        // POST
+        dd(request()->all());
+    }
 
     /**
      * 注册 - 服务协议
