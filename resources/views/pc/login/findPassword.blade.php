@@ -41,7 +41,7 @@
                         <div class="m-form">
                             <div class="form-item mailitem">
                                 <span class="form-field">邮箱帐号：</span>
-                                <input class="ipt_txt ipt_defa" type="text" id="mail" name="mail"  placeholder="请输入已绑定的邮箱账号" />
+                                <input class="ipt_txt ipt_defa" type="text" id="email" name="email"  placeholder="请输入已绑定的邮箱账号" />
                                 <span class="form-tips form-tips-error accountError"><i class="icon-error"></i></span>
                             </div>
 
@@ -98,7 +98,7 @@
                 $(element).parent().find('.form-tips-error').find('.icon-error').html(error);
             },
             rules : {
-                mail : {
+                email : {
                     required: true,
                     email: true,
                     remote   : {
@@ -107,7 +107,7 @@
                         data:{
                             type  : 'remail',
                             value : function(){
-                                return $('#mail').val();
+                                return $('#email').val();
                             }
                         }
                     }
@@ -117,7 +117,7 @@
                 }
             },
             messages : {
-                mail : {
+                email : {
                     required : '邮箱不能为空',
                     email: '邮箱格式错误',
                     remote: '该邮箱不存在'

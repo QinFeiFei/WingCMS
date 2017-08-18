@@ -6,24 +6,39 @@ use Mail;
 
 class EmailMessageService extends Message implements MessageInterface{
 
+    public function __construct($type, $account)
+    {
+        parent::__construct($type, $account);
+    }
+
 
     /**
      * 发送消息
      */
     public function send()
     {
-        Mail::send('emails.register', ['code' => $this->code()], function ($message) use ($user) {
-            $message->from($address, $name = null);
-            $message->sender($address, $name = null);
-            $message->to($address, $name = null);
-            $message->cc($address, $name = null);
-            $message->bcc($address, $name = null);
-            $message->replyTo($address, $name = null);
+        if( !$this->checkType()){ return output_error('邮件发送失败'); }
+
+        $subject = $this->subject($this->type);
+        $user    = $this->user();
+
+        Mail::send('emails.'.$this->type, ['code' => $this->code(), 'user'=>$user], function ($message) use ($subject) {
+            $message->to($this->account, $name = null);
             $message->subject($subject);
-            $message->priority($level);
         });
     }
 
 
+    public function subject($type) {
+        return config('app.name') . ' - ' . str_replace(
+            self::TYPES,
+            [
+                '注册',
+                '找回密码',
+                '修改密码'
+            ],
+            $type
+        );
+    }
 
 }

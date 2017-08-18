@@ -9,8 +9,10 @@
     <link rel="stylesheet" type="text/css"  href="{{ asset('pc/css/uc_9_18.css') }}">
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="//cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
     <style>
         .icon-error { width:250px;height:30px; }
+        #btnSendCode { border:none;position:absolute; top:1px; left:298px; cursor:pointer; display:block;background: #333333; color:#fff; width:100px;height:32px;line-height:32px;text-align:center;font-size:12px; }
     </style>
 </head>
 <body>
@@ -32,27 +34,28 @@
 
             <div class="m-boxA-bd">
                 <p style="margin-left:50px;color:red;">{{ session('error') ? session('error') : '' }}</p>
-                <form id="find-form" method="post">
+                <form id="my-form" method="post">
                     <input type="hidden" id="type" value="email" />
                     {{ csrf_field() }}
                     <div class="ucfnBox">
                         <div class="m-form">
+                            <p style="margin-left:65px;">通过{{ str_replace(array('phone', 'email'), array('手机', '邮件'), request('type')) }} <span style="color:#ff0000">“{{ request('email') }}”</span> 来找回密码.</p>
                             <div class="form-item code" style="position:relative;">
                                 <span class="form-field">验证码：</span>
-                                <input class="ipt_txt ipt_defa" type="text" id="code" name="code"  placeholder="请输出验证码" />
-                                <span style="position:absolute; top:1px; left:298px; cursor:pointer; display:block;background: #333333; color:#fff; width:100px;height:32px;line-height:32px;text-align:center;font-size:12px;">点击获取</span>
+                                <input class="ipt_txt ipt_defa" type="text" id="code" name="code"  placeholder="请输入六位验证码" />
+                                <input id="btnSendCode" type="button" value="点击获取" onclick="sendMessage()" />
                                 <span class="form-tips form-tips-error accountError"><i class="icon-error"></i></span>
                             </div>
 
                             <div class="form-item password">
                                 <span class="form-field">密码：</span>
-                                <input class="ipt_txt ipt_defa" type="text" id="password" name="password"  placeholder="请输入要修改的密码" />
+                                <input class="ipt_txt ipt_defa" type="password" id="password" name="password"  placeholder="请输入要修改的密码" />
                                 <span class="form-tips form-tips-error accountError"><i class="icon-error"></i></span>
                             </div>
 
                             <div class="form-item repassword">
                                 <span class="form-field">确认密码：</span>
-                                <input class="ipt_txt ipt_defa" type="text" id="repassword" name="repassword"  placeholder="请确认要修改的密码" />
+                                <input class="ipt_txt ipt_defa" type="password" id="repassword" name="repassword"  placeholder="请确认要修改的密码" />
                                 <span class="form-tips form-tips-error accountError"><i class="icon-error"></i></span>
                             </div>
 
@@ -73,38 +76,75 @@
 </div>
 
 <script>
+    // 发送短信验证码
+    var InterValObj;    // timer变量，控制时间
+    var count = 60;     // 间隔函数，1秒执行
+    var curCount;       // 当前剩余秒数
+    function sendMessage() {
+        curCount = count;
+        //设置button效果，开始计时
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").css("cursor", "not-allowed");
+        $("#btnSendCode").val(curCount + " 'S");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: '{{ route('api::sendMail') }}',
+            data: {
+                'type' : 'findPassword',
+                'email': '{{ request('email', '') }}'
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { },
+            success: function (msg){ }
+        });
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);
+            $("#btnSendCode").removeAttr("disabled");
+            $("#btnSendCode").css("cursor", "pointer");
+            $("#btnSendCode").val("点击获取");
+        }else {
+            curCount--;
+            $("#btnSendCode").css("cursor", "not-allowed");
+            $("#btnSendCode").val(curCount + " 'S");
+        }
+    }
+
+
     $(function (){
-        $('#find-form').validate({
+        $('#my-form').validate({
             errorPlacement: function(error, element){
                 $(element).parent().find('.form-tips-error').find('.icon-error').html(error);
             },
             rules : {
-                mail : {
-                    required: true,
-                    email: true,
-                    remote   : {
-                        url : '{{ route('pc::registerCheck') }}',
-                        type: 'get',
-                        data:{
-                            type  : 'remail',
-                            value : function(){
-                                return $('#mail').val();
-                            }
-                        }
-                    }
-                },
-                yzmcode : {
+                code : {
                     required: true
+                },
+                password : {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 20
+                },
+                repassword: {
+                    required : true,
+                    equalTo: '#password'
                 }
             },
             messages : {
-                mail : {
-                    required : '邮箱不能为空',
-                    email: '邮箱格式错误',
-                    remote: '该邮箱不存在'
-                },
-                yzmcode : {
+                code : {
                     required : '验证码不能为空'
+                },
+                password : {
+                    required : '密码不能为空',
+                    minlength: '密码长度为5-20个字符',
+                    maxlength: '密码长度为5-20个字符'
+                },
+                repassword : {
+                    required : '重复密码不能为空',
+                    equalTo: "两次密码输入不一致"
                 }
             }
         });
@@ -112,9 +152,9 @@
         $('#submit').click(function(){
             $('.g-error').hide();
 
-            if(! $("#find-form").valid()){ return false; }
+            if(! $("#my-form").valid()){ return false; }
 
-            $('#find-form').submit();
+            $('#my-form').submit();
         })
     })
 </script>

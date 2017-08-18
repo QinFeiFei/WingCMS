@@ -177,6 +177,12 @@ class UserService {
     }
 
 
+    /**
+     * 会员注册
+     *
+     * @param $form
+     * @return array
+     */
     public function register ($form) {
         $validBack = $this->valid($form);
         if(! $validBack['state']){ return output_error($validBack['error']); }
@@ -208,6 +214,7 @@ class UserService {
             return output_error('register error');
         }
     }
+
 
     /**
      * 插入或更新数据时，验证字段
@@ -242,5 +249,19 @@ class UserService {
             $validArr['error'] = $validator->errors()->first();
         }
         return $validArr;
+    }
+
+
+    public function getUserOfAccount ($account) {
+        $column = '';
+        if( isEmail($account) ){
+            $column = 'email';
+        }else if( isMobile($account) ) {
+            $column = 'phone';
+        }else{
+            return null;
+        }
+
+        return User::where($column, $account)->first();
     }
 }

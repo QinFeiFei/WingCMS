@@ -128,6 +128,8 @@ class LoginController extends Controller
 
 
     /**
+     * 找回密码第一步
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -138,11 +140,11 @@ class LoginController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'mail' => 'required|email|exists:user,email',
+            'email' => 'required|email|exists:user,email',
             'yzmcode' => 'required|captcha',
         ], [
-            'mail.required' => '邮箱必填',
-            'mail.email' => '邮箱格式错误',
+            'email.required' => '邮箱必填',
+            'email.email' => '邮箱格式错误',
             'email.exists' => '邮箱不存在',
             'yzmcode.required'  => '图形验证码必填',
             'yzmcode.captcha'   => '图形验证码错误',
@@ -152,14 +154,21 @@ class LoginController extends Controller
             return back()->with('error', $validator->errors()->first());
         }
 
-        redirect()->route('pc::setPassword', ['mail' => request('mail', '')]);
+        return redirect()->route('pc::setPassword', ['type' => 'email', 'email' => request('email', '')]);
     }
 
+
+    /**
+     * 重置密码
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function setPassWord (Request $request) {
         $validator = Validator::make($request->all(), [
-            'mail' => 'required|email|exists:user,email'
-        ], [
-            'email.exists' => '邮箱不存在'
+            'type' => 'required|in:email,phone',
+            'email' => 'email|exists:user,email',
+            'phone' => 'mobile|exists:user,phone'
         ]);
         if ($validator->fails()) {
             // redirect()->route('pc::error404');
@@ -173,6 +182,7 @@ class LoginController extends Controller
         // POST
         dd(request()->all());
     }
+
 
     /**
      * 注册 - 服务协议

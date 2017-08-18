@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // 无需Token
 Route::group(['namespace' => 'Api', 'as' => 'api::'], function () {
-    Route::get('/sendMail/{type}', ['as'=>'sendMail', 'uses'=>'EmailController@send']);
+    Route::post('sendMail', ['as'=>'sendMail', 'uses'=>'EmailController@send']);
 });
