@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers\Pc;
 
+use App\Events\PassWordUpdateEvent;
 use App\Http\Controllers\Controller;
+use App\MsgCodeRecord;
+use App\Services\Message\Message;
 use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
@@ -159,28 +162,61 @@ class LoginController extends Controller
 
 
     /**
-     * 重置密码
+     * 重置密码(找回密码第二步)
      *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function setPassWord (Request $request) {
-        $validator = Validator::make($request->all(), [
-            'type' => 'required|in:email,phone',
-            'email' => 'email|exists:user,email',
-            'phone' => 'mobile|exists:user,phone'
-        ]);
-        if ($validator->fails()) {
-            // redirect()->route('pc::error404');
-        }
-
-        // GET
+        // show view
         if($request->method() == 'GET') {
+            $validator = Validator::make($request->all(), [
+                'type' => 'required|in:email,phone',
+                'email' => 'email|exists:user,email',
+                'phone' => 'mobile|exists:user,phone'
+            ]);
+            if ($validator->fails()) {
+                redirect()->route('pc::error404');
+            }
+
             return view('pc.login.setPassword');
         }
 
         // POST
-        dd(request()->all());
+        $validator = Validator::make($request->all(), [
+            'send_type' => 'required|in:email,phone',
+            'password' => 'required|between:5,30',
+        ], [
+            'send_type.required' => '数据异常!',
+            'send_type.in' => '数据异常',
+            'password.required' => '密码必填',
+            'password.between' => '密码必须大于5位小于30位',
+        ]);
+        if ($validator->fails()) {
+            return output_error($validator->errors()->first());
+        }
+
+        $code = request('code', '');
+        $send_type = request('send_type', '');
+        $send_from = request('send_form', '');
+
+        $message = new Message('findPassword', $send_from);
+        if( ! $message->checkCode($code, $send_type) ){
+            return output_error('验证码错误!');
+        }
+
+        try{
+            $user = User::where($send_type, $send_from)->first();
+            $user->password = bcrypt(trim(request('password', '')));
+            $user->save();
+
+            $message->setCodeVerify($code, $send_type, $send_from);
+
+            event(new PassWordUpdateEvent($user));
+            return output_success('重置密码成功!');
+        }catch (\Exception $e){
+            return output_error('重置密码失败!');
+        }
     }
 
 

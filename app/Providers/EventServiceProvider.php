@@ -28,6 +28,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\PassWordUpdateListener',
         ],
 
+        // 用户修改密码成功
+
 
     ];
 

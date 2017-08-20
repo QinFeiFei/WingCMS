@@ -17,7 +17,7 @@
                 <!-- 登录注册 -->
                 <div class="more_mod userLogin">
                     <span class="sMore">
-                        <a href="{{ $user ? 'javascript:void(0)' : route('pc::login') }}" id="user-login">
+                        <a href="{{ $user ? route('pc::userIndex') : route('pc::login') }}" id="user-login">
                             <i class="iUser"></i>
                             <em>{{ $user ? $user->username : '立即登陆' }}</em>
                         </a>

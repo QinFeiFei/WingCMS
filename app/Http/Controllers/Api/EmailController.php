@@ -12,6 +12,6 @@ class EmailController extends Controller
         $email = request('email', '');
         $service = new EmailMessageService($type, $email);
 
-        dd($service->send());
+        return $service->send();
     }
 }

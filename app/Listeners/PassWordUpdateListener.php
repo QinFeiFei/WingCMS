@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\PassWordUpdateEvent;
+use App\Services\Message\EmailMessageService;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -26,6 +27,10 @@ class PassWordUpdateListener
      */
     public function handle(PassWordUpdateEvent $event)
     {
-        //
+        $user = $event->user;
+        if($user->email){
+            $email = new EmailMessageService('modPassword', $user->email);
+            $email->send();
+        }
     }
 }

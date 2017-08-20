@@ -95,8 +95,16 @@
                 'type' : 'findPassword',
                 'email': '{{ request('email', '') }}'
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) { },
-            success: function (msg){ }
+            success: function (response){
+                if(response.code != 0){
+                    layer.msg(response.msg, {icon: 2});
+                }else{
+                    layer.msg(response.msg);
+                }
+            },
+            error: function () {
+                alert(arguments[1]);
+            }
         });
     }
     //timer处理函数
@@ -149,12 +157,41 @@
             }
         });
 
+        var click = false;
         $('#submit').click(function(){
-            $('.g-error').hide();
+            if(click == true){ return false; }
+            click = true;
 
+            $('.g-error').hide();
             if(! $("#my-form").valid()){ return false; }
 
-            $('#my-form').submit();
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '{{ route('pc::setPassword') }}',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'code' : $('#code').val(),
+                    'password': $('#password').val(),
+                    'send_type': '{{ request('type', '') }}',
+                    'send_form': '{{ request('email', '') }}'
+                },
+                success: function (response){
+                    click = false;
+                    if(response.code != 0){
+                        layer.msg(response.msg, {icon: 2});
+                    }else{
+                        layer.msg(response.msg);
+                        setTimeout(function(){
+                            window.location.href = '{{ route('pc::login') }}'
+                        }, 1000);
+                    }
+                },
+                error: function (){
+                    click = false;
+                    console.log(arguments[1])
+                }
+            });
         })
     })
 </script>
