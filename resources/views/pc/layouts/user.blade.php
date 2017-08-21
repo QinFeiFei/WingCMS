@@ -9,6 +9,8 @@
     <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/element-ui/1.4.2/index.js"></script>
+    <link href="//cdn.bootcss.com/element-ui/1.4.2/theme-default/index.css" rel="stylesheet">
     @yield('head')
 </head>
 <body>
@@ -24,18 +26,18 @@
         <span class="item">欢迎您，<span class="cBlue">{{ $user->username }}</span></span>
     </div>
 </div>
-<div class="g-nav">
-    <div class="g-nav-row">
-        <ul class="g-nav-list clearfix">
-            <li class="current"><a href="">首页</a></li>
-            <li><a href="">帐号管理</a></li>
-            <li><a href="">云收藏</a><i class="split"></i></li>
-        </ul>
-    </div>
-</div>
-
 
 @yield('content')
+
+<!--右侧二维码 start-->
+<a href="javascript:;" class="rightQR" style="margin-top: 380px;">
+    <span class="closeQR" href="javascript:;"></span>
+</a>
+<!--右侧二维码 end-->
+
+<!--右侧意见反馈 start-->
+<a href="" class="feedback" id="feedback" target="_blank"></a>
+<!--右侧意见反馈 end-->
 
 <div class="pfooter mt30">
     <a href="http://www.2345.com/about/about.htm" target="_blank" onclick="cc(&#39;H91&#39;)">关于2345</a><em>|</em>

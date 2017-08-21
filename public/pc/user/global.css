@@ -17,7 +17,7 @@ a{ text-decoration:none;color:#666}
 a:hover{ text-decoration:underline;color:#f30}
 :focus{ outline:0;}
 .clear{ clear:both; overflow:hidden; font-size:0; height:0;line-height:0;}
-
+[v-cloak] { display: none }
 /*common*/
 /*弹窗*/
 .box_mod{ position:fixed; z-index:101; left:50%; background:#fff; top:50%; display:none; margin-top:-180px; _position:absolute;_top:expression(eval(document.documentElement.clientHeight/2+document.documentElement.scrollTop-this.offsetHeight/2)+180);}

@@ -5,8 +5,9 @@
 @endsection
 
 @section('content')
-<!--主体 begin-->
-<div class="main clearfix">
+    @include('pc.user._nav', ['navpos'=>'one'])
+
+    <div class="main clearfix">
     <!--主题头部 begin-->
     <div class="maintop clearfix">
         <!--左侧用户信息 start-->
@@ -390,23 +391,4 @@
     <!--底部 影视大全 end-->
 
 </div>
-<!--主体 end-->
-
-
-
-
-
-<!--弹窗 end-->
-<!--右侧二维码 start-->
-<a href="javascript:;" class="rightQR" style="margin-top: 380px;">
-    <span class="closeQR" href="javascript:;"></span>
-</a>
-<!--右侧二维码 end-->
-
-<!--右侧意见反馈 start-->
-<a href="" class="feedback" id="feedback" target="_blank"></a>
-<!--右侧意见反馈 end-->
-
-
 @endsection
-

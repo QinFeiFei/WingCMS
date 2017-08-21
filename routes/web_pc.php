@@ -50,9 +50,9 @@ Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' =>
 Route::group(['middleware' => ['pc.jwt.token', /*'auth:api',*/ 'pc.jwt.refresh'], 'namespace' => 'pc', 'as' => 'pc::'], function () {
     Route::get('/user', ['as'=>'userIndex', 'uses'=>'UserController@index']);
     Route::match(['get', 'post'], '/user/editInfo', ['as'=>'userEditInfo', 'uses'=>'UserController@editInfo']);
-    Route::match(['get', 'post'], '/user/editPassword', ['as'=>'userEditInfo', 'uses'=>'UserController@editPassword']);
-    Route::match(['get', 'post'], '/user/bindPhone', ['as'=>'userEditInfo', 'uses'=>'UserController@bindPhone']);
-    Route::match(['get', 'post'], '/user/bindEmail', ['as'=>'userEditInfo', 'uses'=>'UserController@bindEmail']);
-    Route::match(['get', 'post'], '/user/editAvatar', ['as'=>'userEditInfo', 'uses'=>'UserController@editAvatar']);
-    Route::match(['get', 'post'], '/user/editOauth', ['as'=>'userEditInfo', 'uses'=>'UserController@editOauth']);
+    Route::match(['get', 'post'], '/user/editPassword', ['as'=>'userEditPassword', 'uses'=>'UserController@editPassword']);
+    Route::match(['get', 'post'], '/user/bindPhone', ['as'=>'userBindPhone', 'uses'=>'UserController@bindPhone']);
+    Route::match(['get', 'post'], '/user/bindEmail', ['as'=>'userBindEmail', 'uses'=>'UserController@bindEmail']);
+    Route::match(['get', 'post'], '/user/editAvatar', ['as'=>'userEditAvatar', 'uses'=>'UserController@editAvatar']);
+    Route::match(['get', 'post'], '/user/editOauth', ['as'=>'userEditOauth', 'uses'=>'UserController@editOauth']);
 });
