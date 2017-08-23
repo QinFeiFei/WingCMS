@@ -54,7 +54,6 @@
                                 @{{ district }}
                             </el-option>
                         </el-select>
-                        <p>@{{ area_selector_selected_prov }} @{{ area_selector_selected_city }} @{{ area_selector_selected_district }}</p>
                     </el-form-item>
                     <div class="form-item">
                         <el-button v-cloak @click="save()" v-loading="loading" type="primary">保存</el-button>
@@ -72,10 +71,10 @@
         el: '#app',
         data: {
             forms: {
-                real_name: '',
-                real_sex: 0,
-                real_birthday: '',
-                qq: null
+                real_name: '{{ $user->real_name }}',
+                real_sex: {{ $user->real_sex }},
+                real_birthday: '{{ $user->real_birthday }}',
+                qq: '{{ $user->qq }}'
             },
             rules: {
                 qq: [
@@ -84,10 +83,11 @@
             },
             loading: false,
 
+            <?php $area = explode(' ', $user->real_area); ?>
             area_selector_data: area_selector_data,
-            area_selector_init_prov: '北京市',
-            area_selector_init_city: '市辖区',
-            area_selector_init_district: '东城区',
+            area_selector_init_prov: '广东省',
+            area_selector_init_city: '深圳市',
+            area_selector_init_district: '龙岗区',
             area_selector_selected_prov: '',
             area_selector_selected_city: '',
             area_selector_selected_district: ''
@@ -147,6 +147,7 @@
                 asyncJob();
             },
             save: function (){
+                var curPage = this
                 this.loading = true
                 var data = {
                     real_name: this.forms.real_name,
@@ -157,8 +158,23 @@
                 }
                 axios({
                     method: 'post',
-                    url: '{{ 'pc::userEditInfo' }}',
+                    url: '{{ route('pc::userEditInfo') }}',
                     data: data
+                }).then(function(response) {
+                    curPage.loading = false
+
+                    if(response.data.code == 0){
+                        curPage.$message({
+                            message: response.data.msg,
+                            type: 'success'
+                        });
+                    }else{
+                        curPage.$message.error(response.data.msg)
+                    }
+
+                    window.setTimeout(function(){
+                        window.location.reload()
+                    },1500)
                 });
             }
         },
