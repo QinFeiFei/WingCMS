@@ -51,8 +51,8 @@ class EmailMessageService extends Message implements MessageInterface{
                 '测试',
                 '注册',
                 '找回密码',
-                '修改密码',
-                '密码修改成功'
+                '密码修改成功',
+                '修改密码'
             ],
             $type
         );

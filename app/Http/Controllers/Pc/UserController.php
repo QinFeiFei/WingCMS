@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pc;
 
+use App\Services\Message\Message;
 use App\Services\UserService;
 use App\User;
 use Exception;
@@ -81,9 +82,13 @@ class UserController extends PcController
         $userService = new UserService();
         $user = User::find($this->getUser()->user_id);
         if($userService->setPassword($user, request()->get('password'))){
-            
-        }else{
+            // 将验证码设置为已验证
+            $message = new Message('modPassword', $this->getUser()->email);
+            $message->setCodeVerify(request()->get('code'), 'email', $this->getUser()->email);
 
+            return back()->with('success', '密码修改成功');
+        }else{
+            return back()->with('error', '密码修改失败');
         }
     }
 
@@ -94,7 +99,33 @@ class UserController extends PcController
      * @return mixed
      */
     public function bindPhone () {
-        return view('pc.user.bindPhone');
+        if(request()->method() == 'GET'){
+            return view('pc.user.bindPhone');
+        }
+
+        $validator = Validator::make(request()->all(), [
+            'code' => 'msgcode:email,modPassword,'.request()->get('code').','.$this->getUser()->email,
+            'password' => 'required|between:5,30',
+        ], [
+            'code.msgcode' => '验证码错误!',
+            'password.required' => '密码必填',
+            'password.between' => '密码必须大于5位小于30位',
+        ]);
+        if ($validator->fails()) {
+            return back()->with('error', $validator->errors()->first());
+        }
+
+        $userService = new UserService();
+        $user = User::find($this->getUser()->user_id);
+        if($userService->setPassword($user, request()->get('password'))){
+            // 将验证码设置为已验证
+            $message = new Message('modPassword', $this->getUser()->email);
+            $message->setCodeVerify(request()->get('code'), 'email', $this->getUser()->email);
+
+            return back()->with('success', '密码修改成功');
+        }else{
+            return back()->with('error', '密码修改失败');
+        }
     }
 
 

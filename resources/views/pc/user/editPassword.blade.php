@@ -18,7 +18,14 @@
             <div class="m-boxB-bd">
                 <form class="m-form" id="my-form" method="post" action="">
                     {{ csrf_field() }}
-                    <p style="color:#000;margin-left:20px;">通过您绑定的邮箱 {{ $user->email }} 来修改密码</p>
+                    @if(!empty(session('success', '')))<p class="msg_ok">{{ session('success') }}</p>@endif
+                    @if(!empty(session('error', '')))<p class="msg_err">{{ session('error', '') }}</p>@endif
+
+                    @if(!empty($user->email) || !empty($user->phone))
+                        <p style="color:#000;margin-left:20px;">通过您绑定的邮箱 <span style="color:#178fe5">{{ $user->email }}</span> 来修改密码</p>
+                    @else
+                        <p style="color:red;padding-left:90px;">! 您还没绑定邮箱或手机,请先 <a href="{{ route('pc::userBindEmail') }}">绑定邮箱</a> 或 绑定手机</p>
+                    @endif
                     <div class="form-item" style="position:relative;">
                         <span class="form-field ft-bold">验证码：</span>
                         <input class="ipt_txt ipt_defa" type="text" id="code" name="code"  placeholder="请输入六位验证码" />
@@ -37,9 +44,6 @@
                     </div>
                     <div class="form-item">
                         <input type="submit" id="submit" class="btn-blueA" value="保存" style="border:0px;cursor:pointer;"></a>
-                    </div>
-                    <div class="form-item">
-                        <span class="g-error" style="color:red;">{{ session('error', '') }}</span>
                     </div>
                 </form>
             </div>
@@ -65,8 +69,8 @@
                 dataType: "json",
                 url: '{{ route('api::sendMail') }}',
                 data: {
-                    'type' : 'findPassword',
-                    'email': '{{ request('email', '') }}'
+                    'type' : 'modPassword',
+                    'email': '{{ $user->email }}'
                 },
                 success: function (response){
                     if(response.code != 0){

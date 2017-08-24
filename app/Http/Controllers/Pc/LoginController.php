@@ -182,8 +182,15 @@ class LoginController extends Controller
             return view('pc.login.setPassword');
         }
 
+
         // POST
+        $code = request('code', '');
+        $send_type = request('send_type', '');
+        $send_from = request('send_form', '');
+        $user = User::where($send_type, $send_from)->first();
+
         $validator = Validator::make($request->all(), [
+            'code' => 'msgcode:email,findPassword,'.$code.','.$user->email,
             'send_type' => 'required|in:email,phone',
             'password' => 'required|between:5,30',
         ], [
@@ -196,25 +203,14 @@ class LoginController extends Controller
             return output_error($validator->errors()->first());
         }
 
-        $code = request('code', '');
-        $send_type = request('send_type', '');
-        $send_from = request('send_form', '');
-
-        $message = new Message('findPassword', $send_from);
-        if( ! $message->checkCode($code, $send_type) ){
-            return output_error('验证码错误!');
-        }
-
-        try{
-            $user = User::where($send_type, $send_from)->first();
-            $user->password = bcrypt(trim(request('password', '')));
-            $user->save();
-
+        $userService = new UserService();
+        if($userService->setPassword($user, request()->get('password'))){
+            // 将验证码设置为已验证
+            $message = new Message('findPassword', $send_from);
             $message->setCodeVerify($code, $send_type, $send_from);
 
-            event(new PassWordUpdateEvent($user));
             return output_success('重置密码成功!');
-        }catch (\Exception $e){
+        }else{
             return output_error('重置密码失败!');
         }
     }

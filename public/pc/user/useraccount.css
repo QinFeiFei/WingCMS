@@ -121,8 +121,25 @@
 /* 2017-5-25 yangjing*/
 
 
+.msg_ok {
+    border: 1px solid #CEDBA0;
+    color: #8DAE1A;
+    background:#FCFFE0 url("./uc_icon_150311.png") no-repeat 0 -49px;
+    padding-left:35px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom:10px;
+}
 
-
+.msg_err {
+    border: 1px solid #F7E3B3;
+    color: #FF8500;
+    background:#FCFFE0 url("./uc_icon_150311.png") no-repeat 0 -72px;
+    padding-left:35px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom:10px;
+}
 
 
 

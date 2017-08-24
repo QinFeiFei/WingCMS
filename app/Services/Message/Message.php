@@ -40,8 +40,11 @@ class Message implements MessageInterface
      * @return mixed
      */
     public function checkSend ($account) {
-        $model = new MsgCodeRecord();
-        return $model->checkSend($account);
+        $noCheck = ['test', 'modPasswordSucc'];
+        if(!in_array($this->type, $noCheck)){
+            $model = new MsgCodeRecord();
+            return $model->checkSend($account);
+        }
     }
 
 
