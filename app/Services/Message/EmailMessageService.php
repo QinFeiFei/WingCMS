@@ -48,9 +48,11 @@ class EmailMessageService extends Message implements MessageInterface{
         return config('app.name') . ' - ' . str_replace(
             self::TYPES,
             [
+                '测试',
                 '注册',
                 '找回密码',
-                '修改密码'
+                '修改密码',
+                '密码修改成功'
             ],
             $type
         );

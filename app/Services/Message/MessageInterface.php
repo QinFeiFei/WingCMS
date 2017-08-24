@@ -8,6 +8,7 @@ interface MessageInterface {
         'register',         // 注册
         'findPassword',     // 找回密码
         'modPassword',      // 修改密码
+        'modPasswordSucc',  // 修改密码成功
     ];
 
     /**

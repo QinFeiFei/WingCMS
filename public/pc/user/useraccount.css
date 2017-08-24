@@ -76,7 +76,7 @@
 .btn-blueA:hover{ text-decoration:none; color:#fff; background:#0090d9;}
 
 /*form ele*/
-.ipt_txt { width:318px; line-height: 22px; font-size: 12px; color: #333333; vertical-align: middle; }
+.ipt_txt { width:318px; line-height: 22px; font-size: 12px; color: #333333; vertical-align: middle; padding:4px 2px; border:1px solid #999;}
 .ipt_txt_focus { border:1px solid #b3e6ff; }
 .ipt_txt.ipt_defa { color: #999999; }
 .ipt_txt.ipt_txt_error { border-color: #ff6600; }

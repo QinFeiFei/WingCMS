@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="gb2312" />
+    <meta charset="utf-8" />
     <title>用户中心-设置密码</title>
     <meta content="" name="Description" />
     <meta content="" name="Keywords" />

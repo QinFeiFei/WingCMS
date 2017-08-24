@@ -56,7 +56,7 @@
                         </el-select>
                     </el-form-item>
                     <div class="form-item">
-                        <el-button v-cloak @click="save()" v-loading="loading" type="primary">保存</el-button>
+                        <el-button style="margin-left:90px;" v-cloak @click="save()" v-loading="loading" type="primary">保存</el-button>
                     </div>
                 </el-form>
             </div>
@@ -85,9 +85,9 @@
 
             <?php $area = explode(' ', $user->real_area); ?>
             area_selector_data: area_selector_data,
-            area_selector_init_prov: '广东省',
-            area_selector_init_city: '深圳市',
-            area_selector_init_district: '龙岗区',
+            area_selector_init_prov: '{{ $area[0] ? $area[0] : '北京市' }}',
+            area_selector_init_city: '{{ $area[1] ? $area[1] : '市辖区' }}',
+            area_selector_init_district: '{{ $area[2] ? $area[2] : '东城区' }}',
             area_selector_selected_prov: '',
             area_selector_selected_city: '',
             area_selector_selected_district: ''
@@ -178,7 +178,7 @@
                 });
             }
         },
-        ready: function(){
+        created: function(){
             this.areaSelectorSet(
                 this.area_selector_init_prov,
                 this.area_selector_init_city,

@@ -1,6 +1,5 @@
 <?php
 
-
 // 无需Token
 Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::match(['get', 'post'], '/register', ['as'=>'register', 'uses'=>'LoginController@register']);

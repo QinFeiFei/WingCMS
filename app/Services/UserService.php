@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Events\LoginEvent;
+use App\Events\PassWordUpdateEvent;
 use App\Events\RegisterEvent;
 use App\User;
 use Carbon\Carbon;
@@ -249,6 +250,23 @@ class UserService {
             $validArr['error'] = $validator->errors()->first();
         }
         return $validArr;
+    }
+
+
+    /**
+     * 修改密码
+     *
+     */
+    public function setPassword(User $user, $password) {
+        try{
+            $user->password = bcrypt(trim(request('password', '')));
+            $user->save();
+
+            event(new PassWordUpdateEvent($user));
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
     }
 
 

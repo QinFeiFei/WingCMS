@@ -29,7 +29,7 @@ class PassWordUpdateListener
     {
         $user = $event->user;
         if($user->email){
-            $email = new EmailMessageService('modPassword', $user->email);
+            $email = new EmailMessageService('modPasswordSucc', $user->email);
             $email->send();
         }
     }

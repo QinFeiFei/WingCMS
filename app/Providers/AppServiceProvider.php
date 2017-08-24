@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Message\Message;
 use Illuminate\Support\ServiceProvider;
 use Validator;
 
@@ -53,5 +54,20 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('idCard', function($attribute, $value, $parameters, $validator) {
             return isIdCardNo($value);
         });
+
+        // 验证码是否正确
+        Validator::extend('msgcode', function($attribute, $value, $parameters) {
+            $send_type = $parameters[0];
+            $content_type = $parameters[1];
+            $code = $parameters[2];
+            $send_from = $parameters[3];
+
+            $message = new Message($content_type, $send_from);
+            if( ! $message->checkCode($code, $send_type) ){
+                return false;
+            }else{
+                return true;
+            }
+        }, '验证码错误.');
     }
 }
