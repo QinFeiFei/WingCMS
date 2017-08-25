@@ -9,6 +9,9 @@ interface MessageInterface {
         'findPassword',     // 找回密码
         'modPasswordSucc',  // 修改密码成功
         'modPassword',      // 修改密码
+        'rebindEmail',      // 重新绑定邮箱
+        'bindEmailSucc',    // 绑定邮箱成功
+        'bindEmail',        // 绑定邮箱
     ];
 
     /**

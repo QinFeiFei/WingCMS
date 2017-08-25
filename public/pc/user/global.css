@@ -35,8 +35,8 @@ a:hover{ text-decoration:underline;color:#f30}
 /*遮罩*/
 .box_mark{ width:100%; z-index:100; height:100%; position:absolute; left:0; top:0; background:#000; opacity:0.6; filter:alpha(opacity=60); text-indent:-9999px;}
 .w477{ width:477px; margin-left:-239px;}
-.w482{ width:482px; height:358px; margin-left:-241px; margin-top:-179px;}
-.w500{ width:500px; height:358px; margin-left:-250px; margin-top:-179px;}
+.w482{ width:482px; height:380px; margin-left:-241px; margin-top:-179px;}
+.w500{ width:500px; height:380px; margin-left:-250px; margin-top:-179px;}
 .h404{ width:482px; height:404px; margin-left:-241px; margin-top:-202px;}
 .wh500{ width:500px; height:404px; margin-left:-250px; margin-top:-202px;}
 .h271{ width:482px; height:290px; margin-left:-241px; margin-top:-145px;}
@@ -76,7 +76,7 @@ a:hover{ text-decoration:underline;color:#f30}
 .btn-select{ width:38px; height:38px; border-left:1px solid #e6e6e6; float:left; cursor:pointer; background:url(./icon.png) no-repeat -70px 16px;}
 .w261{ width:241px;}
 .Noemail{ font-size:15px; color:#666; line-height:24px;}
-.defaultInput{ color:#b2b2b2; font-size:14px;}
+.defaultInput{ color:#464646; font-size:14px;}
 .colorInput{ color:#333;}
 .inputTxtFocus{ border:1px solid #b3e6ff;}
 .inputTxtFocus .btn-select{ border-left:1px solid #b3e6ff;}

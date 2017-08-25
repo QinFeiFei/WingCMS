@@ -52,6 +52,7 @@ Route::group(['middleware' => ['pc.jwt.token', /*'auth:api',*/ 'pc.jwt.refresh']
     Route::match(['get', 'post'], '/user/editPassword', ['as'=>'userEditPassword', 'uses'=>'UserController@editPassword']);
     Route::match(['get', 'post'], '/user/bindPhone', ['as'=>'userBindPhone', 'uses'=>'UserController@bindPhone']);
     Route::match(['get', 'post'], '/user/bindEmail', ['as'=>'userBindEmail', 'uses'=>'UserController@bindEmail']);
+    Route::post('/user/rebindEmail', ['as'=>'userReBindEmail', 'uses'=>'UserController@rebindEmail']);
     Route::match(['get', 'post'], '/user/editAvatar', ['as'=>'userEditAvatar', 'uses'=>'UserController@editAvatar']);
     Route::match(['get', 'post'], '/user/editOauth', ['as'=>'userEditOauth', 'uses'=>'UserController@editOauth']);
 });

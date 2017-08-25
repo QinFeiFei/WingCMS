@@ -8,6 +8,7 @@
         .el-breadcrumb:after, .el-breadcrumb:before, .el-button-group:after, .el-button-group:before, .el-form-item:after, .el-form-item:before, .el-form-item__content:after, .el-form-item__content:before {
             display: none;
         }
+        .ipt_txt {border:none;}
     </style>
 @endsection
 

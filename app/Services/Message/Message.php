@@ -1,12 +1,10 @@
 <?php
 namespace App\Services\Message;
 
-
 use App\MsgCodeRecord;
 use App\Services\UserService;
 use App\User;
 use Carbon\Carbon;
-
 
 class Message implements MessageInterface
 {
@@ -40,7 +38,7 @@ class Message implements MessageInterface
      * @return mixed
      */
     public function checkSend ($account) {
-        $noCheck = ['test', 'modPasswordSucc'];
+        $noCheck = ['test', 'modPasswordSucc', 'bindEmailSucc'];
         if(!in_array($this->type, $noCheck)){
             $model = new MsgCodeRecord();
             return $model->checkSend($account);

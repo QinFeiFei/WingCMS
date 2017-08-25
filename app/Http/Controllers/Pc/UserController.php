@@ -6,6 +6,7 @@ use App\Services\Message\Message;
 use App\Services\UserService;
 use App\User;
 use Exception;
+use Hash;
 use Request;
 use Validator;
 
@@ -68,9 +69,10 @@ class UserController extends PcController
         }
 
         $validator = Validator::make(request()->all(), [
-            'code' => 'msgcode:email,modPassword,'.request()->get('code').','.$this->getUser()->email,
+            'code' => 'required|msgcode:email,modPassword,'.request()->get('code').','.$this->getUser()->email,
             'password' => 'required|between:5,30',
         ], [
+            'code.required' => '验证码必填',
             'code.msgcode' => '验证码错误!',
             'password.required' => '密码必填',
             'password.between' => '密码必须大于5位小于30位',
@@ -135,7 +137,74 @@ class UserController extends PcController
      * @return mixed
      */
     public function bindEmail () {
-        return view('pc.user.bindEmail');
+        if(request()->method() == 'GET'){
+            $blade = empty($this->getUser()->email) ? 'pc.user.bindEmail' : 'pc.user.rebindEmail';
+            return view($blade);
+        }
+
+        $validator = Validator::make(request()->all(), [
+            'code' => 'required|msgcode:email,bindEmail,'.request()->get('code').','.request()->get('email'),
+            'email' => 'required|email|unique:user,email'
+        ], [
+            'code.required' => '验证码必填',
+            'code.msgcode' => '验证码错误!',
+            'email.required' => '邮箱必填',
+            'email.email' => '邮箱格式错误',
+            'email.unique' => '该邮箱已被占用',
+        ]);
+        if ($validator->fails()) {
+            return back()->with('error', $validator->errors()->first());
+        }
+
+        $userService = new UserService();
+        $user = User::find($this->getUser()->user_id);
+        if($userService->setEmail($user, request()->get('email'))){
+            // 将验证码设置为已验证
+            $message = new Message('bindEmail', request()->get('email'));
+            $message->setCodeVerify(request()->get('code'), 'email', request()->get('email'));
+
+            return back()->with('success', '邮箱绑定成功');
+        }else{
+            return back()->with('error', '邮箱绑定失败');
+        }
+    }
+
+
+    /**
+     * 修改邮箱
+     *
+     * @return mixed
+     */
+    public function rebindEmail () {
+        $validator = Validator::make(request()->all(), [
+            'code' => 'required|msgcode:email,rebindEmail,'.request()->get('code').','.request()->get('email'),
+            'email' => 'required|email|unique:user,email'
+        ], [
+            'code.required' => '验证码必填',
+            'code.msgcode' => '验证码错误!',
+            'email.required' => '邮箱必填',
+            'email.email' => '邮箱格式错误',
+            'email.unique' => '该邮箱已被占用',
+        ]);
+        if ($validator->fails()) {
+            return back()->with('error', $validator->errors()->first());
+        }
+
+        $userService = new UserService();
+        $user = User::find($this->getUser()->user_id);
+        if(! Hash::check(request()->get('password'), $user->password)){
+            return back()->with('error', '密码验证失败.');
+        }
+
+        if($userService->setEmail($user, request()->get('email'))){
+            // 将验证码设置为已验证
+            $message = new Message('rebindEmail', request()->get('email'));
+            $message->setCodeVerify(request()->get('code'), 'email', request()->get('email'));
+
+            return back()->with('success', '邮箱绑定成功');
+        }else{
+            return back()->with('error', '邮箱绑定失败');
+        }
     }
 
 

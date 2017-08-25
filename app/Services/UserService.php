@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Events\EmailUpdateEvent;
 use App\Events\LoginEvent;
 use App\Events\PassWordUpdateEvent;
 use App\Events\RegisterEvent;
@@ -259,7 +260,7 @@ class UserService {
      */
     public function setPassword(User $user, $password) {
         try{
-            $user->password = bcrypt(trim(request('password', '')));
+            $user->password = bcrypt(trim($password));
             $user->save();
 
             event(new PassWordUpdateEvent($user));
@@ -270,6 +271,29 @@ class UserService {
     }
 
 
+    /**
+     * 绑定邮箱
+     *
+     */
+    public function setEmail(User $user, $email) {
+        try{
+            $user->email = trim($email);
+            $user->save();
+
+            event(new EmailUpdateEvent($user));
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
+    }
+
+
+    /**
+     * 根据手机号、邮箱号查询用户
+     *
+     * @param $account
+     * @return mixed|null
+     */
     public function getUserOfAccount ($account) {
         $column = '';
         if( isEmail($account) ){

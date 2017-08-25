@@ -32,7 +32,7 @@ class EmailMessageService extends Message implements MessageInterface{
                 $message->subject($subject);
             });
         }catch(\Exception $e){
-            // exit($e->getMessage());
+            exit($e->getMessage());
             return output_error('邮件发送失败');
         }
 
