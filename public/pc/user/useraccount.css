@@ -18,6 +18,8 @@
 .icon-e{ background-position:-47px 3px;}
 .icon-f{ background-position:-48px -30px;}
 .icon-g{ background-position:-77px -32px; height: 23px!important; top:12px!important;}
+.icon-h{ background-position:-48px -56px; }
+.icon-i{ background-position:-75px -58px; }
 .account_nav li .curr_account{ background:#e6e6e6; border-left:4px solid #049ae6;}
 .account_nav li .curr_account:hover{ background:#e6e6e6; border-left:4px solid #049ae6;}
 

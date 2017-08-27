@@ -4,11 +4,11 @@
             <dl class="video">
                 <dt>{{ env('APP_NAME') }}</dt>
                 <dd class="clearfix">
-                    <span><a href="{{ route('pc::movieList') }}">电影</a></span>
-                    <span><a href="{{ route('pc::teleplayList') }}">电视剧</a></span>
+                    <span><a href="{{ route('pc::tvList', ['type'=>'movie']) }}">电影</a></span>
+                    <span><a href="{{ route('pc::tvList', ['type'=>'teleplay']) }}">电视剧</a></span>
                     <span class="wSpan"></span>
-                    <span><a href="{{ route('pc::varietyList') }}">综艺</a></span>
-                    <span><a href="{{ route('pc::cartoonList') }}">动漫</a></span>
+                    <span><a href="{{ route('pc::tvList', ['type'=>'variety']) }}">综艺</a></span>
+                    <span><a href="{{ route('pc::tvList', ['type'=>'cartoon']) }}">动漫</a></span>
                 </dd>
             </dl>
 

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Pc;
 
+use App\Libs\Librarys\ImgCrop;
 use App\Services\Message\Message;
 use App\Services\UserService;
 use App\User;
 use Exception;
 use Hash;
-use Request;
+use Illuminate\Http\Request;
+use Storage;
 use Validator;
 
 class UserController extends PcController
@@ -205,6 +207,59 @@ class UserController extends PcController
         }else{
             return back()->with('error', '邮箱绑定失败');
         }
+    }
+
+
+    /**
+     * 上传头像
+     *
+     * @return mixed
+     */
+    public function uploadAvatar (Request $request) {
+        $file = $request->file('file1');
+        $hashname = $file->hashName();
+        $filelink = Storage::putFileAs('public/user/avatar', $file, $hashname);
+        $success = $filelink ? true : false ;
+        $width = 0;
+        $height = 0;
+        if($success) {
+            $attr = getimagesize($file);
+            $width = $attr[0];
+            $height = $attr[1];
+        }
+        $msg = $success ? '上传成功' : '上传失败';
+        $filelink_ = '/storage/user/avatar/'.$hashname;
+        echo json_encode(['result' => $success, 'msg' => $msg, 'src' => $filelink_, 'width' => $width, 'height' => $height, 'path' => $filelink_]);
+    }
+
+
+    /**
+     * 裁剪头像
+     *
+     * @return mixed
+     */
+    public function saveAvatar (Request $request) {
+        $src = public_path($request->get('src'));
+
+        // 图片裁剪后保存路径
+        $uuid =  md5(uniqid(rand()));
+        $fileName = $uuid . '.jpg';
+        $path = public_path('storage/user/avatar').'/'.$fileName;
+
+        // 裁剪后保存
+        $crop = new ImgCrop();
+        $crop->initialize($src, $path, $request->get('x'), $request->get('y'), 200, 200, $request->get('w'), $request->get('h'));
+        $success = $crop->generate_shot();
+
+        // 保存至数据库
+        $userService = new UserService();
+        request()->offsetSet('user_id', $this->getUser()->user_id);
+        request()->offsetSet('field', 'avatar');
+        request()->offsetSet('value', 'user/avatar/'.$fileName);
+        $userService->setField($request);
+
+        $msg = $success ? '裁剪成功' : '裁剪失败';
+        echo json_encode(array('result' => $success, 'msg' => $msg));
     }
 
 

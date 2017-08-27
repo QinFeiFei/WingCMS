@@ -28,7 +28,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\PassWordUpdateListener',
         ],
 
-        // 用户修改密码成功
+        // 观看影视
+        'App\Events\WatchTvEvent' => [
+            'App\Listeners\WatchTvListener',
+        ]
 
 
     ];

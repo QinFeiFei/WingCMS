@@ -26,15 +26,17 @@ Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' =>
     Route::get('/404', ['as'=>'error404', 'uses'=>'IndexController@index']);
 
     // 影视列表
-    Route::get('/tvlist/movie', ['as'=>'movieList', 'uses'=>'TvListController@movieList']);
-    Route::get('/tvlist/teleplay', ['as'=>'teleplayList', 'uses'=>'TvListController@teleplayList']);
-    Route::get('/tvlist/cartoon', ['as'=>'cartoonList', 'uses'=>'TvListController@cartoonList']);
-    Route::get('/tvlist/variety', ['as'=>'varietyList', 'uses'=>'TvListController@varietyList']);
-    Route::get('/tvlist/mv', ['as'=>'mvList', 'uses'=>'TvListController@mvList']);
-    Route::get('/tvlist/openclass', ['as'=>'openclassList', 'uses'=>'TvListController@openclassList']);
-    Route::get('/tvlist/other', ['as'=>'otherList', 'uses'=>'TvListController@otherList']);
+    Route::get('/tvlist/{type}', ['as'=>'tvList', 'uses'=>'TvListController@index']);
+//    Route::get('/tvlist/movie', ['as'=>'movieList', 'uses'=>'TvListController@movieList']);
+//    Route::get('/tvlist/teleplay', ['as'=>'teleplayList', 'uses'=>'TvListController@teleplayList']);
+//    Route::get('/tvlist/cartoon', ['as'=>'cartoonList', 'uses'=>'TvListController@cartoonList']);
+//    Route::get('/tvlist/variety', ['as'=>'varietyList', 'uses'=>'TvListController@varietyList']);
+//    Route::get('/tvlist/mv', ['as'=>'mvList', 'uses'=>'TvListController@mvList']);
+//    Route::get('/tvlist/openclass', ['as'=>'openclassList', 'uses'=>'TvListController@openclassList']);
+//    Route::get('/tvlist/other', ['as'=>'otherList', 'uses'=>'TvListController@otherList']);
 
     // 影视详情
+    Route::get('/tvdetail/{type}/{tv_id}', ['as'=>'tvDetail', 'uses'=>'TvDetailController@index']);
     Route::get('/tvdetail/movie/{tv_id}', ['as'=>'movieDetail', 'uses'=>'TvDetailController@movieDetail']);
     Route::get('/tvdetail/teleplay/{tv_id}', ['as'=>'teleplayDetail', 'uses'=>'TvDetailController@teleplayDetail']);
     Route::get('/tvdetail/cartoon/{tv_id}', ['as'=>'cartoonDetail', 'uses'=>'TvDetailController@cartoonDetail']);
@@ -53,6 +55,15 @@ Route::group(['middleware' => ['pc.jwt.token', /*'auth:api',*/ 'pc.jwt.refresh']
     Route::match(['get', 'post'], '/user/bindPhone', ['as'=>'userBindPhone', 'uses'=>'UserController@bindPhone']);
     Route::match(['get', 'post'], '/user/bindEmail', ['as'=>'userBindEmail', 'uses'=>'UserController@bindEmail']);
     Route::post('/user/rebindEmail', ['as'=>'userReBindEmail', 'uses'=>'UserController@rebindEmail']);
-    Route::match(['get', 'post'], '/user/editAvatar', ['as'=>'userEditAvatar', 'uses'=>'UserController@editAvatar']);
+    Route::post('/user/editAvatar/upload', ['as'=>'uploadAvatar', 'uses'=>'UserController@uploadAvatar']);
+    Route::get('/user/editAvatar/save', ['as'=>'saveAvatar', 'uses'=>'UserController@saveAvatar']);
+    Route::get('/user/editAvatar', ['as'=>'userEditAvatar', 'uses'=>'UserController@editAvatar']);
     Route::match(['get', 'post'], '/user/editOauth', ['as'=>'userEditOauth', 'uses'=>'UserController@editOauth']);
+
+    Route::get('/user/collect', ['as'=>'collectList', 'uses'=>'UserCollectController@index']);
+    Route::post('/user/collect/delete', ['as'=>'collectDelete', 'uses'=>'UserCollectController@delete']);
+    Route::post('/user/collect/create', ['as'=>'collectCreate', 'uses'=>'UserCollectController@create']);
+
+    Route::get('/user/watch', ['as'=>'watchList', 'uses'=>'UserWatchController@index']);
+    Route::post('/user/watch/delete', ['as'=>'watchDelete', 'uses'=>'UserWatchController@delete']);
 });

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // 影视类型
+    // 影视类型 - 对应数据库
     'TV_MOVIE' => 10,
     'TV_TELEPLAY' => 20,
     'TV_CARTOON' => 30,
@@ -9,6 +9,17 @@ return [
     'TV_MV' => 50,
     'TV_OPENCLASS' => 60,
     'TV_OTHER' => 70,
+
+    // 路由中支持的影视类型
+    'tv_Types' => [
+        'movie',
+        'teleplay',
+        'cartoon',
+        'variety',
+        'mv',
+        'openclass',
+        'other'
+    ],
 
     // 影视地区
     'tv_areas' => [

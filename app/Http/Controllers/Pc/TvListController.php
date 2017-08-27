@@ -20,6 +20,15 @@ class TvListController extends TvController
         view()->share('years', $years);
     }
 
+    public function index ($type, Request $request, TvService $tvService){
+        $this->checkTvType($type);
+
+        echo 'pass';
+    }
+
+
+
+
     public function movieList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_MOVIE'));
         $list = $tvService->pageList($request, 10);

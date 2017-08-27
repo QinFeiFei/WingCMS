@@ -16,13 +16,13 @@
         </span>
         <span class="smenu">
             <a href="{{ route('pc::index') }}" target="_self">首页</a>
-            <a href="{{ route('pc::movieList') }}" target="_self">电影</a>
-            <a href="{{ route('pc::teleplayList') }}" target="_self">电视剧</a>
-            <a href="{{ route('pc::cartoonList') }}" target="_self">动漫</a>
-            <a href="{{ route('pc::varietyList') }}" target="_self">综艺</a>
-            <a href="{{ route('pc::mvList') }}" target="_self">音乐MV</a>
-            <a href="{{ route('pc::openclassList') }}" target="_self">公开课</a>
-            <a href="{{ route('pc::otherList') }}" target="_self">其它视频</a>
+            <a href="{{ route('pc::tvList', ['type'=>'movie']) }}" target="_self">电影</a>
+            <a href="{{ route('pc::tvList', ['type'=>'teleplay']) }}" target="_self">电视剧</a>
+            <a href="{{ route('pc::tvList', ['type'=>'cartoon']) }}" target="_self">动漫</a>
+            <a href="{{ route('pc::tvList', ['type'=>'variety']) }}" target="_self">综艺</a>
+            <a href="{{ route('pc::tvList', ['type'=>'mv']) }}" target="_self">音乐MV</a>
+            <a href="{{ route('pc::tvList', ['type'=>'openclass']) }}" target="_self">公开课</a>
+            <a href="{{ route('pc::tvList', ['type'=>'other']) }}" target="_self">其它视频</a>
         </span>
     </div>
 </div>

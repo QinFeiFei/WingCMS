@@ -49,7 +49,7 @@
                             </div>
                             <i class="iPosterArrow"></i>
                             <p class="pFun clearfix">
-                                <a target="_self" href="javascript:void(0);" id="addCollect" rel="nofollow" class="aCollect">
+                                <a href="javascript:void(0);" id="addCollect" rel="nofollow" class="aCollect">
                                     <i class="fa fa-star-o"></i> 加入收藏
                                 </a>
                                 <i class="iLine"></i>
@@ -255,6 +255,19 @@
             $(".lookBDPWD").click(function(){
                 $(".BDPWD").text(bdpwd);
             })
+
+            $('#addCollect').click(function(){
+                var tvId = '{{ $info->tv_id }}';
+                var this_ = $(this);
+                $.post('{{ route('pc::collectCreate') }}', {tv_id: tvId, _token:'{{ csrf_token() }}' }, function(data){
+                    if(data.code == 0){
+                        $(this_).attr('href', '{{ route('pc::collectList') }}');
+                        $(this_).html('<i class="fa fa-star"></i> 查看收藏')
+                    }else{
+                        alert(data.msg)
+                    }
+                })
+            });
         });
     </script>
 @endsection

@@ -89,7 +89,7 @@ class UserService {
      * @return mixed
      */
     public function setField (Request $request){
-        $model = User::find($request->get('tv_id'));
+        $model = User::find($request->get('user_id'));
 
         $field = $request->get('field');
         $value = $request->get('value', '');

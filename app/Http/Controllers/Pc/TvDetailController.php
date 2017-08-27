@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Pc;
 
 
+use App\Events\WatchTvEvent;
 use App\Services\TvService;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,15 @@ class TvDetailController extends TvController
     {
         parent::__construct($request);
     }
+
+
+    public function index ($type, $tv_id, TvService $tvService, Request $request){
+
+    }
+
+
+
+
 
     public function movieDetail ($tv_id, TvService $tvService, Request $request) {
         $info = $tvService->findTv($tv_id, true);

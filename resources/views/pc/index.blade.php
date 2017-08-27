@@ -10,7 +10,7 @@
                     <div class="v_mod mt30">
                         <div class="v_th">
                             <span class="sMark"><i class="iTvIcon"></i>热播电视剧</span>
-                            <a href="{{ route('pc::teleplayList') }}" class="aMore_left">更多&gt;</a>
+                            <a href="{{ route('pc::tvList', ['type'=>'teleplay']) }}" class="aMore_left">更多&gt;</a>
                         </div>
                         <div class="v_tb">
                             <div class="v_picConBox">
@@ -69,7 +69,7 @@
                     <div class="v_mod mt30">
                         <div class="v_th">
                             <span class="sMark"><i class="iMovieIcon"></i>热播电影</span>
-                            <a href="{{ route('pc::movieList') }}" class="aMore_left">更多&gt;</a>
+                            <a href="{{ route('pc::tvList', ['type'=>'movie']) }}" class="aMore_left">更多&gt;</a>
                         </div>
                         <div class="v_tb">
                             <div class="v_picConBox height612">
