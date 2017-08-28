@@ -42,16 +42,18 @@
     </p>
 </div>
 <script>
-    var t=5;
-    var url='{{ env('APP_URL') }}';
-    setInterval(function(){
-        if(t<0){
-            window.location.href=url
-            return
+    function countDown(secs, surl){
+        var jumpTo = document.getElementById('time_out')
+        jumpTo.innerHTML = secs
+        if(--secs>0){
+            setTimeout("countDown("+secs+",'"+surl+"')",1000)
         }
-        document.getElementById('time_out').innerHTML=t
-        t-=1;
-    },1000);
+        else{
+            location.href = surl
+        }
+    }
+
+    countDown(5, '{{ env('APP_URL') }}')
 </script>
 </body>
 </html>

@@ -49,9 +49,15 @@
                             </div>
                             <i class="iPosterArrow"></i>
                             <p class="pFun clearfix">
-                                <a href="javascript:void(0);" id="addCollect" rel="nofollow" class="aCollect">
-                                    <i class="fa fa-star-o"></i> 加入收藏
-                                </a>
+                                @if(empty($isCollect))
+                                    <a href="javascript:void(0);" id="addCollect" rel="nofollow" class="aCollect">
+                                        <i class="fa fa-star-o"></i> 加入收藏
+                                    </a>
+                                @else
+                                    <a href="{{ route('pc::collectList') }}" rel="nofollow" class="aCollect">
+                                        <i class="fa fa-star"></i> 查看收藏
+                                    </a>
+                                @endif
                                 <i class="iLine"></i>
                                 <a href="" target="_blank" class="aComment" rel="nofollow"><i class="fa fa-exclamation-circle"></i> 不能播放点我</a>
                             </p>
@@ -187,7 +193,7 @@
                                                 <a class="aPlayBtn" href="javascript:void(0)"><i></i></a>
                                             </div>
                                             <div class="txt">
-                                                <span class="sTit"><a href="{{ route('pc::movieDetail', ['tv_id'=>$relate->tv_id]) }}">{{ $relate->tv_name }}</a></span>
+                                                <span class="sTit"><a href="{{ route('pc::tvDetail', ['type' => 'movie', 'tv_id'=>$relate->tv_id]) }}">{{ $relate->tv_name }}</a></span>
                                                 <span class="sActor">
                                                     @forelse($relate->tv_actors->actors as $actor2)
                                                         <em>{{ $actor2 }}</em>&nbsp;&nbsp;
@@ -224,7 +230,7 @@
                                     <li>
                                         <i class="iNum {{ $k<3 ? 'iCurNum' : '' }}">{{ $k+1 }}</i>
                                         <span class="sScore">{{ $push->tv_grade }}分</span>
-                                        <a href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($push->tv_id)]) }}" target="_blank">{{ $push->tv_name }}</a>
+                                        <a href="{{ route('pc::tvDetail', ['type' => 'movie', 'tv_id'=>idEncode($push->tv_id)]) }}" target="_blank">{{ $push->tv_name }}</a>
                                     </li>
                                     @empty
                                         <li>暂无推荐</li>
@@ -257,8 +263,13 @@
             })
 
             $('#addCollect').click(function(){
-                var tvId = '{{ $info->tv_id }}';
-                var this_ = $(this);
+                var username = '{{ $user ? $user->username : null }}'
+                if(username == ''){
+                    window.location.href = '{{ route('pc::login') }}'
+                }
+
+                var tvId = '{{ $info->tv_id }}'
+                var this_ = $(this)
                 $.post('{{ route('pc::collectCreate') }}', {tv_id: tvId, _token:'{{ csrf_token() }}' }, function(data){
                     if(data.code == 0){
                         $(this_).attr('href', '{{ route('pc::collectList') }}');
@@ -266,6 +277,11 @@
                     }else{
                         alert(data.msg)
                     }
+                }).error(function (){
+                    layer.msg('收藏失败')
+                    setTimeout(function(){
+                        window.location.reload()
+                    }, 700)
                 })
             });
         });

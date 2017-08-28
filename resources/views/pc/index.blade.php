@@ -19,12 +19,12 @@
                                     <li>
                                         <div class="pic">
                                             <img src="{{ asset('storage/'.$value->tv_cover) }}" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}';" />
-                                            <a class="aPlayBtn" href="{{ route('pc::teleplayDetail', ['tv_id'=>idEncode($value->tv_id)]) }}"><i></i></a>
+                                            <a class="aPlayBtn" href="{{ route('pc::tvDetail', ['type'=>'teleplay', 'tv_id'=>idEncode($value->tv_id)]) }}"><i></i></a>
                                         </div>
                                         <div class="txtPadding">
                                             <span class="sTit">
                                                 {{--<em class="emScore">8.4</em>--}}
-                                                <em class="emTit"><a href="{{ route('pc::teleplayDetail', ['tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a></em>
+                                                <em class="emTit"><a href="{{ route('pc::tvDetail', ['type'=>'teleplay', 'tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a></em>
                                             </span>
                                             <span class="sDes">{{ $value->tv_brief }}</span>
                                         </div>
@@ -48,7 +48,7 @@
                                     <li>
                                         <i class="iNum {{ $k<3 ? 'iCurNum' : '' }}">{{ $k+1 }}</i>
                                         {{--<span class="sTips">8.3分</span>--}}
-                                        <a href="{{ route('pc::teleplayDetail', ['tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a>
+                                        <a href="{{ route('pc::tvDetail', ['type'=>'teleplay', 'tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a>
                                     </li>
                                     @empty
                                     <li>暂无更新</li>
@@ -78,12 +78,12 @@
                                     <li>
                                         <div class="pic">
                                             <img src="{{ asset('storage/'.$value->tv_cover) }}" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}';" />
-                                            <a class="aPlayBtn" href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($value->tv_id)]) }}"><i></i></a>
+                                            <a class="aPlayBtn" href="{{ route('pc::tvDetail', ['type'=>'movie', 'tv_id'=>idEncode($value->tv_id)]) }}"><i></i></a>
                                         </div>
                                         <div class="txtPadding">
                                             <span class="sTit">
                                                 {{--<em class="emScore">8.4</em>--}}
-                                                <em class="emTit"><a href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a></em>
+                                                <em class="emTit"><a href="{{ route('pc::tvDetail', ['type'=>'movie', 'tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a></em>
                                             </span>
                                             <span class="sDes">{{ $value->tv_brief }}</span>
                                         </div>
@@ -108,7 +108,7 @@
                                         <li>
                                             <i class="iNum {{ $k<3 ? 'iCurNum' : '' }}">{{ $k+1 }}</i>
                                             {{--<span class="sTips">8.3分</span>--}}
-                                            <a href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a>
+                                            <a href="{{ route('pc::tvDetail', ['type'=>'movie', 'tv_id'=>idEncode($value->tv_id)]) }}">{{ $value->tv_name }}</a>
                                         </li>
                                     @empty
                                         <li>暂无更新</li>

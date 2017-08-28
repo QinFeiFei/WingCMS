@@ -25,12 +25,12 @@
                 <li>
                     <div class="pic">
                         <img src="{{ asset('storage/'.$info->tv->tv_cover) }}" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}';" />
-                        <a class="aPlayBtn" href="{{ route('pc::teleplayDetail', ['tv_id'=>idEncode($info->tv_id)]) }}"><i></i></a>
+                        <a class="aPlayBtn" href="{{ route('pc::tvDetail', ['type'=>'teleplay', 'tv_id'=>idEncode($info->tv_id)]) }}"><i></i></a>
                     </div>
                     <div class="txtPadding">
                         <span class="sTit">
                             {{--<em class="emScore">8.4</em>--}}
-                            <em class="emTit"><a href="{{ route('pc::teleplayDetail', ['tv_id'=>idEncode($info->tv_id)]) }}">{{ $info->tv->tv_name }}</a></em>
+                            <em class="emTit"><a href="{{ route('pc::tvDetail', ['type'=>'teleplay', 'tv_id'=>idEncode($info->tv_id)]) }}">{{ $info->tv->tv_name }}</a></em>
                         </span>
                         <span class="sDes">{{ $info->tv->tv_brief }}</span>
                     </div>

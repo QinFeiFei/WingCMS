@@ -23,27 +23,13 @@ Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' =>
     Route::get('/search', ['as'=>'search', 'uses'=>'SearchController@search']);
 
     // 错误页面
-    Route::get('/404', ['as'=>'error404', 'uses'=>'IndexController@index']);
+    Route::get('/404', ['as'=>'error404', 'uses'=>'IndexController@error404']);
 
     // 影视列表
     Route::get('/tvlist/{type}', ['as'=>'tvList', 'uses'=>'TvListController@index']);
-//    Route::get('/tvlist/movie', ['as'=>'movieList', 'uses'=>'TvListController@movieList']);
-//    Route::get('/tvlist/teleplay', ['as'=>'teleplayList', 'uses'=>'TvListController@teleplayList']);
-//    Route::get('/tvlist/cartoon', ['as'=>'cartoonList', 'uses'=>'TvListController@cartoonList']);
-//    Route::get('/tvlist/variety', ['as'=>'varietyList', 'uses'=>'TvListController@varietyList']);
-//    Route::get('/tvlist/mv', ['as'=>'mvList', 'uses'=>'TvListController@mvList']);
-//    Route::get('/tvlist/openclass', ['as'=>'openclassList', 'uses'=>'TvListController@openclassList']);
-//    Route::get('/tvlist/other', ['as'=>'otherList', 'uses'=>'TvListController@otherList']);
 
     // 影视详情
     Route::get('/tvdetail/{type}/{tv_id}', ['as'=>'tvDetail', 'uses'=>'TvDetailController@index']);
-    Route::get('/tvdetail/movie/{tv_id}', ['as'=>'movieDetail', 'uses'=>'TvDetailController@movieDetail']);
-    Route::get('/tvdetail/teleplay/{tv_id}', ['as'=>'teleplayDetail', 'uses'=>'TvDetailController@teleplayDetail']);
-    Route::get('/tvdetail/cartoon/{tv_id}', ['as'=>'cartoonDetail', 'uses'=>'TvDetailController@cartoonDetail']);
-    Route::get('/tvdetail/variety/{tv_id}', ['as'=>'varietyDetail', 'uses'=>'TvDetailController@varietyDetail']);
-    Route::get('/tvdetail/mv/{tv_id}', ['as'=>'mvDetail', 'uses'=>'TvDetailController@mvDetail']);
-    Route::get('/tvdetail/openclass/{tv_id}', ['as'=>'openclassDetail', 'uses'=>'TvDetailController@openclassDetail']);
-    Route::get('/tvdetail/other/{tv_id}', ['as'=>'otherDetail', 'uses'=>'TvDetailController@otherDetail']);
 });
 
 

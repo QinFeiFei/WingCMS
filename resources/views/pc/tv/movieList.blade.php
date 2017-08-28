@@ -11,9 +11,9 @@
             <li>
                 <span class="sTit">类型：</span>
                 <p class="pSelect">
-                    <span><a href="{{ route('pc::movieList') }}?classify=&{{ http_build_query(Request::except('classify', 'tv_type')) }}" class="{{ request('classify', '') == '' ? 'cur' : '' }}">全部</a></span>
+                    <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?classify=&{{ http_build_query(Request::except('classify', 'tv_type')) }}" class="{{ request('classify', '') == '' ? 'cur' : '' }}">全部</a></span>
                     @forelse($classifys as $classify)
-                        <span><a href="{{ route('pc::movieList') }}?classify={{ $classify['value'].'&' }}{{ http_build_query(Request::except('classify', 'tv_type')) }}" class="{{ $classify['value']==request('classify', '') ? 'cur' : '' }}">{{ $classify['label'] }}</a></span>
+                        <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?classify={{ $classify['value'].'&' }}{{ http_build_query(Request::except('classify', 'tv_type')) }}" class="{{ $classify['value']==request('classify', '') ? 'cur' : '' }}">{{ $classify['label'] }}</a></span>
                     @empty
                     @endforelse
                 </p>
@@ -21,9 +21,9 @@
             <li>
                 <span class="sTit">地区：</span>
                 <p class="pSelect">
-                    <span><a href="{{ route('pc::movieList') }}?tv_area=&{{ http_build_query(Request::except('tv_area', 'tv_type')) }}" class="{{ request('tv_area', '') == '' ? 'cur' : '' }}">全部</a></span>
+                    <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?tv_area=&{{ http_build_query(Request::except('tv_area', 'tv_type')) }}" class="{{ request('tv_area', '') == '' ? 'cur' : '' }}">全部</a></span>
                     @forelse($areas as $area)
-                        <span><a href="{{ route('pc::movieList') }}?tv_area={{ $area['value'].'&' }}{{ http_build_query(Request::except('tv_area', 'tv_type')) }}" class="{{ $area['value']==request('tv_area', '') ? 'cur' : '' }}">{{ $area['label'] }}</a></span>
+                        <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?tv_area={{ $area['value'].'&' }}{{ http_build_query(Request::except('tv_area', 'tv_type')) }}" class="{{ $area['value']==request('tv_area', '') ? 'cur' : '' }}">{{ $area['label'] }}</a></span>
                     @empty
                     @endforelse
                 </p>
@@ -31,9 +31,9 @@
             <li>
                 <span class="sTit">年代：</span>
                 <p class="pSelect">
-                    <span><a href="{{ route('pc::movieList') }}?tv_show_year=&{{ http_build_query(Request::except('tv_show_year', 'tv_type')) }}" class="{{ request('tv_show_year', '') == '' ? 'cur' : '' }}">全部</a></span>
+                    <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?tv_show_year=&{{ http_build_query(Request::except('tv_show_year', 'tv_type')) }}" class="{{ request('tv_show_year', '') == '' ? 'cur' : '' }}">全部</a></span>
                     @forelse($years as $year)
-                        <span><a href="{{ route('pc::movieList') }}?tv_show_year={{ $year['value'].'&' }}{{ http_build_query(Request::except('tv_show_year', 'tv_type')) }}" class="{{ $year['value']==request('tv_show_year', '') ? 'cur' : '' }}">{{ $year['label'] }}</a></span>
+                        <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?tv_show_year={{ $year['value'].'&' }}{{ http_build_query(Request::except('tv_show_year', 'tv_type')) }}" class="{{ $year['value']==request('tv_show_year', '') ? 'cur' : '' }}">{{ $year['label'] }}</a></span>
                     @empty
                     @endforelse
                 </p>
@@ -58,8 +58,8 @@
             <div class="v_th">
                 <i class="iLine"></i>
                 <p class="pTab">
-                    <a href="{{ route('pc::movieList') }}?{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ empty(request('orderby', '')) ? 'cur' : '' }}" id="default">最新更新</a>
-                    <a href="{{ route('pc::movieList') }}?orderby=grade&{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ request('orderby', '')=='grade' ? 'cur' : '' }}">评分</a>
+                    <a href="{{ route('pc::tvList', ['type' => 'movie']) }}?{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ empty(request('orderby', '')) ? 'cur' : '' }}" id="default">最新更新</a>
+                    <a href="{{ route('pc::tvList', ['type' => 'movie']) }}?orderby=grade&{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ request('orderby', '')=='grade' ? 'cur' : '' }}">评分</a>
                 </p>
                 {{--<a class="aLatestNews" target="_blank" href="http://dianying.2345.com/top/">电影排行榜</a>--}}
                 <div class="pSelected"></div>
@@ -74,12 +74,12 @@
                                     <img src="{{ asset('storage/'.$tv->tv_cover) }}" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}';" alt="{{ $tv->tv_name }}">
                                     <span class="pRightBottom"><em>{{ $tv->tv_grade }}分</em></span>
 
-                                    <a class="aPlayBtn" href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($tv->tv_id)]) }}" title="{{ $tv->tv_name }}"><i></i></a>
+                                    <a class="aPlayBtn" href="{{ route('pc::tvDetail', ['type' => 'movie', 'tv_id'=>idEncode($tv->tv_id)]) }}" title="{{ $tv->tv_name }}"><i></i></a>
                                 </div>
 
                                 <div class="txtPadding">
                                     <span class="sTit">
-                                      <em class="emTit"><a title="{{ $tv->tv_name }}" href="{{ route('pc::movieDetail', ['tv_id'=>idEncode($tv->tv_id)]) }}">{{ $tv->tv_name }}</a></em>
+                                      <em class="emTit"><a title="{{ $tv->tv_name }}" href="{{ route('pc::tvDetail', ['type' => 'movie', 'tv_id'=>idEncode($tv->tv_id)]) }}">{{ $tv->tv_name }}</a></em>
                                     </span>
 
                                     <span class="sDes">

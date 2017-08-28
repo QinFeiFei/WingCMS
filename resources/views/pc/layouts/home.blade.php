@@ -33,6 +33,7 @@
     <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
     @yield('head')
 </head>
 <body class="body_1280">

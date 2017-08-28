@@ -19,9 +19,9 @@ class TvController extends PcController
      * @return mixed
      */
     protected function checkTvType ($type){
-        dd(config('tv.tv_Types'));
         if(! in_array($type, config('tv.tv_Types'))){
-            return redirect()->route('pc::error404');
+            abort(404);
+            exit;
         }
         return true;
     }

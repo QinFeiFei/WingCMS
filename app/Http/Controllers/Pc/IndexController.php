@@ -84,4 +84,9 @@ class IndexController extends PcController
 
         return Cache::remember($key, $this->indexCacheTime, $callback);
     }
+
+
+    public function error404 () {
+        return abort(404);
+    }
 }

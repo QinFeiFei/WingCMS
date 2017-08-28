@@ -23,55 +23,77 @@ class TvListController extends TvController
     public function index ($type, Request $request, TvService $tvService){
         $this->checkTvType($type);
 
-        echo 'pass';
+        switch ($type) {
+            case 'movie':
+                return $this->movieList($request, $tvService);
+                break;
+            case 'teleplay':
+                return $this->teleplayList($request, $tvService);
+                break;
+            case 'cartoon':
+                return $this->cartoonList($request, $tvService);
+                break;
+            case 'variety':
+                return $this->varietyList($request, $tvService);
+                break;
+            case 'mv':
+                return $this->mvList($request, $tvService);
+                break;
+            case 'openclass':
+                return $this->openclassList($request, $tvService);
+                break;
+            case 'other':
+                return $this->otherList($request, $tvService);
+                break;
+        }
     }
 
 
 
 
-    public function movieList (Request $request, TvService $tvService) {
+    protected function movieList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_MOVIE'));
         $list = $tvService->pageList($request, 10);
 
         return view('pc.tv.movieList')->with(['list'=>$list]);
     }
 
-    public function teleplayList (Request $request, TvService $tvService) {
+    protected function teleplayList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_TELEPLAY'));
         $list = $tvService->pageList($request, 10);
 
         return view('pc.tv.teleplayList')->with(['list'=>$list]);
     }
 
-    public function cartoonList (Request $request, TvService $tvService) {
+    protected function cartoonList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_CARTOON'));
         $list = $tvService->pageList($request, 10);
 
         return view('pc.tv.cartoonList')->with(['list'=>$list]);
     }
 
-    public function varietyList (Request $request, TvService $tvService) {
+    protected function varietyList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_VARIETY'));
         $list = $tvService->pageList($request, 10);
 
         return view('pc.tv.varietyList')->with(['list'=>$list]);
     }
 
-    public function mvList (Request $request, TvService $tvService) {
+    protected function mvList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_MV'));
         $list = $tvService->pageList($request, 10);
 
         return view('pc.tv.mvList')->with(['list'=>$list]);
     }
 
-    public function openclassList (Request $request, TvService $tvService) {
+    protected function openclassList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_OPENCLASS'));
         $list = $tvService->pageList($request, 10);
 
         return view('pc.tv.openclassList')->with(['list'=>$list]);
     }
 
-    public function otherList (Request $request, TvService $tvService) {
+    protected function otherList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_OTHER'));
         $list = $tvService->pageList($request, 10);
 
