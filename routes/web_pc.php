@@ -30,6 +30,9 @@ Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' =>
 
     // 影视详情
     Route::get('/tvdetail/{type}/{tv_id}', ['as'=>'tvDetail', 'uses'=>'TvDetailController@index']);
+
+    // 添加影视浏览记录
+    Route::get('/addWatch/{tv_id}', ['as'=>'addWatch', 'uses'=>'TvController@addWatch']);
 });
 
 

@@ -26,5 +26,7 @@ class TvController extends PcController
         return true;
     }
 
-
+    public function addWatch ($tv_id){
+        dd($tv_id);
+    }
 }

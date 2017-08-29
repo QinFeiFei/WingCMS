@@ -284,6 +284,8 @@
                     }, 700)
                 })
             });
+
+            $.get("{{ route('pc::addWatch', ['tv_id'=>$info->tv_id]) }}");
         });
     </script>
 @endsection
