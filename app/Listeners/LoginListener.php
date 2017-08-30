@@ -3,12 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\LoginEvent;
+use App\Services\UserWatchService;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class LoginListener
+class LoginListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -35,5 +35,9 @@ class LoginListener
         $user->last_ip    = request()->getClientIp();
         $user->login_num  = $user->login_num + 1;
         $user->save();
+
+        // 将影视浏览记录写入数据库
+        $userWatchService = new UserWatchService();
+        $userWatchService->mergebrowse($event->user->user_id);
     }
 }

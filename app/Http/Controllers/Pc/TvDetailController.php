@@ -31,8 +31,10 @@ class TvDetailController extends TvController
         view()->share('pushs', $pushs);
 
         // 是否收藏
-        $isCollect = UserCollect::where('user_id', $this->getUser()->user_id)->where('tv_id', idDecode($tv_id))->first();
-        view()->share('isCollect', $isCollect);
+        if($this->getUser()){
+            $isCollect = UserCollect::where('user_id', $this->getUser()->user_id)->where('tv_id', idDecode($tv_id))->first();
+            view()->share('isCollect', $isCollect);
+        }
 
         switch ($type) {
             case 'movie':

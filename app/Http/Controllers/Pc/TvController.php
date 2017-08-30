@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Pc;
 
-
+use App\Services\UserWatchService;
 use Illuminate\Http\Request;
 
 class TvController extends PcController
@@ -27,6 +27,8 @@ class TvController extends PcController
     }
 
     public function addWatch ($tv_id){
-        dd($tv_id);
+        $user_id = $this->getUser() ? $this->getUser()->user_id : 0;
+        $userWatchService = new UserWatchService();
+        $userWatchService->addViewedGoods($tv_id, $user_id);
     }
 }
