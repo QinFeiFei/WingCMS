@@ -17,10 +17,20 @@
           @click.prevent.native="handleCheckAll">全选</Checkbox>
       </div>
       <Checkbox-group v-model="checkAllGroup" @on-change="checkAllGroupChange">
-        <Checkbox label="电视剧[推荐]" style="width:110px;"></Checkbox>
-        <Checkbox label="电视剧[最近更新]" style="width:110px;"></Checkbox><br />
-        <Checkbox label="电影[推荐]" style="width:110px;"></Checkbox>
-        <Checkbox label="电影[最近更新]" style="width:110px;"></Checkbox><br />
+        <Checkbox label="电视剧[推荐]" style="width:150px;"></Checkbox>
+        <Checkbox label="电视剧[最近更新]" style="width:150px;"></Checkbox><br />
+        <Checkbox label="电影[推荐]" style="width:150px;"></Checkbox>
+        <Checkbox label="电影[最近更新]" style="width:150px;"></Checkbox><br />
+        <Checkbox label="动漫[推荐]" style="width:150px;"></Checkbox>
+        <Checkbox label="动漫[最近更新]" style="width:150px;"></Checkbox><br />
+        <Checkbox label="综艺[推荐]" style="width:150px;"></Checkbox>
+        <Checkbox label="综艺[最近更新]" style="width:150px;"></Checkbox><br />
+        <Checkbox label="其它影视[推荐]" style="width:150px;"></Checkbox>
+        <Checkbox label="其它影视[最近更新]" style="width:150px;"></Checkbox><br />
+        <Checkbox label="MV[推荐]" style="width:150px;"></Checkbox>
+        <Checkbox label="MV[最近更新]" style="width:150px;"></Checkbox><br />
+        <Checkbox label="其它影视[推荐]" style="width:150px;"></Checkbox>
+        <Checkbox label="其它影视[最近更新]" style="width:150px;"></Checkbox><br />
       </Checkbox-group>
 
       <Button type="primary" style="margin-top: 10px;" @click="onclear">立即清除</Button>
@@ -62,6 +72,30 @@
             case '电影[最近更新]':
               tmp = 'index_movie_news'
               break
+            case '动漫[推荐]':
+              tmp = 'index_cartoon_puts'
+              break
+            case '动漫[最近更新]':
+              tmp = 'index_cartoon_news'
+              break
+            case '综艺[推荐]':
+              tmp = 'index_variety_puts'
+              break
+            case '综艺[最近更新]':
+              tmp = 'index_variety_news'
+              break
+            case 'MV[推荐]':
+              tmp = 'index_mv_puts'
+              break
+            case 'MV[最近更新]':
+              tmp = 'index_mv_news'
+              break
+            case '其它影视[推荐]':
+              tmp = 'index_other_puts'
+              break
+            case '其它影视[最近更新]':
+              tmp = 'index_other_news'
+              break
           }
           arr.push(tmp)
         }
@@ -78,7 +112,14 @@
         this.indeterminate = false
 
         if (this.checkAll) {
-          this.checkAllGroup = ['电视剧[推荐]', '电视剧[最近更新]', '电影[推荐]', '电影[最近更新]']
+          this.checkAllGroup = [
+            '电视剧[推荐]', '电视剧[最近更新]',
+            '电影[推荐]', '电影[最近更新]',
+            '动漫[推荐]', '动漫[最近更新]',
+            '综艺[推荐]', '综艺[最近更新]',
+            'MV[推荐]', 'MV[最近更新]',
+            '其它影视[推荐]', '其它影视[最近更新]'
+          ]
         } else {
           this.checkAllGroup = []
         }
@@ -104,6 +145,12 @@
           }
         }).then(response => {
           this.$Message.success('清除成功.')
+
+          setTimeout(
+            function () {
+              window.location.reload()
+            }, 500
+          )
         })
       }
     }

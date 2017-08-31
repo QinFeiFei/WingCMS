@@ -15,12 +15,16 @@ class IndexController extends PcController
         $teleplay = $this->teleplay();
         $cartoon = $this->cartoon();
         $variety = $this->variety();
+        $mv = $this->mv();
+        $other = $this->other();
 
         return view('pc.index')->with([
             'movie' => $movie,
             'teleplay' => $teleplay,
             'cartoon' => $cartoon,
             'variety' => $variety,
+            'mv' => $mv,
+            'other' => $other
         ]);
     }
 
@@ -76,6 +80,32 @@ class IndexController extends PcController
         return $data;
     }
 
+    private function mv () {
+        $data = [];
+        $data['puts'] = $this->loadCache('index__puts',function() {
+            return Tv::with('classifys')->where('tv_type', config('tv.TV_MV'))->where('is_push', '1')->orderBy('tv_sort')->take(10)->get();
+        });
+
+        $data['news'] = $this->loadCache('index__news',function() {
+            return Tv::with('classifys')->where('tv_type', config('tv.TV_MV'))->orderBy('created_at','desc')->take(17)->get();
+        });
+
+        return $data;
+    }
+
+    private function other () {
+        $data = [];
+        $data['puts'] = $this->loadCache('index_other_puts',function() {
+            return Tv::with('classifys')->where('tv_type', config('tv.TV_OTHER'))->where('is_push', '1')->orderBy('tv_sort')->take(10)->get();
+        });
+
+        $data['news'] = $this->loadCache('index_other_news',function() {
+            return Tv::with('classifys')->where('tv_type', config('tv.TV_OTHER'))->orderBy('created_at','desc')->take(17)->get();
+        });
+
+        return $data;
+    }
+
     protected function loadCache($key, $callback)
     {
         if(config('app.debug')){
@@ -84,7 +114,6 @@ class IndexController extends PcController
 
         return Cache::remember($key, $this->indexCacheTime, $callback);
     }
-
 
     public function error404 () {
         return abort(404);

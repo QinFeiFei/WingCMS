@@ -6,6 +6,7 @@ use App\Libs\Librarys\ImgCrop;
 use App\Services\Message\Message;
 use App\Services\UserService;
 use App\User;
+use App\UserWatch;
 use Exception;
 use Hash;
 use Illuminate\Http\Request;
@@ -20,7 +21,11 @@ class UserController extends PcController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index () {
-        return view('pc.user.index');
+        $watchs = UserWatch::with('tv')->orderBy('updated_at', 'desc')->take(10)->get();
+
+        return view('pc.user.index')->with([
+            'watchs' => $watchs
+        ]);
     }
 
 

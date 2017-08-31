@@ -220,3 +220,13 @@ if(! function_exists('replaceTvType')) {
         return $txt;
     }
 }
+
+if(! function_exists('userAvatar')){
+    function userAvatar ($user) {
+        if($user && $user->avatar){
+            return asset('/storage/'. $user->avatar);
+        }else{
+            return asset('/pc/user') . '/default_v2.jpg';
+        }
+    }
+}

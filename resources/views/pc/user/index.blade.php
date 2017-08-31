@@ -1,7 +1,12 @@
 @extends('pc.layouts.user')
 @section('title', '用户中心')
 @section('head')
+    <link href="{{ asset('pc/css') }}/global_v4.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('/pc/user') }}/userindex.css">
+    <style>
+        .pic180_240 li, .pic180_100 li {margin-right: 15px !important;}
+        .pfooter {font-size:12px;}
+    </style>
 @endsection
 
 @section('content')
@@ -14,15 +19,14 @@
         <div class="userInfo indexBox">
             <!-- <div class="ie_filter"></div> -->
             <div class="info">
-
-                <a class="head" id="headEdit" href="">
-                    <img src="{{ asset('/pc/user') }}/default_v2.jpg" />
+                <a class="head" id="headEdit" href="{{ route('pc::userEditAvatar') }}">
+                    <img src="{{ userAvatar($user) }}" />
                 </a>
                 <div class="right">
                     <em class="name">{{ $user->username }}</em>
 
                     <em>上次登陆：{{ $user->last_login }}</em>
-                    <a href="" class="index_btn btn_white">修改资料</a>
+                    <a href="{{ route('pc::userEditInfo') }}" class="index_btn btn_white">修改资料</a>
                     {{--<a href="javascript:;" class="index_btn btn_white">登录详情</a>--}}
                 </div>
 
@@ -157,10 +161,29 @@
     <div class="groupSearch indexBox">
         <div class="title">
             <p>浏览记录</p>
-            <a class="more" href="">所有浏览记录&nbsp;&gt;</a>
+            <a class="more" href="{{ route('pc::watchList') }}">所有浏览记录&nbsp;&gt;</a>
         </div>
         <div class="searchBox">
-            asdfasdf
+            <ul class="v_picTxt pic180_240 pic180_210 clearfix">
+            @forelse($watchs as $info)
+                <li>
+                    <div class="pic">
+                        <img src="{{ asset('storage/'.$info->tv->tv_cover) }}" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}';" />
+                        <a class="aPlayBtn" href="{{ route('pc::tvDetail', ['type'=>'teleplay', 'tv_id'=>idEncode($info->tv_id)]) }}"><i></i></a>
+                    </div>
+                    <div class="txtPadding">
+                    <span class="sTit">
+                        {{--<em class="emScore">8.4</em>--}}
+                        <em class="emTit"><a href="{{ route('pc::tvDetail', ['type'=>'teleplay', 'tv_id'=>idEncode($info->tv_id)]) }}">{{ $info->tv->tv_name }}</a></em>
+                    </span>
+                        <span class="sDes">{{ $info->tv->tv_brief }}</span>
+                    </div>
+                    <span class="remove" data-id="{{ $info->watch_id }}"></span>
+                </li>
+            @empty
+                <p style="">暂无观看记录 - -</p>
+            @endforelse
+            </ul>
         </div>
 
     </div>
