@@ -37,7 +37,7 @@ Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' =>
 
 
 // 需要登陆
-Route::group(['middleware' => ['pc.jwt.token', /*'auth:api',*/ 'pc.jwt.refresh'], 'namespace' => 'pc', 'as' => 'pc::'], function () {
+Route::group(['middleware' => ['pc.jwt.token', /*'auth:api',*/ 'pc.jwt.refresh'], 'namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::get('/user', ['as'=>'userIndex', 'uses'=>'UserController@index']);
     Route::match(['get', 'post'], '/user/editInfo', ['as'=>'userEditInfo', 'uses'=>'UserController@editInfo']);
     Route::match(['get', 'post'], '/user/editPassword', ['as'=>'userEditPassword', 'uses'=>'UserController@editPassword']);
