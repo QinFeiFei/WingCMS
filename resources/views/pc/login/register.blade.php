@@ -11,6 +11,9 @@
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="//cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+    <style>
+        #btnSendCode { border:none;position:absolute; top:-1px; left:168px; cursor:pointer; display:block;background: #333333; color:#fff; width:100px;height:40px;line-height:20px;text-align:center;font-size:12px; }
+    </style>
 </head>
 <body>
 <div class="header">
@@ -28,10 +31,15 @@
 <div class="wrapper">
     <div class="main clearfix pb25" id="loginForm">
         <div class="col_a">
-            <div class="g-error" style="margin-top:30px;padding-left:50px;color:red;display:none;"></div>
+            <ul class="regtype">
+                <li id="btn-email" class="cur">通过邮箱注册</li>
+                <li id="btn-tel">通过用户名注册</li>
+                <div style="clear:both;"></div>
+            </ul>
+            <div class="g-error" style="margin-top:15px;padding-left:105px;color:red;display:none;"></div>
             <div class="loginCon">
-                <div class="con" id="tel-con">
-                    <form id="myFormPhone">
+                <div class="con" id="tel-con" style="display:none;">
+                    <form id="myFormUser">
                         <ul class="ulForm clearfix">
                             <li>
                                 <span class="sTit">用户名：</span>
@@ -86,37 +94,37 @@
                                     <a class="btnStyle" href="javascript:;" id="submit_1">立即注册</a>
                                 </div>
                             </li>
-                            <li class="mtb12">
-                                <span class="sTit">&nbsp;</span>
-                                <!--<div class="formCon fontStyle">您还可以使用 <a class="btn-email" href="javascript:">邮箱注册</a></div>-->
-                            </li>
                         </ul>
                     </form>
                 </div>
-                <!--
-                <div class="con" id="email-con" style="display:none;">
-                    <form id='myFormEmail' method='post' onsubmit="return checkAll('email');">
+                <div class="con" id="email-con">
+                    <form id="myFormEmail">
                         <ul class="ulForm clearfix">
                             <li>
                                 <span class="sTit">邮箱：</span>
-                                <div class="tips" id="msg_username_email" style="display:none"><span class="sError"></span></div>
+                                <div class="tips"><span class="sError"></span></div>
+                                <div class="formCon">
+                                    <div class="inputTxt" style="position:relative;">
+                                        <input name="email" type="text" id="email" value="" placeholder="请输入您的邮箱" />
+                                        <input id="btnSendCode" type="button" value="点击获取" onclick="sendMessage()" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="sTit">邮箱验证码：</span>
+                                <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
                                     <div class="inputTxt">
-                                        <input name="username" type="text" id='username_email' value="" autocomplete='off' >
+                                        <input name="emailCode" id="emailCode" type="text" maxlength="30" placeholder="请输入发送至您邮箱的6位验证码" />
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <span class="sTit">密码：</span>
-                                <div class="tips" id='msg_pwd_email' style="display: none"><span class="sError"></span></div>
-                                <div class="tips" id='pwd_strong_email' style="display: none;">
-                                    <p class="pPasswordHard level4"><em>密码强度</em><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><em class="emStyle">极强</em></p>
-                                    <input name="pwd_strength_email" type="hidden" id="pwd_strength_email" value="1">
-                                </div>
+                                <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
                                     <div class="inputTxt">
-                                        <input name="password" id="password_email" type="password" maxlength="16" autocomplete='off' >
-                                        <i class="iRight" style="display: none"></i>
+                                        <input name="password" id="password" type="password" maxlength="30" />
                                     </div>
                                 </div>
                             </li>
@@ -125,57 +133,37 @@
                                 <div class="tips" id='msg_repassword_email' style="display: none"><span class="sError"></span></div>
                                 <div class="formCon">
                                     <div class="inputTxt">
-                                        <input name="repassword" id='repassword_email' type="password" maxlength="16" autocomplete='off' >
-                                        <i class="iRight" style="display: none"></i>
+                                        <input name="repassword" id="repassword" type="password" maxlength="30" />
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <span class="sTit">图片验证码：</span>
-                                <div class="tips" id="msg_validate_email" style="display: none"><span class="sError">验证码不能为空</span></div>
+                                <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
-                                    <div class="loginCode">
-                                        <div class="inputTxt">
-                                            <input name="validate" id="validate_email" type="text" value="" autocomplete='off'>
-                                            <i class="iRight" style="display: none"></i>
-                                        </div>
-
-                                        <div class="loginCode">
-                                            <div class="inputTxt">
-                                                <input name="captcha" class="captcha" type="text" >
-                                                <i class="iRight" style="display: none"></i>
-                                            </div>
-                                            <img style="cursor: pointer" onclick="this.src = this.src + '?' + Math.random();" src="{{ captcha_src() }}" height="38" class="aMessageCode pic">
-                                        </div>
+                                    <div class="inputTxt" style="width:100px !important;display:inline-block">
+                                        <input name="captcha" id="captcha" class="captcha" type="text">
+                                        <i class="iRight" style="display: none"></i>
                                     </div>
+                                    <img style="cursor: pointer;position:relative;top:-15px;" onclick="this.src = this.src + '?' + Math.random();" src="{{ captcha_src() }}" height="38" class="aMessageCode" id="pic">
                                 </div>
                             </li>
                             <li>
                                 <span class="sTit">&nbsp;</span>
-                                <div class="tips" id="msg_agree_email"><span class="sError"></span></div>
+                                <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
-                                    <span class="sCheck">
-                                        <input type="checkbox" checked class="checkbox" id="agree_email" name="agree">我同意
-                                        <a href="/licence.html" target="_blank">《服务协议》</a>、
-                                        <a href="/declare.html" target="_blank">《隐私声明》</a>
-                                    </span>
+                                    <span class="sCheck"><input type="checkbox" checked class="checkbox" id="agree" name="agree">我同意<a href="{{ route('pc::licence') }}" target="_blank">《服务协议》</a>、<a href="{{ route('pc::declare') }}" target="_blank">《隐私声明》</a></span>
                                 </div>
                             </li>
-                            <input name="reg_type" type="hidden" id='reg_type_email' value="username" />
                             <li>
                                 <span class="sTit">&nbsp;</span>
                                 <div class="formCon">
                                     <a type="button" class="btnStyle" href="javascript:void(0)">立即注册</a>
                                 </div>
                             </li>
-                            <li class="mtb12">
-                                <span class="sTit">&nbsp;</span>
-                                <div class="formCon fontStyle">返回 <a class="btn-tel" href="javascript:">用户名注册</a></div>
-                            </li>
                         </ul>
                     </form>
                 </div>
-                -->
             </div>
         </div>
         <div class="col_b">
@@ -196,18 +184,65 @@
 </div>
 <script>
     //邮件注册和手机注册切换
-    $(".btn-email").bind("click",function()
-    {
+    $("#btn-email").click(function(){
+        $(this).parent().find('li').removeClass('cur')
+        $(this).addClass('cur')
         $(".con").hide();
         $("#email-con").show();
     });
-    $(".btn-tel").bind("click",function()
-    {
+    $("#btn-tel").click(function(){
+        $(this).parent().find('li').removeClass('cur')
+        $(this).addClass('cur')
         $(".con").hide();
         $("#tel-con").show();
     });
-</script>
-<script>
+
+    // 发送短信验证码
+    var InterValObj;    // timer变量，控制时间
+    var count = 60;     // 间隔函数，1秒执行
+    var curCount;       // 当前剩余秒数
+    function sendMessage() {
+        curCount = count;
+        //设置button效果，开始计时
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").css("cursor", "not-allowed");
+        $("#btnSendCode").val(curCount + " 'S");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: '{{ route('api::sendMail') }}',
+            data: {
+                'type' : 'register',
+                'email': $('#email').val()
+            },
+            success: function (response){
+                if(response.code != 0){
+                    layer.msg(response.msg, {icon: 2});
+                }else{
+                    layer.msg(response.msg);
+                }
+            },
+            error: function () {
+                alert(arguments[1]);
+            }
+        });
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);
+            $("#btnSendCode").removeAttr("disabled");
+            $("#btnSendCode").css("cursor", "pointer");
+            $("#btnSendCode").val("点击获取");
+        }else {
+            curCount--;
+            $("#btnSendCode").css("cursor", "not-allowed");
+            $("#btnSendCode").val(curCount + " 'S");
+        }
+    }
+
+    // 添加检测条件
     jQuery.validator.addMethod("realusername", function(value, element) {
         return this.optional(element) ||  /^[\u0391-\uFFE5|a-zA-Z|0-9]{3,20}$/.test(value);
     }, "8-20位字符，支持汉字、数字、字母及“-””_“组合");
@@ -219,7 +254,7 @@
 
     $(function(){
         $(function(){
-            $('#myFormPhone').validate({
+            $('#myFormUser').validate({
                 errorPlacement: function(error, element){
                     $(element).parent().parent().parent().find('.tips').find('.sError').html(error);
                 },
@@ -285,7 +320,7 @@
             });
             $('#submit_1').click(function(){
                 $('.g-error').hide();
-                if(! $("#myFormPhone").valid()){ return false; }
+                if(! $("#myFormUser").valid()){ return false; }
                 $.ajax({
                     type: "POST",
                     url: "{{ route('pc::register') }}",

@@ -6,6 +6,7 @@
     <style>
         .pic180_240 li, .pic180_100 li {margin-right: 15px !important;}
         .pfooter {font-size:12px;}
+        body {background:#fff;}
     </style>
 @endsection
 
