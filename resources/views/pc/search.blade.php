@@ -10,7 +10,7 @@
                         <li media="{{ idEncode($tv->tv_id) }}">
                             <div class="pic">
                                 <img src="{{ asset('storage/'.$tv->tv_cover) }}" onerror="javascript:this.src='{{ asset('pc/images/v_defaultPic.png') }}';" alt="{{ $tv->tv_name }}">
-                                <span class="pRightBottom"><em>{{ replaceTvType($tv->tv_type) }} | 8.5分</em></span>
+                                <span class="pRightBottom"><em>{{ replaceTvType($tv->tv_type) }} | {{ $tv->tv_grade }}分</em></span>
 
                                 <a class="aPlayBtn" href="{{ route('pc::tvDetail', ['type' => 'movie', 'tv_id'=>idEncode($tv->tv_id)]) }}" title="{{ $tv->tv_name }}"><i></i></a>
                             </div>
