@@ -15,7 +15,6 @@ class UserWatchService {
 
             if (! empty($viewedArray)){
                 foreach ($viewedArray as $view){
-                    echo $view['tv_id'];
                     $this->addViewedToDatabase($view['tv_id'], $user_id);
                 }
             }

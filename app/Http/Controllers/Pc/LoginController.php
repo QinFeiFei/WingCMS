@@ -24,6 +24,25 @@ class LoginController extends Controller
             return view('pc.login.register');
         }
 
+        request()->offsetSet('register_type', $request->get('pc'));
+        if($request->get('type') == 'username'){
+            return $this->usernameRegister($request, $userService);
+        }else if ($request->get('type') == 'email'){
+            return $this->emailRegister($request, $userService);
+        }else{
+            return output_error('注册失败');
+        }
+    }
+
+
+    /**
+     * 使用用户名注册
+     *
+     * @param $request
+     * @param $userService
+     * @return array
+     */
+    private function usernameRegister ($request, $userService) {
         $validator = Validator::make($request->all(), [
             'captcha' => 'required|captcha',
         ], [
@@ -35,6 +54,47 @@ class LoginController extends Controller
             return output_error($validator->errors()->first());
         }
 
+        $result = $userService->register($request->all());
+        if( $result['code'] == 0 ){
+            // PC端注册成功后，登陆用户
+            $loginResult = $userService->login($request->all());
+
+            if($loginResult['code'] == 0){
+                setcookie('userToken', 'Bearer '.$loginResult['result'], time()+60*60*24*14, '/');
+                return output_success('login success');
+            }else{
+                return $loginResult;
+            }
+        }else{
+            return $result;
+        }
+    }
+
+
+    /**
+     * 使用邮箱注册
+     *
+     * @param $request
+     * @param $userService
+     * @return array
+     */
+    private function emailRegister ($request, $userService) {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|msgcode:email,register,'.request()->get('code').','.request()->get('email'),
+            'captcha' => 'required|captcha',
+        ], [
+            'code.required' => '邮箱验证码必填',
+            'code.msgcode' => '邮箱验证码错误',
+            'captcha.required'  => '图形验证码必填',
+            'captcha.captcha'   => '图形验证码错误',
+        ]);
+
+        if ($validator->fails()) {
+            return output_error($validator->errors()->first());
+        }
+
+        // 通过邮箱注册的用户，将用户名设置为邮箱
+        request()->offsetSet('username', $request->get('email'));
         $result = $userService->register($request->all());
         if( $result['code'] == 0 ){
             // PC端注册成功后，登陆用户

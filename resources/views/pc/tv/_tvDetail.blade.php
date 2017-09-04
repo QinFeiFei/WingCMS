@@ -8,7 +8,7 @@
         .tab li { float:left;width:100px;height:50px;text-align:center;line-height:50px;cursor:pointer; background: #e2e2e2;}
         .on { display:block; }
 
-        .tabContent ul li {border-bottom:1px dashed #999;height:40px;line-height:40px;padding:0px 10px}
+        .tabContent ul li {border-bottom:1px dashed #999;height:auto;line-height:40px;padding:0px 10px}
         .tabContent ul li:hover { background:#eee; }
 
         .tabContent ul li span {display:block;float:left;}
@@ -161,6 +161,7 @@
                                         <span class="w_50">分享链接：<a target="_blank" href="{{ $info->tv_baidu_url }}">{{ $info->tv_baidu_url }}</a></span>
                                         <span class="w_30">分享密码：<i class="BDPWD">****</i></span>
                                         <span class="w_20"><a href="javascript:void(0)" class="lookBDPWD">查看分享密码</a></span>
+                                        <div style="clear:both;"></div>
                                     </li>
                                 </ul>
                             </div>

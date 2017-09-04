@@ -14,6 +14,9 @@
     <style>
         #btnSendCode { border:none;position:absolute; top:-1px; left:168px; cursor:pointer; display:block;background: #333333; color:#fff; width:100px;height:40px;line-height:20px;text-align:center;font-size:12px; }
     </style>
+    <script>
+        window.onerror=function(){return true;}
+    </script>
 </head>
 <body>
 <div class="header">
@@ -27,7 +30,6 @@
         <p class="pRight">我已有帐号，<a href="{{ route('pc::login') }}">立即登录</a></p>
     </div>
 </div>
-
 <div class="wrapper">
     <div class="main clearfix pb25" id="loginForm">
         <div class="col_a">
@@ -38,6 +40,7 @@
             </ul>
             <div class="g-error" style="margin-top:15px;padding-left:105px;color:red;display:none;"></div>
             <div class="loginCon">
+                <?php $captchaSrc = captcha_src(); ?>
                 <div class="con" id="tel-con" style="display:none;">
                     <form id="myFormUser">
                         <ul class="ulForm clearfix">
@@ -78,7 +81,7 @@
                                         <input name="captcha" id="captcha" class="captcha" type="text">
                                         <i class="iRight" style="display: none"></i>
                                     </div>
-                                    <img style="cursor: pointer;position:relative;top:-15px;" onclick="this.src = this.src + '?' + Math.random();" src="{{ captcha_src() }}" height="38" class="aMessageCode" id="pic">
+                                    <img style="cursor: pointer;position:relative;top:-15px;" onclick="captchaClick()" src="{{ $captchaSrc }}" height="38" class="aMessageCode">
                                 </div>
                             </li>
                             <li>
@@ -98,7 +101,7 @@
                     </form>
                 </div>
                 <div class="con" id="email-con">
-                    <form id="myFormEmail">
+                    <form id="myFormEmail" method="POST">
                         <ul class="ulForm clearfix">
                             <li>
                                 <span class="sTit">邮箱：</span>
@@ -115,7 +118,7 @@
                                 <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
                                     <div class="inputTxt">
-                                        <input name="emailCode" id="emailCode" type="text" maxlength="30" placeholder="请输入发送至您邮箱的6位验证码" />
+                                        <input name="emailCode" id="emailCode" type="text" value="" maxlength="6" placeholder="请输入发送至您邮箱的6位验证码" />
                                     </div>
                                 </div>
                             </li>
@@ -124,16 +127,16 @@
                                 <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
                                     <div class="inputTxt">
-                                        <input name="password" id="password" type="password" maxlength="30" />
+                                        <input name="password2" id="password2" type="password" value="" maxlength="30" />
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <span class="sTit">请确认密码：</span>
-                                <div class="tips" id='msg_repassword_email' style="display: none"><span class="sError"></span></div>
+                                <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
                                     <div class="inputTxt">
-                                        <input name="repassword" id="repassword" type="password" maxlength="30" />
+                                        <input name="repassword2" id="repassword2" type="password" value="" maxlength="30" />
                                     </div>
                                 </div>
                             </li>
@@ -142,23 +145,23 @@
                                 <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
                                     <div class="inputTxt" style="width:100px !important;display:inline-block">
-                                        <input name="captcha" id="captcha" class="captcha" type="text">
+                                        <input name="captcha2" id="captcha2" class="captcha" type="text" value="">
                                         <i class="iRight" style="display: none"></i>
                                     </div>
-                                    <img style="cursor: pointer;position:relative;top:-15px;" onclick="this.src = this.src + '?' + Math.random();" src="{{ captcha_src() }}" height="38" class="aMessageCode" id="pic">
+                                    <img style="cursor: pointer;position:relative;top:-15px;" onclick="captchaClick()" src="{{ $captchaSrc }}" height="38" class="aMessageCode">
                                 </div>
                             </li>
                             <li>
                                 <span class="sTit">&nbsp;</span>
                                 <div class="tips"><span class="sError"></span></div>
                                 <div class="formCon">
-                                    <span class="sCheck"><input type="checkbox" checked class="checkbox" id="agree" name="agree">我同意<a href="{{ route('pc::licence') }}" target="_blank">《服务协议》</a>、<a href="{{ route('pc::declare') }}" target="_blank">《隐私声明》</a></span>
+                                    <span class="sCheck"><input type="checkbox" checked class="checkbox" id="agree2" name="agree2">我同意<a href="{{ route('pc::licence') }}" target="_blank">《服务协议》</a>、<a href="{{ route('pc::declare') }}" target="_blank">《隐私声明》</a></span>
                                 </div>
                             </li>
                             <li>
                                 <span class="sTit">&nbsp;</span>
                                 <div class="formCon">
-                                    <a type="button" class="btnStyle" href="javascript:void(0)">立即注册</a>
+                                    <a type="button" class="btnStyle" id="submit_2" href="javascript:void(0)">立即注册</a>
                                 </div>
                             </li>
                         </ul>
@@ -242,6 +245,7 @@
         }
     }
 
+
     // 添加检测条件
     jQuery.validator.addMethod("realusername", function(value, element) {
         return this.optional(element) ||  /^[\u0391-\uFFE5|a-zA-Z|0-9]{3,20}$/.test(value);
@@ -251,6 +255,10 @@
         var reg = /^[0-9]*$/;
         return !reg.test(value);
     }, "用户名不能是纯数字");
+
+    function captchaClick () {
+      $('.aMessageCode').attr('src', '{{ captcha_src() }}' + '?' + Math.random());
+    }
 
     $(function(){
         $(function(){
@@ -325,6 +333,7 @@
                     type: "POST",
                     url: "{{ route('pc::register') }}",
                     data: {
+                        type: 'username',
                         username: $("#username").val(),
                         password: $("#password").val(),
                         captcha:  $("#captcha").val(),
@@ -333,13 +342,109 @@
                     dataType: "json",
                     success: function(data){
                         if(data.code != 0){
-                            document.getElementById('pic').src = document.getElementById('pic').src + '?' + Math.random();
+                            captchaClick();
                             $('.g-error').html(data.msg).show();
                         }else{
                             layer.msg('注册成功!', {icon: 6});
 
                             window.setTimeout(function () {
-                                window.location.href = '{{ request()->header('referer') }}'
+                                window.location.href = '{{ loginReferer(request()->header('referer')) }}'
+                            }, 1000)
+                        }
+                    }
+                });
+            })
+
+            $('#myFormEmail').validate({
+                errorPlacement: function(error, element){
+                  $(element).parent().parent().parent().find('.tips').find('.sError').html(error);
+                },
+
+                rules : {
+                  email: {
+                    required: true,
+                    email: true,
+                    remote   : {
+                      url : '{{ route('pc::registerCheck') }}',
+                      type: 'get',
+                      data:{
+                        type  : 'email',
+                        value : function(){
+                          return $('#email').val();
+                        }
+                      }
+                    }
+                  },
+                  emailCode: {
+                    required: true,
+                  },
+                  password2: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 20
+                  },
+                  repassword2: {
+                    required : true,
+                    equalTo: '#password2'
+                  },
+                  captcha2: {
+                    required: true
+                  },
+                  agree2: {
+                    required: true
+                  }
+                },
+                messages : {
+                    email: {
+                        required : '邮箱不能为空',
+                        email: '邮箱格式错误',
+                        remote   : '用户名已存在,请尝试其它用户名'
+                    },
+                    emailCode: {
+                        required : '邮箱验证码不能为空',
+                    },
+                    password2: {
+                        required : '密码不能为空',
+                        minlength: '密码长度为5-20个字符',
+                        maxlength: '密码长度为5-20个字符'
+                    },
+                    repassword2: {
+                        required : '重复密码不能为空',
+                        equalTo: "两次密码输入不一致"
+                    },
+                    captcha2: {
+                        required : '验证码不能为空'
+                    },
+                    agree2: {
+                        required: '请同意协议'
+                    }
+                }
+          });
+            $('#submit_2').click(function(){
+                $('.g-error').hide();
+
+                if(! $("#myFormEmail").valid()){ return false; }
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('pc::register') }}",
+                    dataType: "json",
+                    data: {
+                        type: 'email',
+                        email: $("#email").val(),
+                        code: $("#emailCode").val(),
+                        password: $("#password2").val(),
+                        captcha:  $("#captcha2").val(),
+                        _token:   '{{ csrf_token() }}'
+                    },
+                    success: function(data){
+                        if(data.code != 0){
+                            captchaClick();
+                            $('.g-error').html(data.msg).show();
+                        }else{
+                            layer.msg('注册成功!', {icon: 6});
+
+                            window.setTimeout(function () {
+                                window.location.href = '{{ loginReferer(request()->header('referer')) }}'
                             }, 1000)
                         }
                     }

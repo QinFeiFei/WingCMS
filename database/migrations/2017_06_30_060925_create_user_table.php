@@ -19,9 +19,7 @@ class CreateUserTable extends Migration {
 			$table->string('password')->default('')->comment('密码');
 			$table->string('avatar')->default('')->comment('头像');
 			$table->string('email')->default('')->comment('邮箱');
-			$table->string('email_check')->default('0')->comment('邮箱是否已验证');
 			$table->string('phone')->default('')->comment('手机 ');
-			$table->string('phone_check')->default('0')->comment('手机是否已验证');
 			$table->dateTime('last_login')->comment('最后登陆时间');
 			$table->string('last_ip')->default('')->comment('最后登陆IP');
             $table->dateTime('register_time')->comment('注册时间');

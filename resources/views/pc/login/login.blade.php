@@ -159,7 +159,7 @@
                             document.getElementById('pic').src = document.getElementById('pic').src + '?' + Math.random();
                             $('.g-error').html(data.msg).show();
                         }else{
-                            window.location.href = '{{ request()->header('referer') }}'
+                            window.location.href = '{{ loginReferer(request()->header('referer')) }}'
                         }
                     }
                 });

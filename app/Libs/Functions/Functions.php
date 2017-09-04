@@ -222,11 +222,33 @@ if(! function_exists('replaceTvType')) {
 }
 
 if(! function_exists('userAvatar')){
+    /**
+     * 显示用户头像
+     *
+     * @param $user
+     * @return string
+     */
     function userAvatar ($user) {
         if($user && $user->avatar){
             return asset('/storage/'. $user->avatar);
         }else{
             return asset('/pc/user') . '/default_v2.jpg';
         }
+    }
+}
+
+if(! function_exists('loginReferer')){
+    /**
+     * 登陆或注册后跳转
+     *
+     * @param $url
+     * @return string
+     */
+    function loginReferer ($url) {
+        $pattern = '/(login|register)/';
+        if(preg_match($pattern, $url)){
+            $url = route('pc::index');
+        }
+        return $url;
     }
 }
