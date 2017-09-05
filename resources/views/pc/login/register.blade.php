@@ -23,9 +23,8 @@
     <div class="headerCon">
         <div class="logo">
             <a href="/" class="logoPic">
-                <img src="{{ asset('pc/images/logo.png') }}" width="203" height="71">
+                <img src="{{ asset('pc/images/header_logo.png') }}" width="203" height="71">
             </a>
-            <span class="sTxt">注册帐号</span>
         </div>
         <p class="pRight">我已有帐号，<a href="{{ route('pc::login') }}">立即登录</a></p>
     </div>

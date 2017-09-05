@@ -138,6 +138,11 @@ class UserController extends PcController
     }
 
 
+    public function rebindPhone () {
+
+    }
+
+
     /**
      * 绑定邮箱
      *

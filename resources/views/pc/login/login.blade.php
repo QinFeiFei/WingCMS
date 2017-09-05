@@ -15,8 +15,7 @@
 <!--头部 begin-->
 <div class="pheader-col">
     <div class="logo-wrap clearfix">
-        <a class="logoPic" href="/"><img width="203" height="71" title="" alt="" src="{{ asset('pc/images/logo.png') }}"></a>
-        <span class="sTxt">登录</span>
+        <a class="logoPic" href="/"><img width="203" height="71" title="" alt="" src="{{ asset('pc/images/header_logo.png') }}"></a>
     </div>
 </div>
 <!--头部 end-->

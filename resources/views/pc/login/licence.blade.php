@@ -7,7 +7,6 @@
 </head>
 <body>
 <div class="top">
-    <p><a href="http://www.2345.com/">2345网址大全</a> | <a href="http://www.duote.com/">2345软件大全</a> | <a href="http://haozip.2345.com/">2345好压</a> | <a href="http://ie.2345.com/" target="_blank">2345加速浏览器</a></p>
     <a href="http://www.2345.com/" target="_blank" class="logo"><img src="{{ asset('pc/images/logo20141017.png') }}"></a></div>
 <div class="cnt">
     <div class="cnt_in">
