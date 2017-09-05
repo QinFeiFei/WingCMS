@@ -25,6 +25,8 @@ import tvRouter from './tvRouter'
 // 首页管理
 import pcRouter from './pcRouter'
 
+import settingRouter from './settingRouter'
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -60,7 +62,8 @@ export default new Router({
         },
         userRouter,
         tvRouter,
-        pcRouter
+        pcRouter,
+        settingRouter
       ]
     }
   ]

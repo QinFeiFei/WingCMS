@@ -33,6 +33,9 @@ module.exports = {
       },
       '/storage': {
         target: 'http://127.0.0.1:8090'
+      },
+      '/api': {
+        target: 'http://127.0.0.1:8090'
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

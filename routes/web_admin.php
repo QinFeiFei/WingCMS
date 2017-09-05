@@ -24,4 +24,7 @@ Route::group(['middleware' => ['auth:admin', 'jwt.refresh'], 'prefix' => 'admin'
 
     // 首页管理
     Route::get('pc/clearCache', ['as'=>'tv.clearCache', 'uses'=>'PcController@clearCache']);
+
+    // 设置
+    Route::get('setting/emailTest', ['as'=>'setting.emailTest', 'uses'=>'SettingController@emailTest']);
 });

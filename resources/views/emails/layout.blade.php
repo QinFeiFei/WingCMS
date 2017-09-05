@@ -25,7 +25,7 @@
                             <td><table cellpadding="0" cellspacing="0" width="640">
                                     <tbody>
                                     <tr style="line-height: 40px;">
-                                        <td width="80" style="padding-left: 290px;"><a href="{{ env('APP_URL') }}" target="_blank"> <img src="{{ asset('images/logo.svg') }}" width="54"> </a></td>
+                                        <td width="80" style="padding-left: 290px;"><a href="{{ env('APP_URL') }}" target="_blank"> <img src="{{ env('APP_URL').'/images/logo.svg' }}" width="54"> </a></td>
                                     </tr>
                                     </tbody>
                                 </table></td>
