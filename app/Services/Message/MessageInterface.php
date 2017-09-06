@@ -12,6 +12,9 @@ interface MessageInterface {
         'rebindEmail',      // 重新绑定邮箱
         'bindEmailSucc',    // 绑定邮箱成功
         'bindEmail',        // 绑定邮箱
+        'rebindPhone',      // 重新绑定邮箱
+        'bindPhoneSucc',    // 绑定邮箱成功
+        'bindPhone',        // 绑定邮箱
     ];
 
     /**

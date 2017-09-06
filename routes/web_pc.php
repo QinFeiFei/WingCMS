@@ -44,6 +44,8 @@ Route::group(['middleware' => ['pc.jwt.token', /*'auth:api',*/ 'pc.jwt.refresh']
     Route::match(['get', 'post'], '/user/bindPhone', ['as'=>'userBindPhone', 'uses'=>'UserController@bindPhone']);
     Route::match(['get', 'post'], '/user/bindEmail', ['as'=>'userBindEmail', 'uses'=>'UserController@bindEmail']);
     Route::post('/user/rebindEmail', ['as'=>'userReBindEmail', 'uses'=>'UserController@rebindEmail']);
+    Route::post('/user/rebindPhone', ['as'=>'userReBindPhone', 'uses'=>'UserController@rebindPhone']);
+
     Route::post('/user/editAvatar/upload', ['as'=>'uploadAvatar', 'uses'=>'UserController@uploadAvatar']);
     Route::get('/user/editAvatar/save', ['as'=>'saveAvatar', 'uses'=>'UserController@saveAvatar']);
     Route::get('/user/editAvatar', ['as'=>'userEditAvatar', 'uses'=>'UserController@editAvatar']);

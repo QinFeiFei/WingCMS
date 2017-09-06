@@ -28,6 +28,16 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\PassWordUpdateListener',
         ],
 
+        // 用户绑定邮箱
+        'App\Events\EmailUpdateEvent' => [
+            'App\Listeners\EmailUpdateListener',
+        ],
+
+        // 用户绑定手机号
+        'App\Events\PhoneUpdateEvent' => [
+            'App\Listeners\PhoneUpdateListener',
+        ],
+
         // 观看影视
         'App\Events\WatchTvEvent' => [
             'App\Listeners\WatchTvListener',

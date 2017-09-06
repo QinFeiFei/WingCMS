@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Events\EmailUpdateEvent;
 use App\Events\LoginEvent;
 use App\Events\PassWordUpdateEvent;
+use App\Events\PhoneUpdateEvent;
 use App\Events\RegisterEvent;
 use App\User;
 use Carbon\Carbon;
@@ -281,6 +282,19 @@ class UserService {
             $user->save();
 
             event(new EmailUpdateEvent($user));
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
+    }
+
+
+    public function setPhone(User $user, $phone) {
+        try{
+            $user->phone = trim($phone);
+            $user->save();
+
+            event(new PhoneUpdateEvent($user));
             return true;
         }catch (\Exception $e){
             return false;

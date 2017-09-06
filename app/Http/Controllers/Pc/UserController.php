@@ -109,16 +109,19 @@ class UserController extends PcController
      */
     public function bindPhone () {
         if(request()->method() == 'GET'){
-            return view('pc.user.bindPhone');
+            $blade = empty($this->getUser()->phone) ? 'pc.user.bindPhone' : 'pc.user.rebindPhone';
+            return view($blade);
         }
 
         $validator = Validator::make(request()->all(), [
-            'code' => 'msgcode:email,modPassword,'.request()->get('code').','.$this->getUser()->email,
-            'password' => 'required|between:5,30',
+//            'code' => 'required|msgcode:email,bindEmail,'.request()->get('code').','.request()->get('email'),
+            'phone' => 'required|mobile|unique:user,phone'
         ], [
+            'code.required' => '验证码必填',
             'code.msgcode' => '验证码错误!',
-            'password.required' => '密码必填',
-            'password.between' => '密码必须大于5位小于30位',
+            'phone.required' => '手机号必填',
+            'phone.mobile' => '手机格式错误',
+            'phone.unique' => '该手机号已被占用',
         ]);
         if ($validator->fails()) {
             return back()->with('error', $validator->errors()->first());
@@ -126,20 +129,48 @@ class UserController extends PcController
 
         $userService = new UserService();
         $user = User::find($this->getUser()->user_id);
-        if($userService->setPassword($user, request()->get('password'))){
+        if($userService->setPhone($user, request()->get('phone'))){
             // 将验证码设置为已验证
-            $message = new Message('modPassword', $this->getUser()->email);
-            $message->setCodeVerify(request()->get('code'), 'email', $this->getUser()->email);
+            // $message = new Message('bindPhone', request()->get('phone'));
+            // $message->setCodeVerify(request()->get('code'), 'email', request()->get('phone'));
 
-            return back()->with('success', '密码修改成功');
+            return back()->with('success', '手机绑定成功');
         }else{
-            return back()->with('error', '密码修改失败');
+            return back()->with('error', '手机绑定失败');
         }
     }
 
 
     public function rebindPhone () {
+        $validator = Validator::make(request()->all(), [
+//            'code' => 'required|msgcode:email,rebindEmail,'.request()->get('code').','.request()->get('email'),
+            'phone' => 'required|mobile|unique:user,phone'
+        ], [
+            'code.required' => '验证码必填',
+            'code.msgcode' => '验证码错误!',
+            'phone.required' => '手机必填',
+            'phone.mobile' => '手机格式错误',
+            'phone.unique' => '该手机已被占用',
+        ]);
+        if ($validator->fails()) {
+            return back()->with('error', $validator->errors()->first());
+        }
 
+        $userService = new UserService();
+        $user = User::find($this->getUser()->user_id);
+        if(! Hash::check(request()->get('password'), $user->password)){
+            return back()->with('error', '密码验证失败.');
+        }
+
+        if($userService->setPhone($user, request()->get('phone'))){
+            // 将验证码设置为已验证
+            // $message = new Message('rebindEmail', request()->get('email'));
+            // $message->setCodeVerify(request()->get('code'), 'email', request()->get('email'));
+
+            return back()->with('success', '手机绑定成功');
+        }else{
+            return back()->with('error', '手机绑定失败');
+        }
     }
 
 
