@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Pc;
 
 use App\Services\UserWatchService;
+use App\TvClass;
 use Illuminate\Http\Request;
 
 class TvController extends PcController
@@ -30,5 +31,9 @@ class TvController extends PcController
         $user_id = $this->getUser() ? $this->getUser()->user_id : 0;
         $userWatchService = new UserWatchService();
         $userWatchService->addViewedGoods($tv_id, $user_id);
+    }
+
+    public function getClass ($tv_type) {
+        return TvClass::where('tv_type', $tv_type)->get();
     }
 }

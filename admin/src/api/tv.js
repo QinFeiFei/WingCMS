@@ -14,6 +14,8 @@ const tvUpdate = '/admin/tv/'               // 修改影视 PATCH 参数：tv_id
 const destoryTv = '/admin/tv/'              // 将影视移入回收站 DELETE 参数：tv_id
 const deleteTv = '/admin/tv'                // 彻底删除影视(批量删除) DELETE
 
+const getTvClass = '/api/tv/getClass/'          // 查询对应影视类型的影视分类 GET 参数 tv_type
+
 export {
   tvList,
   setField,
@@ -22,5 +24,6 @@ export {
   tvShow,
   tvUploadCover,
   destoryTv,
-  deleteTv
+  deleteTv,
+  getTvClass
 }

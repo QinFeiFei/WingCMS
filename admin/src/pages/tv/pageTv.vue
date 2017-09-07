@@ -129,7 +129,7 @@
 <script type="text/ecmascript-6">
   import consoleTitle from '../../components/ConsoleTitle'
   import editArray from '../../components/EditArray'
-  import { tvStore, tvUploadCover, tvShow, tvUpdate } from '../../api/tv'
+  import { tvStore, tvUploadCover, tvShow, tvUpdate, getTvClass } from '../../api/tv'
   import moment from 'moment'
 
   export default {
@@ -180,7 +180,8 @@
             { required: true, message: '影视地区不能为空', trigger: 'change' }
           ]
         },
-        uploadUrl: tvUploadCover
+        uploadUrl: tvUploadCover,
+        tmp_tv_type: ''
       }
     },
     components: {
@@ -257,7 +258,7 @@
           this.isLoading = false
           let result = response.data
           for (let info of result.classifys) {
-            this.classifys.push(info.classify_key + '-' + info.classify_name)
+            this.classifys.push(info.tv_class_id + '-' + info.classify_name)
           }
 
           delete result.classifys
@@ -287,6 +288,25 @@
       },
       updateActors: function (arr) {
         this.formFields.tv_actors.actors = arr
+      },
+      loadTvClass: function (tvType) {
+        this.axios({
+          method: 'GET',
+          url: getTvClass + tvType
+        }).then(response => {
+          console.log(response.data)
+        })
+      }
+    },
+    watch: {
+      formFields: {
+        handler: function (now, old) {
+          if (now.tv_type !== this.tmp_tv_type) {
+            this.tmp_tv_type = now.tv_type
+            this.loadTvClass(now.tv_type)
+          }
+        },
+        deep: true
       }
     }
   }

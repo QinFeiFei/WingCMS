@@ -129,12 +129,12 @@ class TvService {
         $classify = intval($request->get('classify', 0));
         if(!empty($classify)){
             $model->rightJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
-                  ->where('tv_classify.classify_key', $classify)
-                  ->select(DB::raw('wing_tv.*, wing_tv_classify.classify_key, wing_tv_classify.classify_name'));
+                  ->where('tv_classify.tv_class_id', $classify)
+                  ->select(DB::raw('wing_tv.*, wing_tv_classify.tv_class_id, wing_tv_classify.classify_name'));
         }else{
             $model->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
                   ->groupBy('tv.tv_id')
-                  ->select(DB::raw('wing_tv.*, wing_tv_classify.classify_key, wing_tv_classify.classify_name'));
+                  ->select(DB::raw('wing_tv.*, wing_tv_classify.tv_class_id, wing_tv_classify.classify_name'));
         }
     }
 
@@ -213,7 +213,7 @@ class TvService {
             foreach ($classifys as $item) {
                 $itemArr = explode('-', $item);
                 $many[] = new TvClassify([
-                    'classify_key' => $itemArr[0],
+                    'tv_class_id' => $itemArr[0],
                     'classify_name' => $itemArr[1]
                 ]);
             }
@@ -264,14 +264,14 @@ class TvService {
 
             // ---- 维护影视类型部分，可能写的有点复杂了...
             $many = [];
-            $classify_keys = [];
+            $tv_class_ids = [];
 
             // 先查询出来所有类型
-            $hasClassifys = TvClassify::select('classify_id', 'classify_key', 'classify_name')->where('tv_id', $fields['tv_id'])->get()->toArray();
+            $hasClassifys = TvClassify::select('classify_id', 'tv_class_id', 'classify_name')->where('tv_id', $fields['tv_id'])->get()->toArray();
 
             foreach ($classifys as $item) {
                 $itemArr = explode('-', $item);
-                $classify_keys[] = $itemArr[0];
+                $tv_class_ids[] = $itemArr[0];
 
                 // 判断该类型是否已存在，存在则跳过
                 if(deep_in_array($itemArr[0], $hasClassifys)) {
@@ -279,13 +279,13 @@ class TvService {
                 }
 
                 $many[] = new TvClassify([
-                    'classify_key' => $itemArr[0],
+                    'tv_class_id' => $itemArr[0],
                     'classify_name' => $itemArr[1]
                 ]);
             }
 
             // 最后删除本次提交不存在的类型
-            TvClassify::where('tv_id', $fields['tv_id'])->whereNotIn('classify_key', $classify_keys)->delete();
+            TvClassify::where('tv_id', $fields['tv_id'])->whereNotIn('tv_class_id', $tv_class_ids)->delete();
 
             // 添加不存在的类型
             $model->classifys()->saveMany($many);

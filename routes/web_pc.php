@@ -11,6 +11,8 @@ Route::group(['namespace' => 'Pc', 'as' => 'pc::'], function () {
     Route::get('/registerCheck', ['as'=>'registerCheck', 'uses'=>'LoginController@registerCheck']);
     Route::get('/register/declare', ['as'=>'declare', 'uses'=>'LoginController@reg_declare']);
     Route::get('/register/licence', ['as'=>'licence', 'uses'=>'LoginController@reg_licence']);
+
+    Route::get('/api/tv/getClass/{tv_type}', ['as'=>'getTvClass', 'uses'=>'TvController@getClass']);
 });
 
 
