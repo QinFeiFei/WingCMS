@@ -10,6 +10,8 @@ import openclassList from '../pages/tv/OpenclassList'
 import otherList from '../pages/tv/OtherList'
 import tvSpecial from '../pages/tv/TvSpecial'
 import pageTv from '../pages/tv/pageTv'
+import tvClassList from '../pages/tv/TvClassList'
+import tvClassPage from '../pages/tv/TvClassPage'
 
 export default {
   path: '/tv',
@@ -28,6 +30,10 @@ export default {
     { path: 'otherList', name: 'TvSpecial', component: tvSpecial },
     // 添加与删除
     { path: 'create/:type', name: 'TvCreate', component: pageTv },
-    { path: 'update/:tv_id', name: 'TvUpdate', component: pageTv }
+    { path: 'update/:tv_id', name: 'TvUpdate', component: pageTv },
+    // 影视分类标签
+    { path: 'classList', name: 'TvClassList', component: tvClassList },
+    { path: 'class/create', name: 'TvClassCreate', component: tvClassPage },
+    { path: 'class/update/:tv_class_id', name: 'TvClassUpdate', component: tvClassPage }
   ]
 }

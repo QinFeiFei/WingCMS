@@ -16,7 +16,7 @@ class CreateTvClassifyTable extends Migration {
 		{
 			$table->integer('classify_id', true);
             $table->integer('tv_class_id')->default(0)->comment('类型Key');
-			$table->string('classify_name')->default('')->comment('类型名称');
+			$table->string('tv_class_name')->default('')->comment('类型名称');
 			$table->integer('tv_id')->default(0);
 			$table->timestamps();
 		});

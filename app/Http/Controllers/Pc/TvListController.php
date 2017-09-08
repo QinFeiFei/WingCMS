@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Pc;
 
 use App\Services\TvService;
 use App\Tv;
+use App\TvClass;
 use DB;
 use Illuminate\Http\Request;
 
@@ -11,17 +12,17 @@ class TvListController extends TvController
     public function __construct(Request $request)
     {
         parent::__construct($request);
-        $areas = config('tv.tv_areas');
-        $classifys = config('tv.tv_classify');
-        $years = config('tv.tv_years');
-
-        view()->share('areas', $areas);
-        view()->share('classifys', $classifys);
-        view()->share('years', $years);
     }
 
     public function index ($type, Request $request, TvService $tvService){
         $this->checkTvType($type);
+        $areas = config('tv.tv_areas');
+        $years = config('tv.tv_years');
+        $classifys = TvClass::where('tv_type', replaceTvTypeText($type))->get();
+
+        view()->share('areas', $areas);
+        view()->share('classifys', $classifys);
+        view()->share('years', $years);
 
         switch ($type) {
             case 'movie':
@@ -47,9 +48,6 @@ class TvListController extends TvController
                 break;
         }
     }
-
-
-
 
     protected function movieList (Request $request, TvService $tvService) {
         request()->offsetSet('tv_type', config('tv.TV_MOVIE'));

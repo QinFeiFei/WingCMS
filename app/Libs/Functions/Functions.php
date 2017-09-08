@@ -221,6 +221,42 @@ if(! function_exists('replaceTvType')) {
     }
 }
 
+if(! function_exists('replaceTvTypeText')){
+    /**
+     * 影视类型转换为文字显示
+     * @param $type
+     * @return string
+     */
+    function replaceTvTypeText($type)
+    {
+        $txt = '0';
+        switch ($type) {
+            case "movie":
+                $txt = '10';
+                break;
+            case "teleplay":
+                $txt = '20';
+                break;
+            case "cartoon":
+                $txt = '30';
+                break;
+            case "variety":
+                $txt = '40';
+                break;
+            case "mv":
+                $txt = '50';
+                break;
+            case "openclass":
+                $txt = '60';
+                break;
+            case "other":
+                $txt = '70';
+                break;
+        }
+        return $txt;
+    }
+}
+
 if(! function_exists('userAvatar')){
     /**
      * 显示用户头像

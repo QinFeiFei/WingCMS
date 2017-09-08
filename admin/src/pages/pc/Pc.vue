@@ -25,6 +25,12 @@
               routeName: 'PcIndexClearCache',
               active: true,
               display: false
+            },
+            {
+              itemName: 'Banner管理',
+              routeName: 'bannerList',
+              active: false,
+              display: false
             }
           ]
         }

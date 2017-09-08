@@ -91,7 +91,7 @@
                                 <li class="li_4">
                                     <em class="emTit">类型：</em>
                                     @forelse($info->classifys as $class)
-                                        <a href="javascript:void(0)">{{ $class->classify_name }}</a>
+                                        <a href="javascript:void(0)">{{ $class->tv_class_name }}</a>
                                     @empty
                                         <a href="javascript:void(0)">暂无添加</a>
                                     @endforelse

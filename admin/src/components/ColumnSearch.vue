@@ -3,13 +3,13 @@
     <!-- 简单搜索 -->
     <div class="simpleSearch" v-if="searchType == 'simple'">
       <Select v-model="simpleSearch_.field" style="width:120px">
-        <Option v-for="item in searchFields" :value="item.field" :key="item">{{ item.text }}</Option>
+        <Option v-for="(item, index) in searchFields" :value="item.field" :key="index">{{ item.text }}</Option>
       </Select>
       <template>
         <Input v-if="simpleSearch_.type === 'text'" v-model.trim="simpleSearch_.search" :placeholder="simpleSearch_.placeholder" style="width: 200px" />
         <Date-picker v-if="simpleSearch_.type === 'time'" v-model="simpleSearch_.search" type="datetimerange" format="yyyy-MM-dd HH:mm" :placeholder="simpleSearch_.placeholder" style="width: 300px;display:inline-block" />
         <Select  v-if="simpleSearch_.type === 'select'" v-model="simpleSearch_.search" :placeholder="simpleSearch_.placeholder" style="width:200px">
-          <Option v-for="item in simpleSearch_.values" :value="item.value" :key="item">{{ item.label }}</Option>
+          <Option v-for="(item, index) in simpleSearch_.values" :value="item.value" :key="index">{{ item.label }}</Option>
         </Select>
       </template>
       <Button type="primary" @click="submit">搜索</Button>
@@ -17,14 +17,14 @@
 
     <!-- 高级搜索 -->
     <div class="advancedSearch" v-if="advancedSearch && searchType == 'advanced'">
-      <div class="advanced_field" v-for="(item, index) in searchFields_">
+      <div class="advanced_field" v-for="(item, index) in searchFields_" :key="index">
         <Row>
           <Col span="7"><label class="advancedLabel" :for="'advanced_field_'+index">{{ item.text }}：</label></Col>
           <Col span="17">
             <Input :id="'advanced_field_'+index" v-if="item.type === 'text'" v-model.trim="searchFields_[index].search" :placeholder="item.placeholder" />
             <Date-picker :id="'advanced_field_'+index" v-if="item.type === 'time'" v-model="searchFields_[index].search" format="yyyy-MM-dd HH:mm" type="datetimerange" :placeholder="item.placeholder" />
             <Select :id="'advanced_field_'+index" v-if="item.type === 'select'" v-model="searchFields_[index].search" :placeholder="item.placeholder">
-              <Option v-for="iitem in item.values" :value="iitem.value" :key="iitem">{{ iitem.label }}</Option>
+              <Option v-for="(iitem, index) in item.values" :value="iitem.value" :key="index">{{ iitem.label }}</Option>
             </Select>
           </Col>
         </Row>

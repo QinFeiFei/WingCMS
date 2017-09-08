@@ -18,6 +18,12 @@ Route::group(['middleware' => ['auth:admin', 'jwt.refresh'], 'prefix' => 'admin'
     Route::post('tv/uploadCover', ['as'=>'tv.uploadCover', 'uses'=>'TvController@uploadCover']);
     Route::delete('tv/delete', ['as'=>'tv.delete', 'uses'=>'TvController@delete']);
 
+    Route::get('tvClass', ['as'=>'tv.classList', 'uses'=>'TvController@classList']);
+    Route::get('tvClass/{tv_class_id}', ['as'=>'tv.classShow', 'uses'=>'TvController@classShow']);
+    Route::post('tvClass', ['as'=>'tv.classInsert', 'uses'=>'TvController@classInsert']);
+    Route::delete('tvClass/{tv_class_id}', ['as'=>'tv.classDelete', 'uses'=>'TvController@classDelete']);
+    Route::patch('tvClass/{tv_class_id}', ['as'=>'tv.classUpdate', 'uses'=>'TvController@classUpdate']);
+
     // 用户管理
     Route::resource('user', 'UserController');
     Route::post('user/uploadAvatar', ['as'=>'tv.uploadAvatar', 'uses'=>'UserController@uploadAvatar']);

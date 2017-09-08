@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\TvService;
+use App\TvClass;
+use App\TvClassify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -161,5 +163,89 @@ class TvController extends Controller
         Storage::putFileAs('public/tv', $file, $hashname);
 
         return output_data('tv/'. $hashname);
+    }
+
+    /**
+     * 获取影视影视类型标签
+     *
+     * @return object
+     */
+    public function classList (Request $request, TvService $service) {
+        $list = $service->classPageList($request);
+        return $list;
+    }
+
+    public function classShow ($tv_class_id) {
+        return TvClass::find($tv_class_id);
+    }
+
+    public function classInsert (Request $request) {
+        $fields = $request->get('formFields');
+        $validator = Validator::make($fields, [
+            'tv_class_name' => 'required',
+            'tv_type' => 'required'
+        ], [
+            'tv_class_name.required' => '影视名称必填!',
+            'tv_type.required' => '影视分类必填!'
+        ]);
+        if ($validator->fails()) {
+            return output_error($validator->errors()->first());
+        }
+
+        $model = new TvClass();
+        $model->tv_class_name = trim($fields['tv_class_name']);
+        $model->tv_type = intval($fields['tv_type']);
+        if($model->save()){
+            return output_success('保存成功');
+        }else{
+            return output_error('保存失败');
+        }
+    }
+
+    public function classDelete ($tv_class_id) {
+        if($this->checkClassUsed($tv_class_id)){
+            return output_error('该影视分类标签被占用');
+        }
+
+        if(TvClass::destroy($tv_class_id)){
+            return output_success('删除成功');
+        } else {
+            return output_error('服务器异常');
+        }
+    }
+
+    public function classUpdate ($tv_class_id, Request $request) {
+        $fields = $request->get('formFields');
+        $validator = Validator::make($fields, [
+            'tv_class_name' => 'required',
+            'tv_type' => 'required'
+        ], [
+            'tv_class_name.required' => '影视名称必填!',
+            'tv_type.required' => '影视分类必填!'
+        ]);
+        if ($validator->fails()) {
+            return output_error($validator->errors()->first());
+        }
+
+        $model = TvClass::find($fields['tv_class_id']);
+        if(!$model){ return output_error('该分类标签不存在'); }
+
+        $model->tv_class_name = trim($fields['tv_class_name']);
+        $model->tv_type = intval($fields['tv_type']);
+        if($model->save()){
+            return output_success('保存成功');
+        }else{
+            return output_error('保存失败');
+        }
+    }
+
+    /**
+     * 检测影视分类标签是否被占用
+     *
+     * @param $tv_class_id
+     * @return bool
+     */
+    public function checkClassUsed ($tv_class_id) {
+        return TvClassify::where('tv_class_id', $tv_class_id)->first();
     }
 }

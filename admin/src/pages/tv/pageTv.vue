@@ -23,7 +23,7 @@
 
       <Form-item label="影视分类" prop="tv_type" class="itemWidth" style="width: 200px">
         <Select v-model="formFields.tv_type" placeholder="请选择影视类型">
-          <Option :value="item.value" v-for="item in types" :key="item.id">{{ item.label }}</Option>
+          <Option :value="item.value" v-for="(item, index) in types" :key="index">{{ item.label }}</Option>
         </Select>
       </Form-item>
 
@@ -45,8 +45,8 @@
 
       <Form-item label="影视类型">
         <Checkbox-group v-model="classifys">
-          <Checkbox :label="item.value + '-' + item.label" v-for="item in classify" :key="item">
-            <span>{{ item.label }}</span>
+          <Checkbox :label="item.tv_class_id + '-' + item.tv_class_name" v-for="(item, index) in classify" :key="index">
+            <span>{{ item.tv_class_name }}</span>
           </Checkbox>
         </Checkbox-group>
       </Form-item>
@@ -81,13 +81,13 @@
 
       <Form-item label="语言" class="itemWidth">
         <Select v-model="formFields.tv_lang" placeholder="请选择影视语言" style="width: 200px">
-          <Option v-for="item in langs" :key="item" :value="item.value">{{ item.label }}</Option>
+          <Option v-for="(item, index) in langs" :key="index" :value="item.value">{{ item.label }}</Option>
         </Select>
       </Form-item>
 
       <Form-item label="地区" class="itemWidth">
         <Select v-model="formFields.tv_area" placeholder="请选择地区" style="width: 200px">
-          <Option v-for="item in areas" :key="item" :value="item.value">{{ item.label }}</Option>
+          <Option v-for="(item, index) in areas" :key="index" :value="item.value">{{ item.label }}</Option>
         </Select>
       </Form-item>
 
@@ -258,7 +258,7 @@
           this.isLoading = false
           let result = response.data
           for (let info of result.classifys) {
-            this.classifys.push(info.tv_class_id + '-' + info.classify_name)
+            this.classifys.push(info.tv_class_id + '-' + info.tv_class_name)
           }
 
           delete result.classifys
@@ -294,7 +294,7 @@
           method: 'GET',
           url: getTvClass + tvType
         }).then(response => {
-          console.log(response.data)
+          this.classify = response.data
         })
       }
     },

@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import langs from '../config/TvLangs'
 import areas from '../config/TvAreas'
-import classify from '../config/TvClassify'
 import types from '../config/TvTypes'
 const [movie, teleplay, cartoon, variety, mv, openclass, other] = types
 import { setField, destoryTv } from '../api/tv'
@@ -11,7 +10,6 @@ export default {
     this.langs = langs
     this.areas = areas
     this.types = types
-    this.classify = classify
 
     this.movie = movie
     this.teleplay = teleplay
@@ -170,6 +168,15 @@ export default {
       })
 
       return (index === -1) ? types[0].value : types[index].value
+    },
+
+    // 根据影视类型(Tvtype:text=>value)转为数据库值
+    parseTvTypeText: function (tvType) {
+      let index = _.findIndex(types, function (chr) {
+        return parseInt(chr.value) === parseInt(tvType)
+      })
+
+      return (index === -1) ? types[0].label : types[index].label
     },
 
     // 根据影视语言(TvLang:value=>text)转换为文字

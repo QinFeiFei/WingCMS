@@ -50,8 +50,8 @@
               ]
             },
             {
-              itemName: '未来添加',
-              routeName: 'dashBoard',
+              itemName: '分类标签',
+              routeName: 'TvClassList',
               active: false,
               display: false
             }

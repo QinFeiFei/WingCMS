@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Tv;
+use App\TvClass;
 use App\TvClassify;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -130,11 +131,11 @@ class TvService {
         if(!empty($classify)){
             $model->rightJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
                   ->where('tv_classify.tv_class_id', $classify)
-                  ->select(DB::raw('wing_tv.*, wing_tv_classify.tv_class_id, wing_tv_classify.classify_name'));
+                  ->select(DB::raw('wing_tv.*, wing_tv_classify.tv_class_id, wing_tv_classify.tv_class_name'));
         }else{
             $model->leftJoin('tv_classify', 'tv.tv_id', '=', 'tv_classify.tv_id')
                   ->groupBy('tv.tv_id')
-                  ->select(DB::raw('wing_tv.*, wing_tv_classify.tv_class_id, wing_tv_classify.classify_name'));
+                  ->select(DB::raw('wing_tv.*, wing_tv_classify.tv_class_id, wing_tv_classify.tv_class_name'));
         }
     }
 
@@ -214,7 +215,7 @@ class TvService {
                 $itemArr = explode('-', $item);
                 $many[] = new TvClassify([
                     'tv_class_id' => $itemArr[0],
-                    'classify_name' => $itemArr[1]
+                    'tv_class_name' => $itemArr[1]
                 ]);
             }
             $tv->classifys()->saveMany($many);
@@ -267,7 +268,7 @@ class TvService {
             $tv_class_ids = [];
 
             // 先查询出来所有类型
-            $hasClassifys = TvClassify::select('classify_id', 'tv_class_id', 'classify_name')->where('tv_id', $fields['tv_id'])->get()->toArray();
+            $hasClassifys = TvClassify::select('classify_id', 'tv_class_id', 'tv_class_name')->where('tv_id', $fields['tv_id'])->get()->toArray();
 
             foreach ($classifys as $item) {
                 $itemArr = explode('-', $item);
@@ -280,7 +281,7 @@ class TvService {
 
                 $many[] = new TvClassify([
                     'tv_class_id' => $itemArr[0],
-                    'classify_name' => $itemArr[1]
+                    'tv_class_name' => $itemArr[1]
                 ]);
             }
 
@@ -369,4 +370,26 @@ class TvService {
         });
         return $list;
     }
+
+
+    /**
+     * 获取影视类型标签
+     *
+     * @return mixed
+     */
+    public function classPageList (Request $request) {
+        $tvClass = TvClass::select();
+        if(!empty(request()->get('tv_type', ''))){
+            $tvClass->where('tv_type', request()->get('tv_type'));
+        }
+        return $tvClass->paginate($request->get('page_size', 15));
+    }
+
+
+
+
+
+
+
+
 }

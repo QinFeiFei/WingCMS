@@ -13,7 +13,7 @@
                 <p class="pSelect">
                     <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?classify=&{{ http_build_query(Request::except('classify', 'tv_type')) }}" class="{{ request('classify', '') == '' ? 'cur' : '' }}">全部</a></span>
                     @forelse($classifys as $classify)
-                        <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?classify={{ $classify['value'].'&' }}{{ http_build_query(Request::except('classify', 'tv_type')) }}" class="{{ $classify['value']==request('classify', '') ? 'cur' : '' }}">{{ $classify['label'] }}</a></span>
+                        <span><a href="{{ route('pc::tvList', ['type' => 'movie']) }}?classify={{ $classify['tv_class_id'].'&' }}{{ http_build_query(Request::except('classify', 'tv_type')) }}" class="{{ $classify['tv_class_id']==request('classify', '') ? 'cur' : '' }}">{{ $classify['tv_class_name'] }}</a></span>
                     @empty
                     @endforelse
                 </p>
