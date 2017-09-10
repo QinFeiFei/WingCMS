@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 栏目Title -->
-    <console-title title="添加电影" class="console-title-border">
+    <console-title title="影视编辑" class="console-title-border">
       <div slot="left" style="max-width:400px;">
       </div>
       <div slot="right" style="width:auto;height:auto;position:absolute;top:10px;right:0px;">
