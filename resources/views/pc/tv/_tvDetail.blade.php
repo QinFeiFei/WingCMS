@@ -109,7 +109,7 @@
 
                                 <li class="li_4">
                                     <em class="emTit">地区：</em>
-                                    <a title="{{ parseTvArea($info->tv_area) }}电影" href="javascript:void(0)">{{ parseTvArea($info->tv_area) }}</a>
+                                    <a title="{{ parseTvArea($info->tv_area, $type) }}电影" href="javascript:void(0)">{{ parseTvArea($info->tv_area, $type) }}</a>
                                 </li>
 
                                 <li class="li_4">

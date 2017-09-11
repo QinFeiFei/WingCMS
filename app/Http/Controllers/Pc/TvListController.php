@@ -16,7 +16,7 @@ class TvListController extends TvController
 
     public function index ($type, Request $request, TvService $tvService){
         $this->checkTvType($type);
-        $areas = config('tv.tv_areas');
+        $areas = config('tv.tv_areas')[$type];
         $years = config('tv.tv_years');
         $classifys = TvClass::where('tv_type', replaceTvTypeText($type))->get();
 

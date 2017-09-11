@@ -16,6 +16,7 @@ class TvDetailController extends TvController
 
 
     public function index ($type, $tv_id, TvService $tvService, Request $request){
+        view()->share('type', $type);
         $this->checkTvType($type);
 
         // 获取影视详情

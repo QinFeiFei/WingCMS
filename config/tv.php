@@ -87,7 +87,7 @@ return [
 
     // 影视地区
     'tv_areas' => [
-        '10' => [
+        'movie' => [
             [
                 'label'=> '大陆',
                 'value'=> '1'
@@ -145,7 +145,7 @@ return [
                 'value'=> '99'
             ]
         ],
-        '20' => [
+        'teleplay' => [
             [
                 'label'=> '大陆剧',
                 'value'=> '101'

@@ -174,9 +174,9 @@ if(! function_exists('parseTvArea')) {
      * @param $code
      * @return string
      */
-    function parseTvArea($code)
+    function parseTvArea($code, $type)
     {
-        $areas = config('tv.tv_areas');
+        $areas = config('tv.tv_areas')[$type];
         foreach ($areas as $area){
             if($area['value'] == $code)
                 return $area['label'];
