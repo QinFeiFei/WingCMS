@@ -110,7 +110,7 @@
   import columnSearch from '../../components/ColumnSearch'
   import setColumnModal from '../../components/SetColumnsShow'
   import langs from '../../config/TvLangs'
-  import areas from '../../config/TvAreas'
+  // import areas from '../../config/TvAreas'
 
   export default {
     name: 'cartoonList',
@@ -119,7 +119,7 @@
         searchFields: [
           { field: 'tv_name', text: '影视名称', type: 'text', placeholder: '请输入要搜索的名称', search: null },
           { field: 'tv_lang', text: '影视语言', type: 'select', values: langs, placeholder: '请选择语言', search: null },
-          { field: 'tv_area', text: '影视地区', type: 'select', values: areas, placeholder: '请选地区', search: null },
+          // { field: 'tv_area', text: '影视地区', type: 'select', values: areas, placeholder: '请选地区', search: null },
           { field: 'is_push', text: '是否推荐', type: 'select', values: [{ label: '不限', value: '' }, { label: '是', value: '1' }, { label: '否', value: '0' }], placeholder: '请选译是否推荐', search: null },
           { field: 'created_at', text: '添加时间', type: 'time', placeholder: '请选择添加时间范围', search: null }
         ],

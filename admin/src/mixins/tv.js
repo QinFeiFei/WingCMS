@@ -1,15 +1,15 @@
 import _ from 'lodash'
 import langs from '../config/TvLangs'
-import areas from '../config/TvAreas'
 import types from '../config/TvTypes'
+import areas from '../config/TvAreas'
 const [movie, teleplay, cartoon, variety, mv, openclass, other] = types
 import { setField, destoryTv } from '../api/tv'
 
 export default {
   created: function () {
     this.langs = langs
-    this.areas = areas
     this.types = types
+    this.areas = areas
 
     this.movie = movie
     this.teleplay = teleplay
@@ -22,8 +22,8 @@ export default {
   data: function () {
     return {
       langs: [],
-      areas: [],
       types: [],
+      areas: {},
       classify: [],
 
       movie: {},
@@ -190,12 +190,13 @@ export default {
     },
 
     // 根据影视地区(TvArea:value=>text)转换为文字
-    parseTvAreaText: function (area) {
-      let index = _.findIndex(areas, function (chr) {
+    parseTvAreaText: function (area, type) {
+      let tmparea = areas[type]
+      let index = _.findIndex(tmparea, function (chr) {
         return chr.value === area
       })
 
-      let text = (index === -1) ? '未知' : areas[index].label
+      let text = (index === -1) ? '未知' : tmparea[index].label
       return text
     }
   }

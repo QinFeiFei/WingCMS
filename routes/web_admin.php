@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:admin', 'jwt.refresh'], 'prefix' => 'admin'
     // PC端
     Route::get('pc/clearCache', ['as'=>'tv.clearCache', 'uses'=>'PcController@clearCache']);   // 首页缓存清理
     Route::resource('banner', 'BannerController');
+    Route::post('banner/upload', ['as'=>'tv.bannerUpload', 'uses'=>'BannerController@upload']);
 
     // 设置
     Route::get('setting/emailTest', ['as'=>'setting.emailTest', 'uses'=>'SettingController@emailTest']);

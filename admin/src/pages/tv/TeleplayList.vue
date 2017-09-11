@@ -41,7 +41,7 @@
       </el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_area')" label="地区">
         <template scope="scope">
-          {{ parseTvAreaText(scope.row.tv_area) }}
+          {{ parseTvAreaText(scope.row.tv_area, 'teleplay') }}
         </template>
       </el-table-column>
       <el-table-column v-if="displayColumns(showColumns, 'tv_minute')" prop="tv_minute" label="片长" sortable></el-table-column>
@@ -119,7 +119,7 @@
         searchFields: [
           { field: 'tv_name', text: '影视名称', type: 'text', placeholder: '请输入要搜索的名称', search: null },
           { field: 'tv_lang', text: '影视语言', type: 'select', values: langs, placeholder: '请选择语言', search: null },
-          { field: 'tv_area', text: '影视地区', type: 'select', values: areas, placeholder: '请选地区', search: null },
+          { field: 'tv_area', text: '影视地区', type: 'select', values: areas.teleplay, placeholder: '请选地区', search: null },
           { field: 'created_at', text: '添加时间', type: 'time', placeholder: '请选择添加时间范围', search: null }
         ],
         showColumns: [

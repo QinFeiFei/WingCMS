@@ -87,7 +87,7 @@
 
       <Form-item label="地区" class="itemWidth">
         <Select v-model="formFields.tv_area" placeholder="请选择地区" style="width: 200px">
-          <Option v-for="(item, index) in areas" :key="index" :value="item.value">{{ item.label }}</Option>
+          <Option v-for="(item, index) in areaList" :key="index" :value="item.value">{{ item.label }}</Option>
         </Select>
       </Form-item>
 
@@ -136,7 +136,7 @@
     created: function () {
       this.formFields.tv_type = this.parseTvTypeValue(this.$route.params.type)  // 影视分类, 默认选中电影
       this.formFields.tv_lang = this.langs[0].value  // 影视语言, 默认选中中文
-      this.formFields.tv_area = this.areas[0].value  // 影视地区, 默认选中大陆
+      // this.formFields.tv_area = this.areas[0].value  // 影视地区, 默认选中大陆
 
       this.pageType = this.$route.name
       this.pageType === 'TvUpdate' ? this.loadTv() : ''
@@ -145,6 +145,7 @@
       return {
         pageType: '',       // 页面当前操作：TvCreate增加，TvUpdate修改
         classifys: [],
+        areaList: [],
         formFields: {
           tv_id: 0,
           tv_name: '',
@@ -303,7 +304,13 @@
         handler: function (now, old) {
           if (now.tv_type !== this.tmp_tv_type) {
             this.tmp_tv_type = now.tv_type
+
+            // 加载对应影视类型的影视分类
             this.loadTvClass(now.tv_type)
+
+            // 加载影视地区
+            console.log(now.tv_type)
+            this.areaList = this.areas[this.$route.params.type]
           }
         },
         deep: true

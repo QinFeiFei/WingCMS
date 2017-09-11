@@ -35,7 +35,7 @@
 
       <Form-item label="影视封面" >
         <template v-if="formFields.banner_src !== ''">
-          <img :src="uploadDirUrl+formFields.banner_src" class="w300" />
+          <img :src="formFields.banner_src" class="w300" />
         </template>
         <Upload name="banner_src" type="drag" :action="uploadUrl" :headers="tokenAuth" :max-size="2048" :format="['jpg','jpeg','png','gif']" :on-success="handleSuccess" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" :on-remove="handleRemove" :before-upload="handleBeforeUpload" class="itemWidth">
           <div style="padding: 20px 0">
@@ -46,49 +46,41 @@
       </Form-item>
 
       <Form-item>
-        <Button v-if="pageType === 'TvCreate'" type="primary" @click="create">确认添加</Button>
-        <Button v-if="pageType === 'TvUpdate'" type="primary" @click="update">确认修改</Button>
+        <Button v-if="pageType === 'bannerCreate'" type="primary" @click="create">确认添加</Button>
+        <Button v-if="pageType === 'bannerUpdate'" type="primary" @click="update">确认修改</Button>
       </Form-item>
     </Form>
   </div>
 </template>
 <script type="text/ecmascript-6">
   import consoleTitle from '../../components/ConsoleTitle'
-  import { tvStore, tvUploadCover, tvShow, tvUpdate } from '../../api/tv'
+  import { bannerCreate, bannerShow, bannerUpdate, bannerUpload } from '../../api/pc'
 
   export default {
     created: function () {
       this.pageType = this.$route.name
-      this.pageType === 'bannerCreate' ? this.loadTv() : ''
+      this.pageType === 'bannerUpdate' ? this.loadBanner() : ''
     },
     data: function () {
       return {
         pageType: '',
-        classifys: [],
         formFields: {
-          tv_id: 0,
-          tv_name: '',
+          banner_id: 0,
+          banner_title: '',
           banner_sort: 255,
           banner_url: '',
-          banner_bgcolor: '#FFFFFF',
-          tv_type: ''
+          banner_src: '',
+          banner_bgcolor: '#FFFFFF'
         },
         formRules: {
-          tv_type: [
-            { required: true, message: '影视分类不能为空', trigger: 'change' }
+          banner_title: [
+            { required: true, message: 'Banner标题不能为空', trigger: 'blur' }
           ],
-          tv_name: [
-            { required: true, message: '影视名称不能为空', trigger: 'blur' }
-          ],
-          tv_lang: [
-            { required: true, message: '影视语言不能为空', trigger: 'change' }
-          ],
-          tv_area: [
-            { required: true, message: '影视地区不能为空', trigger: 'change' }
+          banner_url: [
+            { required: true, message: 'Banner链接不能为空', trigger: 'blur' }
           ]
         },
-        uploadUrl: tvUploadCover,
-        tmp_tv_type: ''
+        uploadUrl: bannerUpload
       }
     },
     components: {
@@ -129,10 +121,9 @@
         if (this.validForm()) {
           this.isLoading = true
           this.axios({
-            url: tvStore,
+            url: bannerCreate,
             method: 'POST',
             data: {
-              classifys: this.classifys,
               formFields: this.formFields
             }
           }).then(response => {
@@ -146,19 +137,14 @@
           })
         }
       },
-      loadTv: function () {
+      loadBanner: function () {
         this.isLoading = true
         this.axios({
           method: 'GET',
-          url: tvShow + this.$route.params.tv_id
+          url: bannerShow + this.$route.params.banner_id
         }).then(response => {
           this.isLoading = false
           let result = response.data
-          for (let info of result.classifys) {
-            this.classifys.push(info.tv_class_id + '-' + info.tv_class_name)
-          }
-
-          delete result.classifys
           this.formFields = result
         })
       },
@@ -166,10 +152,9 @@
         if (this.validForm()) {
           this.isLoading = true
           this.axios({
-            url: tvUpdate + this.formFields.tv_id,
+            url: bannerUpdate + this.formFields.banner_id,
             method: 'PATCH',
             data: {
-              classifys: this.classifys,
               formFields: this.formFields
             }
           }).then(response => {

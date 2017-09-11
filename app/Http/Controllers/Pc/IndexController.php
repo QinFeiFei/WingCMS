@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Pc;
 
+use App\Banner;
 use App\Tv;
 use Cache;
 use Illuminate\Support\Facades\Mail;
@@ -11,6 +12,7 @@ class IndexController extends PcController
     private $indexCacheTime = 60 * 24;     // 1天
 
     public function index () {
+        $banner = Banner::orderBy('banner_sort')->get();
         $movie = $this->movie();
         $teleplay = $this->teleplay();
         $cartoon = $this->cartoon();
@@ -19,6 +21,7 @@ class IndexController extends PcController
         $other = $this->other();
 
         return view('pc.index')->with([
+            'banner' => $banner,
             'movie' => $movie,
             'teleplay' => $teleplay,
             'cartoon' => $cartoon,
