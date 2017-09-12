@@ -35,10 +35,9 @@
             <i class="iLine"></i>
 
             <dl class="downLoad">
-                <dt>资源QQ群</dt>
+                <dt>资源QQ群(点击添加)</dt>
                 <dd>
-                    <span>一群：<a href="">58975545744</a></span>
-                    <span>二群：<a href="">58975545733</a></span>
+                    <span>一群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=1ae5bd0fe7e8ac3855a864a463aa06ad1a2d80fdbcfc5be7ee25a7a8e29410de">627256199</a></span>
                 </dd>
             </dl>
         </div>
@@ -46,26 +45,23 @@
 
     <div class="footerStatement">
         <div class="footerCon clearfix">
+            <!--
             <div class="friendLinks" style="text-align: center">
                 <span>友情链接：</span>
-                <a href="">动画电影　</a>
-                <a href="">美国科幻电影　</a>
+                <a href=""></a>
             </div>
+            -->
 
             <p class="pTxt">
-                <a href="" target="_blank" rel="nofollow" id="sfadvice">留言板</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-
-                <a href="" target="_blank">用户注册协议</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-
-                <a href="" target="_blank" rel="nofollow">版权声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-
-                <a href="" target="_blank" rel="nofollow">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-
-                <a href="" target="_blank" rel="nofollow">联系方式</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="javascript:void(0)" id="sfadvice">留言板</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="{{ route('pc::declare') }}" target="_blank">用户注册协议</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="{{ route('pc::licence') }}" target="_blank">版权声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="{{ route('pc::aboutUs') }}">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="{{ route('pc::contact') }}">联系方式</a>
             </p>
 
             <div class="copyRight">
-                版权所有&nbsp;&copy;&nbsp;2345.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP证沪B2-20120099
+                版权所有&nbsp;&copy;&nbsp;{{ env('APP_NAME') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP证沪B2-20120099
             </div>
 
             <p class="pTxt" style="color:red;">本网站的内容、图文来自于网络，我们尊重他人的合法权益，如有内容侵犯您的合法权益，请及时与我们联系，我们将第一时间安排核实及删除！</p>
