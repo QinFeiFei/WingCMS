@@ -76,6 +76,7 @@
                             <input type="button" id="submit" class="g-btn" value="登&nbsp;&nbsp;&nbsp;&nbsp;录">
                             <div class="g-error" id='form-tips-error' style="display:none;"></div>
 
+                            <!--
                             <div class="g-other-login">
                                 <span class="sTit">第三方登录：</span>
                                 <div class="otherStyle">
@@ -83,6 +84,7 @@
                                     <a href="" target="_blank"><i class="g-icon-weixin"></i></a>
                                 </div>
                             </div>
+                            -->
                         </div>
                     </form>
                     <!--2345帐号登录 结束-->

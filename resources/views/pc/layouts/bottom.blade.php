@@ -26,7 +26,7 @@
             <dl class="advice">
                 <dt>意见反馈</dt>
                 <dd>
-                    <span><a href=""><i class="iQQ"></i>留言板</a></span>
+                    <span><a href="javascript:alert('功能暂未开发')"><i class="iQQ"></i>留言板</a></span>
                     <span><a href="javascript:alert('功能暂未开发');"><i class="fa fa-telegram" aria-hidden="true"></i>  求资源、求种子</a></span>
                 </dd>
 

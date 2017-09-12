@@ -38,7 +38,7 @@
 <!--右侧二维码 end-->
 
 <!--右侧意见反馈 start-->
-<a href="" class="feedback" id="feedback" target="_blank"></a>
+<!--<a href="" class="feedback" id="feedback" target="_blank"></a>-->
 <!--右侧意见反馈 end-->
 
 <div class="pfooter mt30">

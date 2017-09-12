@@ -1,0 +1,26 @@
+.main { padding-top: 20px;}
+.col_a { width: 200px !important; float: left; }
+.col_b { float: right;}
+
+.wrapper {min-height: 580px;}
+
+.body_1280 .col_b { width: 950px !important;}
+
+.leftNav { background-color: #f5f5f5; display: block; padding-bottom: 10px; padding-top: 10px;}
+.leftNav li { width: 100%; float: left; overflow: hidden; margin-top: 2px; display: inline;}
+.leftNav a { display: block; line-height: 42px; height: 42px; overflow: hidden; color: #333; border-left: 2px solid #f5f5f5; font-size: 16px}
+.leftNav a em { float: left; cursor: pointer; padding-left: 28px;}
+.leftNav a:hover { text-decoration: none; color: #333; background-color: #fafafa;}
+.leftNav .cur a,.leftNav .cur a:hover { border-left-color:#1f86ee; background-color: #fff;}
+
+.txt { line-height: 24px; color: #333;}
+.txt .tit { font-size: 22px; line-height: 48px; height: 48px; overflow: hidden; font-weight: 100; text-align: center;}
+.txt .pIntro { padding: 10px 0 25px;}
+
+.txt .list dt { font-weight: 700;}
+.txt .list p { padding-bottom: 25px;}
+.txt .list .sTit { display: block;}
+
+.contactList .list { width: 49%; float: left;}
+.contactList .list a { color: #666;}
+.contactList .list a:hover { color: #f30;}

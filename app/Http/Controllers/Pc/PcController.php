@@ -20,4 +20,12 @@ class PcController extends Controller
     protected function getUser () {
         return auth('api')->user();
     }
+
+    public function aboutUs () {
+        return view('pc.aboutUs');
+    }
+
+    public function contact () {
+        return view('pc.contact');
+    }
 }

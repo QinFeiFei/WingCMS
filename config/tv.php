@@ -166,6 +166,28 @@ return [
                 'label'=> '其它电视剧',
                 'value'=> '110'
             ]
+        ],
+        'cartoon' => [
+        ],
+        'variety' => [
+        ],
+        'mv' => [
+            [
+                'label'=> '华语',
+                'value'=> '201'
+            ],
+            [
+                'label'=> '日韩',
+                'value'=> '202'
+            ],
+            [
+                'label'=> '欧美',
+                'value'=> '203'
+            ]
+        ],
+        'openclass' => [
+        ],
+        'other' => [
         ]
     ]
 ];

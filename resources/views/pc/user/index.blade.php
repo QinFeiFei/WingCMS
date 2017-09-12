@@ -34,33 +34,23 @@
 
                 <div class="acc_icon">
                     <span>账号安全：</span>
-
-
-                                        <a class="user_icon bac_gray icon_phone" href="">
+                    <a class="user_icon {{ empty($user->phone) ? 'bac_gray' : '' }} icon_phone" href="{{ route('pc::userBindPhone') }}">
                         <i></i>
                         <em class="tips"><i class="top"></i>绑定手机</em>
                     </a>
-
-
-                                        <a class="user_icon bac_gray icon_email" href="http://login.2345.com/member/bindEmail?page=open">
+                    <a class="user_icon {{ empty($user->email) ? 'bac_gray' : '' }} icon_email" href="{{ route('pc::userBindEmail') }}">
                         <i></i>
                         <em class="tips"><i class="top"></i>绑定邮箱</em>
                     </a>
-
-
-                                        <a class="user_icon bac_gray icon_weixin" href="http://login.2345.com/oauth/bind/weixin">
+                    <a class="user_icon bac_gray icon_weixin" href="javascript:void(alert('暂未开发'))">
                         <i></i>
                         <em class="tips"><i class="top"></i>绑定微信</em>
                     </a>
-
-
-                                        <a class="user_icon icon_qq unbind" href="javascript:void(0)" data-type="qq" data-type-name="QQ">
+                    <a class="user_icon bac_gray icon_qq" href="javascript:void(alert('暂未开发'))">
                         <i></i>
-                        <em class="tips"><i class="top"></i>解绑QQ</em>
+                        <em class="tips"><i class="top"></i>绑定QQ</em>
                     </a>
-
-
-                                        <a class="user_icon icon_pwd" href="http://login.2345.com/member/editPassword?page=open">
+                    <a class="user_icon icon_pwd" href="">
                         <i></i>
                         <em class="tips"><i class="top"></i>修改密码</em>
                     </a>
@@ -74,86 +64,32 @@
                     <span class="right"> 欢迎关注微信公众帐号</span>
                 </div>
 
-                                <a class="res_bot" href=""><img src="{{ asset('/pc/user') }}/resource.jpg"></a>
-                            </div>
-
+                <img src="{{ asset('/pc/user') }}/resource.jpg">
+            </div>
         </div>
         <!--左侧用户信息 end-->
 
         <!--右侧 小游戏 start-->
         <div class="extension indexBox">
             <div class="title">
-                <p>休闲娱乐</p>
+                <p>消息中心</p>
                 <a class="download" href=""></a>
             </div>
 
             <div class="exList">
                 <ul class="game-list">
-                                        <li>
+                    <p style="line-height:180px;text-align:center;font-size:14px;">- - ||| 暂未开发</p>
+                    <!--
+                    <li>
                         <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/20170221111100.jpg" style="width:52px; height:52px;">
-                            <span>斗地主</span>
+                            <img src="{{ asset('/pc/user') }}/.jpg" style="width:52px; height:52px;">
+                            <span></span>
                         </a>
                     </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/20170710141543.jpg" style="width:52px; height:52px;">
-                            <span>保卫萝卜</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/67868_75.jpg" style="width:52px; height:52px;">
-                            <span>双人五子棋</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/483521img_75x.jpg" style="width:52px; height:52px;">
-                            <span>象棋高手</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/20170710141708.jpg" style="width:52px; height:52px;">
-                            <span>消灭星星</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/45453_75.jpg" style="width:52px; height:52px;">
-                            <span>经典黑白棋</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/52088_75.jpg" style="width:52px; height:52px;">
-                            <span>蜘蛛纸牌</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/506449img_75x.jpg" style="width:52px; height:52px;">
-                            <span>欢乐麻将</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/20170221130923.jpg" style="width:52px; height:52px;">
-                            <span>宠物连连看</span>
-                        </a>
-                    </li>
-                                        <li>
-                        <a href="" target="_blank">
-                            <img src="{{ asset('/pc/user') }}/20170221130905.jpg" style="width:52px; height:52px;">
-                            <span>装在卡车5</span>
-                        </a>
-                    </li>
-                                    </ul>
+                    -->
+                </ul>
             </div>
         </div>
-
-        <!--右侧 小游戏 end-->
     </div>
 
     <!--广告位 -->

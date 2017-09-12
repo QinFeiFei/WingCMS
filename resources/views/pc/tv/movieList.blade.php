@@ -61,7 +61,7 @@
                     <a href="{{ route('pc::tvList', ['type' => 'movie']) }}?{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ empty(request('orderby', '')) ? 'cur' : '' }}" id="default">最新更新</a>
                     <a href="{{ route('pc::tvList', ['type' => 'movie']) }}?orderby=grade&{{ http_build_query(Request::except('orderby', 'tv_type')) }}" class="{{ request('orderby', '')=='grade' ? 'cur' : '' }}">评分</a>
                 </p>
-                {{--<a class="aLatestNews" target="_blank" href="http://dianying.2345.com/top/">电影排行榜</a>--}}
+                {{--<a class="aLatestNews" target="_blank" href="">电影排行榜</a>--}}
                 <div class="pSelected"></div>
             </div>
 
