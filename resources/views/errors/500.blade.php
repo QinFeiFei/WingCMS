@@ -34,12 +34,13 @@
     <div class="g-notfound">
         <div class="">
             <div class="g-notfound-btit">服务器出现错误，程序猿正在抢修...</div>
-            <div class="g-notfound-tips"><em id='time_out'>5</em>秒后 页面自动跳转至&nbsp;&nbsp;<a class="trig" href="{{ route('pc::index') }}" target="_self">影视首页>></a></div>
+            <!--<div class="g-notfound-tips"><em id='time_out'>5</em>秒后 页面自动跳转至&nbsp;&nbsp;<a class="trig" href="{{ route('pc::index') }}" target="_self">影视首页>></a></div>-->
         </div>
     </div>
     <!--404页 end-->
 </div>
 <script>
+    /*
     function countDown(secs, surl){
         var jumpTo = document.getElementById('time_out')
         jumpTo.innerHTML = secs
@@ -52,6 +53,7 @@
     }
 
     countDown(5, '{{ env('APP_URL') }}')
+    */
 </script>
 </body>
 </html>
