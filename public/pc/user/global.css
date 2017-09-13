@@ -188,8 +188,8 @@ a:hover{ text-decoration:underline;color:#f30}
 .grid_ad .iconfont { background: url('./icon_close.jpg') no-repeat; display: block; width: 25px; height: 25px; float: right; margin-top: -60px; margin-right: 0; cursor: pointer; font-size: 14px; color: #FFF; opacity: .9; }
 
 /* 右侧二维码 */
-.rightQR { display: block; width: 134px; height: 148px; background: url(./rightQR.png) no-repeat left top; _background: url(./rightQR_ie6.gif) no-repeat left top; position: fixed; _position: absolute; right: 50%; top: 0; margin-right: -635px; margin-top: 295px; zoom: 1; }
-.rightQR .closeQR { display: block; width: 13px; height: 13px; position: absolute; right: 19px; top: 10px; opacity: 0; filter: alpha(opacity=0); }
+.rightQR { display: block; width: 134px; height: 148px; background: url(./rightQR.png) no-repeat left top; position: fixed; _position: absolute; right: 50%; top: 0; margin-right: -635px; margin-top: 295px; zoom: 1; }
+.rightQR .closeQR { cursor:pointer; display: block; width: 13px; height: 13px; position: absolute; right: 19px; top: 10px; opacity: 0; filter: alpha(opacity=0); }
 .rightQR:hover { cursor: default; background-position: 0 -148px; _background: url(./rightQR_h_ie6.gif) no-repeat left top; _background-position: 0 0; }
 
 /* 右侧意见反馈 */

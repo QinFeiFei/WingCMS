@@ -175,15 +175,9 @@
         </div>
     </div>
 </div>
-<div class="footer">
-    <div class="footerCon">
-        <a href="http://www.2345.com/about/about.htm" target="_blank" >关于2345</a><em>|</em>
-        <a href="http://www.2345.com/about/socially.htm" target="_blank" >公益</a><em>|</em>
-        <a href="/declare.html" target="_blank" >隐私声明</a><em>|</em>
-        <a href="http://www.2345.net/join_us/" target="_blank" >诚聘英才</a><em>|</em>&nbsp;版权所有&nbsp;&copy;&nbsp;2345.com&nbsp;
-        <a href="http://www.2345.com/icp.jpg" target="_blank">ICP证沪B2-20120099</a>&nbsp;诚信上网&nbsp;规范经营
-    </div>
-</div>
+
+@include('pc.layouts.bottom_login')
+
 <script>
     //邮件注册和手机注册切换
     $("#btn-email").click(function(){

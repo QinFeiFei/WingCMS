@@ -74,9 +74,8 @@
         </div>
     </div>
 </div>
-<div class="pfooter">
-    <a href="http://www.2345.com/about/about.htm" target="_blank">关于2345</a><em>|</em><a href="http://bbs.2345.cn/fk/index.htm?cName=%u7528%u6237%u4E2D%u5FC3" target="_blank">错误反馈</a><em>|</em><a href="http://www.2345.com/" target="_blank">标准版</a><em>|</em><a href="http://www.2345.com/j.htm" target="_blank">精简版</a><em>|</em><a href="http://www.2345.com/laonian.htm" target="_blank">老年版</a><em>|</em><a href="http://m.2345.com/pages/" target="_blank">手机版</a><em>|</em><a href="http://www.2345.com/about/gyhd.htm" target="_blank">公益</a><em>|</em>版权所有 &copy; 2345.com <a href="http://www.2345.com/icp.jpg" target="_blank">ICP证沪B2-20120099</a>
-</div>
+
+@include('pc.layouts.bottom_login')
 
 <script>
     $(function (){

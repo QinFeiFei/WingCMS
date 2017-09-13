@@ -54,8 +54,8 @@
 
             <p class="pTxt">
                 <a href="javascript:void(0)" id="sfadvice">留言板</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="{{ route('pc::declare') }}" target="_blank">用户注册协议</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="{{ route('pc::licence') }}" target="_blank">版权声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="{{ route('pc::licence') }}" target="_blank">用户注册协议</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="{{ route('pc::declare') }}" target="_blank">版权声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                 <a href="{{ route('pc::aboutUs') }}">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                 <a href="{{ route('pc::contact') }}">联系方式</a>
             </p>

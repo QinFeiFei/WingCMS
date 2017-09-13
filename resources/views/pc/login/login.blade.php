@@ -97,16 +97,9 @@
 </div>
 <!--login_wrap end-->
 <!--主体 end-->
+
 <!--底部 begin-->
-<div class="footer">
-    <div class="footerCon">
-        <a href="http://www.2345.com/about/about.htm" target="_blank" onclick="cc('L14')">关于2345</a><em>|</em>
-        <a href="http://www.2345.com/about/socially.htm" target="_blank" onclick="cc('L15')">公益</a><em>|</em>
-        <a href="/declare.html" target="_blank" onclick="cc('L16')">隐私声明</a><em>|</em>
-        <a href="http://www.2345.net/join_us/" target="_blank" onclick="cc('L17')">诚聘英才</a><em>|</em>&nbsp;版权所有&nbsp;&copy;&nbsp;2345.com&nbsp;
-        <a href="http://www.2345.com/icp.jpg" target="_blank" onclick="cc('L18')">ICP证沪B2-20120099</a>&nbsp;诚信上网&nbsp;规范经营
-    </div>
-</div>
+@include('pc.layouts.bottom_login')
 <!--底部 end-->
 
 <script>

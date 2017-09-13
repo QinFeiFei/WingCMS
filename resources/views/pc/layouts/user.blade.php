@@ -30,33 +30,27 @@
 @yield('content')
 
 <!--右侧二维码 start-->
-<!--
 <a href="javascript:;" class="rightQR" style="margin-top: 380px;">
     <span class="closeQR" href="javascript:;"></span>
 </a>
--->
 <!--右侧二维码 end-->
 
 <!--右侧意见反馈 start-->
 <!--<a href="" class="feedback" id="feedback" target="_blank"></a>-->
 <!--右侧意见反馈 end-->
 
-<div class="pfooter mt30">
-    <a href="http://www.2345.com/about/about.htm" target="_blank" onclick="cc(&#39;H91&#39;)">关于2345</a><em>|</em>
-    <a href="http://bbs.2345.cn/fk/index.htm?cName=%u7528%u6237%u4E2D%u5FC3" target="_blank" onclick="cc(&#39;H92&#39;)">错误反馈</a><em>|</em>
-    <a href="http://www.2345.com/" target="_blank" onclick="cc(&#39;H93&#39;)">标准版</a><em>|</em>
-    <a href="http://www.2345.com/j.htm" target="_blank" onclick="cc(&#39;H94&#39;)">精简版</a><em>|</em>
-    <a href="http://www.2345.com/laonian.htm" target="_blank" onclick="cc(&#39;H95&#39;)">老年版</a><em>|</em>
-    <a href="http://m.2345.com/pages/" target="_blank" onclick="cc(&#39;H96&#39;)">手机版</a><em>|</em>
-    <a href="http://www.2345.com/about/gyhd.htm" target="_blank" onclick="cc(&#39;H97&#39;)">公益</a><em>|</em>版权所有 <i>&#169;</i> 2345.com
-    <a href="http://www.2345.com/icp.jpg" target="_blank" onclick="cc(&#39;H98&#39;)">ICP证沪B2-20120099</a>
-</div>
+@include('pc.layouts.bottom_login')
+
 @yield('footer')
 <script>
     $('#user-logout').click(function(){
         $.get('{{ route('pc::logout') }}', function(){
             window.location.href = '/'
         });
+    });
+
+    $('.closeQR').click(function () {
+      $('.rightQR').hide();
     });
 </script>
 
