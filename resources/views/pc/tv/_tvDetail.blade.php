@@ -28,6 +28,12 @@
         .lookBDPWD:hover {background:#333;color:#fff;}
 
         .body_1280 .height568 .pic167_223 { width: 920px !important; }
+
+        #feedback {width:460px;height:160px;padding:20px;display:none;}
+        #feedback h2 {margin-bottom:5px;}
+        #feedback p {margin-bottom:80px;}
+        #feedback p label {cursor: pointer;}
+        #feedbtn {width:460px;height:40px;line-height: 40px;display:block;text-align: center;background:#199cfa;cursor:pointer;color:#fff;}
     </style>
 @endsection
 
@@ -59,7 +65,7 @@
                                     </a>
                                 @endif
                                 <i class="iLine"></i>
-                                <a href="" target="_blank" class="aComment" rel="nofollow"><i class="fa fa-exclamation-circle"></i> 不能播放点我</a>
+                                <a href="javascript:void(0);" class="aComment" rel="nofollow"><i class="fa fa-exclamation-circle"></i> 不能播放点我</a>
                             </p>
                         </div>
                     </div>
@@ -129,8 +135,10 @@
 
                             <!-- 播放 -->
                             <div class="playBtnCon latestPlayCon clearfix">
+                                <!--
                                 <a href="javascript:void(0)" class="v_blue_btn latestBtn" id="aPlayBtn"><i class="fa fa-play"></i> 在线播放</a>
                                 <a href="javascript:void(0)" class="v_yellow_btn latestBtn" id="aPlayBtn"><i class="fa fa-cloud-download"></i> 资源下载</a>
+                                -->
                             </div>
                             <!-- 播放 -->
                         </div>
@@ -140,7 +148,7 @@
 
                     <!-- 功能 -->
                     <a href="javascript:void(0)" class="aQRCodeBtn">
-                        <span class="btn">找不到想看的资源，点我</span>
+                        <span class="btn tvseek">找不到想看的资源，点我</span>
                     </a>
                     <!-- 功能 -->
                 </div>
@@ -158,9 +166,9 @@
                             <div class="tabContent tabContent1 on">
                                 <ul>
                                     <li>
-                                        <span class="w_50">分享链接：<a target="_blank" href="{{ $info->tv_baidu_url }}">{{ $info->tv_baidu_url }}</a></span>
-                                        <span class="w_30">分享密码：<i class="BDPWD">****</i></span>
-                                        <span class="w_20"><a href="javascript:void(0)" class="lookBDPWD">查看分享密码</a></span>
+                                        <span class="">分享链接：<a target="_blank" href="{{ $info->tv_baidu_url }}">{{ $info->tv_baidu_url }}</a></span><br>
+                                        <span class="" style="margin-right: 20px;">分享密码：<i class="BDPWD">****</i></span>
+                                        <span class=""><a href="javascript:void(0)" class="lookBDPWD">查看分享密码</a></span>
                                         <div style="clear:both;"></div>
                                     </li>
                                 </ul>
@@ -247,6 +255,19 @@
         </div>
         <div class="mainBottomBg"></div>
     </div>
+
+
+    <div id="feedback">
+        <h2>异常类型：</h2>
+        <p>
+            <input type="radio" name="type" value="1" id="baidu" checked> <label for="baidu">百度网盘</label>　
+            <input type="radio" name="type" value="2" id="play"> <label for="play">在线播放</label>　
+            <input type="radio" name="type" value="3" id="down"> <label for="down">下载中心</label>　
+        </p>
+        <div id="feedbtn">确认反馈</div>
+    </div>
+    @include('pc.tv._seek')
+
 @endsection
 
 @section('footer')
@@ -287,6 +308,28 @@
             });
 
             $.get("{{ route('pc::addWatch', ['tv_id'=>$info->tv_id]) }}");
+
+            $('.aComment').click(function () {
+              layer.open({
+                type: 1,
+                title: false,
+                area:['500px', '200px'],
+                closeBtn: 0,
+                shadeClose: true,
+                content: $('#feedback')
+              });
+            });
+
+            $('#feedbtn').click(function () {
+              var feed = $('input:radio[name="type"]:checked').val()
+              $.post('{{ route('pc::tvFeed') }}', {tv_id: '{{ idEncode($info->tv_id) }}', tv_name:'{{ $info->tv_name }}', type: feed, _token: '{{ csrf_token() }}'}, function (data) {
+                layer.msg(data.msg)
+                
+                window.setTimeout(function () {
+                  layer.closeAll()
+                }, 1500)
+              });
+            })
         });
     </script>
 @endsection

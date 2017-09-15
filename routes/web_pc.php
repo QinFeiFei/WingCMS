@@ -36,6 +36,10 @@ Route::group(['middleware' => ['pc.jwt.token', 'pc.jwt.refresh'], 'namespace' =>
     // 添加影视浏览记录
     Route::get('/addWatch/{tv_id}', ['as'=>'addWatch', 'uses'=>'TvController@addWatch']);
 
+    // 资源异常反馈 | 找资源
+    Route::post('/feed', ['as'=>'tvFeed', 'uses'=>'TvController@feed']);
+    Route::post('/seek', ['as'=>'tvSeek', 'uses'=>'TvController@seek']);
+
     // 关于我们、联系我们
     Route::get('/aboutUs', ['as'=>'aboutUs', 'uses'=>'PcController@aboutUs']);
     Route::get('/contact', ['as'=>'contact', 'uses'=>'PcController@contact']);
