@@ -12,6 +12,8 @@ import tvSpecial from '../pages/tv/TvSpecial'
 import pageTv from '../pages/tv/pageTv'
 import tvClassList from '../pages/tv/TvClassList'
 import tvClassPage from '../pages/tv/TvClassPage'
+import tvSeekList from '../pages/tv/TvSeekList'
+import tvFeedbackList from '../pages/tv/TvFeedbackList'
 
 export default {
   path: '/tv',
@@ -34,6 +36,10 @@ export default {
     // 影视分类标签
     { path: 'classList', name: 'TvClassList', component: tvClassList },
     { path: 'class/create', name: 'TvClassCreate', component: tvClassPage },
-    { path: 'class/update/:tv_class_id', name: 'TvClassUpdate', component: tvClassPage }
+    { path: 'class/update/:tv_class_id', name: 'TvClassUpdate', component: tvClassPage },
+    // 资源异常列表
+    { path: 'seekList', name: 'TvSeekList', component: tvSeekList },
+    // 用户反馈
+    { path: 'feedbackList', name: 'TvFeedbackList', component: tvFeedbackList }
   ]
 }

@@ -40,6 +40,7 @@
                 { childName: '其它短片', routeName: 'OtherList', active: false }
               ]
             },
+            /*
             {
               itemName: '电影专题',
               active: false,
@@ -49,9 +50,22 @@
                 { childName: '回收站', routeName: 'UserList', active: false }
               ]
             },
+            */
             {
               itemName: '分类标签',
               routeName: 'TvClassList',
+              active: false,
+              display: false
+            },
+            {
+              itemName: '求资源',
+              routeName: 'TvSeekList',
+              active: false,
+              display: false
+            },
+            {
+              itemName: '链接异常',
+              routeName: 'TvFeedbackList',
               active: false,
               display: false
             }

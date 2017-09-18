@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Services\TvService;
 use App\TvClass;
 use App\TvClassify;
+use App\TvFeedback;
+use App\TvSeek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -247,5 +249,49 @@ class TvController extends Controller
      */
     public function checkClassUsed ($tv_class_id) {
         return TvClassify::where('tv_class_id', $tv_class_id)->first();
+    }
+
+    public function seekList (Request $request) {
+        return TvSeek::where('is_handle', '0')->paginate($request->get('page_size', 20));
+    }
+
+    public function seekDelete ($sk_id) {
+        if(TvSeek::destroy($sk_id)){
+            return output_success('删除成功');
+        }else{
+            return output_error('服务器异常');
+        }
+    }
+
+    public function seekHandle ($sk_id) {
+        $model = TvSeek::find($sk_id);
+        $model->is_handle = 1;
+        if($model->save()){
+            return output_success('处理成功');
+        }else{
+            return output_error('服务器异常');
+        }
+    }
+
+    public function feedbackList (Request $request){
+        return TvFeedback::where('is_handle', '0')->paginate($request->get('page_size', 20));
+    }
+
+    public function feedbackDelete ($fb_id) {
+        if(TvFeedback::destroy($fb_id)){
+            return output_success('删除成功');
+        }else{
+            return output_error('服务器异常');
+        }
+    }
+
+    public function feedbackHandle ($fb_id) {
+        $model = TvFeedback::find($fb_id);
+        $model->is_handle = 1;
+        if($model->save()){
+            return output_success('处理成功');
+        }else{
+            return output_error('服务器异常');
+        }
     }
 }

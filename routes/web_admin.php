@@ -24,6 +24,13 @@ Route::group(['middleware' => ['auth:admin', 'jwt.refresh'], 'prefix' => 'admin'
     Route::delete('tvClass/{tv_class_id}', ['as'=>'tv.classDelete', 'uses'=>'TvController@classDelete']);
     Route::patch('tvClass/{tv_class_id}', ['as'=>'tv.classUpdate', 'uses'=>'TvController@classUpdate']);
 
+    Route::get('tvseek', ['as'=>'tv.seekList', 'uses'=>'TvController@seekList']);
+    Route::delete('tvseek/{sk_id}', ['as'=>'tv.seekDelete', 'uses'=>'TvController@seekDelete']);
+    Route::post('tvseek/{sk_id}', ['as'=>'tv.seekHandle', 'uses'=>'TvController@seekHandle']);
+    Route::get('tvfeedback', ['as'=>'tv.feedbackList', 'uses'=>'TvController@feedbackList']);
+    Route::delete('tvfeedback/{fb_id}', ['as'=>'tv.feedbackDelete', 'uses'=>'TvController@feedbackDelete']);
+    Route::post('tvfeedback/{fb_id}', ['as'=>'tv.feedbackHandle', 'uses'=>'TvController@feedbackHandle']);
+
     // 用户管理
     Route::resource('user', 'UserController');
     Route::post('user/uploadAvatar', ['as'=>'tv.uploadAvatar', 'uses'=>'UserController@uploadAvatar']);

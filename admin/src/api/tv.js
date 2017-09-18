@@ -20,6 +20,14 @@ const destoryTv = '/admin/tv/'              // 将影视移入回收站 DELETE �
 const deleteTv = '/admin/tv'                // 彻底删除影视(批量删除) DELETE
 const tvClassDestory = '/admin/tvClass/'   // 删除影视分类标签 DELETE 参数：tv_class_id
 
+// 求资源 | 资源异常
+const tvSeekList = '/admin/tvseek'         // 求资源列表
+const tvSeekDestory = '/admin/tvseek/'     // 删除求资源 DELETE 参数sk_id
+const tvSeekHandle = '/admin/tvseek/'      // 求资源已处理 POST 参数sk_id
+const tvFeedbackList = '/admin/tvfeedback' // 资源异常反馈列表
+const tvFeedbackDestory = '/admin/tvfeedback/' // 资源异常反馈删除 DELETE 参数fb_id
+const tvFeedbackHandle = '/admin/tvfeedback/'      // 资源异常反馈已处理 POST 参数fb_id
+
 export {
   tvList,
   setField,
@@ -34,5 +42,11 @@ export {
   tvClassUpdate,
   tvClassDestory,
   tvClassShow,
-  tvClassStore
+  tvClassStore,
+  tvSeekList,
+  tvSeekDestory,
+  tvFeedbackList,
+  tvFeedbackDestory,
+  tvSeekHandle,
+  tvFeedbackHandle
 }
