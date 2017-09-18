@@ -41,9 +41,17 @@ class EventServiceProvider extends ServiceProvider
         // 观看影视
         'App\Events\WatchTvEvent' => [
             'App\Listeners\WatchTvListener',
-        ]
+        ],
 
+        // 资源异常已处理
+        'App\Events\FeedbackTvEvent' => [
+            'App\Listeners\FeedbackTvListener',
+        ],
 
+        // 想看的资源已添加
+        'App\Events\SeekTvEvent' => [
+            'App\Listeners\SeekTvListener',
+        ],
     ];
 
     /**

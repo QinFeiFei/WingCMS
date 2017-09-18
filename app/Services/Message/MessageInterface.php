@@ -14,7 +14,9 @@ interface MessageInterface {
         'bindEmail',        // 绑定邮箱
         'rebindPhone',      // 重新绑定邮箱
         'bindPhoneSucc',    // 绑定邮箱成功
-        'bindPhone',        // 绑定邮箱
+        'bindPhone',        // 绑定邮箱,
+        'tvSeek',           // 想看的影视
+        'tvFeedback',       // 影视资源异常
     ];
 
     /**

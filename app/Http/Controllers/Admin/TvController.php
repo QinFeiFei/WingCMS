@@ -1,7 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Events\FeedbackTvEvent;
+use App\Events\SeekTvEvent;
 use App\Http\Controllers\Controller;
+use App\Listeners\FeedbackTvListener;
+use App\Listeners\SeekTvListener;
 use App\Services\TvService;
 use App\TvClass;
 use App\TvClassify;
@@ -267,6 +271,7 @@ class TvController extends Controller
         $model = TvSeek::find($sk_id);
         $model->is_handle = 1;
         if($model->save()){
+            event(new SeekTvEvent($model->user_id));
             return output_success('处理成功');
         }else{
             return output_error('服务器异常');
@@ -289,6 +294,7 @@ class TvController extends Controller
         $model = TvFeedback::find($fb_id);
         $model->is_handle = 1;
         if($model->save()){
+            event(new FeedbackTvEvent($model->user_id));
             return output_success('处理成功');
         }else{
             return output_error('服务器异常');
