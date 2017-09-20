@@ -131,7 +131,7 @@
                 <!-- 热播动漫 start -->
                 <div class="v_mod mt30">
                     <div class="v_th">
-                        <span class="sMark"><i class="iMovieIcon"></i>热播动漫</span>
+                        <span class="sMark"><i class="iCartoonIcon"></i>热播动漫</span>
                         <a href="{{ route('pc::tvList', ['type'=>'movie']) }}" class="aMore_left">更多&gt;</a>
                     </div>
                     <div class="v_tb">
@@ -191,7 +191,7 @@
                 <!-- 热播综艺 start -->
                 <div class="v_mod mt30">
                     <div class="v_th">
-                        <span class="sMark"><i class="iMovieIcon"></i>热播综艺</span>
+                        <span class="sMark"><i class="iMicIcon"></i>热播综艺</span>
                         <a href="{{ route('pc::tvList', ['type'=>'movie']) }}" class="aMore_left">更多&gt;</a>
                     </div>
                     <div class="v_tb">
@@ -251,7 +251,7 @@
                 <!-- 热播MV start -->
                 <div class="v_mod mt30">
                     <div class="v_th">
-                        <span class="sMark"><i class="iMovieIcon"></i>热播MV</span>
+                        <span class="sMark"><i class="iLiveIcon"></i>热播MV</span>
                         <a href="{{ route('pc::tvList', ['type'=>'movie']) }}" class="aMore_left">更多&gt;</a>
                     </div>
                     <div class="v_tb">

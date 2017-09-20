@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="login-page">
-    <mt-header title="美图账号">
+    <mt-header title="登陆">
       <router-link to="/" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
@@ -17,6 +17,10 @@
           <input type="password" v-model="psw" placeholder="密码">
         </div>
         <mt-button @click="login" type="primary" size="large">登录</mt-button>
+        <p class="regTxt">
+          <a class="fleft">立即注册</a>
+          <a class="fright">找回密码</a>
+        </p>
       </div>
       <div class="login-icons">
         <p>其他方式登录</p>
@@ -33,7 +37,7 @@
       </div>
     </div>
     <div class="Copyright">
-      ©2017 Meitu, Inc. 美图公司版权所有 闽B2-20040192
+      ©2017 icxtv.com, Inc. 晨曦影视 · 版权所有
     </div>
   </div>
 </template>
@@ -76,11 +80,16 @@ export default {
 </script>
 
 <style scoped>
+  input {
+    border:none;
+    outline:none
+  }
   .mint-header{
     font-size: 2rem;
     color: #737373;
     font-weight: 400;
     border-bottom: 2px solid #ed0b13;
+    background-color: #fff;
   }
   .mint-button--primary{
     background-color: #fc3c60;
@@ -153,5 +162,13 @@ export default {
     /*padding: 3rem;*/
     color: #737373;
     text-align: center;
+  }
+  .regTxt {
+    margin-top: 10px;
+    font-size:14px;
+    color:#666;
+  }
+  .fright {
+    float:right;
   }
 </style>

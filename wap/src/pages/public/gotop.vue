@@ -8,11 +8,11 @@
 export default {
   methods: {
     gotop: function () {
-      console.log('aaa')
       $(window).scrollTop = 0
     }
   }
 }
+/*
 window.onscroll = function() {
 	var scrollTop =  document.documentElement.scrollTop || document.body.scrollTop
   var  goTop= document.querySelector('.gotop-box')
@@ -22,6 +22,7 @@ window.onscroll = function() {
     goTop.style.display = 'none'
 	}
 	}
+*/
 </script>
 
 <style lang="css">
@@ -40,6 +41,5 @@ window.onscroll = function() {
   background:url(../../assets/images/gotop.png)center center no-repeat;
   background-size: cover;
   display: inline-block;
-
 }
 </style>

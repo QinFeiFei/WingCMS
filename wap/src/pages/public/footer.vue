@@ -1,21 +1,17 @@
-<template lang="html">
+<template>
   <div class="footer">
     <div class="links">
-      <router-link to='' class="link">关于美图</router-link>
+      <router-link to='' class="link">关于我们</router-link>
       <span class="sep">|</span>
-      <router-link to='' class="link">加入美图</router-link>
+      <router-link to='' class="link">联系方式</router-link>
       <span class="sep">|</span>
-      <router-link to='' class="link">美图App</router-link>
+      <router-link to='' class="link">微信公众号</router-link>
       <span class="sep">|</span>
-      <router-link to='' class="link">联系我们</router-link>
+      <router-link to='' class="link">访问电脑版</router-link>
     </div>
     <p class="copyrights">
-      ©2017&nbsp;Meitu&nbsp;美图公司版权所有<br>
-      <router-link to='' class="link">增值电信业务经营许可证：B2-20040192</router-link>
-      <br>
-      <router-link to=''>网络文化经营许可证：闽网文﹝2015﹞1661-028号</router-link>
-      <br>
-      <router-link to=''>闽公网安备 35020302000186号</router-link>
+      © 2017&nbsp;icxtv.com&nbsp;版权所有<br />
+      <span style="color:red;display:block;width:80%;margin:0 auto;text-align:center;">如有内容侵犯您的合法权益，请及时与我们联系，我们将第一时间安排核实及删除！</span>
     </p>
   </div>
 </template>
@@ -25,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style scoped>
 .footer {
   clear: both;
   width: 100%;

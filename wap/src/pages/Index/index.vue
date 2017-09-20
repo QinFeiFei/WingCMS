@@ -1,13 +1,8 @@
 <template lang="html">
   <div class="index-page">
+    <!-- 头部 -->
     <div class="header">
       <img src="../../assets/images/logo.png" alt="">
-      <span class="iconButton">
-        <router-link to="/cart">
-          <i class="icon car"></i>
-          <em class="number">{{count}}</em>
-        </router-link>
-      </span>
       <span class="iconButton">
         <router-link :to="homeUrl">
           <i class="icon home"></i>
@@ -17,6 +12,8 @@
         <i class="icon search"></i>
       </span>
     </div>
+
+    <!-- 焦点图 -->
     <swiper :options="swiperOption" ref="mySwiper">
        <swiper-slide>
           <img src="http://mshopimg2.meitudata.com/59290fe961c4971444.jpg" alt="">
@@ -35,73 +32,83 @@
        </swiper-slide>
        <div class="swiper-pagination"  slot="pagination"></div>
    </swiper>
+
+    <!-- 小导航 -->
     <div class="view category">
       <ul class="list category">
         <li class="item">
           <router-link to="/phone">
             <i class="icon phone"></i>
-            <span class="text">手机</span>
+            <span class="text">电影</span>
           </router-link>
         </li>
         <li class="item">
           <router-link to="/goods">
             <i class="icon good"></i>
-            <span class="text">配件</span>
+            <span class="text">电视剧</span>
           </router-link>
         </li>
         <li class="item">
           <router-link to="/services">
             <i class="icon service"></i>
-            <span class="text">服务</span>
+            <span class="text">动漫</span>
           </router-link>
         </li>
         <li class="item">
           <router-link to="/club">
             <i class="icon club"></i>
-            <span class="text">美图福利社</span>
+            <span class="text">综艺</span>
           </router-link>
         </li>
       </ul>
     </div>
+
+    <!-- 搜索 -->
     <div class="mask" v-show="modalShow"></div>
     <div class="search-modal"  v-show="modalShow">
       <div class="search-box">
         <div class="input-box">
           <i @click="searchhandle" class="searchIcon"></i>
-          <input @keypress.enter="searchhandle" type="text" class="keywords" placeholder="美图M8">
+          <input @keypress.enter="searchhandle" type="text" class="keywords" placeholder="请输入要搜索的影视名称">
         </div>
         <span class="btn cancel" @click="showModal">取消</span>
         <div class="search-category">
           <dl class="subcate">
-            <dt>手机</dt>
+            <dt>所有影视分类</dt>
             <dt class="dd">
-              <router-link to=''>美图M8</router-link>
-              <router-link to=''>美图T8</router-link>
-              <router-link to=''>美图M6s</router-link>
+              <router-link to=''>电影</router-link>
+              <router-link to=''>电视剧</router-link>
+              <router-link to=''>动漫</router-link>
+              <router-link to=''>综艺</router-link>
+              <router-link to=''>动漫</router-link>
+              <router-link to=''>MV</router-link>
+              <router-link to=''>公开课</router-link>
+              <router-link to=''>其它</router-link>
             </dt>
-            <dt>常规配件</dt>
-            <dt>拍摄配件</dt>
-            <dt>MeituFamily专区</dt>
-            <dt>线下体验点</dt>
           </dl>
         </div>
       </div>
-
     </div>
-    <indexHot></indexHot>
-    <indexPhone></indexPhone>
-    <indexGoods></indexGoods>
-    <indexFamily></indexFamily>
-    <!-- <goTop></goTop> -->
-    <footBar></footBar>
 
+    <!-- 热门推荐 -->
+    <indexHot></indexHot>
+
+    <list :listData="movieList" listTitle="热门电影" listTitleSrc="/tv/movie"></list>
+    <list :listData="teleplayList" listTitle="热门电视剧" listTitleSrc="/tv/teleplay"></list>
+    <list :listData="cartoonList" listTitle="热门动漫" listTitleSrc="/tv/cartoon"></list>
+    <list :listData="varietyList" listTitle="热门综艺" listTitleSrc="/tv/variety"></list>
+
+    <!-- 底部 -->
+    <goTop></goTop>
+    <footBar></footBar>
   </div>
 </template>
+
 <script>
+// import indexPhone from './Index_phone'
 import indexHot from './Index_hot'
-import indexPhone from './Index_phone'
-import indexGoods from './Index_accessories'
-import indexFamily from './Index_family'
+import list from '../../components/list_style1'
+import goTop from '../public/gotop'
 import footBar from '../public/footer'
 export default {
   data () {
@@ -113,13 +120,53 @@ export default {
         paginationClickable: true,
         pagination: '.swiper-pagination'
       },
-      modalShow: false
+      modalShow: false,
+
+      movieList: [
+        {
+          imgSrc: 'http://mshopimg3.meitudata.com/563745f67f45545765.jpg',
+          title:'美图遥控器第二代',
+          desc:'史上最好看的电影',
+          price:89
+        },
+        {
+          imgSrc: 'http://mshopimg1.meitudata.com/577f007c56ea942623.jpg',
+          title:'MeituFamily印花移动电源',
+          desc:'史上最好看的电影',
+          price:189
+        },
+        {
+          imgSrc: 'http://mshopimg3.meitudata.com/58f821664f7cc70281.jpg?thumb220',
+          title:'美图T8钢化玻璃贴膜',
+          desc:'原装正品，品质保证',
+          price:39
+        },
+        {
+          imgSrc: 'http://mshopimg2.meitudata.com/57fe0a266385b34439.jpg?thumb220',
+          title:'MeituFamily潮趣手机壳',
+          desc:'潮趣手机壳',
+          price:99
+        },
+        {
+          imgSrc: 'http://mshopimg1.meitudata.com/5795a7a49ed5238759.jpg?thumb220',
+          title:'美图M6/美图M6s/美图T8手机数据线',
+          desc:'原装正品，品质保证',
+          price:39
+        },
+        {
+          imgSrc: 'http://mshopimg3.meitudata.com/561e03a60e3cb47662.jpg?thumb220',
+          title:'美图手机专属耳机',
+          desc:'美图专属耳机',
+          price:79
+        }
+
+      ],
+      teleplayList: [{}, {}],
+      cartoonList: [{}, {}],
+      varietyList: [{}, {}]
     }
   },
   computed: {
-    count () {
-      return this.$store.state.cart.cartInfos.total_nums
-    },
     homeUrl () {
       if (!this.$store.state.cart.login) {
         return '/login'
@@ -153,16 +200,16 @@ export default {
     }
   },
   components: {
+    // indexPhone,
     indexHot,
-    indexPhone,
-    indexGoods,
-    indexFamily,
+    list,
+    goTop,
     footBar
   }
 }
 </script>
 
-<style lang="css">
+<style>
 .header {
   width: 100%;
   height: 4.4rem;
@@ -246,13 +293,13 @@ export default {
   display: flex;
   display: -webkit-flex;
 }
- .list .item{
+ .category .item{
   width: 25%;
   height: 10rem;
   padding-top: 1.5rem;
   box-sizing: border-box;
 }
-.item .text {
+.category .item .text {
   height: 2rem;
   line-height: 2rem;
   text-align: center;
@@ -325,6 +372,7 @@ export default {
   border: none;
   outline: none;
   flex:1;
+  text-indent: 0.7rem;
 }
 .input-box .searchIcon {
   display: block;
@@ -351,11 +399,12 @@ export default {
 .subcate dt{
     font-size: 1.6rem;
     font-weight: 500;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
 }
 .dd a{
   margin-right: 2rem;
   font-size: 1.4rem;
-  color: #5c5c5c
+  color: #5c5c5c;
+  margin-bottom:0.3rem;
 }
 </style>
