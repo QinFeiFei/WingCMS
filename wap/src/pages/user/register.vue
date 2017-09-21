@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="login-page">
-    <mt-header title="登陆">
+    <mt-header title="注册">
       <router-link to="/" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
@@ -16,27 +16,13 @@
         <div class="input-box">
           <input type="password" v-model="psw" placeholder="密码">
         </div>
-        <mt-button @click="login" type="primary" size="large">登录</mt-button>
+        <mt-button @click="login" type="primary" size="large">立即注册</mt-button>
         <p class="regTxt">
-          <a class="fleft">立即注册</a>
-          <a class="fright">找回密码</a>
+          <a class="fleft">返回登陆</a>
         </p>
       </div>
-      <div class="login-icons">
-        <p>其他方式登录</p>
-        <div class="icons">
-          <div class="icon-item">
-            <i class="icon weibo"></i>
-            <p class="name">新浪微博</p>
-          </div>
-          <div class="icon-item">
-            <i class="icon qq"></i>
-            <p class="name">QQ登录</p>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="Copyright">
+    <div class="Copyright" style="position:fixed;bottom:0px;left:0px;right:0px;line-height:50px;width:24rem;border-top:1px solid #d2d2d2;margin:0 auto;">
       ©2017 icxtv.com, Inc. 晨曦影视 · 版权所有
     </div>
   </div>
@@ -103,7 +89,6 @@ export default {
     padding-bottom: 1rem;
     width: 24rem;
     margin: 0 auto;
-    border-bottom: 1px solid #dbdbdb;
   }
   .login-input .input-box {
     width: 100%;
