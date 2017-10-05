@@ -1,5 +1,6 @@
 <template>
   <div>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <div class="col-xs-4 col-md-2 list_mov">
       <a href="/movie/21364">
         <img class="img-responsive center-block lazy" data-original="//t.dyxz.la/upload/img/201708/poster_20170831_4870360_b.jpg">
@@ -255,8 +256,6 @@
 </script>
 
 <style scoped>
-  @import "../assets/css/bootstrap.min.css";
-
   h3.main-h3 {
     padding: 0 0 0 0.3em;
     font-size: 1.3em;

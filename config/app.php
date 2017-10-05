@@ -195,6 +195,9 @@ return [
 
         // captcha
         Mews\Captcha\CaptchaServiceProvider::class,
+
+        // 解决跨域头
+        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*

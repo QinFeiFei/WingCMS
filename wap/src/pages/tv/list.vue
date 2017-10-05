@@ -1,70 +1,64 @@
 <template lang="html">
-  <div class="good-page">
-    <div class="header">
-      <router-link to='/'>
-        <span class="gohome"></span>
-      </router-link>
-      <div class="input-box">
-        <input type="text" placeholder="美图M8">
-      </div>
-      <span class="search-btn">搜索</span>
-    </div>
+  <div class="page">
+    <header_></header_>
+
     <div class="swiper-container2">
       <div class="swiper-wrapper">
         <div class="swiper-slide slide1">
           <span class="type" >分类:</span>
         </div>
-        <div class="swiper-slide slide2">
-          <router-link to='/goods'>
-            <span id="all" v-on:click="selectType" class="type Active" >全部</span>
-          </router-link>
-
-        </div>
-        <div class="swiper-slide slide3">
-          <router-link to="/list2">
-            <span v-on:click="selectType" class="type" >充电器</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide4">
-          <router-link to="/list3">
-            <span v-on:click="selectType" class="type" >手机壳</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide5">
-          <router-link to="/listError">
-            <span v-on:click="selectType" class="type" >贴膜</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide6">
-          <router-link to="/listError">
-            <span v-on:click="selectType" class="type" >玩具手办</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide7">
-          <router-link to="/list4">
-            <span v-on:click="selectType" class="type" >耳机</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide8">
-          <router-link to="/list2">
-            <span v-on:click="selectType" class="type">时尚服饰</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide9">
-          <router-link to="/listError">
-            <span v-on:click="selectType" class="type" >遥控器</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide10">
-          <router-link to="/listError">
-            <span v-on:click="selectType" class="type" >补光灯</span>
-          </router-link>
-        </div>
-        <div class="swiper-slide slide11">
-          <router-link to="/list3">
-            <span v-on:click="selectType" class="type">自拍架</span>
-          </router-link>
-        </div>
+        <swiper :options="swiperOption">
+          <div class="swiper-slide slide2">
+            <router-link to='/goods'>
+              <span id="all" v-on:click="selectType" class="type Active" >全部</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide3">
+            <router-link to="/list2">
+              <span v-on:click="selectType" class="type" >充电器</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide4">
+            <router-link to="/list3">
+              <span v-on:click="selectType" class="type" >手机壳</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide5">
+            <router-link to="/listError">
+              <span v-on:click="selectType" class="type" >贴膜</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide6">
+            <router-link to="/listError">
+              <span v-on:click="selectType" class="type" >玩具手办</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide7">
+            <router-link to="/list4">
+              <span v-on:click="selectType" class="type" >耳机</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide8">
+            <router-link to="/list2">
+              <span v-on:click="selectType" class="type">时尚服饰</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide9">
+            <router-link to="/listError">
+              <span v-on:click="selectType" class="type" >遥控器</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide10">
+            <router-link to="/listError">
+              <span v-on:click="selectType" class="type" >补光灯</span>
+            </router-link>
+          </div>
+          <div class="swiper-slide slide11">
+            <router-link to="/list3">
+              <span v-on:click="selectType" class="type">自拍架</span>
+            </router-link>
+          </div>
+        </swiper>
       </div>
     </div>
     <router-view></router-view>
@@ -73,6 +67,7 @@
 </template>
 
 <script>
+  import header_ from '../public/header'
   import list from '../../components/list_style2'
   import footBar from '../public/footer'
   export default {
@@ -80,14 +75,15 @@
       return {
         isActive: false,
         typeSwiper: null,
-        allShow: true
+        allShow: true,
+        swiperOption: {
+          slidesPerView: 4,
+          paginationClickable: true,
+          spaceBetween: 8
+        }
       }
     },
-    mounted () {
-      this.typeSwiper = new Swiper('.swiper-container2', {
-        freeMode: true
-      })
-    },
+
     methods: {
       selectType: function (e) {
         if(e.target.id === 'all') {
@@ -103,68 +99,42 @@
     },
     components: {
       list,
-      footBar
+      footBar,
+      header_
     }
   }
 </script>
 <style lang="css">
-  .good-page .header{
-    align-items: center;
-  }
-  .good-page .header .gohome{
-    display: block;
-    width: 1.8rem;
-    height: 1.8rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    background: url(../../assets/images/home.png) no-repeat;
-    background-size: cover;
-  }
-  .good-page .header {
-    display: flex;
-  }
-  .good-page .header .input-box {
-    flex:1;
-    width: 20rem;
-    height: 3rem;
-    border: 1px solid #cdced1;
-    padding: .8rem;
-    box-sizing: border-box;
-  }
-  .good-page .header .search-btn {
-    width: 4.4rem;
-    height: 4.4rem;
-    line-height: 4.4rem;
-    text-align: center;
-    color: #817e83;
-    font-size: 1.4rem;
+  input {
+    border:none;
+    background:none;
   }
   .Active {
-    padding: .4rem;
+    padding: 0.2rem 0.4rem;
     border-radius: .3rem;
     color: #fff !important;
     background: #f55669;
   }
-  .good-page .swiper-container2{
+  .page .swiper-container2{
     width: 100%;
     overflow-x: hidden;
-    height: 4rem;
-    line-height: 4rem;
+    height: 3rem;
+    line-height: 3rem;
     background: #fff;
     border-top: 1px solid #efefef;
     border-bottom: 1px solid #efefef;
   }
-  .good-page .swiper-container2 .swiper-wrapper{
+  .page .swiper-container2 .swiper-wrapper{
     width: 100%;
   }
-  .good-page .swiper-container2 .swiper-slide {
+  .page .swiper-container2 .swiper-slide {
     float: left;
-    width: 7rem !important;
+    width: 4rem !important;
     text-align: center;
   }
-  .good-page .swiper-container2 .swiper-slide .type{
+  .page .swiper-container2 .swiper-slide .type{
     width: 100%;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #444;
   }
   .type-list {

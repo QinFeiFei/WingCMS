@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.30 on 2017-08-02.
+ * Generated for Laravel 5.4.30 on 2017-10-05.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12699,6 +12699,62 @@ namespace Vinkla\Hashids\Facades {
  
 }
 
+namespace Mews\Captcha\Facades { 
+
+    class Captcha {
+        
+        /**
+         * Create captcha image
+         *
+         * @param string $config
+         * @return \Mews\Captcha\ImageManager->response 
+         * @static 
+         */ 
+        public static function create($config = 'default')
+        {
+            return \Mews\Captcha\Captcha::create($config);
+        }
+        
+        /**
+         * Captcha check
+         *
+         * @param $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function check($value)
+        {
+            return \Mews\Captcha\Captcha::check($value);
+        }
+        
+        /**
+         * Generate captcha image source
+         *
+         * @param null $config
+         * @return string 
+         * @static 
+         */ 
+        public static function src($config = null)
+        {
+            return \Mews\Captcha\Captcha::src($config);
+        }
+        
+        /**
+         * Generate captcha image html tag
+         *
+         * @param null $config
+         * @return string 
+         * @static 
+         */ 
+        public static function img($config = null)
+        {
+            return \Mews\Captcha\Captcha::img($config);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -14770,6 +14826,8 @@ namespace  {
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 
     class Hashids extends \Vinkla\Hashids\Facades\Hashids {}
+
+    class Captcha extends \Mews\Captcha\Facades\Captcha {}
  
 }
 
