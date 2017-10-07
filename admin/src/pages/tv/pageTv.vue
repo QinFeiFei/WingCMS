@@ -156,7 +156,7 @@
           tv_show_date: moment().format('YYYY-MM-DD'),
           tv_show_year: moment().format('YYYY'),
           tv_lang: '',
-          tv_area: '',
+          tv_area: 0,
           tv_actors: { actors: [] },
           tv_director: '',
           tv_minute: 0,
