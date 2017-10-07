@@ -38,6 +38,7 @@
                 <dt>资源QQ群(点击添加)</dt>
                 <dd>
                     <span>一群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=1ae5bd0fe7e8ac3855a864a463aa06ad1a2d80fdbcfc5be7ee25a7a8e29410de">627256199</a></span>
+                    <span>二群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=cb7c16dacd8a236c8cc7d2d678174622da658b49887583afda663a4a9fb78299">551938923</a></span>
                 </dd>
             </dl>
         </div>

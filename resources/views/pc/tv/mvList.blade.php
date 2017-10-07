@@ -59,7 +59,7 @@
                                 </div>
                             </li>
                         @empty
-                            <p>No list</p>
+                            @include('pc.tv._noResult')
                         @endforelse
                     </ul>
 
